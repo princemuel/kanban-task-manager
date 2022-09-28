@@ -1,6 +1,6 @@
 # Kanban Task Manager
 
-A Kanban board is an easy-to-use agile project management tool using the Kanban methodology that helps you to visualize and manage workflows. It can be physical or digital and features columns representing stages of a process. Cards are used to track individual tasks and activities as they progress through the stages.
+The Kanban board is an easy-to-use agile project management tool using the Kanban methodology that helps you to visualize and manage workflows. It can be physical or digital and features columns representing stages of a process. Cards are used to track individual tasks and activities as they progress through the stages.
 
 ![Design preview](./preview.jpg)
 
@@ -9,9 +9,8 @@ A Kanban board is an easy-to-use agile project management tool using the Kanban 
 - [Kanban Task Manager](#kanban-task-manager)
   - [Table of contents](#table-of-contents)
   - [Overview](#overview)
-    - [The challenge](#the-challenge)
     - [Screenshot](#screenshot)
-    - [Links](#links)
+    - [Project Links](#project-links)
   - [My process](#my-process)
     - [Built with](#built-with)
     - [The challenge (Situation)](#the-challenge-situation)
@@ -32,26 +31,13 @@ This project uses the STAR approach. Read more about the Kanban methodology in t
 - [Kanban](<https://en.wikipedia.org/wiki/Kanban_(development)>)
 - [Kanban Board](https://en.wikipedia.org/wiki/Kanban_board)
 
-### The challenge
-
-Users should be able to:
-
-- View the optimal layout for the app depending on their device's screen size
-- See hover states for all interactive elements on the page
-- Create, read, update, and delete boards and tasks
-- Receive form validations when trying to create/edit boards and tasks
-- Mark subtasks as complete and move tasks between columns
-- Hide/show the board sidebar
-- Toggle the theme between light/dark modes
-- **Bonus**: Allow users to drag and drop tasks to change their status and re-order them in a column
-- **Bonus**: Keep track of any changes, even after refreshing the browser (`localStorage` could be used for this if not building out a full-stack app)
-- **Bonus**: Build this project as a full-stack application
-
 ### Screenshot
 
-![](./screenshot.jpg)
+![Kanban Task Manager](./screenshot.jpg)
 
-### Links
+### Project Links
+
+Press . on the keyboard to view the project code just like in Visual Studio Code
 
 - Solution URL: [Frontend Repo](https://your-solution-url.com)
 - Solution URL: [Backend Repo](https://your-solution-url.com)
