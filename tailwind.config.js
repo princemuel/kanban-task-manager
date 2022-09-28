@@ -8,6 +8,26 @@ module.exports = {
   ],
 
   theme: {
+    colors: {
+      current: 'currentColor',
+      transparent: 'transparent',
+      neutral: '#ffffff',
+      primary: {
+        100: '#f4f7fd',
+        200: '#e4ebfa',
+        300: '#a8a4ff',
+        400: '#828fa3',
+        500: '#635fc7',
+        600: '#3e3f4e',
+        700: '#2b2c37',
+        800: '#20212c',
+        900: '#000112',
+      },
+      accent: {
+        100: '#ff9898',
+        200: '#ea5555',
+      },
+    },
     screens: {
       xs: '30em', // => @media (min-width: 480px) { ... }
       ...defaultTheme.screens,

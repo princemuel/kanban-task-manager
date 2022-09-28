@@ -11,7 +11,7 @@ const Home: NextPage = () => {
       <header>{/* Header */}</header>
 
       <main>
-        <h1 className='text-3xl font-bold underline'>Hello world!</h1>
+        <h1 className='text-3xl font-medium underline'>Hello world!</h1>
         {/* Navigation */}
         {/* Content */}
       </main>
