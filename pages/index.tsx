@@ -7,11 +7,13 @@ const Home: NextPage = () => {
       <Head>
         <title>Kanban Task Manager</title>
       </Head>
-      {/* Header */}
+
       <header>{/* Header */}</header>
 
       <main>
-        <h1 className='text-3xl font-medium underline'>Hello world!</h1>
+        <h1 className='text-100 text-primary-500 font-medium underline'>
+          Hello world!
+        </h1>
         {/* Navigation */}
         {/* Content */}
       </main>

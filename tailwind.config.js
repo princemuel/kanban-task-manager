@@ -8,6 +8,11 @@ module.exports = {
   ],
 
   theme: {
+    borderRadius: {
+      ...defaultTheme.borderRadius,
+      pill: '100vmax',
+    },
+
     colors: {
       current: 'currentColor',
       transparent: 'transparent',
@@ -28,6 +33,31 @@ module.exports = {
         200: '#ea5555',
       },
     },
+
+    fontSize: {
+      100: '0.5rem',
+      200: '0.625rem',
+      300: '0.75rem',
+      400: '0.8125rem',
+      500: '0.9375rem',
+      600: '1.125rem',
+      700: '1.5rem',
+      800: '1.875rem',
+      900: '2.25rem',
+    },
+
+    lineHeight: {
+      100: '0.8rem',
+      200: '10px',
+      300: '10px',
+      400: '1.25rem',
+      500: '1.5rem',
+      600: '1.5rem',
+      700: '1.5rem',
+      800: '1.5rem',
+      900: '1.5rem',
+    },
+
     screens: {
       xs: '30em', // => @media (min-width: 480px) { ... }
       ...defaultTheme.screens,
