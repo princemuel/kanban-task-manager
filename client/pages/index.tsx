@@ -23,8 +23,8 @@ const Home: NextPage = () => {
 
       <main>
         <GlobalWrap as='section' className='m-20 | flow'>
-          <header className=''>
-            <h2 className='text-600 font-bold'>
+          <header className='mb-10'>
+            <h2 className='text-700 font-bold'>
               <span className='text-primary-500'>01</span>
               <span className='ml-6 text-primary-900'>Colors</span>
             </h2>
@@ -32,7 +32,7 @@ const Home: NextPage = () => {
 
           <ul
             role={'list'}
-            className='grid grid-cols-4 gap-10 | flow-space--none'
+            className='grid grid-cols-fit-big gap-10 | flow-space--none'
           >
             <li className='flex items-center justify-center p-14 rounded-xl text-neutral bg-primary-500 text-500 font-bold uppercase'>
               #635fc7
@@ -63,7 +63,7 @@ const Home: NextPage = () => {
             <li className='flex items-center justify-center p-14 rounded-xl text-primary-700 bg-primary-100 text-500 font-bold uppercase'>
               #f4f7fd
             </li>
-            <li className='flex items-center justify-center p-14 rounded-xl text-primary-700 bg-neutral text-500 font-bold uppercase'>
+            <li className='flex items-center justify-center p-14 border border-primary-200 rounded-xl text-primary-700 bg-neutral text-500 font-bold uppercase'>
               #ffffff
             </li>
             <li className='flex items-center justify-center p-14 rounded-xl text-neutral bg-accent-200 text-500 font-bold uppercase'>
@@ -73,6 +73,25 @@ const Home: NextPage = () => {
               #ff9898
             </li>
           </ul>
+        </GlobalWrap>
+
+        <GlobalWrap as='section' className='m-20 | flow'>
+          <header className='mb-10'>
+            <h2 className='text-700 font-bold'>
+              <span className='text-primary-500'>02</span>
+              <span className='ml-6 text-primary-900'>Typography</span>
+            </h2>
+          </header>
+
+          <div>
+            <div className='text-400 text-primary-400 font-medium'>
+              <span className=''>Plus Jakarta Sans</span>
+              <span className='ml-4 text-primary-900 font-bold'>Bold</span>
+              <span className='ml-4'>24px</span>
+              <span className='ml-4'>30px Line</span>
+            </div>
+          </div>
+          <div></div>
         </GlobalWrap>
       </main>
     </>

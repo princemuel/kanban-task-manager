@@ -67,6 +67,13 @@ module.exports = {
         xl: '80em', // => @media (min-width: 1280px) { ... }
         '2xl': '96em', // => @media (min-width: 1536px) { ... }
       },
+      gridTemplateColumns: {
+        // arbitrary values
+        'fill-16': 'repeat(auto-fill, minmax(4rem, 1fr))',
+        'fill-20': 'repeat(auto-fill, minmax(5rem, 1fr))',
+        'fit-big': 'repeat(auto-fit, minmax(25rem, 1fr))',
+        // etc.
+      },
     },
 
     fontFamily: {
