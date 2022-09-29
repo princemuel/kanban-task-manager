@@ -4,9 +4,9 @@ import IconCheck from 'assets/icon-check.svg';
 import IconChevronDown from 'assets/icon-chevron-down.svg';
 import IconChevronUp from 'assets/icon-chevron-up.svg';
 import IconCross from 'assets/icon-cross.svg';
-import IconThemeDark from 'assets/icon-dark-theme.svg';
+import IconMoon from 'assets/icon-dark-theme.svg';
 import IconSidebarHide from 'assets/icon-hide-sidebar.svg';
-import IconThemeLight from 'assets/icon-light-theme.svg';
+import IconSun from 'assets/icon-light-theme.svg';
 import IconSidebarShow from 'assets/icon-show-sidebar.svg';
 import IconEllipsisVertical from 'assets/icon-vertical-ellipsis.svg';
 import LogoDark from 'assets/logo-dark.svg';
@@ -20,8 +20,8 @@ export {
   IconChevronUp,
   IconChevronDown,
   IconCross,
-  IconThemeLight,
-  IconThemeDark,
+  IconSun,
+  IconMoon,
   LogoLight,
   LogoDark,
   LogoMobile,

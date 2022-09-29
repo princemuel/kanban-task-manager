@@ -1,5 +1,8 @@
+import { LogoDark } from 'common';
 import type { NextPage } from 'next';
 import Head from 'next/head';
+import Image from 'next/image';
+import { GlobalWrap } from 'styles';
 
 const Home: NextPage = () => {
   return (
@@ -8,14 +11,20 @@ const Home: NextPage = () => {
         <title>Kanban Task Manager</title>
       </Head>
 
-      <header>{/* Header */}</header>
+      <header>
+        <GlobalWrap className='flex items-center justify-between'>
+          <div className='logo'>
+            <Image src={LogoDark} alt='logo' />
+          </div>
+
+          <h1 className='text-primary-900 text-700 font-bold'>Design System</h1>
+        </GlobalWrap>
+      </header>
 
       <main>
-        <h1 className='text-900 text-primary-900 font-bold underline'>
-          Hello world!
-        </h1>
-        {/* Navigation */}
-        {/* Content */}
+        <GlobalWrap className='flex items-center justify-between'>
+          <h2 className='text-primary-900 text-700 font-bold'>Design System</h2>
+        </GlobalWrap>
       </main>
     </>
   );
