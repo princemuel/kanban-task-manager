@@ -17,16 +17,6 @@ Version: 01
   /* ////////////////////////////////////////////
 // BASE CONFIGURATION
 */
-  :root {
-    /* colors */
-    --clr-700: 0 0% 0%;
-    --clr-600: 0 0% 6%;
-    --clr-500: 22 65% 57%;
-    --clr-400: 21 94% 75%;
-    --clr-300: 0 0% 95%;
-    --clr-200: 0 0% 98%;
-    --clr-100: 0 0% 100%;
-  }
 
   /* Set core root defaults */
   html {
@@ -112,26 +102,6 @@ Version: 01
   }
 
   /* TYPOGRAPHY */
-  body {
-    /* Levels of white */
-    --clr-neutral-100: hsl(var(--clr-100));
-    --clr-neutral-200: hsl(var(--clr-200));
-    --clr-neutral-300: hsl(var(--clr-300));
-
-    /* Levels of brown */
-    --clr-primary-100: hsl(var(--clr-500));
-    --clr-primary-200: hsl(var(--clr-400));
-
-    /* Levels of dark */
-    --clr-accent-100: hsl(var(--clr-700));
-    --clr-accent-200: hsl(var(--clr-600));
-
-    color: var(--clr-accent-100);
-    background: var(--clr-neutral-100);
-    font-family: var(--ff-body);
-    font-weight: var(--fw-semi-bold);
-    font-size: var(--fs-body);
-  }
 
   /* FLOW UTILITY */
   :where(.flow :not(:first-child)) {
@@ -139,6 +109,9 @@ Version: 01
   }
   .flow-space--small {
     --flow-space: 1rem;
+  }
+  .flow-space--none {
+    --flow-space: 0;
   }
 
   .skip-to-content {
