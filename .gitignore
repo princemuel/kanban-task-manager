@@ -148,6 +148,6 @@ design
 *.local
 *.txt
 *.md
-!notes.md
+!todos.md
 !README.md
 server
