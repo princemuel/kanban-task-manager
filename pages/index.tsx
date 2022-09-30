@@ -22,9 +22,13 @@ const Home: NextPage = () => {
       </header>
 
       <main>
-        <GlobalWrap as='section' className='m-20 | flow'>
+        <GlobalWrap
+          as='section'
+          className='m-20 | flow'
+          aria-labelledby='colors'
+        >
           <header className='mb-10'>
-            <h2 className='text-700 font-bold'>
+            <h2 id='colors' className='text-700 font-bold'>
               <span className='text-primary-500'>01</span>
               <span className='ml-6 text-primary-900'>Colors</span>
             </h2>
@@ -75,23 +79,159 @@ const Home: NextPage = () => {
           </ul>
         </GlobalWrap>
 
-        <GlobalWrap as='section' className='m-20 | flow'>
+        <GlobalWrap
+          as='section'
+          className='m-20 | flow'
+          aria-labelledby='typography'
+        >
           <header className='mb-10'>
-            <h2 className='text-700 font-bold'>
+            <h2 id='typography' className='text-700 font-bold'>
               <span className='text-primary-500'>02</span>
               <span className='ml-6 text-primary-900'>Typography</span>
             </h2>
           </header>
 
-          <div>
-            <div className='text-400 text-primary-400 font-medium'>
-              <span className=''>Plus Jakarta Sans</span>
-              <span className='ml-4 text-primary-900 font-bold'>Bold</span>
-              <span className='ml-4'>24px</span>
-              <span className='ml-4'>30px Line</span>
+          <div className='flex flex-wrap gap-10'>
+            <div className='flex-1'>
+              <div className='mb-16'>
+                <p className='mb-2 text-primary-400 text-400 font-medium'>
+                  <span className=''>Plus Jakarta Sans</span>
+                  <span className='ml-4 text-primary-900 font-medium'>
+                    Bold
+                  </span>
+                  <span className='ml-4'>24px</span>
+                  <span className='ml-4'>30px Line</span>
+                </p>
+                <p className='text-primary-900 text-700 font-bold leading-500'>
+                  Heading (XL)
+                </p>
+              </div>
+              <div className='mb-16'>
+                <p className='mb-2 text-primary-400 text-400 font-medium'>
+                  <span className=''>Plus Jakarta Sans</span>
+                  <span className='ml-4 text-primary-900 font-medium'>
+                    Bold
+                  </span>
+                  <span className='ml-4'>18px</span>
+                  <span className='ml-4'>23px Line</span>
+                </p>
+                <p className='text-primary-900 text-600 leading-400 font-bold'>
+                  Heading (L)
+                </p>
+              </div>
+              <div className='mb-16'>
+                <p className='mb-2 text-primary-400 text-400 font-medium'>
+                  <span className=''>Plus Jakarta Sans</span>
+                  <span className='ml-4 text-primary-900 font-medium'>
+                    Bold
+                  </span>
+                  <span className='ml-4'>15px</span>
+                  <span className='ml-4'>19px Line</span>
+                </p>
+                <p className='text-primary-900 text-500 leading-300 font-bold'>
+                  Heading (M)
+                </p>
+              </div>
+
+              <div className='mb-16'>
+                <p className='mb-2 text-primary-400 text-400 font-medium'>
+                  <span className=''>Plus Jakarta Sans</span>
+                  <span className='ml-4 text-primary-900 font-medium'>
+                    Bold
+                  </span>
+                  <span className='ml-4'>12px</span>
+                  <span className='ml-4'>15px Line</span>
+                  <span className='ml-4'>2.4px Kerning</span>
+                </p>
+                <p className='text-primary-400 text-300 leading-200 font-bold'>
+                  Heading ( S )
+                </p>
+              </div>
+            </div>
+
+            <div className='flex-1'>
+              <div className='mb-16'>
+                <p className='mb-2 text-primary-400 text-400 font-medium'>
+                  <span className=''>Plus Jakarta Sans</span>
+                  <span className='ml-4 text-primary-900 font-medium'>
+                    Medium
+                  </span>
+                  <span className='ml-4'>13px</span>
+                  <span className='ml-4'>23px Line</span>
+                </p>
+                <p className='text-primary-700 text-400 leading-400 font-medium'>
+                  Body (L) - Lorem ipsum dolor sit amet, consectetuer adipiscing
+                  elit. Phasellus hendrerit. Pellentesque aliquet nibh nec urna.
+                  In nisi neque, aliquet vel, dapibus id, mattis vel, nisi. Sed
+                  pretium, ligula sollicitudin laoreet viverra, tortor libero
+                  sodales leo, eget blandit nunc tortor eu nibh. Nullam mollis.
+                  Ut justo. Suspendisse potenti. Sed egestas, ante et vulputate
+                  volutpat, eros pede semper est, vitae luctus metus libero eu
+                  augue. Morbi purus libero, faucibus adipiscing, commodo quis,
+                  gravida id, est.
+                </p>
+              </div>
+
+              <div className='mb-16'>
+                <p className='mb-2 text-primary-400 text-400 font-medium'>
+                  <span className=''>Plus Jakarta Sans</span>
+                  <span className='ml-4 text-primary-900 font-medium'>
+                    Medium
+                  </span>
+                  <span className='ml-4'>12px</span>
+                  <span className='ml-4'>25px Line</span>
+                </p>
+                <p className='text-primary-700 text-300 leading-200 font-bold'>
+                  Body (M) - - Lorem ipsum dolor sit amet, consectetuer
+                  adipiscing elit. Phasellus hendrerit. Pellentesque aliquet
+                  nibh nec urna. In nisi neque, aliquet vel, dapibus id, mattis
+                  vel, nisi. Sed pretium, ligula sollicitudin laoreet viverra,
+                  tortor libero sodales leo, eget blandit nunc tortor eu nibh.
+                  Nullam mollis. Ut justo. Suspendisse potenti. Sed egestas,
+                  ante et vulputate volutpat, eros pede semper est, vitae luctus
+                  metus libero eu augue. Morbi purus libero, faucibus
+                  adipiscing, commodo quis, gravida id, est.
+                </p>
+              </div>
             </div>
           </div>
-          <div></div>
+        </GlobalWrap>
+
+        <GlobalWrap
+          as='section'
+          className='m-20 | flow'
+          aria-labelledby='interactive-elements'
+        >
+          <header className='mb-10'>
+            <h2 id='interactive-elements' className='text-700 font-bold'>
+              <span className='text-primary-500'>03</span>
+              <span className='ml-6 text-primary-900'>
+                Interactive Elements
+              </span>
+            </h2>
+          </header>
+
+          <div className='light-version'>
+            <p className='mb-10 text-primary-400 text-600 font-bold leading-400'>
+              Light Version
+            </p>
+
+            <ul role='list' className='grid grid-cols-fit-big gap-10'>
+              <li>
+                <button
+                  type='button'
+                  className='py-6 px-24 rounded-pill text-neutral bg-primary-500 text-500 font-bold leading-300'
+                >
+                  Button Primary (L)
+                </button>
+              </li>
+            </ul>
+          </div>
+          <div className='dark-version'>
+            <p className='mb-10 text-primary-400 text-600 font-bold leading-400'>
+              Dark Version
+            </p>
+          </div>
         </GlobalWrap>
       </main>
     </>
