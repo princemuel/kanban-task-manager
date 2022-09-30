@@ -48,12 +48,16 @@ MyDocument.getInitialProps = async (ctx: DocumentContext) => {
   const originalRenderPage = ctx.renderPage;
 
   try {
+    // Run the React rendering logic synchronously
     ctx.renderPage = () =>
       originalRenderPage({
-        enhanceApp: (MyApp) => (props) =>
-          sheet.collectStyles(<MyApp {...props} />),
+        // Useful for wrapping the whole react tree
+        enhanceApp: (App) => (props) => sheet.collectStyles(<App {...props} />),
+        // Useful for wrapping in a per-page basis
+        // enhanceComponent: (Component) => Component,
       });
 
+    // Run the parent `getInitialProps`, it now includes the custom `renderPage`
     const initialProps = await Document.getInitialProps(ctx);
     return {
       ...initialProps,

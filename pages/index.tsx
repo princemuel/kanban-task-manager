@@ -91,8 +91,8 @@ const Home: NextPage = () => {
             </h2>
           </header>
 
-          <div className='flex flex-wrap gap-10'>
-            <div className='flex-1'>
+          <div className='grid grid-flow-col auto-cols-fr gap-10'>
+            <div className=''>
               <div className='mb-16'>
                 <p className='mb-2 text-primary-400 text-400 font-medium'>
                   <span className=''>Plus Jakarta Sans</span>
@@ -149,7 +149,7 @@ const Home: NextPage = () => {
               </div>
             </div>
 
-            <div className='flex-1'>
+            <div className='flow-space--none'>
               <div className='mb-16'>
                 <p className='mb-2 text-primary-400 text-400 font-medium'>
                   <span className=''>Plus Jakarta Sans</span>
@@ -216,13 +216,41 @@ const Home: NextPage = () => {
               Light Version
             </p>
 
-            <ul role='list' className='grid grid-cols-fit-big gap-10'>
+            <ul
+              role='list'
+              className='grid grid-cols-fit-big items-center gap-10'
+            >
               <li>
                 <button
                   type='button'
                   className='py-6 px-24 rounded-pill text-neutral bg-primary-500 text-500 font-bold leading-300'
                 >
                   Button Primary (L)
+                </button>
+              </li>
+
+              <li>
+                <button
+                  type='button'
+                  className='py-4 px-24 rounded-pill text-neutral bg-primary-500 text-400 font-bold leading-400'
+                >
+                  Button Primary (S)
+                </button>
+              </li>
+              <li>
+                <button
+                  type='button'
+                  className='py-4 px-24 rounded-pill text-neutral bg-primary-500 text-400 font-bold leading-400'
+                >
+                  Button Secondary
+                </button>
+              </li>
+              <li>
+                <button
+                  type='button'
+                  className='py-4 px-24 rounded-pill text-neutral bg-primary-500 text-400 font-bold leading-400'
+                >
+                  Button Destructive
                 </button>
               </li>
             </ul>
