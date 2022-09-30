@@ -91,7 +91,7 @@ const Home: NextPage = () => {
             </h2>
           </header>
 
-          <div className='grid grid-flow-col auto-cols-fr gap-10'>
+          <div className='grid md:grid-flow-col md:auto-cols-fr gap-10'>
             <div className=''>
               <div className='mb-16'>
                 <p className='mb-2 text-primary-400 text-400 font-medium'>
@@ -216,42 +216,96 @@ const Home: NextPage = () => {
               Light Version
             </p>
 
-            <ul
-              role='list'
-              className='grid grid-cols-fit-big items-center gap-10'
-            >
+            <ul role='list' className='grid grid-cols-fit-big items-end gap-10'>
               <li>
                 <button
                   type='button'
-                  className='py-6 px-24 rounded-pill text-neutral bg-primary-500 text-500 font-bold leading-300'
+                  className='py-6 px-24 rounded-pill text-neutral bg-primary-500 hover:bg-primary-300 text-500 font-bold leading-300'
                 >
                   Button Primary (L)
                 </button>
+                <p className='text-primary-400 text-400 leading-400 font-medium text-center'>
+                  Idle
+                </p>
+              </li>
+              <li>
+                <button
+                  type='button'
+                  className='py-4 px-24 rounded-pill text-neutral bg-primary-500 hover:bg-primary-300 text-400 font-bold leading-400'
+                >
+                  Button Primary (S)
+                </button>
+                <p className='text-primary-400 text-400 leading-400 font-medium text-center'>
+                  Idle
+                </p>
+              </li>
+              <li>
+                <button
+                  type='button'
+                  className='py-4 px-24 rounded-pill text-primary-500 bg-primary-500/10 hover:bg-primary-500/25 text-400 font-bold leading-400'
+                >
+                  Button Secondary
+                </button>
+                <p className='text-primary-400 text-400 leading-400 font-medium text-center'>
+                  Idle
+                </p>
+              </li>
+              <li>
+                <button
+                  type='button'
+                  className='py-4 px-24 rounded-pill text-neutral bg-accent-200 hover:bg-accent-100 text-400 font-bold leading-400'
+                >
+                  Button Destructive
+                </button>
+                <p className='text-primary-400 text-400 leading-400 font-medium text-center'>
+                  Idle
+                </p>
               </li>
 
               <li>
                 <button
                   type='button'
-                  className='py-4 px-24 rounded-pill text-neutral bg-primary-500 text-400 font-bold leading-400'
+                  className='py-6 px-24 rounded-pill text-neutral bg-primary-300 text-500 font-bold leading-300'
+                >
+                  Button Primary (L)
+                </button>
+                <p className='text-primary-400 text-400 leading-400 font-medium text-center'>
+                  Hover
+                </p>
+              </li>
+
+              <li>
+                <button
+                  type='button'
+                  className='py-4 px-24 rounded-pill text-neutral bg-primary-300 text-400 font-bold leading-400'
                 >
                   Button Primary (S)
                 </button>
+                <p className='text-primary-400 text-400 leading-400 font-medium text-center'>
+                  Hover
+                </p>
               </li>
               <li>
                 <button
                   type='button'
-                  className='py-4 px-24 rounded-pill text-neutral bg-primary-500 text-400 font-bold leading-400'
+                  className='py-4 px-24 rounded-pill text-primary-500 bg-primary-500/25 text-400 font-bold leading-400'
                 >
                   Button Secondary
                 </button>
+                <p className='text-primary-400 text-400 leading-400 font-medium text-center'>
+                  Hover
+                </p>
               </li>
               <li>
                 <button
                   type='button'
-                  className='py-4 px-24 rounded-pill text-neutral bg-primary-500 text-400 font-bold leading-400'
+                  className='py-4 px-24 rounded-pill text-neutral bg-accent-100 text-400 font-bold leading-400'
                 >
                   Button Destructive
                 </button>
+                <p className='text-primary-400 text-400 leading-400 font-medium text-center'>
+                  Hover
+                </p>
               </li>
             </ul>
           </div>
