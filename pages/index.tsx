@@ -1,4 +1,4 @@
-import { IconCheck, LogoDark } from 'common';
+import { LogoDark } from 'common';
 import type { NextPage } from 'next';
 import Image from 'next/future/image';
 import Head from 'next/head';
@@ -314,19 +314,34 @@ const Home: NextPage = () => {
               className='grid grid-cols-fit-big items-start gap-10 flow-space--none'
             >
               <li className='flex flex-col gap-4'>
-                <label className='flex items-center gap-4 py-6 px-10 rounded-xl text-primary-900 bg-primary-100 text-300 leading-200 font-bold cursor-pointer'>
-                  <div className='relative'>
-                    <input
-                      type='checkbox'
-                      name='check-1'
-                      id='check-1'
-                      className='cursor-pointer'
-                    />
-                    <div className='absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] flex items-center justify-center w-8 aspect-square rounded-md bg-primary-500'>
-                      <Image src={IconCheck} alt='' />
-                    </div>
-                  </div>
-                  <span className=''>Idle</span>
+                <label className='flex items-center gap-6 py-6 px-10 rounded-xl text-primary-900 bg-primary-100 text-400 leading-200 font-bold cursor-pointer'>
+                  <input
+                    type='checkbox'
+                    name='check-1'
+                    id='check-1'
+                    className='w-6 aspect-square accent-primary-500 cursor-pointer'
+                  />
+                  <p className=''>Idle</p>
+                </label>
+
+                <label className='flex items-center gap-6 py-6 px-10 rounded-xl text-primary-900 bg-primary-100 text-400 leading-200 font-bold cursor-pointer'>
+                  <input
+                    type='checkbox'
+                    name='check-1'
+                    id='check-1'
+                    className='w-6 aspect-square accent-primary-500 cursor-pointer'
+                  />
+                  <p className=''>Hovered</p>
+                </label>
+
+                <label className='flex items-center gap-6 py-6 px-10 rounded-xl text-primary-900 bg-primary-100 text-400 leading-200 font-bold cursor-pointer'>
+                  <input
+                    type='checkbox'
+                    name='check-1'
+                    id='check-1'
+                    className='w-6 aspect-square accent-primary-500 cursor-pointer'
+                  />
+                  <p className=''>Completed</p>
                 </label>
               </li>
               <div></div>
