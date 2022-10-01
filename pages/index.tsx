@@ -1,7 +1,7 @@
-import { LogoDark } from 'common';
+import { IconCheck, LogoDark } from 'common';
 import type { NextPage } from 'next';
+import Image from 'next/future/image';
 import Head from 'next/head';
-import Image from 'next/image';
 import { GlobalWrap } from 'styles';
 
 const Home: NextPage = () => {
@@ -220,7 +220,7 @@ const Home: NextPage = () => {
               <li>
                 <button
                   type='button'
-                  className='py-6 px-24 rounded-pill text-neutral bg-primary-500 hover:bg-primary-300 text-500 font-bold leading-300'
+                  className='py-6 px-24 rounded-pill text-neutral bg-primary-500 hover:bg-primary-300 text-500 font-bold leading-300 transition-colors'
                 >
                   Button Primary (L)
                 </button>
@@ -231,7 +231,7 @@ const Home: NextPage = () => {
               <li>
                 <button
                   type='button'
-                  className='py-4 px-24 rounded-pill text-neutral bg-primary-500 hover:bg-primary-300 text-400 font-bold leading-400'
+                  className='py-4 px-24 rounded-pill text-neutral bg-primary-500 hover:bg-primary-300 text-400 font-bold leading-400 transition-colors'
                 >
                   Button Primary (S)
                 </button>
@@ -242,7 +242,7 @@ const Home: NextPage = () => {
               <li>
                 <button
                   type='button'
-                  className='py-4 px-24 rounded-pill text-primary-500 bg-primary-500/10 hover:bg-primary-500/25 text-400 font-bold leading-400'
+                  className='py-4 px-24 rounded-pill text-primary-500 bg-primary-500/10 hover:bg-primary-500/25 text-400 font-bold leading-400 transition-colors'
                 >
                   Button Secondary
                 </button>
@@ -253,7 +253,7 @@ const Home: NextPage = () => {
               <li>
                 <button
                   type='button'
-                  className='py-4 px-24 rounded-pill text-neutral bg-accent-200 hover:bg-accent-100 text-400 font-bold leading-400'
+                  className='py-4 px-24 rounded-pill text-neutral bg-accent-200 hover:bg-accent-100 text-400 font-bold leading-400 transition-colors'
                 >
                   Button Destructive
                 </button>
@@ -307,6 +307,30 @@ const Home: NextPage = () => {
                   Hover
                 </p>
               </li>
+            </ul>
+
+            <ul
+              role='list'
+              className='grid grid-cols-fit-big items-start gap-10 flow-space--none'
+            >
+              <li className='flex flex-col gap-4'>
+                <label className='flex items-center gap-4 py-6 px-10 rounded-xl text-primary-900 bg-primary-100 text-300 leading-200 font-bold cursor-pointer'>
+                  <div className='relative'>
+                    <input
+                      type='checkbox'
+                      name='check-1'
+                      id='check-1'
+                      className='cursor-pointer'
+                    />
+                    <div className='absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] flex items-center justify-center w-8 aspect-square rounded-md bg-primary-500'>
+                      <Image src={IconCheck} alt='' />
+                    </div>
+                  </div>
+                  <span className=''>Idle</span>
+                </label>
+              </li>
+              <div></div>
+              <div></div>
             </ul>
           </div>
           <div className='dark-version'>

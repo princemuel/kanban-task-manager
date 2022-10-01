@@ -17,7 +17,7 @@
 @tailwind utilities;
 
 /**
- * Use this directive to control where Tailwind injects the hover, focus,
+ * Use this directive to control where Tailwind injects the hover focus,
  * responsive, dark mode, and other variants of each class.
  *
  * If omitted, Tailwind will append these classes to the very end of
@@ -29,6 +29,7 @@
      CUSTOM UTILITIES
   ============================
 */
+
 .btn {
   @apply px-24 rounded-pill font-bold;
 }

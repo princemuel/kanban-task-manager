@@ -12,6 +12,17 @@ export default function MyDocument() {
     <Html lang='en'>
       <Head>
         <meta name='robots' content='all' />
+        {/* <meta name='color-scheme' content='dark light' /> */}
+        <meta
+          name='theme-color'
+          media='(prefers-color-scheme: light)'
+          content='white'
+        />
+        <meta
+          name='theme-color'
+          media='(prefers-color-scheme: dark)'
+          content='black'
+        />
         <meta
           name='description'
           content='The Kanban board is an easy-to-use agile project management tool using the Kanban methodology that helps you to visualize and manage workflows.'

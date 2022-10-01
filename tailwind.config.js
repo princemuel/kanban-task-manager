@@ -2,6 +2,7 @@ const defaultTheme = require('tailwindcss/defaultTheme');
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  darkMode: ['class', '[data-theme="dark"]'],
   content: [
     './pages/**/*.{js,ts,jsx,tsx}',
     './components/**/*.{js,ts,jsx,tsx}',
@@ -32,6 +33,10 @@ module.exports = {
         100: '#ff9898',
         200: '#ea5555',
       },
+    },
+
+    fontFamily: {
+      sans: ['Plus Jakarta Sans', ...defaultTheme.fontFamily.sans],
     },
 
     fontSize: {
@@ -75,10 +80,6 @@ module.exports = {
         'fit-big': 'repeat(auto-fit, minmax(25rem, 1fr))',
         // etc.
       },
-    },
-
-    fontFamily: {
-      sans: ['Plus Jakarta Sans', 'sans-serif'],
     },
   },
   plugins: [],

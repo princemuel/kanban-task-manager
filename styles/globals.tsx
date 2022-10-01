@@ -18,6 +18,43 @@ Version: 01
 // BASE CONFIGURATION
 */
 
+  :root {
+    scroll-behavior: smooth;
+    scroll-padding-top: 2rem;
+  }
+
+  /* Set core root defaults */
+  html {
+    box-sizing: border-box;
+    font-size: 50%;
+    text-rendering: optimizeSpeed;
+
+    @media screen and (min-width: 45em) {
+      font-size: 56.25%;
+    }
+    @media screen and (min-width: 75em) {
+      font-size: 62.5%;
+    }
+    @media screen and (min-width: 112.5em) {
+      font-size: 75%;
+    }
+
+    &,
+    &:focus-within {
+      scroll-behavior: smooth;
+    }
+  }
+
+  *,
+  *::before,
+  *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+  }
+
+  /********** THEMING ************/
+
   /* Set core root defaults */
   html {
     box-sizing: border-box;
@@ -51,6 +88,9 @@ Version: 01
 
   /* Set core body defaults */
   body {
+    color: var(--color-text);
+    background-color: var(--color-background);
+
     text-rendering: optimizeSpeed;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;

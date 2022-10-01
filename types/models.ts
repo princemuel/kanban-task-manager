@@ -1,25 +1,13 @@
-export interface IData {
-  boards: IBoard[];
-}
+import { data } from 'common';
+import { Unarray } from './types';
 
-export interface IBoard {
-  name: string;
-  columns: IColumn[];
-}
-
-export interface IColumn {
-  name: string;
-  tasks: ITask[];
-}
-
-export interface ITask {
-  title: string;
-  description: string;
-  status: 'Todo' | 'Doing' | 'Done';
-  subtasks: ISubtask[];
-}
-
-export interface ISubtask {
-  title: string;
-  isCompleted: boolean;
-}
+/*===============================*
+          DATA MODELS
+ *===============================*
+*/
+export type IData = typeof data;
+export type IBoard = Unarray<IData['boards'][0]>;
+export type IColumn = Unarray<IBoard['columns'][0]>;
+export type ITask = Unarray<IColumn['tasks'][0]> & TaskStatus;
+export type ISubtask = Unarray<ITask['subtasks'][0]>;
+export type TaskStatus = { status: 'Todo' | 'Doing' | 'Done' };
