@@ -216,7 +216,10 @@ const Home: NextPage = () => {
               Light Version
             </p>
 
-            <ul role='list' className='grid grid-cols-fit-big items-end gap-10'>
+            <ul
+              role='list'
+              className='mb-10 grid grid-cols-fit-big items-end gap-10'
+            >
               <li>
                 <button
                   type='button'
@@ -311,10 +314,11 @@ const Home: NextPage = () => {
 
             <ul
               role='list'
-              className='grid grid-cols-fit-big items-start gap-10 flow-space--none'
+              className='mb-10 grid grid-cols-fit-big items-start gap-10 flow-space--none'
             >
               <li className='flex flex-col gap-4'>
-                <label className='flex items-center gap-6 py-6 px-10 rounded-xl text-primary-900 bg-primary-100 text-400 leading-200 font-bold cursor-pointer'>
+                <p className='text-primary-400 text-300'>Subtask Checkbox</p>
+                <label className='flex items-center gap-6 py-6 px-10 rounded-xl text-primary-900 bg-primary-100 hover:bg-primary-500/25 text-400 leading-200 font-bold cursor-pointer'>
                   <input
                     type='checkbox'
                     name='check-1'
@@ -324,7 +328,7 @@ const Home: NextPage = () => {
                   <p className=''>Idle</p>
                 </label>
 
-                <label className='flex items-center gap-6 py-6 px-10 rounded-xl text-primary-900 bg-primary-100 text-400 leading-200 font-bold cursor-pointer'>
+                <label className='flex items-center gap-6 py-6 px-10 rounded-xl text-primary-900 bg-primary-500/25 text-400 leading-200 font-bold cursor-pointer'>
                   <input
                     type='checkbox'
                     name='check-1'
@@ -340,14 +344,30 @@ const Home: NextPage = () => {
                     name='check-1'
                     id='check-1'
                     className='w-6 aspect-square accent-primary-500 cursor-pointer'
+                    readOnly
+                    checked
                   />
-                  <p className=''>Completed</p>
+                  <p className='text-primary-400 line-through'>Completed</p>
                 </label>
               </li>
-              <div></div>
-              <div></div>
+              <li className='flex flex-col gap-4'>
+                <div className='flex flex-col'>
+                  <label htmlFor='text-1' className='text-primary-400 text-300'>
+                    Text Field (Idle)
+                  </label>
+                  <input
+                    type='text'
+                    name='text-1'
+                    id='text-1'
+                    className='border-primary-400/25'
+                    placeholder='Enter task name'
+                  />
+                </div>
+              </li>
+              <li></li>
             </ul>
           </div>
+
           <div className='dark-version'>
             <p className='mb-10 text-primary-400 text-600 font-bold leading-400'>
               Dark Version
