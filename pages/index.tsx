@@ -318,53 +318,51 @@ const Home: NextPage = () => {
             >
               <li className='flex flex-col gap-4'>
                 <p className='text-primary-400 text-300'>Subtask Checkbox</p>
-                <label className='flex items-center gap-6 py-6 px-10 rounded-xl text-primary-900 bg-primary-100 hover:bg-primary-500/25 text-400 leading-200 font-bold cursor-pointer'>
+                <label className='flex items-center gap-6 py-6 px-6 rounded-xl text-primary-900 bg-primary-100 hover:bg-primary-500/25 text-400 leading-200 font-bold cursor-pointer'>
                   <input
                     type='checkbox'
                     name='check-1'
-                    id='check-1'
-                    className='w-6 aspect-square accent-primary-500 cursor-pointer'
+                    className='w-7 aspect-square accent-primary-500 cursor-pointer'
                   />
                   <p className=''>Idle</p>
                 </label>
 
-                <label className='flex items-center gap-6 py-6 px-10 rounded-xl text-primary-900 bg-primary-500/25 text-400 leading-200 font-bold cursor-pointer'>
+                <label className='flex items-center gap-6 py-6 px-6 rounded-xl text-primary-900 bg-primary-500/25 text-400 leading-200 font-bold cursor-pointer'>
                   <input
                     type='checkbox'
                     name='check-1'
-                    id='check-1'
-                    className='w-6 aspect-square accent-primary-500 cursor-pointer'
+                    className='w-7 aspect-square accent-primary-500 cursor-pointer'
                   />
                   <p className=''>Hovered</p>
                 </label>
 
-                <label className='flex items-center gap-6 py-6 px-10 rounded-xl text-primary-900 bg-primary-100 text-400 leading-200 font-bold cursor-pointer'>
+                <label className='flex items-center gap-6 py-6 px-6 rounded-xl text-primary-900 bg-primary-100 text-400 leading-200 font-bold cursor-pointer'>
                   <input
                     type='checkbox'
                     name='check-1'
-                    id='check-1'
-                    className='w-6 aspect-square accent-primary-500 cursor-pointer'
+                    className='w-7 aspect-square accent-primary-500 cursor-pointer'
                     readOnly
                     checked
                   />
                   <p className='text-primary-400 line-through'>Completed</p>
                 </label>
               </li>
+
               <li className='flex flex-col gap-4'>
-                <div className='flex flex-col'>
-                  <label htmlFor='text-1' className='text-primary-400 text-300'>
+                <label className='block flow flow-space--sm'>
+                  <span className='block text-primary-400 text-300 font-bold'>
                     Text Field (Idle)
-                  </label>
+                  </span>
                   <input
                     type='text'
-                    name='text-1'
-                    id='text-1'
-                    className='border-primary-400/25'
+                    name='task-name'
                     placeholder='Enter task name'
+                    className='w-full px-6 py-5 border rounded-xl border-primary-400/25 text-400 text-primary-900 font-bold placeholder-primary-900/25 focus:border-primary-400/25 focus:outline-none focus:ring-accent-200'
                   />
-                </div>
+                </label>
               </li>
-              <li></li>
+
+              <li className='flex flex-col gap-4'>label</li>
             </ul>
           </div>
 
