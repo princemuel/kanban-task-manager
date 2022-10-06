@@ -1,4 +1,5 @@
 const defaultTheme = require('tailwindcss/defaultTheme');
+const plugin = require('tailwindcss/plugin');
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -82,5 +83,13 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    plugin(function ({ addUtilities, theme }) {
+      addUtilities({
+        '.btn': {
+          '--flow-space': '<value>',
+        },
+      });
+    }),
+  ],
 };

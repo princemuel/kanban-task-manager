@@ -30,6 +30,8 @@
   ============================
 */
 
-.btn {
-  @apply px-24 rounded-pill font-bold;
+@layer utitities {
+  .btn {
+    @apply px-24 rounded-pill font-bold;
+  }
 }

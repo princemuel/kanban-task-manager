@@ -58,12 +58,9 @@ Version: 01
   /* Set core root defaults */
   html {
     box-sizing: border-box;
-    font-size: 50%;
+    font-size: 56.25%;
     text-rendering: optimizeSpeed;
 
-    @media (min-width: 45em) {
-      font-size: 56.25%;
-    }
     @media (min-width: 75em) {
       font-size: 62.5%;
     }
@@ -144,10 +141,11 @@ Version: 01
   /* TYPOGRAPHY */
 
   /* FLOW UTILITY */
-  :where(.flow :not(:first-child)) {
+
+  :where(.flow > :not(:first-child)) {
     margin-block-start: var(--flow-space, 1.6rem);
   }
-  .flow-space--small {
+  .flow-space--sm {
     --flow-space: 1rem;
   }
   .flow-space--none {

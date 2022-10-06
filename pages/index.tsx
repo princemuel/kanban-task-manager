@@ -357,7 +357,7 @@ const Home: NextPage = () => {
                     type='text'
                     name='task-name'
                     placeholder='Enter task name'
-                    className='w-full px-6 py-5 border rounded-xl border-primary-400/25 text-400 text-primary-900 font-bold placeholder-primary-900/25 focus:border-primary-400/25 focus:outline-none focus:ring-accent-200'
+                    className='w-full px-6 py-5 border rounded-xl border-primary-400/25 text-400 text-primary-900 font-bold placeholder-primary-900/25 focus:border-primary-400/25 focus:outline-none'
                   />
                 </label>
               </li>
