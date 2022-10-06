@@ -349,7 +349,7 @@ const Home: NextPage = () => {
               </li>
 
               <li className='flex flex-col gap-4'>
-                <label className='block flow flow-space--sm'>
+                <label className='block'>
                   <span className='block text-primary-400 text-300 font-bold'>
                     Text Field (Idle)
                   </span>
@@ -357,8 +357,34 @@ const Home: NextPage = () => {
                     type='text'
                     name='task-name'
                     placeholder='Enter task name'
-                    className='w-full px-6 py-5 border rounded-xl border-primary-400/25 text-400 text-primary-900 font-bold placeholder-primary-900/25 focus:border-primary-400/25 focus:outline-none'
+                    className='w-full px-6 py-5 border rounded-xl border-primary-400/25 text-400 text-primary-900 font-medium placeholder-primary-900/25 focus:border-primary-400/25 focus:outline-none'
                   />
+                </label>
+                <label className='block leading-4'>
+                  <span className='block text-primary-400 text-300 font-bold'>
+                    Text Field (Active)
+                  </span>
+                  <input
+                    type='text'
+                    name='task-name'
+                    placeholder='Enter task name'
+                    className='w-full px-6 py-5 border rounded-xl border-primary-400/25 text-400 text-primary-900 font-medium placeholder-primary-900 focus:border-primary-400/25 focus:outline-none'
+                  />
+                </label>
+
+                <label className='relative block leading-4'>
+                  <span className='block text-primary-400 text-300 font-bold'>
+                    Text Field (Error)
+                  </span>
+                  <input
+                    type='text'
+                    name='task-name'
+                    placeholder='Enter task name'
+                    className='w-full px-6 py-5 border rounded-xl border-accent-200 text-400 text-primary-900 font-medium placeholder-primary-900/25 focus:border-primary-400/25 focus:outline-none'
+                  />
+                  <span className='absolute top-2/4 right-0 mr-6 text-accent-200 text-400 font-medium'>
+                    Can’t be empty
+                  </span>
                 </label>
               </li>
 
