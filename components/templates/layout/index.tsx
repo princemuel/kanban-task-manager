@@ -1,3 +1,4 @@
+import { Header, MainContent, Sidebar } from 'components';
 import { ReactNode } from 'react';
 
 type Props = {
@@ -6,11 +7,14 @@ type Props = {
 
 const Layout = ({ children }: Props) => {
   return (
-    <>
-      {/* SIDEBAR */}
-      {/* HEADER */}
-      {children}
-    </>
+    <div className='grid min-h-screen overflow-hidden'>
+      <Header />
+
+      <div className='main-content'>
+        <Sidebar />
+        <MainContent />
+      </div>
+    </div>
   );
 };
 

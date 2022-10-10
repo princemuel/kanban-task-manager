@@ -1,10 +1,10 @@
-import { LogoDark } from 'common';
-import type { NextPage } from 'next';
+import { IconCheck, LogoDark } from 'common';
 import Image from 'next/future/image';
 import Head from 'next/head';
 import { GlobalWrap } from 'styles';
+import type { NextPageWithLayout } from 'types';
 
-const DesignSystem: NextPage = () => {
+const DesignSystem: NextPageWithLayout = () => {
   return (
     <>
       <Head>
@@ -507,6 +507,18 @@ const DesignSystem: NextPage = () => {
                   <p className=''>Idle</p>
                 </label>
 
+                <div className='flex flex-col gap-4'>
+                  <p className='text-neutral text-300'>Subtask Checkbox</p>
+
+                  <label className='relative flex items-center gap-6 max-w-[35rem] max-h-[4rem] py-6 px-6 rounded-xl text-neutral bg-primary-800 hover:bg-primary-500/25 text-400 leading-200 font-bold cursor-pointer'>
+                    <span className='flex items-center justify-center w-[1.4rem] aspect-square rounded-sm bg-primary-700 checked:bg-primary-500'>
+                      <Image src={IconCheck} alt='check off task' />
+                    </span>
+                    <input type='checkbox' className='sr-only' />
+                    <p className=''>Idle</p>
+                  </label>
+                </div>
+
                 <label className='flex items-center gap-6 max-w-[35rem] max-h-[4rem] py-6 px-6 rounded-xl text-neutral bg-primary-500/25 text-400 leading-200 font-bold cursor-pointer'>
                   <input
                     type='checkbox'
@@ -578,3 +590,7 @@ const DesignSystem: NextPage = () => {
 };
 
 export default DesignSystem;
+
+DesignSystem.getLayout = function getLayout(page) {
+  return <>{page}</>;
+};

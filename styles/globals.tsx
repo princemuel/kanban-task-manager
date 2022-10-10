@@ -85,9 +85,6 @@ Version: 01
 
   /* Set core body defaults */
   body {
-    color: var(--color-text);
-    background-color: var(--color-background);
-
     text-rendering: optimizeSpeed;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -156,15 +153,15 @@ Version: 01
     position: absolute;
     margin-inline: auto;
     padding: 0.5em 1em;
-    color: var(--clr-accent-100);
-    background: var(--clr-neutral-200);
+    /* color: var(--clr-accent-100); */
+    /* background: var(--clr-neutral-200); */
     clip-path: none;
     z-index: 9999;
     transform: translateY(-120%);
     transition: transform 500ms ease-in-out;
 
     &:focus {
-      outline: 2px solid var(--clr-primary-100);
+      /* outline: 2px solid var(--clr-primary-100); */
       transform: translateY(0);
     }
   }
