@@ -1,3 +1,4 @@
+import { MainContent } from 'components/organisms';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 
@@ -7,6 +8,8 @@ const Home: NextPage = () => {
       <Head>
         <title>Kanban Task Manager</title>
       </Head>
+
+      <MainContent />
     </>
   );
 };
