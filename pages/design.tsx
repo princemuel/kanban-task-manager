@@ -1,5 +1,4 @@
-import { IconCheck, LogoDark } from 'common';
-import Image from 'next/future/image';
+import { icons } from 'common';
 import Head from 'next/head';
 import { GlobalWrap } from 'styles';
 import type { NextPageWithLayout } from 'types';
@@ -14,7 +13,7 @@ const DesignSystem: NextPageWithLayout = () => {
       <header className='p-8'>
         <GlobalWrap className='px-20 flex items-center justify-between'>
           <div className='logo'>
-            <Image src={LogoDark} alt='logo' />
+            <icons.logo.dark />
           </div>
 
           <h1 className='text-primary-900 text-700 font-bold'>Design System</h1>
@@ -512,7 +511,8 @@ const DesignSystem: NextPageWithLayout = () => {
 
                   <label className='relative flex items-center gap-6 max-w-[35rem] max-h-[4rem] py-6 px-6 rounded-xl text-neutral bg-primary-800 hover:bg-primary-500/25 text-400 leading-200 font-bold cursor-pointer'>
                     <span className='flex items-center justify-center w-[1.4rem] aspect-square rounded-sm bg-primary-700 checked:bg-primary-500'>
-                      <Image src={IconCheck} alt='check off task' />
+                      <span className='sr-only'>check off task</span>
+                      <icons.board.check />
                     </span>
                     <input type='checkbox' className='sr-only' />
                     <p className=''>Idle</p>
