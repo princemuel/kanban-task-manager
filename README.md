@@ -71,7 +71,7 @@ View the User Stories at the [User Stories Markdown File](./user-stories.md)
 
 ## Author
 
-- Website - [Prince Muel](https://www.your-site.com)
-- Twitter - [@iamprincemuel](https://www.twitter.com/iamprincemuel)
-- LinkedIn - [@princemuel](https://www.linkedin.com/in/princemuel)
+- Website - [Samuel Chukwuzube](https://princemuel.vercel.app/)
+- LinkedIn - [@princemuel](https://linkedin.com/in/princemuel/)
+- Twitter - [@iamprincemuel](https://twitter.com/iamprincemuel)
 - Frontend Mentor - [@princemuel](https://www.frontendmentor.io/profile/princemuel)

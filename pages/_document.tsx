@@ -25,7 +25,7 @@ export default function MyDocument() {
         />
         <meta
           name='description'
-          content='The Kanban board is an easy-to-use agile project management tool using the Kanban methodology that helps you to visualize and manage workflows.'
+          content='The Kanban board is an easy-to-use agile project management tool using the Kanban methodology that is designed to bring clarity to your work process, and enhance productivity by minimizing work in progress and help you visualize and manage workflows.'
         />
         <meta name='author' content='Prince Muel' />
         <link

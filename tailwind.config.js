@@ -84,10 +84,27 @@ module.exports = {
     },
   },
   plugins: [
-    plugin(function ({ addUtilities, theme }) {
-      addUtilities({
+    plugin(function ({ addComponents, addUtilities, theme }) {
+      addComponents({
         '.btn': {
-          '--flow-space': '<value>',
+          display: 'inline-flex',
+          alignItems: 'center',
+          gap: '1rem',
+          paddingBlock: '1.5rem',
+          paddingInline: '2.75rem',
+          borderRadius: theme('borderRadius.pill'),
+          fontSize: theme('fontSize.400'),
+          lineHeight: theme('lineHeight.200'),
+          letterSpacing: theme('letterSpacing.200'),
+        },
+      });
+      addUtilities({
+        '.icon': {
+          fill: 'currentColor',
+        },
+        '.w-full-shadow': {
+          boxShadow: '0 0 0 100vmax currentColor, 0 0 2rem currentColor',
+          clipPath: 'inset(0 -100vmax)',
         },
       });
     }),

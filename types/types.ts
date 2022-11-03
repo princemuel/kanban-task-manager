@@ -1,3 +1,8 @@
+import type { NextPage } from 'next';
+import type { AppProps } from 'next/app';
+import { ParsedUrlQuery } from 'querystring';
+import type { ReactElement, ReactNode } from 'react';
+
 /*===============================*
           EVENT TYPES
  *===============================*
@@ -8,9 +13,32 @@ export type ReactInputEvent = React.ChangeEvent<HTMLInputElement>;
 export type ReactMouseEvent = React.MouseEvent<HTMLButtonElement>;
 
 /*===============================*
+          NEXTJS TYPES
+ *===============================*
+*/
+export type {
+  GetServerSideProps,
+  GetStaticPaths,
+  GetStaticProps,
+  NextPage,
+} from 'next';
+
+export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
+  getLayout?: (page: ReactElement) => ReactNode;
+};
+export type AppPropsWithLayout = AppProps & {
+  Component: NextPageWithLayout;
+};
+
+/*===============================*
           HELPER TYPES
  *===============================*
 */
+
+export interface Params extends ParsedUrlQuery {
+  category: string;
+  slug: string;
+}
 export type Unarray<T> = T extends Array<infer U> ? U : T;
 export type ReturnValue<T> = T extends (...args: any[]) => infer R ? R : T;
 

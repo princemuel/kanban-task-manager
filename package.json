@@ -12,13 +12,20 @@
     "@headlessui/react": "^1.7.2",
     "@heroicons/react": "^2.0.11",
     "@reduxjs/toolkit": "^1.8.5",
+    "apollo-server-micro": "^3.11.1",
+    "class-validator": "^0.13.2",
+    "graphql": "^15.3.0",
+    "micro": "^9.4.1",
     "next": "12.3.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-redux": "^8.0.4",
-    "styled-components": "^5.3.5"
+    "reflect-metadata": "^0.1.13",
+    "styled-components": "^5.3.5",
+    "type-graphql": "^1.1.1"
   },
   "devDependencies": {
+    "@svgr/webpack": "^6.5.1",
     "@types/node": "18.7.23",
     "@types/react": "18.0.21",
     "@types/react-dom": "18.0.6",
