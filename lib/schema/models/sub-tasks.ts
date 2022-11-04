@@ -11,14 +11,3 @@ export class Subtask {
   @Field()
   isCompleted!: boolean;
 }
-
-// @Resolver(Subtask)
-// export class SubtasksResolver {
-//   @Query(() => [Subtask])
-//   boards(): Subtask[] {
-//     return [
-//       { id: 'hddd', title: 'Platform Launch', isCompleted: true },
-//       { id: 'hdd', title: 'Marketing Plan', isCompleted: false },
-//     ];
-//   }
-// }
