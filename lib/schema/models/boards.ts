@@ -11,14 +11,3 @@ export class Board {
   @Field((type) => [Column], { nullable: true })
   columns?: Column[];
 }
-
-// @Resolver(Board)
-// export class BoardsResolver {
-//   @Query(() => [Board])
-//   boards(): Board[] {
-//     return [
-//       { id: 'hddd', name: 'Platform Launch', columns: ['hello'] },
-//       { id: 'hdd', name: 'Marketing Plan', columns: ['hello'] },
-//     ];
-//   }
-// }
