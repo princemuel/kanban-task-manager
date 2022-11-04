@@ -2,21 +2,24 @@ import { Field, ID, ObjectType } from 'type-graphql';
 import type { TaskStatus } from 'types';
 import { Subtask } from './sub-tasks';
 
-@ObjectType()
+@ObjectType({ description: 'The task model' })
 export class Task {
-  @Field(() => ID)
-  id!: string;
+  @Field((type) => ID)
+  readonly id!: string;
 
-  @Field(() => String)
+  @Field({ description: 'The title of the task' })
   title!: string;
 
-  @Field(() => String)
+  @Field({ nullable: true, description: 'The description of the task' })
   description?: string;
 
-  @Field(() => String)
+  @Field({
+    nullable: true,
+    description: 'The status of the task. can be todo, doing or done',
+  })
   status?: TaskStatus;
 
-  @Field(() => [Subtask])
+  @Field(() => [Subtask], { nullable: true })
   subtasks?: Subtask[];
 }
 
