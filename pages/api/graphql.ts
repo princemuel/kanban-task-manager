@@ -1,5 +1,10 @@
 import { ApolloServer } from 'apollo-server-micro';
-import { BoardsResolver } from 'lib';
+import {
+  BoardsResolver,
+  ColumnsResolver,
+  SubtasksResolver,
+  TasksResolver,
+} from 'lib';
 import cors from 'micro-cors';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import 'reflect-metadata';
@@ -22,7 +27,7 @@ const allowCors = cors({
 });
 
 const schema = await buildSchema({
-  resolvers: [BoardsResolver],
+  resolvers: [BoardsResolver, ColumnsResolver, TasksResolver, SubtasksResolver],
 });
 
 const server = new ApolloServer({

@@ -1,4 +1,4 @@
-import { TaskStatus } from 'lib/schema/models';
+import { TaskStatus } from 'lib';
 
 /*===============================*
           DATA MODELS
