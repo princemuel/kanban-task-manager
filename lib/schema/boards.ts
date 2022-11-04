@@ -1,4 +1,5 @@
-import { Field, ID, ObjectType, Query, Resolver } from 'type-graphql';
+import { Field, ID, ObjectType } from 'type-graphql';
+import { Column } from './columns';
 
 @ObjectType()
 export class Board {
@@ -8,17 +9,17 @@ export class Board {
   @Field()
   name!: string;
 
-  @Field((type) => [String])
-  columns?: string[];
+  @Field(() => [Column])
+  columns?: Column[];
 }
 
-@Resolver(Board)
-export class BoardsResolver {
-  @Query(() => [Board])
-  boards(): Board[] {
-    return [
-      { id: 'hddd', name: 'Platform Launch', columns: ['hello'] },
-      { id: 'hdd', name: 'Marketing Plan', columns: ['hello'] },
-    ];
-  }
-}
+// @Resolver(Board)
+// export class BoardsResolver {
+//   @Query(() => [Board])
+//   boards(): Board[] {
+//     return [
+//       { id: 'hddd', name: 'Platform Launch', columns: ['hello'] },
+//       { id: 'hdd', name: 'Marketing Plan', columns: ['hello'] },
+//     ];
+//   }
+// }
