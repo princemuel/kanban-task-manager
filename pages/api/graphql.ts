@@ -1,15 +1,9 @@
 import { ApolloServer } from 'apollo-server-micro';
+import { BoardsResolver } from 'lib/schema';
 import cors from 'micro-cors';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import 'reflect-metadata';
-import {
-  buildSchema,
-  Field,
-  ID,
-  ObjectType,
-  Query,
-  Resolver,
-} from 'type-graphql';
+import { buildSchema } from 'type-graphql';
 
 const allowCors = cors({
   origin: 'https://studio.apollographql.com',
@@ -26,20 +20,6 @@ const allowCors = cors({
     'Access-Control-Allow-Methods',
   ],
 });
-
-@ObjectType()
-export class Board {
-  @Field(() => ID)
-  name!: string;
-}
-
-@Resolver(Board)
-export class BoardsResolver {
-  @Query(() => [Board])
-  boards(): Board[] {
-    return [{ name: 'Platform Launch' }, { name: 'Marketing Plan' }];
-  }
-}
 
 const schema = await buildSchema({
   resolvers: [BoardsResolver],
