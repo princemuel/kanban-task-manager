@@ -1,28 +1,25 @@
 import { ApolloServer } from 'apollo-server-micro';
+import { BoardsResolver } from 'lib';
+import cors from 'micro-cors';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import 'reflect-metadata';
-import {
-  buildSchema,
-  Field,
-  ID,
-  ObjectType,
-  Query,
-  Resolver,
-} from 'type-graphql';
+import { buildSchema } from 'type-graphql';
 
-@ObjectType()
-export class Board {
-  @Field(() => ID)
-  name!: string;
-}
-
-@Resolver(Board)
-export class BoardsResolver {
-  @Query(() => [Board])
-  boards(): Board[] {
-    return [{ name: 'Platform Launch' }, { name: 'Marketing Plan' }];
-  }
-}
+const allowCors = cors({
+  origin: 'https://studio.apollographql.com',
+  allowCredentials: true,
+  allowMethods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowHeaders: [
+    'Origin',
+    'X-Requested-With',
+    'Content-Type',
+    'Accept',
+    'Access-Control-Allow-Origin',
+    'Access-Control-Allow-Headers',
+    'Access-Control-Allow-Credentials',
+    'Access-Control-Allow-Methods',
+  ],
+});
 
 const schema = await buildSchema({
   resolvers: [BoardsResolver],
@@ -31,17 +28,25 @@ const schema = await buildSchema({
 const server = new ApolloServer({
   schema,
 });
-
-export const config = {
-  api: { bodyParser: false },
-};
+0;
 
 const startServer = server.start();
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse<any>
-) {
+async function handler(req: NextApiRequest, res: NextApiResponse<any>) {
+  if (req.method === 'OPTIONS') {
+    res.end();
+    return false;
+  }
+
   await startServer;
-  await server.createHandler({ path: '/api/graphql' })(req, res);
+  return server?.createHandler({ path: '/api/graphql' })(req, res);
 }
+
+// @ts-ignore
+export default allowCors(handler);
+
+export const config = {
+  api: {
+    bodyParser: false,
+  },
+};

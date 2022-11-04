@@ -1,0 +1,7 @@
+query getBoards {
+  boards {
+    id
+    name
+    columns
+  }
+}
