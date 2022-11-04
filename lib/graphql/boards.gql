@@ -2,6 +2,8 @@ query getBoards {
   boards {
     id
     name
-    columns
+    columns {
+      name
+    }
   }
 }

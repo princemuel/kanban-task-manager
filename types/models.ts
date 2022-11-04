@@ -1,3 +1,5 @@
+import { TaskStatus } from 'lib';
+
 /*===============================*
           DATA MODELS
  *===============================*
@@ -27,4 +29,3 @@ export interface ISubtask {
   title: string;
   isCompleted: boolean;
 }
-export type TaskStatus = 'Todo' | 'Doing' | 'Done' | 'Now' | 'Next' | 'Later';

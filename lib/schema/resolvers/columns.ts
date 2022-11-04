@@ -1,14 +1,12 @@
-import { Field, ID, ObjectType } from 'type-graphql';
-import { Task } from './tasks';
+import { data } from 'lib/data';
+import { Query, Resolver } from 'type-graphql';
+import { Column } from '../models';
 
-@ObjectType()
-export class Column {
-  @Field(() => ID)
-  id!: string;
-
-  @Field(() => String)
-  name!: string;
-
-  @Field(() => [Task])
-  tasks?: Task[];
+@Resolver(Column)
+export class ColumnsResolver {
+  @Query(() => [Column])
+  columns(): Column[] {
+    //@ts-expect-error
+    return data?.boards?.[0]?.columns;
+  }
 }

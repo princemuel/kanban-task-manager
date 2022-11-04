@@ -1,32 +1,39 @@
-import { Field, ID, ObjectType } from 'type-graphql';
-import type { TaskStatus } from 'types';
+import { Field, ID, ObjectType, registerEnumType } from 'type-graphql';
 import { Subtask } from './sub-tasks';
 
-@ObjectType()
+@ObjectType({ description: 'The task model' })
 export class Task {
-  @Field(() => ID)
-  id!: string;
+  @Field((type) => ID)
+  readonly id!: string;
 
-  @Field(() => String)
+  @Field({ description: 'The title of the task' })
   title!: string;
 
-  @Field(() => String)
+  @Field({ nullable: true, description: 'The description of the task' })
   description?: string;
 
-  @Field(() => String)
+  @Field((type) => TaskStatus, {
+    nullable: true,
+    description:
+      'The status of a task. can be (todo, doing and done) or (now, next and later)',
+  })
   status?: TaskStatus;
 
-  @Field(() => [Subtask])
+  @Field((type) => [Subtask], { nullable: true })
   subtasks?: Subtask[];
 }
 
-// @Resolver(Task)
-// export class TasksResolver {
-//   @Query(() => [Task])
-//   boards(): Task[] {
-//     return [
-//       { id: 'hddd', title: 'Platform Launch', isCompleted: true },
-//       { id: 'hdd', title: 'Marketing Plan', isCompleted: false },
-//     ];
-//   }
-// }
+enum TaskStatus {
+  Todo = 'Todo',
+  Doing = 'Doing',
+  Done = 'Done',
+  Now = 'Now',
+  Next = 'Next',
+  Later = 'Later',
+}
+
+registerEnumType(TaskStatus, {
+  name: 'TaskStatus',
+  description:
+    'The status of a task. can be (todo, doing and done) or (now, next and later)',
+});
