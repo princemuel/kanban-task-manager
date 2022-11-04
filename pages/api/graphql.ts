@@ -1,5 +1,5 @@
 import { ApolloServer } from 'apollo-server-micro';
-import { BoardsResolver } from 'lib/schema';
+import { BoardsResolver } from 'lib';
 import cors from 'micro-cors';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import 'reflect-metadata';

@@ -27,4 +27,4 @@ export interface ISubtask {
   title: string;
   isCompleted: boolean;
 }
-export type TaskStatus = 'Todo' | 'Doing' | 'Done';
+export type TaskStatus = 'Todo' | 'Doing' | 'Done' | 'Now' | 'Next' | 'Later';
