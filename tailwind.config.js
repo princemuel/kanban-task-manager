@@ -18,7 +18,7 @@ module.exports = {
     colors: {
       current: 'currentColor',
       transparent: 'transparent',
-      neutral: '#ffffff',
+      neutral: { 100: '#ffffff', 900: '#000000' },
       primary: {
         100: '#f4f7fd',
         200: '#e4ebfa',
@@ -99,12 +99,19 @@ module.exports = {
         },
       });
       addUtilities({
-        '.icon': {
+        '.icon--svg': {
           fill: 'currentColor',
         },
         '.w-full-shadow': {
           boxShadow: '0 0 0 100vmax currentColor, 0 0 2rem currentColor',
           clipPath: 'inset(0 -100vmax)',
+        },
+        '.h-container': {
+          '--max-width': '111rem',
+          '--container-padding': '1.6rem',
+
+          width: 'min(var(--max-width), 100% - (var(--container-padding) * 2))',
+          marginInline: 'auto',
         },
       });
     }),
