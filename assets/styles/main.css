@@ -3,9 +3,9 @@
 /* -------------------------------- */
 
 /*!Theme Name:
-Theme URI: https://invoicenote.vercel.app/
-Repository: https://github.com/princemuel/invoicer
-Description: A web app where you can send .This web application presents the products using the most user-friendly format with accessibility in mind.
+Theme URI: https://kanban-tm.vercel.app/
+Repository: https://github.com/princemuel/kanban-task-manager
+Description: The Kanban board is an easy-to-use agile project management tool using the Kanban methodology that helps you to visualize and manage workflows.This web application presents the workflows using the most user-friendly format with accessibility in mind.
 Author's Name: Samuel Chukwuzube
 Author's Moniker: princemuel
 Version: 01
@@ -21,6 +21,11 @@ Version: 01
   ============================
 */
 @layer base {
+  :root {
+    scroll-behavior: smooth;
+    scroll-padding-top: 2rem;
+  }
+
   html {
     box-sizing: border-box;
     font-size: 56.25%;
@@ -63,6 +68,7 @@ Version: 01
     /* Changed to min- to prevent cropping */
     /* min-height: 100%; */
     min-block-size: 100vh;
+
     line-height: 1.5;
     text-rendering: optimizeSpeed;
     -webkit-font-smoothing: antialiased;
@@ -122,7 +128,7 @@ Version: 01
     }
   }
   :where(svg) {
-    --clr-icon: currentColor;
+    --clr-icon--svg: currentColor;
   }
 
   /* Anchor elements that don't have a class get default styles */
@@ -142,7 +148,7 @@ Version: 01
   @media (prefers-reduced-motion: no-preference) {
     :where(html:focus-within) {
       scroll-behavior: smooth;
-      scroll-behavior: auto;
+      /* scroll-behavior: auto; */
     }
   }
 
@@ -164,36 +170,36 @@ Version: 01
 
   /* *********** TYPOGRAPHY  ************* */
   :where(body) {
-    @apply text-primary-900 dark:text-neutral-100 bg-neutral-200 dark:bg-primary-800 font-sans font-medium;
+    @apply text-primary-900 dark:text-neutral-100 bg-primary-100 dark:bg-primary-800 font-sans;
   }
 
-  :is(h1, h2, h3, button) {
+  :is(h1, h2, h3, h4, .body-200) {
     @apply font-bold;
   }
 
   h1 {
-    @apply text-900 leading-700 tracking-500;
+    @apply text-700 leading-500;
   }
   h2 {
-    @apply text-700 leading-400 tracking-300;
+    @apply text-600 leading-400;
   }
   h3 {
-    @apply text-600 leading-500 tracking-400;
+    @apply text-500 leading-300;
   }
   h4 {
-    @apply text-400 leading-200 tracking-200;
+    @apply text-primary-400 text-300 leading-200 tracking-100;
   }
 
   .body-100 {
-    @apply text-400 leading-200 tracking-200;
+    @apply text-400 font-medium leading-400;
   }
   .body-200 {
-    @apply text-300 leading-300 tracking-100;
+    @apply text-300 leading-200 tracking-100;
   }
 
-  :where(li a) {
+  /* :where(li a) {
     @apply text-300 no-underline uppercase;
-  }
+  } */
 }
 
 /**
@@ -208,29 +214,25 @@ Version: 01
 */
 @layer components {
   /* ********** BUTTONS ********** */
-  .btn-invoice {
-    @apply p-4 text-neutral-100 bg-primary-500 hover:bg-primary-200;
+  .btn {
+    @apply inline-flex items-center py-4 px-24 rounded-pill text-neutral-100 text-400 font-bold leading-400 transition-colors;
   }
-  .btn-paid {
-    @apply px-11 text-neutral-100 bg-primary-500 hover:bg-primary-200;
+  .btn-primary--sm {
+    @apply bg-primary-500 hover:bg-primary-300;
   }
-  .btn-edit {
-    @apply text-primary-400 hover:text-primary-400  bg-neutral-300 hover:bg-primary-100  dark:text-primary-100 dark:hover:text-neutral-100  dark:bg-primary-600 dark:hover:bg-primary-100;
+  .btn-primary--xl {
+    @apply text-500 bg-primary-500 hover:bg-primary-300 leading-300;
   }
-  .btn-draft {
-    @apply text-primary-300 bg-[#373B53] hover:bg-primary-900 dark:text-primary-100 dark:hover:bg-[#373B53];
+  .btn-accent {
+    @apply text-primary-500 bg-primary-500/10 dark:bg-neutral-100 hover:bg-primary-500/25;
   }
   .btn-delete {
-    @apply text-neutral-100 bg-accent-200 hover:bg-accent-100;
+    @apply bg-accent-200 hover:bg-accent-100;
   }
-  .btn-add {
-    @apply px-32 text-primary-400 bg-neutral-300 hover:bg-primary-100;
-  }
-  /* ********** BUTTONS ********** */
 
-  .logo {
+  /* .logo {
     @apply fill-primary-500 dark:bg-primary-500;
-  }
+  } */
 }
 
 /**
@@ -244,13 +246,6 @@ Version: 01
   ============================
 */
 @layer utilities {
-  .main-container {
-    --max-width: 111rem;
-    --container-padding: 1.6rem;
-
-    width: min(var(--max-width), 100% - (var(--container-padding) * 2));
-    margin-inline: auto;
-  }
   .navigation-link:where(:hover, :focus),
   [aria-current='page'] {
     @apply text-primary-100;
@@ -263,13 +258,8 @@ Version: 01
     --flow-space: 1rem;
   }
 
-  .w-full-shadow {
-    box-shadow: 0 0 0 100vmax currentColor, 0 0 2rem currentColor;
-    clip-path: inset(0 -100vmax);
-  }
-
   .skip-to-content {
-    @apply absolute mx-auto py-[1em] px-[0.5em]  text-neutral-100 bg-primary-300 z-[9999] translate-y-[-120%] transition-transform focus:translate-y-0 focus:outline-offset-2 focus:outline focus:outline-primary-300;
+    @apply absolute mx-auto py-[1em] px-[0.5em]  text-neutral-100 bg-primary-500 z-[9999] translate-y-[-120%] transition-transform focus:translate-y-0 focus:outline-offset-2 focus:outline focus:outline-primary-300;
   }
 }
 

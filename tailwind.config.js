@@ -48,8 +48,6 @@ module.exports = {
       500: '1.5rem',
       600: '1.8rem',
       700: '2.4rem', //
-      800: '1.875rem',
-      900: '2.25rem',
     },
 
     lineHeight: {
@@ -58,6 +56,10 @@ module.exports = {
       300: '1.9rem',
       400: '2.3rem',
       500: '3rem',
+    },
+    letterSpacing: {
+      100: '2.4px',
+      ...defaultTheme.letterSpacing,
     },
 
     screens: {

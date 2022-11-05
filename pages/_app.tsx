@@ -1,17 +1,16 @@
+import 'assets/styles/main.css';
 import { Layout } from 'components';
 import { queryClient } from 'lib';
 import Head from 'next/head';
 import type { DehydratedState } from 'react-query';
 import { Hydrate, QueryClientProvider } from 'react-query';
-import { GlobalStyle } from 'styles';
 import type { AppPropsWithLayout } from 'types';
-import '../styles/main.css';
 
 type PageProps = {
   dehydratedState: DehydratedState;
 };
 
-function MyApp({ Component, pageProps }: AppPropsWithLayout<PageProps>) {
+function App({ Component, pageProps }: AppPropsWithLayout<PageProps>) {
   const getLayout = Component.getLayout ?? ((page) => <Layout>{page}</Layout>);
 
   return (
@@ -27,10 +26,8 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout<PageProps>) {
           </Hydrate>
         </QueryClientProvider>
       )}
-
-      <GlobalStyle />
     </>
   );
 }
 
-export default MyApp;
+export default App;
