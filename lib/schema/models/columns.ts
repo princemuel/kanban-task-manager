@@ -4,10 +4,10 @@ import { Task } from './tasks';
 @ObjectType({ description: 'The column model' })
 export class Column {
   @Field((type) => ID)
-  readonly id!: string;
+  readonly id: string;
 
   @Field({ description: 'The name of the column' })
-  name!: string;
+  name: string;
 
   @Field((type) => [Task], { nullable: true })
   tasks?: Task[];

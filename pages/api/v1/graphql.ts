@@ -51,7 +51,6 @@ const server = new ApolloServer({
 const startServer = server.start();
 
 async function handler(req: NextApiRequest, res: NextApiResponse<any>) {
-  await runMiddleware(req, res, allowCors);
   if (req.method === 'OPTIONS') {
     res.end();
     return false;
@@ -62,7 +61,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse<any>) {
 }
 
 // @ts-ignore
-export default handler;
+export default allowCors(handler);
 
 export const config = {
   api: {

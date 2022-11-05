@@ -4,10 +4,10 @@ import { Subtask } from './sub-tasks';
 @ObjectType({ description: 'The task model' })
 export class Task {
   @Field((type) => ID)
-  readonly id!: string;
+  readonly id: string;
 
   @Field({ description: 'The title of the task' })
-  title!: string;
+  title: string;
 
   @Field({ nullable: true, description: 'The description of the task' })
   description?: string;
