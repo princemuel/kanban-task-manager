@@ -10,9 +10,7 @@ const nextConfig = {
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
   webpack(config) {
-    if (!config.experiments) {
-      config.experiments = {};
-    }
+    config.experiments = config.experiments || {};
     config.experiments.topLevelAwait = true;
 
     config.module.rules.push({
