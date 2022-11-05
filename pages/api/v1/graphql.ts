@@ -26,6 +26,19 @@ const allowCors = cors({
   ],
 });
 
+// Middleware to run the cors configuration
+function runMiddleware(req: NextApiRequest, res: NextApiResponse, fn: any) {
+  return new Promise((resolve, reject) => {
+    fn(req, res, (result: any) => {
+      if (result instanceof Error) {
+        return reject(result);
+      }
+
+      return resolve(result);
+    });
+  });
+}
+
 const schema = await buildSchema({
   resolvers: [BoardsResolver, ColumnsResolver, TasksResolver, SubtasksResolver],
 });
@@ -38,17 +51,18 @@ const server = new ApolloServer({
 const startServer = server.start();
 
 async function handler(req: NextApiRequest, res: NextApiResponse<any>) {
+  await runMiddleware(req, res, allowCors);
   if (req.method === 'OPTIONS') {
     res.end();
     return false;
   }
 
   await startServer;
-  return server?.createHandler({ path: '/api/graphql' })(req, res);
+  return server?.createHandler({ path: '/api/v1/graphql' })(req, res);
 }
 
 // @ts-ignore
-export default allowCors(handler);
+export default handler;
 
 export const config = {
   api: {
