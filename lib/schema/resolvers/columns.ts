@@ -1,5 +1,5 @@
 import data from 'lib/data/data.json';
-import { Query, Resolver } from 'type-graphql';
+import { Arg, ID, Query, Resolver } from 'type-graphql';
 import { Column } from '../models';
 
 @Resolver(Column)
@@ -7,6 +7,17 @@ export class ColumnsResolver {
   @Query(() => [Column])
   columns(): Column[] {
     return data?.boards?.[0]?.columns;
+  }
+
+  @Query(() => Column, { nullable: true })
+  column(@Arg('id', (type) => ID) id: string): Column {
+    const column = data?.boards?.[0]?.columns?.find(
+      (column) => column.id === id
+    );
+    if (column === undefined) {
+      throw new Error('Column not found');
+    }
+    return column;
   }
 }
 
