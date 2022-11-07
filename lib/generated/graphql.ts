@@ -25,76 +25,71 @@ function fetcher<TData, TVariables>(query: string, variables?: TVariables) {
   }
 }
 /** All built-in and custom scalars, mapped to their actual values */
-export type Scalars = {
+export interface Scalars {
   ID: string;
   String: string;
   Boolean: boolean;
   Int: number;
   Float: number;
-};
+}
 
 /** The board model */
-export type Board = {
-  __typename?: 'Board';
-  columns?: Maybe<Array<Column>>;
+export interface IBoard {
+  columns?: Maybe<Array<IColumn>>;
   id: Scalars['ID'];
   /** The name of the board */
   name: Scalars['String'];
-};
+}
 
 /** The column model */
-export type Column = {
-  __typename?: 'Column';
+export interface IColumn {
   id: Scalars['ID'];
   /** The name of the column */
   name: Scalars['String'];
-  tasks?: Maybe<Array<Task>>;
-};
+  tasks?: Maybe<Array<ITask>>;
+}
 
-export type Query = {
-  __typename?: 'Query';
-  board?: Maybe<Board>;
-  boards: Array<Board>;
-};
+export interface IQuery {
+  board?: Maybe<IBoard>;
+  boards: Array<IBoard>;
+}
 
 
-export type QueryBoardArgs = {
+export interface IQueryBoardArgs {
   id: Scalars['ID'];
-};
+}
 
 /** The sub-task model */
-export type Subtask = {
-  __typename?: 'Subtask';
+export interface ISubtask {
   id: Scalars['ID'];
   isCompleted: Scalars['Boolean'];
   /** The title of the subtask */
   title: Scalars['String'];
-};
+}
 
 /** The task model */
-export type Task = {
-  __typename?: 'Task';
+export interface ITask {
   /** The description of the task */
   description?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
   /** The status of a task. can be (todo, doing and done) or (now, next and later) */
   status?: Maybe<Scalars['String']>;
-  subtasks?: Maybe<Array<Subtask>>;
+  subtasks?: Maybe<Array<ISubtask>>;
   /** The title of the task */
   title: Scalars['String'];
-};
+}
 
-export type GetBoardsQueryVariables = Exact<{ [key: string]: never; }>;
+export type IGetBoardsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetBoardsQuery = { __typename?: 'Query', boards: Array<{ __typename?: 'Board', id: string, name: string, columns?: Array<{ __typename?: 'Column', id: string, name: string }> | null }> };
+export type IGetBoardsQuery = { boards: Array<{ id: string, name: string, columns?: Array<{ id: string, name: string }> | null }> };
 
-export type GetBoardQueryVariables = Exact<{
+export type IGetBoardQueryVariables = Exact<{
   id: Scalars['ID'];
 }>;
 
 
-export type GetBoardQuery = { __typename?: 'Query', board?: { __typename?: 'Board', id: string, name: string, columns?: Array<{ __typename?: 'Column', id: string, name: string, tasks?: Array<{ __typename?: 'Task', title: string, description?: string | null, status?: string | null }> | null }> | null } | null };
+export type IGetBoardQuery = { board?: { id: string, name: string, columns?: Array<{ id: string, name: string, tasks?: Array<{ title: string, description?: string | null, status?: string | null }> | null }> | null } | null };
 
 
 export const GetBoardsDocument = /*#__PURE__*/ `
@@ -110,22 +105,22 @@ export const GetBoardsDocument = /*#__PURE__*/ `
 }
     `;
 export const useGetBoardsQuery = <
-      TData = GetBoardsQuery,
+      TData = IGetBoardsQuery,
       TError = unknown
     >(
-      variables?: GetBoardsQueryVariables,
-      options?: UseQueryOptions<GetBoardsQuery, TError, TData>
+      variables?: IGetBoardsQueryVariables,
+      options?: UseQueryOptions<IGetBoardsQuery, TError, TData>
     ) =>
-    useQuery<GetBoardsQuery, TError, TData>(
+    useQuery<IGetBoardsQuery, TError, TData>(
       variables === undefined ? ['GetBoards'] : ['GetBoards', variables],
-      fetcher<GetBoardsQuery, GetBoardsQueryVariables>(GetBoardsDocument, variables),
+      fetcher<IGetBoardsQuery, IGetBoardsQueryVariables>(GetBoardsDocument, variables),
       options
     );
 
-useGetBoardsQuery.getKey = (variables?: GetBoardsQueryVariables) => variables === undefined ? ['GetBoards'] : ['GetBoards', variables];
+useGetBoardsQuery.getKey = (variables?: IGetBoardsQueryVariables) => variables === undefined ? ['GetBoards'] : ['GetBoards', variables];
 ;
 
-useGetBoardsQuery.fetcher = (variables?: GetBoardsQueryVariables) => fetcher<GetBoardsQuery, GetBoardsQueryVariables>(GetBoardsDocument, variables);
+useGetBoardsQuery.fetcher = (variables?: IGetBoardsQueryVariables) => fetcher<IGetBoardsQuery, IGetBoardsQueryVariables>(GetBoardsDocument, variables);
 export const GetBoardDocument = /*#__PURE__*/ `
     query GetBoard($id: ID!) {
   board(id: $id) {
@@ -144,19 +139,19 @@ export const GetBoardDocument = /*#__PURE__*/ `
 }
     `;
 export const useGetBoardQuery = <
-      TData = GetBoardQuery,
+      TData = IGetBoardQuery,
       TError = unknown
     >(
-      variables: GetBoardQueryVariables,
-      options?: UseQueryOptions<GetBoardQuery, TError, TData>
+      variables: IGetBoardQueryVariables,
+      options?: UseQueryOptions<IGetBoardQuery, TError, TData>
     ) =>
-    useQuery<GetBoardQuery, TError, TData>(
+    useQuery<IGetBoardQuery, TError, TData>(
       ['GetBoard', variables],
-      fetcher<GetBoardQuery, GetBoardQueryVariables>(GetBoardDocument, variables),
+      fetcher<IGetBoardQuery, IGetBoardQueryVariables>(GetBoardDocument, variables),
       options
     );
 
-useGetBoardQuery.getKey = (variables: GetBoardQueryVariables) => ['GetBoard', variables];
+useGetBoardQuery.getKey = (variables: IGetBoardQueryVariables) => ['GetBoard', variables];
 ;
 
-useGetBoardQuery.fetcher = (variables: GetBoardQueryVariables) => fetcher<GetBoardQuery, GetBoardQueryVariables>(GetBoardDocument, variables);
+useGetBoardQuery.fetcher = (variables: IGetBoardQueryVariables) => fetcher<IGetBoardQuery, IGetBoardQueryVariables>(GetBoardDocument, variables);

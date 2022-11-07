@@ -1,5 +1,3 @@
-import { TaskStatus } from 'lib';
-
 /*===============================*
           DATA MODELS
  *===============================*
@@ -21,7 +19,7 @@ export interface ITask {
   id: string;
   title: string;
   description: string;
-  status: TaskStatus;
+  status: string;
   subtasks: ISubtask[];
 }
 export interface ISubtask {

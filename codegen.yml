@@ -1,4 +1,4 @@
-schema: http://localhost:3000/api/v1/graphql
+schema: ${NEXT_PUBLIC_GRAPHQL_ENDPOINT}
 documents: './lib/**/*.{graphql,gql}'
 overwrite: true
 watch: true
@@ -9,11 +9,16 @@ generates:
       - typescript-operations
       - typescript-react-query
     config:
+      noNamespaces: true
       pureMagicComment: true
+      typesPrefix: 'I'
+      skipTypename: true
+      interfacePrefix: 'I'
+      declarationKind: 'interface'
       exposeQueryKeys: true
+      exposeFetcher: true
       fetcher:
-        endpoint: http://localhost:3000/api/v1/graphql
+        endpoint: ${NEXT_PUBLIC_GRAPHQL_ENDPOINT}
         fetchParams:
           headers:
             Content-Type: application/json
-      exposeFetcher: true
