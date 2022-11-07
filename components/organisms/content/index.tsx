@@ -1,11 +1,12 @@
-type Props = {};
-
-const MainContent = (props: Props) => {
-  return (
-    <>
-      <h1 className=''>MAIN CONTENT</h1>
-    </>
-  );
+type Props = {
+  children: React.ReactNode;
+  className: string;
 };
 
-export { MainContent };
+export function MainContent({ children, ...rest }: Props) {
+  return (
+    <main id='main-content' {...rest}>
+      {children}
+    </main>
+  );
+}
