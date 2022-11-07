@@ -1,6 +1,11 @@
 import { ApolloServer } from 'apollo-server-micro';
 import { IncomingMessage, ServerResponse } from 'http';
-import { BoardsResolver } from 'lib';
+import {
+  BoardsResolver,
+  ColumnsResolver,
+  SubtasksResolver,
+  TasksResolver,
+} from 'lib';
 import cors from 'micro-cors';
 import 'reflect-metadata';
 import { buildSchema } from 'type-graphql';
@@ -28,8 +33,7 @@ export const config = {
 };
 
 const schema = await buildSchema({
-  resolvers: [BoardsResolver],
-  // resolvers: [BoardsResolver, ColumnsResolver, TasksResolver, SubtasksResolver],
+  resolvers: [BoardsResolver, ColumnsResolver, TasksResolver, SubtasksResolver],
 });
 
 const server = new ApolloServer({

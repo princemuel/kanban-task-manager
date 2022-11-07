@@ -52,10 +52,19 @@ export interface IColumn {
 export interface IQuery {
   board?: Maybe<IBoard>;
   boards: Array<IBoard>;
+  column?: Maybe<IColumn>;
+  columns: Array<IColumn>;
+  subtasks: Array<ISubtask>;
+  tasks: Array<ITask>;
 }
 
 
 export interface IQueryBoardArgs {
+  id: Scalars['ID'];
+}
+
+
+export interface IQueryColumnArgs {
   id: Scalars['ID'];
 }
 
@@ -90,6 +99,18 @@ export type IGetBoardQueryVariables = Exact<{
 
 
 export type IGetBoardQuery = { board?: { id: string, name: string, columns?: Array<{ id: string, name: string, tasks?: Array<{ title: string, description?: string | null, status?: string | null }> | null }> | null } | null };
+
+export type IGetColumnsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type IGetColumnsQuery = { columns: Array<{ id: string, name: string, tasks?: Array<{ id: string, title: string }> | null }> };
+
+export type IGetColumnQueryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type IGetColumnQuery = { column?: { id: string, name: string, tasks?: Array<{ id: string, title: string, description?: string | null, status?: string | null }> | null } | null };
 
 
 export const GetBoardsDocument = /*#__PURE__*/ `
@@ -155,3 +176,63 @@ useGetBoardQuery.getKey = (variables: IGetBoardQueryVariables) => ['GetBoard', v
 ;
 
 useGetBoardQuery.fetcher = (variables: IGetBoardQueryVariables) => fetcher<IGetBoardQuery, IGetBoardQueryVariables>(GetBoardDocument, variables);
+export const GetColumnsDocument = /*#__PURE__*/ `
+    query GetColumns {
+  columns {
+    id
+    name
+    tasks {
+      id
+      title
+    }
+  }
+}
+    `;
+export const useGetColumnsQuery = <
+      TData = IGetColumnsQuery,
+      TError = unknown
+    >(
+      variables?: IGetColumnsQueryVariables,
+      options?: UseQueryOptions<IGetColumnsQuery, TError, TData>
+    ) =>
+    useQuery<IGetColumnsQuery, TError, TData>(
+      variables === undefined ? ['GetColumns'] : ['GetColumns', variables],
+      fetcher<IGetColumnsQuery, IGetColumnsQueryVariables>(GetColumnsDocument, variables),
+      options
+    );
+
+useGetColumnsQuery.getKey = (variables?: IGetColumnsQueryVariables) => variables === undefined ? ['GetColumns'] : ['GetColumns', variables];
+;
+
+useGetColumnsQuery.fetcher = (variables?: IGetColumnsQueryVariables) => fetcher<IGetColumnsQuery, IGetColumnsQueryVariables>(GetColumnsDocument, variables);
+export const GetColumnDocument = /*#__PURE__*/ `
+    query GetColumn($id: ID!) {
+  column(id: $id) {
+    id
+    name
+    tasks {
+      id
+      title
+      description
+      status
+    }
+  }
+}
+    `;
+export const useGetColumnQuery = <
+      TData = IGetColumnQuery,
+      TError = unknown
+    >(
+      variables: IGetColumnQueryVariables,
+      options?: UseQueryOptions<IGetColumnQuery, TError, TData>
+    ) =>
+    useQuery<IGetColumnQuery, TError, TData>(
+      ['GetColumn', variables],
+      fetcher<IGetColumnQuery, IGetColumnQueryVariables>(GetColumnDocument, variables),
+      options
+    );
+
+useGetColumnQuery.getKey = (variables: IGetColumnQueryVariables) => ['GetColumn', variables];
+;
+
+useGetColumnQuery.fetcher = (variables: IGetColumnQueryVariables) => fetcher<IGetColumnQuery, IGetColumnQueryVariables>(GetColumnDocument, variables);
