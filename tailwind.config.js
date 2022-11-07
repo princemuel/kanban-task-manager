@@ -18,7 +18,7 @@ module.exports = {
     colors: {
       current: 'currentColor',
       transparent: 'transparent',
-      neutral: '#ffffff',
+      neutral: { 100: '#ffffff', 900: '#000000' },
       primary: {
         100: '#f4f7fd',
         200: '#e4ebfa',
@@ -48,8 +48,6 @@ module.exports = {
       500: '1.5rem',
       600: '1.8rem',
       700: '2.4rem', //
-      800: '1.875rem',
-      900: '2.25rem',
     },
 
     lineHeight: {
@@ -58,6 +56,10 @@ module.exports = {
       300: '1.9rem',
       400: '2.3rem',
       500: '3rem',
+    },
+    letterSpacing: {
+      100: '2.4px',
+      ...defaultTheme.letterSpacing,
     },
 
     screens: {
@@ -99,12 +101,19 @@ module.exports = {
         },
       });
       addUtilities({
-        '.icon': {
+        '.icon--svg': {
           fill: 'currentColor',
         },
         '.w-full-shadow': {
           boxShadow: '0 0 0 100vmax currentColor, 0 0 2rem currentColor',
           clipPath: 'inset(0 -100vmax)',
+        },
+        '.h-container': {
+          '--max-width': '111rem',
+          '--container-padding': '1.6rem',
+
+          width: 'min(var(--max-width), 100% - (var(--container-padding) * 2))',
+          marginInline: 'auto',
         },
       });
     }),

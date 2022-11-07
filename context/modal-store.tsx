@@ -1,5 +1,7 @@
+import { createAStore as createModalStore } from './store';
+
 type ModalAction = 'add' | 'view' | 'edit' | 'delete';
-type ModalSubject = 'board' | 'task';
+type ModalSubject = 'board' | 'task' | 'column' | 'subtask';
 
 export type ModalType = `${ModalAction}-${ModalSubject}`;
 
@@ -9,3 +11,16 @@ interface ModalStore {
   toggleModal: (name: ModalType) => void;
   closeModal: () => void;
 }
+
+const { StoreProvider, useStore } = createModalStore<ModalStore>({
+  isModalOpen: false,
+  currentModal: null,
+  toggleModal: (name) => {
+    console.log(name);
+  },
+  closeModal: () => {
+    console.log('modal closed');
+  },
+});
+
+export { StoreProvider as ModalProvider, useStore as useModalStore };

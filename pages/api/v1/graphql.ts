@@ -1,12 +1,7 @@
 import { ApolloServer } from 'apollo-server-micro';
-import {
-  BoardsResolver,
-  ColumnsResolver,
-  SubtasksResolver,
-  TasksResolver,
-} from 'lib';
+import { IncomingMessage, ServerResponse } from 'http';
+import { BoardsResolver } from 'lib';
 import cors from 'micro-cors';
-import type { NextApiRequest, NextApiResponse } from 'next';
 import 'reflect-metadata';
 import { buildSchema } from 'type-graphql';
 
@@ -26,32 +21,31 @@ const allowCors = cors({
   ],
 });
 
+export const config = {
+  api: {
+    bodyParser: false,
+  },
+};
+
 const schema = await buildSchema({
-  resolvers: [BoardsResolver, ColumnsResolver, TasksResolver, SubtasksResolver],
+  resolvers: [BoardsResolver],
+  // resolvers: [BoardsResolver, ColumnsResolver, TasksResolver, SubtasksResolver],
 });
 
 const server = new ApolloServer({
   schema,
 });
-0;
 
 const startServer = server.start();
 
-async function handler(req: NextApiRequest, res: NextApiResponse<any>) {
+async function handler(req: IncomingMessage, res: ServerResponse) {
   if (req.method === 'OPTIONS') {
     res.end();
     return false;
   }
 
   await startServer;
-  return server?.createHandler({ path: '/api/graphql' })(req, res);
+  return server?.createHandler({ path: '/api/v1/graphql' })(req, res);
 }
 
-// @ts-ignore
 export default allowCors(handler);
-
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-};

@@ -1,9 +1,26 @@
-query getBoards {
+query GetBoards {
   boards {
     id
     name
     columns {
+      id
       name
+    }
+  }
+}
+
+query GetBoard($id: ID!) {
+  board(id: $id) {
+    id
+    name
+    columns {
+      id
+      name
+      tasks {
+        title
+        description
+        status
+      }
     }
   }
 }

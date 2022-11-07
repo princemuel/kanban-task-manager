@@ -1,11 +1,7 @@
-import Document, {
-  DocumentContext,
-  Head,
-  Html,
-  Main,
-  NextScript,
-} from 'next/document';
-import { ServerStyleSheet } from 'styled-components';
+import dotenv from 'dotenv-safe';
+import { Head, Html, Main, NextScript } from 'next/document';
+
+dotenv.config();
 
 export default function MyDocument() {
   return (
@@ -53,28 +49,3 @@ export default function MyDocument() {
     </Html>
   );
 }
-
-MyDocument.getInitialProps = async (ctx: DocumentContext) => {
-  const sheet = new ServerStyleSheet();
-  const originalRenderPage = ctx.renderPage;
-
-  try {
-    // Run the React rendering logic synchronously
-    ctx.renderPage = () =>
-      originalRenderPage({
-        // Useful for wrapping the whole react tree
-        enhanceApp: (App) => (props) => sheet.collectStyles(<App {...props} />),
-        // Useful for wrapping in a per-page basis
-        // enhanceComponent: (Component) => Component,
-      });
-
-    // Run the parent `getInitialProps`, it now includes the custom `renderPage`
-    const initialProps = await Document.getInitialProps(ctx);
-    return {
-      ...initialProps,
-      styles: [initialProps.styles, sheet.getStyleElement()],
-    };
-  } finally {
-    sheet.seal();
-  }
-};

@@ -1,17 +1,29 @@
-import { GraphQLClient } from 'graphql-request';
-import * as Dom from 'graphql-request/dist/types.dom';
-import gql from 'graphql-tag';
+import { useQuery, UseQueryOptions } from '@tanstack/react-query';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
-export type Exact<T extends { [key: string]: unknown }> = {
-  [K in keyof T]: T[K];
-};
-export type MakeOptional<T, K extends keyof T> = Omit<T, K> & {
-  [SubKey in K]?: Maybe<T[SubKey]>;
-};
-export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & {
-  [SubKey in K]: Maybe<T[SubKey]>;
-};
+export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
+export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
+export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
+
+function fetcher<TData, TVariables>(query: string, variables?: TVariables) {
+  return async (): Promise<TData> => {
+    const res = await fetch("http://localhost:3000/api/v1/graphql", {
+    method: "POST",
+    ...({"headers":{"Content-Type":"application/json"}}),
+      body: JSON.stringify({ query, variables }),
+    });
+
+    const json = await res.json();
+
+    if (json.errors) {
+      const { message } = json.errors[0];
+
+      throw new Error(message);
+    }
+
+    return json.data;
+  }
+}
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -41,7 +53,13 @@ export type Column = {
 
 export type Query = {
   __typename?: 'Query';
+  board?: Maybe<Board>;
   boards: Array<Board>;
+};
+
+
+export type QueryBoardArgs = {
+  id: Scalars['ID'];
 };
 
 /** The sub-task model */
@@ -60,77 +78,85 @@ export type Task = {
   description?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
   /** The status of a task. can be (todo, doing and done) or (now, next and later) */
-  status?: Maybe<TaskStatus>;
+  status?: Maybe<Scalars['String']>;
   subtasks?: Maybe<Array<Subtask>>;
   /** The title of the task */
   title: Scalars['String'];
 };
 
-/** The status of a task. can be (todo, doing and done) or (now, next and later) */
-export enum TaskStatus {
-  Doing = 'Doing',
-  Done = 'Done',
-  Later = 'Later',
-  Next = 'Next',
-  Now = 'Now',
-  Todo = 'Todo',
-}
+export type GetBoardsQueryVariables = Exact<{ [key: string]: never; }>;
 
-export type GetBoardsQueryVariables = Exact<{ [key: string]: never }>;
 
-export type GetBoardsQuery = {
-  __typename?: 'Query';
-  boards: Array<{
-    __typename?: 'Board';
-    id: string;
-    name: string;
-    columns?: Array<{ __typename?: 'Column'; name: string }> | null;
-  }>;
-};
+export type GetBoardsQuery = { __typename?: 'Query', boards: Array<{ __typename?: 'Board', id: string, name: string, columns?: Array<{ __typename?: 'Column', id: string, name: string }> | null }> };
 
-export const GetBoardsDocument = gql`
-  query getBoards {
-    boards {
+export type GetBoardQueryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type GetBoardQuery = { __typename?: 'Query', board?: { __typename?: 'Board', id: string, name: string, columns?: Array<{ __typename?: 'Column', id: string, name: string, tasks?: Array<{ __typename?: 'Task', title: string, description?: string | null, status?: string | null }> | null }> | null } | null };
+
+
+export const GetBoardsDocument = /*#__PURE__*/ `
+    query GetBoards {
+  boards {
+    id
+    name
+    columns {
       id
       name
-      columns {
-        name
+    }
+  }
+}
+    `;
+export const useGetBoardsQuery = <
+      TData = GetBoardsQuery,
+      TError = unknown
+    >(
+      variables?: GetBoardsQueryVariables,
+      options?: UseQueryOptions<GetBoardsQuery, TError, TData>
+    ) =>
+    useQuery<GetBoardsQuery, TError, TData>(
+      variables === undefined ? ['GetBoards'] : ['GetBoards', variables],
+      fetcher<GetBoardsQuery, GetBoardsQueryVariables>(GetBoardsDocument, variables),
+      options
+    );
+
+useGetBoardsQuery.getKey = (variables?: GetBoardsQueryVariables) => variables === undefined ? ['GetBoards'] : ['GetBoards', variables];
+;
+
+useGetBoardsQuery.fetcher = (variables?: GetBoardsQueryVariables) => fetcher<GetBoardsQuery, GetBoardsQueryVariables>(GetBoardsDocument, variables);
+export const GetBoardDocument = /*#__PURE__*/ `
+    query GetBoard($id: ID!) {
+  board(id: $id) {
+    id
+    name
+    columns {
+      id
+      name
+      tasks {
+        title
+        description
+        status
       }
     }
   }
-`;
-
-export type SdkFunctionWrapper = <T>(
-  action: (requestHeaders?: Record<string, string>) => Promise<T>,
-  operationName: string,
-  operationType?: string
-) => Promise<T>;
-
-const defaultWrapper: SdkFunctionWrapper = (
-  action,
-  _operationName,
-  _operationType
-) => action();
-
-export function getSdk(
-  client: GraphQLClient,
-  withWrapper: SdkFunctionWrapper = defaultWrapper
-) {
-  return {
-    getBoards(
-      variables?: GetBoardsQueryVariables,
-      requestHeaders?: Dom.RequestInit['headers']
-    ): Promise<GetBoardsQuery> {
-      return withWrapper(
-        (wrappedRequestHeaders) =>
-          client.request<GetBoardsQuery>(GetBoardsDocument, variables, {
-            ...requestHeaders,
-            ...wrappedRequestHeaders,
-          }),
-        'getBoards',
-        'query'
-      );
-    },
-  };
 }
-export type Sdk = ReturnType<typeof getSdk>;
+    `;
+export const useGetBoardQuery = <
+      TData = GetBoardQuery,
+      TError = unknown
+    >(
+      variables: GetBoardQueryVariables,
+      options?: UseQueryOptions<GetBoardQuery, TError, TData>
+    ) =>
+    useQuery<GetBoardQuery, TError, TData>(
+      ['GetBoard', variables],
+      fetcher<GetBoardQuery, GetBoardQueryVariables>(GetBoardDocument, variables),
+      options
+    );
+
+useGetBoardQuery.getKey = (variables: GetBoardQueryVariables) => ['GetBoard', variables];
+;
+
+useGetBoardQuery.fetcher = (variables: GetBoardQueryVariables) => fetcher<GetBoardQuery, GetBoardQueryVariables>(GetBoardDocument, variables);
