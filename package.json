@@ -12,9 +12,11 @@
   "dependencies": {
     "@headlessui/react": "^1.7.2",
     "@heroicons/react": "^2.0.11",
-    "@reduxjs/toolkit": "^1.8.5",
+    "@tanstack/react-query": "^4.14.5",
+    "@tanstack/react-query-devtools": "^4.14.5",
     "apollo-server-micro": "^3.11.1",
     "class-validator": "^0.13.2",
+    "dotenv-safe": "^8.2.0",
     "graphql": "^15.3.0",
     "graphql-request": "^5.0.0",
     "micro": "^9.4.1",
@@ -22,10 +24,7 @@
     "next": "12.3.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-query": "^3.39.2",
-    "react-redux": "^8.0.4",
     "reflect-metadata": "^0.1.13",
-    "styled-components": "^5.3.5",
     "type-graphql": "^1.1.1"
   },
   "devDependencies": {
@@ -34,21 +33,19 @@
     "@graphql-codegen/typescript-graphql-request": "^4.5.8",
     "@graphql-codegen/typescript-operations": "^2.5.6",
     "@graphql-codegen/typescript-react-query": "^4.0.4",
+    "@graphql-codegen/typescript-resolvers": "^2.7.6",
     "@svgr/webpack": "^6.5.1",
+    "@types/dotenv-safe": "^8.1.2",
     "@types/micro-cors": "^0.1.2",
     "@types/node": "18.7.23",
     "@types/react": "18.0.21",
     "@types/react-dom": "18.0.6",
-    "@types/styled-components": "^5.1.26",
     "autoprefixer": "^10.4.12",
     "eslint": "8.24.0",
     "eslint-config-next": "12.3.1",
     "infer-next-props-type": "^0.1.0",
     "postcss": "^8.4.16",
     "tailwindcss": "^3.1.8",
-    "typescript": "4.8.3"
-  },
-  "resolutions": {
-    "styled-components": "^5"
+    "typescript": "4.8.4"
   }
 }
