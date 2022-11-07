@@ -160,3 +160,5 @@ design
 *.local.*
 !README.md
 server
+
+.vercel
