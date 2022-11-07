@@ -31,6 +31,7 @@ export interface Scalars {
   Boolean: boolean;
   Int: number;
   Float: number;
+  DateTime: any;
 }
 
 /** The board model */
@@ -49,11 +50,39 @@ export interface IColumn {
   tasks?: Maybe<Array<ITask>>;
 }
 
+export interface ILoginInput {
+  email: Scalars['String'];
+  password: Scalars['String'];
+}
+
+export interface ILoginResponse {
+  access_token: Scalars['String'];
+  status: Scalars['String'];
+}
+
+export interface IMutation {
+  createUser: IUserResponse;
+  login: ILoginResponse;
+}
+
+
+export interface IMutationCreateUserArgs {
+  input: ISignUpInput;
+}
+
+
+export interface IMutationLoginArgs {
+  input: ILoginInput;
+}
+
 export interface IQuery {
   board?: Maybe<IBoard>;
   boards: Array<IBoard>;
   column?: Maybe<IColumn>;
   columns: Array<IColumn>;
+  getUser: IUserResponse;
+  logoutUser: Scalars['Boolean'];
+  refresh: ILoginResponse;
   subtasks: Array<ISubtask>;
   tasks: Array<ITask>;
 }
@@ -66,6 +95,14 @@ export interface IQueryBoardArgs {
 
 export interface IQueryColumnArgs {
   id: Scalars['ID'];
+}
+
+export interface ISignUpInput {
+  countersign: Scalars['String'];
+  email: Scalars['String'];
+  name: Scalars['String'];
+  password: Scalars['String'];
+  photo: Scalars['String'];
 }
 
 /** The sub-task model */
@@ -86,6 +123,22 @@ export interface ITask {
   subtasks?: Maybe<Array<ISubtask>>;
   /** The title of the task */
   title: Scalars['String'];
+}
+
+export interface IUserData {
+  _id: Scalars['String'];
+  createdAt: Scalars['DateTime'];
+  email: Scalars['String'];
+  id?: Maybe<Scalars['String']>;
+  name: Scalars['String'];
+  photo: Scalars['String'];
+  role: Scalars['String'];
+  updatedAt: Scalars['DateTime'];
+}
+
+export interface IUserResponse {
+  status: Scalars['String'];
+  user: IUserData;
 }
 
 export type IGetBoardsQueryVariables = Exact<{ [key: string]: never; }>;

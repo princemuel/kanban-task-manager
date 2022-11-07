@@ -1,8 +1,10 @@
 import InferNextPropsType from 'infer-next-props-type';
 import type { NextPage } from 'next';
+import { NextApiRequest, NextApiResponse } from 'next';
 import type { AppContext, AppProps } from 'next/app';
 import { ParsedUrlQuery } from 'querystring';
 import type { ReactElement, ReactNode } from 'react';
+import { User } from 'server/models';
 
 /*===============================*
           EVENT TYPES
@@ -37,6 +39,15 @@ export type AppPropsWithLayout<P = any> = AppProps<P> & {
           HELPER TYPES
  *===============================*
 */
+
+export type IUserContext = {
+  req: NextApiRequest;
+  res: NextApiResponse;
+  deserializeUser: (
+    req: NextApiRequest,
+    res: NextApiResponse
+  ) => Promise<User | undefined>;
+};
 
 export interface Params extends ParsedUrlQuery {
   category: string;
