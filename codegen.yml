@@ -1,8 +1,19 @@
 schema: http://localhost:3000/api/v1/graphql
 documents: './lib/**/*.{graphql,gql}'
+overwrite: true
+watch: true
 generates:
   ./lib/generated/graphql.ts:
     plugins:
       - typescript
       - typescript-operations
-      - typescript-graphql-request
+      - typescript-react-query
+    config:
+      pureMagicComment: true
+      exposeQueryKeys: true
+      fetcher:
+        endpoint: http://localhost:3000/api/v1/graphql
+        fetchParams:
+          headers:
+            Content-Type: application/json
+      exposeFetcher: true
