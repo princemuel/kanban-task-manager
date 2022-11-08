@@ -1,56 +1,80 @@
-import {
-  getModelForClass,
-  index,
-  ModelOptions,
-  pre,
-  prop,
-  Severity,
-} from '@typegoose/typegoose';
-import * as bcrypt from 'bcrypt';
+import { IsEmail, MaxLength, MinLength } from 'class-validator';
+import { Field, InputType, ObjectType } from 'type-graphql';
 
-@pre<User>('save', async function (next) {
-  if (!this.isModified('password')) return next();
-
-  this.password = await bcrypt.hash(this.password, 12);
-  this.countersign = undefined;
-  return next();
-})
-@ModelOptions({
-  schemaOptions: {
-    timestamps: true,
-  },
-  options: {
-    allowMixed: Severity.ALLOW,
-  },
-})
-@index({ email: 1 })
-export class User {
-  readonly _id: string;
-
-  @prop({ required: true })
+@InputType()
+export class SignupData {
+  @Field(() => String)
   name: string;
 
-  @prop({ required: true, unique: true, lowercase: true })
+  @IsEmail()
+  @Field(() => String)
   email: string;
 
-  @prop({ default: 'user' })
-  role: string;
-
-  @prop({ required: true, select: false })
+  @MinLength(8, { message: 'Password must be at least 8 characters long' })
+  @MaxLength(32, { message: 'Password must be at most 32 characters long' })
+  @Field(() => String)
   password: string;
 
-  @prop({ required: true })
+  @Field(() => String)
   countersign: string | undefined;
 
-  @prop({ default: 'default.jpeg' })
+  @Field(() => String)
   photo: string;
-
-  @prop({ default: true, select: false })
-  verified: boolean;
-
-  static async comparePasswords(data: string, hashed: string) {
-    return await bcrypt.compare(data, hashed);
-  }
 }
 
-export const UserModel = getModelForClass<typeof User>(User);
+@InputType()
+export class LoginData {
+  @IsEmail()
+  @Field(() => String)
+  email: string;
+
+  @MinLength(8, { message: 'Invalid email or password' })
+  @MaxLength(32, { message: 'Invalid email or password' })
+  @Field(() => String)
+  password: string;
+}
+
+@ObjectType()
+export class UserData {
+  @Field(() => String)
+  readonly _id: string;
+
+  @Field(() => String, { nullable: true })
+  readonly id: string;
+
+  @Field(() => String)
+  name: string;
+
+  @Field(() => String)
+  email: string;
+
+  @Field(() => String)
+  role: string;
+
+  @Field(() => String)
+  photo: string;
+
+  @Field(() => Date)
+  createdAt: Date;
+
+  @Field(() => Date)
+  updatedAt: Date;
+}
+
+@ObjectType()
+export class UserResponse {
+  @Field(() => String)
+  status: string;
+
+  @Field(() => UserData)
+  user: UserData;
+}
+
+@ObjectType()
+export class LoginResponse {
+  @Field(() => String)
+  status: string;
+
+  @Field(() => String)
+  access_token: string;
+}

@@ -1,0 +1,18 @@
+mutation CreateUser($input: SignupData!) {
+  createUser(input: $input) {
+    status
+    user {
+      name
+      email
+      photo
+      role
+    }
+  }
+}
+
+mutation Login($input: LoginData!) {
+  login(input: $input) {
+    status
+    access_token
+  }
+}

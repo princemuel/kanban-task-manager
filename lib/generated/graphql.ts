@@ -1,4 +1,4 @@
-import { useQuery, UseQueryOptions } from '@tanstack/react-query';
+import { useQuery, useMutation, UseQueryOptions, UseMutationOptions } from '@tanstack/react-query';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
@@ -50,7 +50,7 @@ export interface IColumn {
   tasks?: Maybe<Array<ITask>>;
 }
 
-export interface ILoginInput {
+export interface ILoginData {
   email: Scalars['String'];
   password: Scalars['String'];
 }
@@ -67,12 +67,12 @@ export interface IMutation {
 
 
 export interface IMutationCreateUserArgs {
-  input: ISignUpInput;
+  input: ISignupData;
 }
 
 
 export interface IMutationLoginArgs {
-  input: ILoginInput;
+  input: ILoginData;
 }
 
 export interface IQuery {
@@ -81,7 +81,7 @@ export interface IQuery {
   column?: Maybe<IColumn>;
   columns: Array<IColumn>;
   getUser: IUserResponse;
-  logoutUser: Scalars['Boolean'];
+  logout: Scalars['Boolean'];
   refresh: ILoginResponse;
   subtasks: Array<ISubtask>;
   tasks: Array<ITask>;
@@ -97,7 +97,7 @@ export interface IQueryColumnArgs {
   id: Scalars['ID'];
 }
 
-export interface ISignUpInput {
+export interface ISignupData {
   countersign: Scalars['String'];
   email: Scalars['String'];
   name: Scalars['String'];
@@ -164,6 +164,20 @@ export type IGetColumnQueryVariables = Exact<{
 
 
 export type IGetColumnQuery = { column?: { id: string, name: string, tasks?: Array<{ id: string, title: string, description?: string | null, status?: string | null }> | null } | null };
+
+export type ICreateUserMutationVariables = Exact<{
+  input: ISignupData;
+}>;
+
+
+export type ICreateUserMutation = { createUser: { status: string, user: { name: string, email: string, photo: string, role: string } } };
+
+export type ILoginMutationVariables = Exact<{
+  input: ILoginData;
+}>;
+
+
+export type ILoginMutation = { login: { status: string, access_token: string } };
 
 
 export const GetBoardsDocument = /*#__PURE__*/ `
@@ -289,3 +303,44 @@ useGetColumnQuery.getKey = (variables: IGetColumnQueryVariables) => ['GetColumn'
 ;
 
 useGetColumnQuery.fetcher = (variables: IGetColumnQueryVariables) => fetcher<IGetColumnQuery, IGetColumnQueryVariables>(GetColumnDocument, variables);
+export const CreateUserDocument = /*#__PURE__*/ `
+    mutation CreateUser($input: SignupData!) {
+  createUser(input: $input) {
+    status
+    user {
+      name
+      email
+      photo
+      role
+    }
+  }
+}
+    `;
+export const useCreateUserMutation = <
+      TError = unknown,
+      TContext = unknown
+    >(options?: UseMutationOptions<ICreateUserMutation, TError, ICreateUserMutationVariables, TContext>) =>
+    useMutation<ICreateUserMutation, TError, ICreateUserMutationVariables, TContext>(
+      ['CreateUser'],
+      (variables?: ICreateUserMutationVariables) => fetcher<ICreateUserMutation, ICreateUserMutationVariables>(CreateUserDocument, variables)(),
+      options
+    );
+useCreateUserMutation.fetcher = (variables: ICreateUserMutationVariables) => fetcher<ICreateUserMutation, ICreateUserMutationVariables>(CreateUserDocument, variables);
+export const LoginDocument = /*#__PURE__*/ `
+    mutation Login($input: LoginData!) {
+  login(input: $input) {
+    status
+    access_token
+  }
+}
+    `;
+export const useLoginMutation = <
+      TError = unknown,
+      TContext = unknown
+    >(options?: UseMutationOptions<ILoginMutation, TError, ILoginMutationVariables, TContext>) =>
+    useMutation<ILoginMutation, TError, ILoginMutationVariables, TContext>(
+      ['Login'],
+      (variables?: ILoginMutationVariables) => fetcher<ILoginMutation, ILoginMutationVariables>(LoginDocument, variables)(),
+      options
+    );
+useLoginMutation.fetcher = (variables: ILoginMutationVariables) => fetcher<ILoginMutation, ILoginMutationVariables>(LoginDocument, variables);

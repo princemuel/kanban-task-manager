@@ -1,12 +1,6 @@
 import { ApolloServer } from 'apollo-server-micro';
 import { IncomingMessage, ServerResponse } from 'http';
-import {
-  BoardsResolver,
-  ColumnsResolver,
-  SubtasksResolver,
-  TasksResolver,
-  UserResolver,
-} from 'lib';
+import { resolvers } from 'lib';
 import cors from 'micro-cors';
 import { NextApiRequest, NextApiResponse } from 'next';
 import 'reflect-metadata';
@@ -37,19 +31,13 @@ export const config = {
 };
 
 const schema = await buildSchema({
-  resolvers: [
-    BoardsResolver,
-    ColumnsResolver,
-    TasksResolver,
-    SubtasksResolver,
-    UserResolver,
-  ] as const,
+  resolvers,
   dateScalarMode: 'isoDate',
 });
 
 export const server = new ApolloServer({
   schema,
-  csrfPrevention: true,
+  // csrfPrevention: true,
   context: ({ req, res }: { req: NextApiRequest; res: NextApiResponse }) => ({
     req,
     res,

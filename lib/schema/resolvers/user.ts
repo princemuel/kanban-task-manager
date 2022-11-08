@@ -1,7 +1,7 @@
 import {
-  LoginInput,
+  LoginData,
   LoginResponse,
-  SignUpInput,
+  SignupData,
   UserResponse,
 } from 'server/schema';
 import { UserService } from 'server/services';
@@ -15,12 +15,12 @@ export class UserResolver {
   }
 
   @Mutation(() => UserResponse)
-  async createUser(@Arg('input') input: SignUpInput) {
+  async createUser(@Arg('input') input: SignupData) {
     return this.userService.createUser(input);
   }
 
   @Mutation(() => LoginResponse)
-  async login(@Arg('input') input: LoginInput, @Ctx() ctx: IUserContext) {
+  async login(@Arg('input') input: LoginData, @Ctx() ctx: IUserContext) {
     return this.userService.login(input, ctx);
   }
 
@@ -35,7 +35,7 @@ export class UserResolver {
   }
 
   @Query(() => Boolean)
-  async logoutUser(@Ctx() ctx: IUserContext) {
+  async logout(@Ctx() ctx: IUserContext) {
     return this.userService.logout(ctx);
   }
 }
