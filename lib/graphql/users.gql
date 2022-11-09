@@ -1,0 +1,43 @@
+mutation CreateUser($input: SignupData!) {
+  createUser(input: $input) {
+    status
+    user {
+      name
+      email
+      photo
+      role
+    }
+  }
+}
+
+mutation LoginUser($input: LoginData!) {
+  login(input: $input) {
+    status
+    access_token
+  }
+}
+
+query GetRefreshToken {
+  refresh {
+    status
+    access_token
+  }
+}
+
+query GetUser {
+  getUser {
+    status
+    user {
+      id
+      email
+      role
+      photo
+      createdAt
+      updatedAt
+    }
+  }
+}
+
+query LogoutUser {
+  logout
+}

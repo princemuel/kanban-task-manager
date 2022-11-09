@@ -1,7 +1,9 @@
-import dotenv from 'dotenv-safe';
+import * as dotenv from 'dotenv-safe';
 import { Head, Html, Main, NextScript } from 'next/document';
 
-dotenv.config();
+dotenv.config({
+  allowEmptyValues: true,
+});
 
 export default function MyDocument() {
   return (

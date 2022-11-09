@@ -18,8 +18,6 @@ type PageProps = {
 
 export const queryClient = new QueryClient(queryOptions);
 
-// export const { getBoards } = getSdk(gqlClient);
-
 function App({ Component, pageProps }: AppPropsWithLayout<PageProps>) {
   const getLayout = Component.getLayout ?? ((page) => <Layout>{page}</Layout>);
   // const [queryClient] = useState(() => new QueryClient(queryOptions));

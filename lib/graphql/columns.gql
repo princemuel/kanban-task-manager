@@ -1,0 +1,23 @@
+query GetColumns {
+  columns {
+    id
+    name
+    tasks {
+      id
+      title
+    }
+  }
+}
+
+query GetColumn($id: ID!) {
+  column(id: $id) {
+    id
+    name
+    tasks {
+      id
+      title
+      description
+      status
+    }
+  }
+}
