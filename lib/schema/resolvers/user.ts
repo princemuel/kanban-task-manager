@@ -3,7 +3,7 @@ import {
   LoginResponse,
   SignupData,
   UserResponse,
-} from 'server/schema';
+} from 'lib/schema/models';
 import { UserService } from 'server/services';
 import { Arg, Ctx, Mutation, Query, Resolver } from 'type-graphql';
 import type { IUserContext } from 'types';
