@@ -172,12 +172,27 @@ export type ICreateUserMutationVariables = Exact<{
 
 export type ICreateUserMutation = { createUser: { status: string, user: { name: string, email: string, photo: string, role: string } } };
 
-export type ILoginMutationVariables = Exact<{
+export type ILoginUserMutationVariables = Exact<{
   input: ILoginData;
 }>;
 
 
-export type ILoginMutation = { login: { status: string, access_token: string } };
+export type ILoginUserMutation = { login: { status: string, access_token: string } };
+
+export type IGetRefreshTokenQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type IGetRefreshTokenQuery = { refresh: { status: string, access_token: string } };
+
+export type IGetUserQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type IGetUserQuery = { getUser: { status: string, user: { id?: string | null, email: string, role: string, photo: string, createdAt: any, updatedAt: any } } };
+
+export type ILogoutUserQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type ILogoutUserQuery = { logout: boolean };
 
 
 export const GetBoardsDocument = /*#__PURE__*/ `
@@ -326,21 +341,100 @@ export const useCreateUserMutation = <
       options
     );
 useCreateUserMutation.fetcher = (variables: ICreateUserMutationVariables) => fetcher<ICreateUserMutation, ICreateUserMutationVariables>(CreateUserDocument, variables);
-export const LoginDocument = /*#__PURE__*/ `
-    mutation Login($input: LoginData!) {
+export const LoginUserDocument = /*#__PURE__*/ `
+    mutation LoginUser($input: LoginData!) {
   login(input: $input) {
     status
     access_token
   }
 }
     `;
-export const useLoginMutation = <
+export const useLoginUserMutation = <
       TError = unknown,
       TContext = unknown
-    >(options?: UseMutationOptions<ILoginMutation, TError, ILoginMutationVariables, TContext>) =>
-    useMutation<ILoginMutation, TError, ILoginMutationVariables, TContext>(
-      ['Login'],
-      (variables?: ILoginMutationVariables) => fetcher<ILoginMutation, ILoginMutationVariables>(LoginDocument, variables)(),
+    >(options?: UseMutationOptions<ILoginUserMutation, TError, ILoginUserMutationVariables, TContext>) =>
+    useMutation<ILoginUserMutation, TError, ILoginUserMutationVariables, TContext>(
+      ['LoginUser'],
+      (variables?: ILoginUserMutationVariables) => fetcher<ILoginUserMutation, ILoginUserMutationVariables>(LoginUserDocument, variables)(),
       options
     );
-useLoginMutation.fetcher = (variables: ILoginMutationVariables) => fetcher<ILoginMutation, ILoginMutationVariables>(LoginDocument, variables);
+useLoginUserMutation.fetcher = (variables: ILoginUserMutationVariables) => fetcher<ILoginUserMutation, ILoginUserMutationVariables>(LoginUserDocument, variables);
+export const GetRefreshTokenDocument = /*#__PURE__*/ `
+    query GetRefreshToken {
+  refresh {
+    status
+    access_token
+  }
+}
+    `;
+export const useGetRefreshTokenQuery = <
+      TData = IGetRefreshTokenQuery,
+      TError = unknown
+    >(
+      variables?: IGetRefreshTokenQueryVariables,
+      options?: UseQueryOptions<IGetRefreshTokenQuery, TError, TData>
+    ) =>
+    useQuery<IGetRefreshTokenQuery, TError, TData>(
+      variables === undefined ? ['GetRefreshToken'] : ['GetRefreshToken', variables],
+      fetcher<IGetRefreshTokenQuery, IGetRefreshTokenQueryVariables>(GetRefreshTokenDocument, variables),
+      options
+    );
+
+useGetRefreshTokenQuery.getKey = (variables?: IGetRefreshTokenQueryVariables) => variables === undefined ? ['GetRefreshToken'] : ['GetRefreshToken', variables];
+;
+
+useGetRefreshTokenQuery.fetcher = (variables?: IGetRefreshTokenQueryVariables) => fetcher<IGetRefreshTokenQuery, IGetRefreshTokenQueryVariables>(GetRefreshTokenDocument, variables);
+export const GetUserDocument = /*#__PURE__*/ `
+    query GetUser {
+  getUser {
+    status
+    user {
+      id
+      email
+      role
+      photo
+      createdAt
+      updatedAt
+    }
+  }
+}
+    `;
+export const useGetUserQuery = <
+      TData = IGetUserQuery,
+      TError = unknown
+    >(
+      variables?: IGetUserQueryVariables,
+      options?: UseQueryOptions<IGetUserQuery, TError, TData>
+    ) =>
+    useQuery<IGetUserQuery, TError, TData>(
+      variables === undefined ? ['GetUser'] : ['GetUser', variables],
+      fetcher<IGetUserQuery, IGetUserQueryVariables>(GetUserDocument, variables),
+      options
+    );
+
+useGetUserQuery.getKey = (variables?: IGetUserQueryVariables) => variables === undefined ? ['GetUser'] : ['GetUser', variables];
+;
+
+useGetUserQuery.fetcher = (variables?: IGetUserQueryVariables) => fetcher<IGetUserQuery, IGetUserQueryVariables>(GetUserDocument, variables);
+export const LogoutUserDocument = /*#__PURE__*/ `
+    query LogoutUser {
+  logout
+}
+    `;
+export const useLogoutUserQuery = <
+      TData = ILogoutUserQuery,
+      TError = unknown
+    >(
+      variables?: ILogoutUserQueryVariables,
+      options?: UseQueryOptions<ILogoutUserQuery, TError, TData>
+    ) =>
+    useQuery<ILogoutUserQuery, TError, TData>(
+      variables === undefined ? ['LogoutUser'] : ['LogoutUser', variables],
+      fetcher<ILogoutUserQuery, ILogoutUserQueryVariables>(LogoutUserDocument, variables),
+      options
+    );
+
+useLogoutUserQuery.getKey = (variables?: ILogoutUserQueryVariables) => variables === undefined ? ['LogoutUser'] : ['LogoutUser', variables];
+;
+
+useLogoutUserQuery.fetcher = (variables?: ILogoutUserQueryVariables) => fetcher<ILogoutUserQuery, ILogoutUserQueryVariables>(LogoutUserDocument, variables);
