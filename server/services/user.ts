@@ -1,8 +1,8 @@
 import { AuthenticationError, ForbiddenError } from 'apollo-server-micro';
-import { setCookie } from 'cookies-next';
+import { deleteCookie, setCookie } from 'cookies-next';
 import { LoginData } from 'lib/schema/models';
 import { disconnectDB } from 'server/config';
-import { deserializeUser, errorHandler } from 'server/middleware';
+import { errorHandler } from 'server/middleware';
 import { User, UserModel } from 'server/models';
 import {
   accessTokenCookieOptions,
@@ -17,14 +17,13 @@ import {
 import type { IUserContext } from 'types';
 
 if (process.env.NODE_ENV === 'production') cookieOptions.secure = true;
-// Generate Tokens
 
 export class UserService {
   /**
-   * @desc Create New User
-   * @access Private
+   * @desc Create A New User
+   * @method POST
    * @param input User
-   * @returns
+   * @returns Promise<ForbiddenError | { status: string; user: FlattenMaps<LeanDocument<User>>} | undefined>
    */
   public async createUser(input: Partial<User>) {
     try {
@@ -43,10 +42,11 @@ export class UserService {
   }
 
   /**
-   * @desc Login a user
-   * @access Private
-   * @param input User
-   * @returns
+   * @desc Get The Authenticated User
+   * @method POST
+   * @param input LoginData
+   * @param context IUserContext
+   * @returns Promise<User | undefined>;
    */
   public async login(input: LoginData, { req, res }: IUserContext) {
     try {
@@ -55,19 +55,15 @@ export class UserService {
       const user = await findByEmail(input.email);
       await disconnectDB();
 
-      if (!user) {
-        return new AuthenticationError(message);
-      }
+      if (!user) return new AuthenticationError(message);
 
+      // Compare the passwords
       const isValidPassword = await UserModel.comparePasswords(
         input.password,
         user.password
       );
 
-      // Compare the passwords
-      if (!isValidPassword) {
-        return new AuthenticationError(message);
-      }
+      if (!isValidPassword) return new AuthenticationError(message);
 
       // Sign the JWT Tokens
       const { access_token, refresh_token } = signTokens(user);
@@ -99,7 +95,12 @@ export class UserService {
     }
   }
 
-  // Get Authenticated User
+  /**
+   * @desc Get The Authenticated User
+   * @method POST
+   * @param context IUserContext
+   * @returns Promise<User | undefined>;
+   */
   public async getUser({ req, res, deserializeUser }: IUserContext) {
     try {
       const user = await deserializeUser(req, res);
@@ -115,7 +116,12 @@ export class UserService {
     }
   }
 
-  // Refresh Access Token
+  /**
+   * @desc Refresh The Access Token
+   * @method POST
+   * @param context IUserContext
+   * @returns Promise<{ status: string; access_token: string;} | undefined>
+   */
   public async refresh({ req, res }: IUserContext) {
     try {
       // Get the refresh token
@@ -163,14 +169,19 @@ export class UserService {
     }
   }
 
-  // Logout User
+  //
+  /**
+   * @desc Logout The Authenticated User
+   * @method POST
+   * @param context IUserContext
+   * @returns Promise<true | undefined>
+   */
   public async logout({ req, res }: IUserContext) {
     try {
-      const user = await deserializeUser(req, res);
       // Logout user
-      setCookie('access_token', '', { req, res, maxAge: -1 });
-      setCookie('refresh_token', '', { req, res, maxAge: -1 });
-      setCookie('logged_in', '', { req, res, maxAge: -1 });
+      deleteCookie('access_token', { req, res });
+      deleteCookie('refresh_token', { req, res });
+      deleteCookie('logged_in', { req, res });
 
       return true;
     } catch (error) {

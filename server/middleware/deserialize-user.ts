@@ -23,7 +23,7 @@ const deserializeUser = async (req: NextApiRequest, res: NextApiResponse) => {
     if (!access_token)
       throw new AuthenticationError('No access token was found');
 
-    // Validate the Access token
+    // validate the access token
     const decoded = verify<{ userId: string }>(
       String(access_token),
       'at-public'
@@ -31,7 +31,7 @@ const deserializeUser = async (req: NextApiRequest, res: NextApiResponse) => {
 
     if (!decoded) throw new AuthenticationError('This access token is invalid');
 
-    // Check if user exist
+    // Check if the user exists
     const user = await UserModel.findById(decoded.userId)
       .select('+verified')
       .lean(true);
