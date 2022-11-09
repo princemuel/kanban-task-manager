@@ -10,9 +10,34 @@ mutation CreateUser($input: SignupData!) {
   }
 }
 
-mutation Login($input: LoginData!) {
+mutation LoginUser($input: LoginData!) {
   login(input: $input) {
     status
     access_token
   }
+}
+
+query GetRefreshToken {
+  refresh {
+    status
+    access_token
+  }
+}
+
+query GetUser {
+  getUser {
+    status
+    user {
+      id
+      email
+      role
+      photo
+      createdAt
+      updatedAt
+    }
+  }
+}
+
+query LogoutUser {
+  logout
 }
