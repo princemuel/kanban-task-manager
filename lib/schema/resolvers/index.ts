@@ -1,6 +1,6 @@
 import { BoardsResolver } from './boards';
 import { ColumnsResolver } from './columns';
-import { SubtasksResolver } from './sub-tasks';
+import { SubtasksResolver } from './subtasks';
 import { TasksResolver } from './tasks';
 import { UserResolver } from './user';
 

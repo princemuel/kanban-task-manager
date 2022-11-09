@@ -1,5 +1,5 @@
 import { Field, ID, ObjectType } from 'type-graphql';
-import { Subtask } from './sub-tasks';
+import { Subtask } from './subtasks';
 
 @ObjectType({ description: 'The task model' })
 export class Task {
