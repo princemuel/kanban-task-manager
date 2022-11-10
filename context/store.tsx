@@ -7,7 +7,10 @@ import {
   useSyncExternalStore,
 } from 'react';
 
-export function createAStore<Store>(initalState: Store) {
+export function createAStore<Store>(
+  initalState: Store,
+  displayName = 'StoreContext'
+) {
   function useStoreData(): {
     get: () => Store;
     set: (value: Partial<Store>) => void;
@@ -41,6 +44,7 @@ export function createAStore<Store>(initalState: Store) {
   type UseStoreDataType = ReturnType<typeof useStoreData>;
 
   const StoreContext = createContext<UseStoreDataType | null>(null);
+  StoreContext.displayName = displayName;
 
   type ProviderProps = {
     children: ReactNode;

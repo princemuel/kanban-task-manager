@@ -7,6 +7,7 @@ import {
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import 'assets/styles/main.css';
 import { Layout } from 'components';
+import { ModalProvider } from 'context';
 import { queryOptions } from 'helpers';
 import Head from 'next/head';
 
@@ -30,7 +31,9 @@ function App({ Component, pageProps }: AppPropsWithLayout<PageProps>) {
 
       <QueryClientProvider client={queryClient}>
         <Hydrate state={pageProps?.dehydratedState ?? {}}>
-          {getLayout(<Component {...pageProps} />)}
+          <ModalProvider>
+            {getLayout(<Component {...pageProps} />)}
+          </ModalProvider>
           <ReactQueryDevtools initialIsOpen={false} />
         </Hydrate>
       </QueryClientProvider>
