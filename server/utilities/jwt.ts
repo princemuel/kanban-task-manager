@@ -8,14 +8,12 @@ export const sign = (
   key: 'at-private' | 'rt-private',
   options?: SignOptions
 ) => {
-  let privateKey = '';
-
   const access_token = toBase64(process.env.ACCESS_TOKEN_PRIVATE_KEY!);
-
   const refresh_token = toBase64(process.env.REFRESH_TOKEN_PRIVATE_KEY!);
 
-  privateKey =
+  const privateKey =
     key === 'at-private' ? toUtf8(access_token) : toUtf8(refresh_token);
+
   return jwt.sign(payload, privateKey, {
     ...(options ?? {}),
     algorithm: 'RS256',
@@ -26,11 +24,10 @@ export const verify = <T>(
   token: string,
   key: 'at-public' | 'rt-public'
 ): T | null => {
-  let publicKey = '';
-  let access_token = toBase64(process.env.ACCESS_TOKEN_PUBLIC_KEY!);
-  let refresh_token = toBase64(process.env.REFRESH_TOKEN_PUBLIC_KEY!);
+  const access_token = toBase64(process.env.ACCESS_TOKEN_PUBLIC_KEY!);
+  const refresh_token = toBase64(process.env.REFRESH_TOKEN_PUBLIC_KEY!);
 
-  publicKey =
+  const publicKey =
     key === 'at-public' ? toUtf8(access_token) : toUtf8(refresh_token);
 
   try {
@@ -43,7 +40,8 @@ export const verify = <T>(
 };
 
 export function signTokens(user: User) {
-  const userId: string = user._id.toString();
+  //@ts-expect-error
+  const userId: string = user?._id?.toString() ?? user?.id?.toString();
   const access_token = sign({ userId }, 'at-private', {
     expiresIn: `${accessTokenExpiresIn}m`,
   });
