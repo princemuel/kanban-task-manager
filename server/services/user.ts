@@ -22,12 +22,12 @@ export class UserService {
   /**
    * @desc Create A New User
    * @method POST
-   * @param input User
+   * @param data User
    * @returns Promise<ForbiddenError | { status: string; user: FlattenMaps<LeanDocument<User>>} | undefined>
    */
-  public async createUser(input: Partial<User>) {
+  public async createUser(data: Partial<User>) {
     try {
-      const user = await UserModel.create(input);
+      const user = await UserModel.create(data);
       await disconnectDB();
       return {
         status: 'success',
@@ -44,22 +44,22 @@ export class UserService {
   /**
    * @desc Get The Authenticated User
    * @method POST
-   * @param input LoginData
+   * @param data LoginData
    * @param context IUserContext
    * @returns Promise<User | undefined>;
    */
-  public async login(input: LoginData, { req, res }: IUserContext) {
+  public async login(data: LoginData, { req, res }: IUserContext) {
     try {
       const message = 'Invalid email or password';
-      // Find a user by email
-      const user = await findByEmail(input.email);
+      // find a user by email
+      const user = await findByEmail(data.email);
       await disconnectDB();
 
       if (!user) return new AuthenticationError(message);
 
-      // Compare the passwords
+      // compare the passwords
       const isValidPassword = await UserModel.comparePasswords(
-        input.password,
+        data.password,
         user.password
       );
 
@@ -108,7 +108,8 @@ export class UserService {
         status: 'success',
         user: {
           ...user,
-          id: user?._id,
+          //@ts-expect-error
+          id: user?._id ?? user?.id,
         },
       };
     } catch (error: any) {
@@ -143,9 +144,13 @@ export class UserService {
       }
 
       // Sign the new access token
-      const access_token = sign({ userId: user._id }, 'at-private', {
-        expiresIn: `${accessTokenExpiresIn}m`,
-      });
+      const access_token = sign(
+        { userId: user?._id ?? user?.id },
+        'at-private',
+        {
+          expiresIn: `${accessTokenExpiresIn}m`,
+        }
+      );
 
       // Send the access token cookie
       setCookie('access_token', access_token, {
