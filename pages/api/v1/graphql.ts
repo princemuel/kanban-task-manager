@@ -33,11 +33,12 @@ export const config = {
 const schema = await buildSchema({
   resolvers,
   dateScalarMode: 'isoDate',
+  emitSchemaFile: true,
 });
 
 export const server = new ApolloServer({
   schema,
-  // csrfPrevention: true,
+  csrfPrevention: true,
   context: ({ req, res }: { req: NextApiRequest; res: NextApiResponse }) => ({
     req,
     res,
