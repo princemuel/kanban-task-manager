@@ -1,27 +1,19 @@
 import { createAStore as createModalStore } from './store';
 
-type ModalAction = 'add' | 'view' | 'edit' | 'delete';
-type ModalSubject = 'board' | 'task';
+type ModalAction = 'Add' | 'View' | 'Edit' | 'Delete';
+type ModalSubject = 'Board' | 'Task';
 
-export type ModalType = `${ModalAction}-${ModalSubject}`;
+export type ModalType = `${ModalAction}${ModalSubject}`;
 
 interface ModalStore {
   isModalOpen: boolean;
   currentModal: ModalType | null;
-  toggleModal: (name: ModalType) => void;
-  closeModal: () => void;
 }
 
 const { StoreProvider, useStore } = createModalStore<ModalStore>(
   {
     isModalOpen: false,
     currentModal: null,
-    toggleModal: (name) => {
-      console.log(name);
-    },
-    closeModal: () => {
-      console.log('modal closed');
-    },
   },
   'ModalContext'
 );
