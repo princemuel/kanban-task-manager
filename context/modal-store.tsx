@@ -3,19 +3,21 @@ import { createAStore as createModalStore } from './store';
 type ModalAction = 'Add' | 'View' | 'Edit' | 'Delete';
 type ModalSubject = 'Board' | 'Task';
 
-export type ModalType = `${ModalAction}${ModalSubject}`;
+export type ModalType = `${ModalAction}${ModalSubject}` | null;
 
 interface ModalStore {
   isModalOpen: boolean;
-  currentModal: ModalType | null;
+  isLocked: boolean;
+  currentModal: ModalType;
 }
 
 const { StoreProvider, useStore } = createModalStore<ModalStore>(
   {
     isModalOpen: false,
+    isLocked: false,
     currentModal: null,
   },
-  'ModalContext'
+  'Modal'
 );
 
 export { StoreProvider as ModalProvider, useStore as useModalStore };
