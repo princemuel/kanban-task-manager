@@ -304,24 +304,6 @@ Version: 01
 .modal--closing {
   animation: fade-out 500ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
-
-@keyframes fade-in {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-@keyframes fade-out {
-  100% {
-    opacity: 0;
-  }
-  0% {
-    opacity: 1;
-  }
-}
 @keyframes slide-up {
   0% {
     transform: translateY(100%);
@@ -330,7 +312,14 @@ Version: 01
     transform: translateY(0%);
   }
 }
-
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
 @keyframes fade-out {
   100% {
     opacity: 0;
