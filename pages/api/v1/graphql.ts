@@ -1,8 +1,7 @@
 import { ApolloServer } from 'apollo-server-micro';
-import { IncomingMessage, ServerResponse } from 'http';
 import { resolvers } from 'lib';
 import cors from 'micro-cors';
-import { NextApiRequest, NextApiResponse } from 'next';
+import type { NextApiRequest, NextApiResponse } from 'next';
 import 'reflect-metadata';
 import { connectDB } from 'server/config';
 import { deserializeUser } from 'server/middleware/deserialize-user';
@@ -36,10 +35,12 @@ const schema = await buildSchema({
   emitSchemaFile: true,
 });
 
+type TServerContext = { req: NextApiRequest; res: NextApiResponse };
+
 export const server = new ApolloServer({
   schema,
   csrfPrevention: true,
-  context: ({ req, res }: { req: NextApiRequest; res: NextApiResponse }) => ({
+  context: ({ req, res }: TServerContext) => ({
     req,
     res,
     deserializeUser,
@@ -48,7 +49,11 @@ export const server = new ApolloServer({
 
 const startServer = server.start();
 
-async function handler(req: IncomingMessage, res: ServerResponse) {
+// @ts-expect-error
+export default allowCors(async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   if (req.method === 'OPTIONS') {
     res.end();
     return false;
@@ -56,6 +61,4 @@ async function handler(req: IncomingMessage, res: ServerResponse) {
   await connectDB();
   await startServer;
   return server?.createHandler({ path: '/api/v1/graphql' })(req, res);
-}
-
-export default allowCors(handler);
+});

@@ -10,9 +10,9 @@ type Props = {
 const Modal = (props: Props) => {
   return (
     <>
-      {props?.name === 'AddTask' && <AddTaskModal name={'AddTask'} />}
-      {props?.name === 'AddBoard' && <AddBoardModal name={'AddBoard'} />}
-      {props?.name === 'ViewBoard' && <ViewBoardModal name={'ViewBoard'} />}
+      {props?.name === 'AddTask' && <AddTaskModal />}
+      {props?.name === 'AddBoard' && <AddBoardModal />}
+      {props?.name === 'ViewBoard' && <ViewBoardModal />}
     </>
   );
 };

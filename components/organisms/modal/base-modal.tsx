@@ -1,40 +1,27 @@
-import { ModalType, useModalStore } from 'context';
 import { ReactNode, useCallback, useEffect, useMemo, useRef } from 'react';
 
 type Props = {
   open?: boolean;
   isLocked?: boolean;
-  name: ModalType;
   children: ReactNode;
   handleCloseModal: () => void;
 };
 
 type ReactModalEvent = React.SyntheticEvent<HTMLDialogElement>;
 
-const BaseModal = ({
-  name,
-  handleCloseModal,
-  isLocked,
-  children,
-  ...rest
-}: Props) => {
+const BaseModal = ({ open, handleCloseModal, isLocked, children }: Props) => {
   const ref = useRef<HTMLDialogElement | null>(null);
-
-  const [modalName] = useModalStore((state) => state['currentModal']);
-  const [isActive] = useModalStore((state) => state['isModalOpen']);
-
-  const isCurrentModal = modalName === name && isActive;
 
   const classes = useMemo(() => {
     const classNames = ['modal'];
-    if (!isCurrentModal) classNames.push('modal--closing');
+    if (!open) classNames.push('modal--closing');
 
     return classNames.join(' ').trim();
-  }, [isCurrentModal]);
+  }, [open]);
 
   useEffect(() => {
     const { current: modal } = ref;
-    if (isCurrentModal) {
+    if (open) {
       console.log('%c Useeffect Ran', 'color: green;');
       modal?.showModal();
     }
@@ -42,7 +29,7 @@ const BaseModal = ({
       modal?.close();
       console.log('%c Useeffect Cleanup', 'color: red;');
     };
-  }, [isCurrentModal]);
+  }, [open]);
 
   // Event Listener: Close Modal when The Escape Key is pressed
   const handleCancel = useCallback(
@@ -65,8 +52,8 @@ const BaseModal = ({
   // Event Listener: Close the modal when the animation ends
   const handleAnimationEnd = useCallback(() => {
     const { current: modal } = ref;
-    if (!isCurrentModal) modal?.close();
-  }, [isCurrentModal]);
+    if (!open) modal?.close();
+  }, [open]);
 
   return (
     <dialog

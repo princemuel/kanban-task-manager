@@ -1,17 +1,16 @@
-import { ModalType, useModalStore } from 'context';
+import { useModalStore } from 'context';
 import { BaseModal } from './base-modal';
 
-type Props = {
-  name: ModalType;
-};
+type Props = {};
 
 export const ViewBoardModal = (props: Props) => {
-  const [, setIsActive] = useModalStore((state) => state['isModalOpen']);
+  const [isActive, setIsActive] = useModalStore(
+    (state) => state['isModalOpen']
+  );
 
   return (
     <BaseModal
-      // open={isActive && props?.name === 'ViewBoard'}
-      name={'ViewBoard'}
+      open={isActive}
       handleCloseModal={() => setIsActive({ isModalOpen: false })}
     >
       <form className='form' method='dialog'>

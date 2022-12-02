@@ -3,6 +3,7 @@ import { ModalType, useModalStore } from 'context';
 import { createDehydratedState } from 'helpers';
 import { useGetBoardsQuery } from 'lib/generated/graphql';
 import Head from 'next/head';
+import { useCallback } from 'react';
 import type { InferNextPropsType, NextPageWithLayout } from 'types';
 import { queryClient } from './_app';
 
@@ -12,23 +13,17 @@ const Home: NextPageWithLayout<Props> = (props: Props) => {
   // const Home: NextPageWithLayout = () => {
   const { data } = useGetBoardsQuery();
 
-  const [isActive, setIsActive] = useModalStore(
-    (state) => state['isModalOpen']
-  );
-  const [currentModal, setCurrentModal] = useModalStore(
-    (state) => state['currentModal']
-  );
+  const [, setIsActive] = useModalStore((state) => state['isModalOpen']);
+  const [modal, setModal] = useModalStore((state) => state['currentModal']);
 
-  const openModal = (
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-    modalName: ModalType
-  ) => {
-    const current = e.currentTarget.dataset.modal;
-    if (current === modalName) {
-      setCurrentModal({ currentModal: modalName });
-      setIsActive({ isModalOpen: !isActive });
-    }
-  };
+  const openModal = useCallback(
+    (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+      const current = e?.currentTarget?.dataset?.id as ModalType;
+      setModal({ currentModal: current });
+      setIsActive({ isModalOpen: true });
+    },
+    [setModal, setIsActive]
+  );
 
   return (
     <>
@@ -41,19 +36,17 @@ const Home: NextPageWithLayout<Props> = (props: Props) => {
       {/* <p className='text-500'>{JSON.stringify(dehydratedState?.queries)}</p> */}
 
       {/* <p className='text-500'>{JSON.stringify(data)}</p> */}
-      <button data-modal='AddTask' onClick={(e) => openModal(e, 'AddTask')}>
+      <button data-id='AddTask' onClick={(e) => openModal(e)}>
         Open Add Task Modal
       </button>
-      <button data-modal='AddBoard' onClick={(e) => openModal(e, 'AddBoard')}>
+      <button data-id='AddBoard' onClick={(e) => openModal(e)}>
         Open Add Board Modal
       </button>
-      <button data-modal='ViewBoard' onClick={(e) => openModal(e, 'ViewBoard')}>
+      <button data-id='ViewBoard' onClick={(e) => openModal(e)}>
         Open View Board Modal
       </button>
 
-      <Modal name='AddTask' />
-      <Modal name='AddBoard' />
-      <Modal name='ViewBoard' />
+      <Modal name={modal} />
     </>
   );
 };
