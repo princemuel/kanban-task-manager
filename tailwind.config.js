@@ -13,7 +13,6 @@ module.exports = {
     borderRadius: {
       ...defaultTheme.borderRadius,
       pill: "100vmax",
-      default: "0.8rem",
     },
 
     colors: {
@@ -34,9 +33,6 @@ module.exports = {
       accent: {
         100: "#ff9898",
         200: "#ea5555",
-        300: "#49C4E5",
-        400: "#8471F2",
-        500: "#67E2AE",
       },
     },
 
@@ -86,10 +82,6 @@ module.exports = {
         "fill-20": "repeat(auto-fill, minmax(5rem, 1fr))",
         "fit-big": "repeat(auto-fit, minmax(25rem, 1fr))",
         // etc.
-      },
-
-      boxShadow: {
-        task: "0px 4px 6px rgba(54, 78, 126, 0.101545)",
       },
     },
   },
