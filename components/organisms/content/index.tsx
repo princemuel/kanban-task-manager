@@ -3,10 +3,11 @@ type Props = {
   className: string;
 };
 
-export function MainContent({ children, ...rest }: Props) {
+const MainContent = ({ children, ...rest }: Props) => {
   return (
-    <main id='main-content' {...rest}>
+    <main id="main-content" {...rest}>
       {children}
     </main>
   );
-}
+};
+export { MainContent };

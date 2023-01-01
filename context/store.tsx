@@ -5,10 +5,10 @@ import {
   useContext,
   useRef,
   useSyncExternalStore,
-} from 'react';
-import { capitalize } from 'utils';
+} from "react";
+import { capitalize } from "utilities";
 
-export function createAStore<Store>(initalState: Store, prefix = 'Store') {
+export function createAStore<Store>(initalState: Store, prefix = "Store") {
   function useStoreData(): {
     get: () => Store;
     set: (value: Partial<Store>) => void;
@@ -44,7 +44,7 @@ export function createAStore<Store>(initalState: Store, prefix = 'Store') {
   const STORE_NAME = capitalize(prefix);
 
   const StoreContext = createContext<UseStoreDataType | null>(null);
-  StoreContext.displayName = STORE_NAME + 'Context';
+  StoreContext.displayName = STORE_NAME + "Context";
 
   type ProviderProps = {
     children: ReactNode;

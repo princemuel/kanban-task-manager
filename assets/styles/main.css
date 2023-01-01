@@ -52,7 +52,7 @@ Version: 01
     box-sizing: inherit;
   }
 
-  :where([hidden]:not([hidden='until-found'])) {
+  :where([hidden]:not([hidden="until-found"])) {
     display: none !important;
   }
 
@@ -66,10 +66,16 @@ Version: 01
     background: transparent; /* Chrome/Safari/Webkit */
   }
 
+  html,
+  body,
+  #__next {
+    height: 100%;
+  }
+
   /* Set core body defaults */
   :where(body) {
     /* Changed to min- to prevent cropping */
-    min-height: 100vh;
+    /* min-height: 100vh; */
     /* min-block-size: 100vh; */
 
     line-height: 1.5;
@@ -77,7 +83,7 @@ Version: 01
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 
-    /* position: relative; */
+    position: relative;
   }
 
   :where(h1, h2, h3) {
@@ -99,7 +105,7 @@ Version: 01
     font: inherit;
     color: inherit;
   }
-  :where(button, label, select, summary, [role='button'], [role='option']) {
+  :where(button, label, select, summary, [role="button"], [role="option"]) {
     cursor: pointer;
   }
   :where(textarea) {
@@ -109,13 +115,8 @@ Version: 01
   :where(:disabled) {
     cursor: not-allowed;
   }
-  :where(label:has(> input:disabled), label:has(+ input:disabled)) {
+  :where(label:has(* > input:disabled), label:has(* + input:disabled)) {
     cursor: not-allowed;
-  }
-
-  /* Remove list styles on ul, ol elements  */
-  :where(ul, ol) {
-    list-style: none;
   }
 
   :where(img, svg, video, canvas, audio, iframe, embed, object) {
@@ -126,7 +127,7 @@ Version: 01
     block-size: auto;
   }
   @media not all and (min-resolution: 0.001dpcm) {
-    :where(img[loading='lazy']) {
+    :where(img[loading="lazy"]) {
       clip-path: inset(0.5px);
     }
   }
@@ -160,7 +161,6 @@ Version: 01
     html:focus-within {
       scroll-behavior: auto;
     }
-
     *,
     *::before,
     *::after {
@@ -173,7 +173,7 @@ Version: 01
 
   /* *********** TYPOGRAPHY  ************* */
   :where(body) {
-    @apply text-primary-900 dark:text-neutral-100 bg-primary-100 dark:bg-primary-800 font-sans;
+    @apply bg-primary-100 font-sans text-primary-900 dark:bg-primary-800 dark:text-neutral-100;
   }
 
   :is(h1, h2, h3, h4, .body-200) {
@@ -190,7 +190,7 @@ Version: 01
     @apply text-500 leading-300;
   }
   h4 {
-    @apply text-primary-400 text-300 leading-200 tracking-100;
+    @apply text-300 leading-200 tracking-100 text-primary-400;
   }
 
   .body-100 {
@@ -218,16 +218,16 @@ Version: 01
 @layer components {
   /* ********** BUTTONS ********** */
   .btn {
-    @apply inline-flex items-center py-4 px-24 rounded-pill text-neutral-100 text-400 font-bold leading-400 transition-colors;
+    @apply inline-flex items-center rounded-pill py-4 px-24 text-400 font-bold leading-400 text-neutral-100 transition-colors;
   }
   .btn-primary--sm {
     @apply bg-primary-500 hover:bg-primary-300;
   }
   .btn-primary--xl {
-    @apply text-500 bg-primary-500 hover:bg-primary-300 leading-300;
+    @apply bg-primary-500 text-500 leading-300 hover:bg-primary-300;
   }
   .btn-accent {
-    @apply text-primary-500 bg-primary-500/10 dark:bg-neutral-100 hover:bg-primary-500/25;
+    @apply bg-primary-500/10 text-primary-500 hover:bg-primary-500/25 dark:bg-neutral-100;
   }
   .btn-delete {
     @apply bg-accent-200 hover:bg-accent-100;
@@ -250,7 +250,7 @@ Version: 01
 */
 @layer utilities {
   .navigation-link:where(:hover, :focus),
-  [aria-current='page'] {
+  [aria-current="page"] {
     @apply text-primary-100;
   }
 
@@ -262,7 +262,7 @@ Version: 01
   }
 
   .skip-to-content {
-    @apply absolute mx-auto py-[1em] px-[0.5em]  text-neutral-100 bg-primary-500 z-[9999] translate-y-[-120%] transition-transform focus:translate-y-0 focus:outline-offset-2 focus:outline focus:outline-primary-300;
+    @apply absolute z-[9999] mx-auto translate-y-[-120%]  bg-primary-500 py-[1em] px-[0.5em] text-neutral-100 transition-transform focus:translate-y-0 focus:outline focus:outline-offset-2 focus:outline-primary-300;
   }
 }
 
