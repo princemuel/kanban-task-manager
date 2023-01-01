@@ -5,9 +5,6 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "generate": "graphql-codegen -r dotenv/config --config codegen.yml dotenv_config_path=.env",
-    "prestart": "yarn generate",
-    "predev": "yarn generate",
     "start": "next start",
     "lint": "next lint"
   },
