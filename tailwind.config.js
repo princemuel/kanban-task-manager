@@ -13,6 +13,7 @@ module.exports = {
     borderRadius: {
       ...defaultTheme.borderRadius,
       pill: "100vmax",
+      default: "0.8rem",
     },
 
     colors: {
@@ -33,6 +34,9 @@ module.exports = {
       accent: {
         100: "#ff9898",
         200: "#ea5555",
+        300: "#49C4E5",
+        400: "#8471F2",
+        500: "#67E2AE",
       },
     },
 
