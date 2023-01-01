@@ -86,6 +86,7 @@ module.exports = {
     },
   },
   plugins: [
+    require("tailwind-scrollbar")({ nocompatible: true }),
     plugin(function ({ addComponents, addUtilities, theme }) {
       addComponents({
         ".btn": {
