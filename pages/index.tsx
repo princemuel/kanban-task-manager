@@ -3,7 +3,8 @@ import Head from "next/head";
 import * as React from "react";
 import type { NextPageWithLayout } from "types";
 
-import { LogoIcon } from "components";
+import { icons } from "common";
+import { LogoIcon, NavLink } from "components";
 import { data } from "lib/data";
 import { clsx } from "utilities";
 
@@ -28,8 +29,8 @@ const Home: NextPageWithLayout<Props> = (props: Props) => {
         <title>Kanban Task Manager</title>
       </Head>
 
-      <div className="grid grid-cols-[15%,1fr] grid-rows-[8rem_calc(100vh_-_8rem)] grid-areas-desk">
-        <header className="grid grid-cols-[15%,1fr] bg-neutral-100 text-700 font-bold grid-in-header dark:bg-primary-700">
+      <div className="grid grid-cols-[26rem,1fr] grid-rows-[8rem_calc(100vh_-_8rem)] grid-areas-desk">
+        <header className="grid grid-cols-[26rem,1fr] bg-neutral-100 text-700 font-bold grid-in-header dark:bg-primary-700">
           <div className="px-8 py-10">
             <LogoIcon />
           </div>
@@ -38,12 +39,53 @@ const Home: NextPageWithLayout<Props> = (props: Props) => {
           </div>
         </header>
 
-        <aside className="bg-neutral-100 py-10 px-8 text-700 font-bold grid-in-aside dark:bg-primary-700">
-          <h1 className="">SIDEBAR</h1>
+        <aside className="space-y-4 bg-neutral-100 py-10 text-700 font-bold grid-in-aside dark:bg-primary-700">
+          <h4 className="flex items-center gap-2 px-10">
+            <span className="uppercase">All Boards</span>
+            <output className="uppercase">({data.boards.length})</output>
+          </h4>
+
+          <div className="flex flex-col justify-between">
+            <nav className="flex flex-col gap-4">
+              {data.boards.map((board) => {
+                return (
+                  <NavLink
+                    activeClassName=""
+                    key={board.id}
+                    href={`/boards/${board.id}`}
+                  >
+                    <a className="group mr-8 flex items-center gap-6 px-10 py-4 text-500 font-bold leading-300 text-primary-400 aria-[current='page']:rounded-r-full aria-[current='page']:bg-primary-500 aria-[current='page']:text-neutral-100 hover:rounded-r-full hover:bg-primary-500/10 active:rounded-r-full active:bg-primary-500/10 dark:hover:bg-neutral-100 dark:active:bg-neutral-100">
+                      <icons.board.board className="fill-current text-primary-400 group-hover:text-primary-500 group-active:text-primary-500 group-aria-[current='page']:text-neutral-100 group-aria-[current='page']:group-hover:text-primary-500" />
+                      <span className="group-hover:text-primary-500 group-active:text-primary-500">
+                        {board.name}
+                      </span>
+                    </a>
+                  </NavLink>
+                );
+              })}
+
+              <button
+                type="button"
+                className="group mr-8 flex items-center gap-6 px-10 py-4 text-500 font-bold leading-300 text-primary-500"
+              >
+                <icons.board.board className="fill-current text-primary-500" />
+                <span>+ Create New Board</span>
+              </button>
+            </nav>
+            <div>
+              <div className="m-auto">THEME</div>
+              <div>
+                <button></button>
+              </div>
+            </div>
+          </div>
         </aside>
 
         <main className="overflow-scroll border-l border-primary-200 py-10 px-12 text-700 font-bold text-neutral-100 grid-in-main scrollbar scrollbar-track-primary-400 scrollbar-thumb-primary-600 scrollbar-track-rounded-lg scrollbar-thumb-rounded-lg scrollbar-w-4 dark:border-primary-600 dark:scrollbar-track-primary-700 dark:scrollbar-thumb-primary-400">
-          <section className="h-full min-w-full cursor-move space-y-8 ">
+          <section
+            id="main-content"
+            className="h-full min-w-min cursor-move space-y-8 "
+          >
             <header className="flex items-center gap-[2.4rem]">
               {currentBoard.columns.map((column) => {
                 return (
@@ -71,7 +113,7 @@ const Home: NextPageWithLayout<Props> = (props: Props) => {
               })}
             </header>
 
-            <div className="flex items-start gap-[2.4rem]">
+            <div className="flex h-full items-start gap-[2.4rem]">
               {currentBoard.columns.map((column) => {
                 return (
                   <div
@@ -86,7 +128,7 @@ const Home: NextPageWithLayout<Props> = (props: Props) => {
                       return (
                         <article
                           key={task.id}
-                          className="group flex cursor-pointer flex-col gap-4 rounded-default bg-neutral-100 px-6 py-9 text-primary-900 shadow-task transition-all hover:scale-110 dark:bg-primary-700 dark:text-neutral-100"
+                          className="group flex cursor-pointer select-none flex-col gap-4 rounded-[0.6rem] bg-neutral-100 px-6 py-9 text-primary-900 shadow-task transition-all hover:scale-110 dark:bg-primary-700 dark:text-neutral-100"
                         >
                           <h3 className="group-hover:text-primary-500">
                             {task.title}
@@ -101,6 +143,13 @@ const Home: NextPageWithLayout<Props> = (props: Props) => {
                   </div>
                 );
               })}
+
+              <button
+                type="button"
+                className="grid h-full w-[28rem] place-content-center rounded-default bg-gradient-to-b from-[#E9EFFA] to-[#E9EFFA]/50 text-[2.4rem] font-bold leading-500 text-primary-400 hover:text-primary-500 active:text-primary-500  dark:from-primary-700/25 dark:to-primary-700/[0.125]"
+              >
+                + New Column
+              </button>
             </div>
           </section>
         </main>
