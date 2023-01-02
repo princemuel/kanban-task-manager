@@ -27,9 +27,15 @@ Version: 01
 
   html {
     box-sizing: border-box;
-    font-size: 56.25%;
+    font-size: 50%;
     text-rendering: optimizeSpeed;
-    -webkit-text-size-adjust: none;
+    text-size-adjust: none;
+  }
+
+  @media (min-width: 48em) {
+    html {
+      font-size: 56.25%;
+    }
   }
 
   @media (min-width: 75em) {
@@ -56,26 +62,10 @@ Version: 01
     display: none !important;
   }
 
-  /*********** SCROLLBARS: REFACTOR THIS ************/
-  html {
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none; /* IE 10+ */
-  }
-  html::-webkit-scrollbar {
-    width: 0px;
-    background: transparent; /* Chrome/Safari/Webkit */
-  }
-
-  html,
-  body,
-  #__next {
-    height: 100%;
-  }
-
   /* Set core body defaults */
   :where(body) {
     /* Changed to min- to prevent cropping */
-    /* min-height: 100vh; */
+    min-height: 100vh;
     /* min-block-size: 100vh; */
 
     line-height: 1.5;
@@ -84,6 +74,7 @@ Version: 01
     -moz-osx-font-smoothing: grayscale;
 
     position: relative;
+    overflow-x: hidden;
   }
 
   :where(h1, h2, h3) {
