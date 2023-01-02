@@ -13,7 +13,8 @@ module.exports = {
     borderRadius: {
       ...defaultTheme.borderRadius,
       pill: "100vmax",
-      default: "0.8rem",
+      100: "0.8rem",
+      200: "0.6rem",
     },
 
     colors: {
@@ -68,23 +69,18 @@ module.exports = {
     },
 
     screens: {
+      s: "20em", // => @media (min-width: 320px) { ... }
       xs: "30em", // => @media (min-width: 480px) { ... }
-      ...defaultTheme.screens,
+      sm: "36em", // => @media (min-width: 576px) { ... }
+      sx: "40em", // => @media (min-width: 640px) { ... }
+      md: "45em", // => @media (min-width: 720px) { ... }
+      lg: "64em", // => @media (min-width: 1024px) { ... }
+      xl: "80em", // => @media (min-width: 1280px) { ... }
+      xxl: "96em", // => @media (min-width: 1280px) { ... }
+      xxxl: "112.5em", // => @media (min-width: 1800px) { ... }
     },
 
     extend: {
-      screens: {
-        s: "20em", // => @media (min-width: 320px) { ... }
-        xs: "30em", // => @media (min-width: 480px) { ... }
-        sm: "36em", // => @media (min-width: 576px) { ... }
-        sx: "40em", // => @media (min-width: 640px) { ... }
-        md: "45em", // => @media (min-width: 720px) { ... }
-        lg: "64em", // => @media (min-width: 1024px) { ... }
-        xl: "80em", // => @media (min-width: 1280px) { ... }
-        xxl: "96em", // => @media (min-width: 1280px) { ... }
-        xxxl: "112.5em", // => @media (min-width: 1800px) { ... }
-      },
-
       gridTemplateAreas: {
         desk: ["header header", "aside main"],
         // ipad: ["header header", "copy social"],
