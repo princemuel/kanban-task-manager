@@ -10,7 +10,7 @@ export default function MyDocument() {
     <Html lang="en">
       <Head>
         <meta name="robots" content="all" />
-        {/* <meta name='color-scheme' content='dark light' /> */}
+        <meta name="color-scheme" content="dark light" />
         <meta
           name="theme-color"
           media="(prefers-color-scheme: light)"
@@ -45,14 +45,11 @@ export default function MyDocument() {
       </Head>
 
       <body>
-        {/* <a href="#content" className="sr-only focus:not-sr-only">
-          Skip to content
-        </a> */}
         <a
           href="#main-content"
           className="sr-only absolute left-0 m-3 -translate-y-16 bg-primary-500 p-3 text-600 transition focus:not-sr-only focus:translate-y-0"
         >
-          Skip Navigation
+          Skip to Content
         </a>
         <Main />
         <NextScript />
