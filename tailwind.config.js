@@ -126,17 +126,6 @@ module.exports = {
         ".icon--svg": {
           fill: "currentColor",
         },
-        ".w-full-shadow": {
-          boxShadow: "0 0 0 100vmax currentColor, 0 0 2rem currentColor",
-          clipPath: "inset(0 -100vmax)",
-        },
-        ".h-container": {
-          "--max-width": "111rem",
-          "--container-padding": "1.6rem",
-
-          width: "min(var(--max-width), 100% - (var(--container-padding) * 2))",
-          marginInline: "auto",
-        },
       });
     }),
   ],
