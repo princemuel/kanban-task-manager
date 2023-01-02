@@ -21,7 +21,8 @@ const LogoIcon = (props: Props) => {
   if (!isMounted) return <></>;
   return (
     <Link href={"/"} passHref>
-      <a className="flex items-center">
+      <a className="flex items-center" title="Home Logo">
+        <span className="sr-only">Home Logo</span>
         {isdarkTheme ? <icons.logo.dark /> : <icons.logo.light />}
       </a>
     </Link>

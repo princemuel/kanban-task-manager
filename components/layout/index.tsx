@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { ReactNode } from "react";
 
 type Props = {
   children: ReactNode;
@@ -6,7 +6,7 @@ type Props = {
 
 const Layout = ({ children }: Props) => {
   return (
-    <div className='min-h-screen overflow-hidden'>
+    <div className="min-h-screen overflow-hidden">
       {/* <Header /> */}
 
       {/* <Sidebar /> */}
