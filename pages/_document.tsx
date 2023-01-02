@@ -45,10 +45,7 @@ export default function MyDocument() {
       </Head>
 
       <body>
-        <a
-          href="#main-content"
-          className="sr-only absolute left-0 m-3 -translate-y-16 bg-primary-500 p-3 text-600 transition focus:not-sr-only focus:translate-y-0"
-        >
+        <a href="#main-content" className="skip-to-content text-600">
           Skip to Content
         </a>
         <Main />
