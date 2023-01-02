@@ -158,7 +158,5 @@ design
 
 local
 *.local.*
-!README.md
-
 
 .vercel

@@ -74,6 +74,7 @@ Version: 01
     -moz-osx-font-smoothing: grayscale;
 
     position: relative;
+    transition: all 150ms ease-in-out;
   }
 
   :where(h1, h2, h3) {

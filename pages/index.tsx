@@ -4,7 +4,7 @@ import * as React from "react";
 import type { NextPageWithLayout } from "types";
 
 import { icons } from "common";
-import { LogoIcon, NavLink } from "components";
+import { LogoIcon, NavLink, ThemeModeToggler } from "components";
 import { data } from "lib/data";
 import { clsx } from "utilities";
 
@@ -39,13 +39,13 @@ const Home: NextPageWithLayout<Props> = (props: Props) => {
           </div>
         </header>
 
-        <aside className="space-y-4 bg-neutral-100 py-10 text-700 font-bold grid-in-aside dark:bg-primary-700">
+        <aside className="space-y-4 bg-neutral-100 pt-10 pb-14 text-700 font-bold grid-in-aside dark:bg-primary-700">
           <h4 className="flex items-center gap-2 px-10">
             <span className="uppercase">All Boards</span>
             <output className="uppercase">({data.boards.length})</output>
           </h4>
 
-          <div className="flex flex-col justify-between">
+          <div className="flex h-full flex-col justify-between">
             <nav className="flex flex-col gap-4">
               {data.boards.map((board) => {
                 return (
@@ -72,10 +72,20 @@ const Home: NextPageWithLayout<Props> = (props: Props) => {
                 <span>+ Create New Board</span>
               </button>
             </nav>
-            <div>
-              <div className="m-auto">THEME</div>
-              <div>
-                <button></button>
+
+            <div className="space-y-4">
+              <ThemeModeToggler className={"mx-8"} />
+
+              <div className="mr-8">
+                <button
+                  type="button"
+                  className="group flex w-full items-center gap-6 px-10 py-4 text-500 font-bold leading-300 text-primary-400 hover:rounded-r-full hover:bg-primary-500/10 active:rounded-r-full dark:hover:bg-neutral-100"
+                >
+                  <icons.sidebar.hide className="fill-current text-primary-400" />
+                  <span className="group-hover:text-primary-500 group-active:text-primary-500">
+                    Hide Sidebar
+                  </span>
+                </button>
               </div>
             </div>
           </div>
@@ -128,7 +138,7 @@ const Home: NextPageWithLayout<Props> = (props: Props) => {
                       return (
                         <article
                           key={task.id}
-                          className="group flex cursor-pointer select-none flex-col gap-4 rounded-[0.6rem] bg-neutral-100 px-6 py-9 text-primary-900 shadow-task transition-all hover:scale-110 dark:bg-primary-700 dark:text-neutral-100"
+                          className="group flex cursor-pointer select-none flex-col gap-4 rounded-200 bg-neutral-100 px-6 py-9 text-primary-900 shadow-task dark:bg-primary-700 dark:text-neutral-100"
                         >
                           <h3 className="group-hover:text-primary-500">
                             {task.title}
@@ -146,7 +156,7 @@ const Home: NextPageWithLayout<Props> = (props: Props) => {
 
               <button
                 type="button"
-                className="grid h-full w-[28rem] place-content-center rounded-default bg-gradient-to-b from-[#E9EFFA] to-[#E9EFFA]/50 text-[2.4rem] font-bold leading-500 text-primary-400 hover:text-primary-500 active:text-primary-500  dark:from-primary-700/25 dark:to-primary-700/[0.125]"
+                className="grid h-full w-[28rem] place-content-center rounded-100 bg-gradient-to-b from-[#E9EFFA] to-[#E9EFFA]/50 text-[2.4rem] font-bold leading-500 text-primary-400 hover:text-primary-500 active:text-primary-500  dark:from-primary-700/25 dark:to-primary-700/[0.125]"
               >
                 + New Column
               </button>
