@@ -138,7 +138,7 @@ const Home: NextPageWithLayout<Props> = (props: Props) => {
                       return (
                         <article
                           key={task.id}
-                          className="group flex cursor-pointer select-none flex-col gap-4 rounded-200 bg-neutral-100 px-6 py-9 text-primary-900 shadow-task hover:scale-110 dark:bg-primary-700 dark:text-neutral-100"
+                          className="group flex cursor-pointer select-none flex-col gap-4 rounded-200 bg-neutral-100 px-6 py-9 text-primary-900 shadow-task dark:bg-primary-700 dark:text-neutral-100"
                         >
                           <h3 className="group-hover:text-primary-500">
                             {task.title}
