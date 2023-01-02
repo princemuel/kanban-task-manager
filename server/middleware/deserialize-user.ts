@@ -13,7 +13,7 @@ const deserializeUser = async (req: NextApiRequest, res: NextApiResponse) => {
     const authHeader = req.headers.authorization || req.headers.Authorization;
 
     // @ts-expect-error
-    if (Boolean(authHeader) && authHeader.startsWith('Bearer ')) {
+    if (Boolean(authHeader) && authHeader?.startsWith('Bearer ')) {
       // @ts-expect-error
       access_token = authHeader?.split(' ')[1];
     } else if (hasCookie('access_token', { req, res })) {

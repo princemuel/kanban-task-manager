@@ -1,4 +1,5 @@
 import {
+  DocumentType,
   getModelForClass,
   index,
   ModelOptions,
@@ -11,13 +12,24 @@ import * as bcrypt from 'bcrypt';
 @pre<User>('save', async function (next) {
   if (!this.isModified('password')) return next();
 
-  this.password = await bcrypt.hash(this.password, 12);
+  const salt = await bcrypt.genSalt(12);
+
+  this.password = await bcrypt.hash(this.password, salt);
   this.countersign = undefined;
   return next();
 })
 @ModelOptions({
   schemaOptions: {
     timestamps: true,
+    toJSON: {
+      getters: true,
+      virtuals: true,
+      transform: (document: UserDocument, returnedObject) => {
+        returnedObject.id = returnedObject?._id?.toString();
+        delete returnedObject?._id;
+        delete returnedObject?.__v;
+      },
+    },
   },
   options: {
     allowMixed: Severity.ALLOW,
@@ -27,20 +39,20 @@ import * as bcrypt from 'bcrypt';
 export class User {
   readonly _id: string;
 
-  @prop({ required: true })
+  @prop({ required: true, trim: true })
   name: string;
 
-  @prop({ required: true, unique: true, lowercase: true })
+  @prop({ required: true, unique: true, lowercase: true, trim: true })
   email: string;
 
-  @prop({ default: 'user' })
+  @prop({ default: 'user', lowercase: true })
   role: string;
 
-  @prop({ required: true, select: false })
+  @prop({ required: true, select: false, trim: true })
   password: string;
 
-  @prop({ required: true })
-  countersign: string | undefined;
+  @prop({ required: true, select: false, trim: true })
+  countersign?: string;
 
   @prop({ default: 'default.jpeg' })
   photo: string;
@@ -52,5 +64,5 @@ export class User {
     return await bcrypt.compare(data, hashed);
   }
 }
-
+export type UserDocument = DocumentType<User>;
 export const UserModel = getModelForClass<typeof User>(User);

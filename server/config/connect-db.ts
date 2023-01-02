@@ -1,27 +1,33 @@
 import * as mongoose from 'mongoose';
-import { green, purple, warning } from 'server/utilities';
+import { error, green, purple, warning } from 'server/utilities';
 
 const DB_URI = process.env.MONGODB_URI as string;
 
 const connection: any = {};
 export async function connectDB() {
-  if (connection.isConnected) {
-    console.log(warning('The database is already connected'));
-    return;
-  }
-
-  if (mongoose.connections.length > 0) {
-    connection.isConnected = mongoose.connections[0].readyState;
-    if (connection.isConnected === 1) {
-      console.log(warning('Using the previous database connection'));
+  try {
+    if (connection.isConnected) {
+      console.log(warning('* The database is already connected'));
       return;
     }
-    await mongoose.disconnect();
-  }
 
-  const db = await mongoose.connect(DB_URI);
-  console.log(green('? Your MongoDB Database is Connected Successfully'));
-  connection.isConnected = db.connections[0].readyState;
+    if (mongoose.connections.length > 0) {
+      connection.isConnected = mongoose.connections[0].readyState;
+      if (connection.isConnected === 1) {
+        console.log(warning('& Using the previous database connection'));
+        return;
+      }
+      await mongoose.disconnect();
+    }
+
+    const db = await mongoose.connect(DB_URI);
+    console.log(green('? Your MongoDB Database Has Connected Successfully'));
+    connection.isConnected = db.connections[0].readyState;
+  } catch (ex) {
+    console.error(error('Error connecting to database'));
+    console.error(error(ex));
+    return process.exit(1);
+  }
 }
 
 export async function disconnectDB() {
@@ -30,7 +36,7 @@ export async function disconnectDB() {
       await mongoose.disconnect();
       connection.isConnected = false;
     } else {
-      console.log(purple('The database is not yet disconnected'));
+      console.log(purple('+ The database is not yet disconnected'));
     }
   }
 }

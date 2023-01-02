@@ -7,8 +7,8 @@ export const refreshTokenExpiresIn = 60;
 
 export const cookieOptions: OptionsType = {
   httpOnly: true,
-  // domain: '/',
   sameSite: 'lax',
+  // domain: '/',
   // secure: true,
 };
 

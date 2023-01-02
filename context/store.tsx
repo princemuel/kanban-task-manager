@@ -5,9 +5,10 @@ import {
   useContext,
   useRef,
   useSyncExternalStore,
-} from 'react';
+} from "react";
+import { capitalize } from "utilities";
 
-export function createAStore<Store>(initalState: Store) {
+export function createAStore<Store>(initalState: Store, prefix = "Store") {
   function useStoreData(): {
     get: () => Store;
     set: (value: Partial<Store>) => void;
@@ -40,7 +41,10 @@ export function createAStore<Store>(initalState: Store) {
 
   type UseStoreDataType = ReturnType<typeof useStoreData>;
 
+  const STORE_NAME = capitalize(prefix);
+
   const StoreContext = createContext<UseStoreDataType | null>(null);
+  StoreContext.displayName = STORE_NAME + "Context";
 
   type ProviderProps = {
     children: ReactNode;
@@ -60,10 +64,12 @@ export function createAStore<Store>(initalState: Store) {
     const store = useContext(StoreContext);
     if (!store)
       throw new Error(
-        'Store not found. useStore must be used in a StoreProvider'
+        `${STORE_NAME}Store not found. use${STORE_NAME}Store must be used in a ${prefix}Provider`
       );
-    const state = useSyncExternalStore(store.subscribe, () =>
-      selector(store.get())
+    const state = useSyncExternalStore(
+      store.subscribe,
+      () => selector(store.get()),
+      () => selector(store.get())
     );
 
     return [state, store.set];

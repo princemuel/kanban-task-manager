@@ -1,60 +1,72 @@
-import { ApolloServer } from 'apollo-server-micro';
-import { IncomingMessage, ServerResponse } from 'http';
-import { resolvers } from 'lib';
-import cors from 'micro-cors';
-import { NextApiRequest, NextApiResponse } from 'next';
-import 'reflect-metadata';
-import { connectDB } from 'server/config';
-import { deserializeUser } from 'server/middleware/deserialize-user';
-import { buildSchema } from 'type-graphql';
+// import { ApolloServer } from 'apollo-server-micro';
+// import { resolvers } from 'lib';
+// import cors from 'micro-cors';
+// import type { NextApiRequest, NextApiResponse } from 'next';
+// import 'reflect-metadata';
+// import { connectDB } from 'server/config';
+// import { deserializeUser } from 'server/middleware/deserialize-user';
+// import { buildSchema } from 'type-graphql';
 
-const allowCors = cors({
-  origin: 'https://studio.apollographql.com',
-  allowCredentials: true,
-  allowMethods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
-  allowHeaders: [
-    'Origin',
-    'X-Requested-With',
-    'Content-Type',
-    'Accept',
-    'Access-Control-Allow-Origin',
-    'Access-Control-Allow-Headers',
-    'Access-Control-Allow-Credentials',
-    'Access-Control-Allow-Methods',
-  ],
-});
+// const allowCors = cors({
+//   origin: 'https://studio.apollographql.com',
+//   allowCredentials: true,
+//   allowMethods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
+//   allowHeaders: [
+//     'Origin',
+//     'X-Requested-With',
+//     'Content-Type',
+//     'Accept',
+//     'Access-Control-Allow-Origin',
+//     'Access-Control-Allow-Headers',
+//     'Access-Control-Allow-Credentials',
+//     'Access-Control-Allow-Methods',
+//   ],
+// });
 
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-};
+// export const config = {
+//   api: {
+//     bodyParser: false,
+//   },
+// };
 
-const schema = await buildSchema({
-  resolvers,
-  dateScalarMode: 'isoDate',
-});
+// const schema = await buildSchema({
+//   resolvers,
+//   dateScalarMode: 'isoDate',
+//   emitSchemaFile: true,
+// });
 
-export const server = new ApolloServer({
-  schema,
-  // csrfPrevention: true,
-  context: ({ req, res }: { req: NextApiRequest; res: NextApiResponse }) => ({
-    req,
-    res,
-    deserializeUser,
-  }),
-});
+// type TServerContext = { req: NextApiRequest; res: NextApiResponse };
 
-const startServer = server.start();
+// export const server = new ApolloServer({
+//   schema,
+//   csrfPrevention: true,
+//   context: ({ req, res }: TServerContext) => ({
+//     req,
+//     res,
+//     deserializeUser,
+//   }),
+// });
 
-async function handler(req: IncomingMessage, res: ServerResponse) {
-  if (req.method === 'OPTIONS') {
-    res.end();
-    return false;
-  }
-  await connectDB();
-  await startServer;
-  return server?.createHandler({ path: '/api/v1/graphql' })(req, res);
+// const startServer = server.start();
+
+// // @ts-expect-error
+// export default allowCors(async function handler(
+//   req: NextApiRequest,
+//   res: NextApiResponse
+// ) {
+//   if (req.method === 'OPTIONS') {
+//     res.end();
+//     return false;
+//   }
+//   await connectDB();
+//   await startServer;
+//   return server?.createHandler({ path: '/api/v1/graphql' })(req, res);
+// });
+import { NextApiRequest, NextApiResponse } from "next";
+
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
+  res.status(200).json({ message: "hello api connected" });
 }
-
-export default allowCors(handler);
