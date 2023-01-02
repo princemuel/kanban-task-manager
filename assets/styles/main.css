@@ -74,7 +74,6 @@ Version: 01
     -moz-osx-font-smoothing: grayscale;
 
     position: relative;
-    overflow-x: hidden;
   }
 
   :where(h1, h2, h3) {
@@ -240,31 +239,19 @@ Version: 01
   ============================
 */
 @layer utilities {
-  .navigation-link:where(:hover, :focus),
-  [aria-current="page"] {
-    @apply text-primary-100;
-  }
-
-  :where(.flow > :not(:first-child)) {
-    margin-block-start: var(--flow-space, 1.6rem);
-  }
-  .flow-space--small {
-    --flow-space: 1rem;
-  }
-
   .skip-to-content {
     @apply absolute z-[9999] mx-auto translate-y-[-120%]  bg-primary-500 py-[1em] px-[0.5em] text-neutral-100 transition-transform focus:translate-y-0 focus:outline focus:outline-offset-2 focus:outline-primary-300;
   }
 }
 
 /**
- * Use this directive to control where Tailwind injects the hover focus,
+ * Use this directive to control where Tailwind injects the hover, focus,
  * responsive, dark mode, and other variants of each class.
  *
  * If omitted, Tailwind will append these classes to the very end of
  * your stylesheet by default.
  */
-/* @tailwind variants; */
+@tailwind variants;
 
 .modal {
   border: 0;
