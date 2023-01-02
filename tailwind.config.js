@@ -19,6 +19,7 @@ module.exports = {
     colors: {
       current: "currentColor",
       transparent: "transparent",
+      inherit: "inherit",
       neutral: { 100: "#ffffff", 900: "#000000" },
       primary: {
         100: "#f4f7fd",
@@ -73,11 +74,20 @@ module.exports = {
 
     extend: {
       screens: {
-        sm: "40em", // => @media (min-width: 640px) { ... }
-        md: "48em", // => @media (min-width: 768px) { ... }
+        s: "20em", // => @media (min-width: 320px) { ... }
+        xs: "30em", // => @media (min-width: 480px) { ... }
+        sm: "36em", // => @media (min-width: 576px) { ... }
+        sx: "40em", // => @media (min-width: 640px) { ... }
+        md: "45em", // => @media (min-width: 720px) { ... }
         lg: "64em", // => @media (min-width: 1024px) { ... }
         xl: "80em", // => @media (min-width: 1280px) { ... }
-        "2xl": "96em", // => @media (min-width: 1536px) { ... }
+        xxl: "96em", // => @media (min-width: 1280px) { ... }
+        xxxl: "112.5em", // => @media (min-width: 1800px) { ... }
+      },
+
+      gridTemplateAreas: {
+        desk: ["header header", "aside main"],
+        // ipad: ["header header", "copy social"],
       },
 
       gridTemplateColumns: {
@@ -87,9 +97,16 @@ module.exports = {
         "fit-big": "repeat(auto-fit, minmax(25rem, 1fr))",
         // etc.
       },
+
+      boxShadow: {
+        task: "0px 4px 6px rgba(54, 78, 126, 0.101545)",
+        scrollbar:
+          "inset 2px 2px 2px rgb(0 0% 0% / 0.5%), inset -2px -2px 2px rgb(0 0 0 / 0.5%)",
+      },
     },
   },
   plugins: [
+    require("@savvywombat/tailwindcss-grid-areas"),
     require("tailwind-scrollbar")({ nocompatible: true }),
     plugin(function ({ addComponents, addUtilities, theme }) {
       addComponents({
