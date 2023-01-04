@@ -1,5 +1,6 @@
 import { Dialog } from "@headlessui/react";
 import { icons } from "common";
+import { SubtaskList } from "components/molecules";
 import { useModalDispatch, useModalState } from "context";
 import { useRef, useState } from "react";
 import { BaseModal } from "./base-modal";
@@ -11,12 +12,12 @@ export const AddTask = (props: Props) => {
   const modalDispatch = useModalDispatch();
   let inputRef = useRef<HTMLInputElement>(null);
 
-  const [showDropdown, setShowDropdown] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [optionValue, setOptionValue] = useState("");
 
-  function handleStatus(e: React.MouseEvent<HTMLLIElement, MouseEvent>) {
+  function handleStatusChange(e: React.MouseEvent<HTMLLIElement, MouseEvent>) {
     setOptionValue(e.currentTarget.textContent!);
-    setShowDropdown(false);
+    setIsDropdownOpen(false);
   }
 
   return (
@@ -65,44 +66,7 @@ recharge the batteries a little.'
         <legend className='block text-300 font-bold leading-200 text-primary-400 dark:text-neutral-100'>
           Subtasks
         </legend>
-        <div className='flex items-center justify-between'>
-          <input
-            type='text'
-            className='w-[93%] rounded-300 border border-primary-400/25 bg-inherit py-4 px-6 text-400 font-medium leading-400 placeholder:text-primary-900/25 focus:outline-none dark:placeholder:text-neutral-100/25'
-            id='subtask'
-            placeholder='e.g. Make coffee'
-          />
-          <button
-            type='button'
-            className='inline-flex w-[8%] items-center justify-end'
-          >
-            <icons.board.cross />
-            <span className='sr-only'>Remove</span>
-          </button>
-        </div>
-
-        <div className='flex items-center justify-between'>
-          <input
-            type='text'
-            className='w-[93%] rounded-300 border border-primary-400/25 bg-inherit py-4 px-6 text-400 font-medium leading-400 placeholder:text-primary-900/25 focus:outline-none dark:placeholder:text-neutral-100/25'
-            id='subtask'
-            placeholder='e.g. Make coffee'
-          />
-          <button
-            type='button'
-            className='inline-flex w-[8%] items-center justify-end'
-          >
-            <icons.board.cross />
-            <span className='sr-only'>Remove</span>
-          </button>
-        </div>
-
-        <button
-          type='button'
-          className='inline-grid w-full place-items-center rounded-pill bg-primary-500/10 py-4 text-400 font-bold leading-400 text-primary-500 dark:bg-neutral-100'
-        >
-          + Add New Subtask
-        </button>
+        <SubtaskList />
       </fieldset>
 
       <fieldset className='> * + * space-y-4'>
@@ -114,7 +78,7 @@ recharge the batteries a little.'
           <button
             type='button'
             className='flex w-full items-center justify-between rounded-300 border border-primary-400/25 bg-inherit py-4 px-6 text-400 font-medium leading-400'
-            onClick={() => setShowDropdown((prev) => !prev)}
+            onClick={() => setIsDropdownOpen((prev) => !prev)}
           >
             <span>{optionValue || "Select a Status"}</span>
             <icons.chevron.down />
@@ -122,23 +86,23 @@ recharge the batteries a little.'
 
           <ul
             className='absolute left-0 mt-4 w-full scale-0 rounded-100 bg-neutral-100 p-6 transition-all duration-500 data-[open=true]:scale-100 dark:bg-primary-800'
-            data-open={showDropdown}
+            data-open={isDropdownOpen}
           >
             <li
               className='cursor-pointer text-400 font-medium leading-400 text-primary-400'
-              onClick={handleStatus}
+              onClick={handleStatusChange}
             >
               Todo
             </li>
             <li
               className='cursor-pointer text-400 font-medium leading-400 text-primary-400'
-              onClick={handleStatus}
+              onClick={handleStatusChange}
             >
               Doing
             </li>
             <li
               className='cursor-pointer text-400  font-medium leading-400 text-primary-400'
-              onClick={handleStatus}
+              onClick={handleStatusChange}
             >
               Done
             </li>
