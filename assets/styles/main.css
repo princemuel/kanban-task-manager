@@ -74,7 +74,6 @@ Version: 01
     -moz-osx-font-smoothing: grayscale;
 
     position: relative;
-    transition: all 150ms ease-in-out;
   }
 
   :where(h1, h2, h3) {
@@ -133,11 +132,6 @@ Version: 01
   }
   :where(a:not([class])) {
     text-decoration-skip-ink: auto;
-  }
-
-  :where(:focus-visible) {
-    outline: 2px solid var(--focus-color, Highlight);
-    outline-offset: 2px;
   }
 
   @media (prefers-reduced-motion: no-preference) {
