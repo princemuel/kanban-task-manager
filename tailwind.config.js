@@ -15,6 +15,7 @@ module.exports = {
       pill: "100vmax",
       100: "0.8rem",
       200: "0.6rem",
+      300: "0.4rem",
     },
 
     colors: {
