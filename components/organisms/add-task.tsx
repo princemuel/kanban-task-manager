@@ -1,5 +1,6 @@
 import { Dialog } from "@headlessui/react";
 import { icons } from "common";
+import { FormInput, FormLabel, TextField } from "components/atoms";
 import { SubtaskList } from "components/molecules";
 import { useModalDispatch, useModalState } from "context";
 import { useRef, useState } from "react";
@@ -31,48 +32,33 @@ export const AddTask = (props: Props) => {
       </Dialog.Title>
 
       <div className='> * + * space-y-4'>
-        <label
-          className='block text-300 font-bold leading-200 text-primary-400 dark:text-neutral-100'
-          htmlFor='title'
-        >
-          Title
-        </label>
-        <input
+        <FormLabel htmlFor='title'>Title</FormLabel>
+        <FormInput
           type='text'
           ref={inputRef}
-          className='w-full rounded-300 border border-primary-400/25 bg-inherit py-4 px-6 text-400 font-medium leading-400 placeholder:text-primary-900/25 focus:outline-none dark:placeholder:text-neutral-100/25'
           id='title'
           placeholder='e.g. Take coffee break'
         />
       </div>
 
       <div className='> * + * space-y-4'>
-        <label
-          className='block text-300 font-bold leading-200 text-primary-400 dark:text-neutral-100'
-          htmlFor='description'
-        >
-          Description
-        </label>
-        <textarea
+        <FormLabel htmlFor='description'>Description</FormLabel>
+        <TextField
           name='message'
-          className='min-h-[10rem] w-full rounded-300 border border-primary-400/25 bg-inherit py-4 px-6 text-400 font-medium leading-400 placeholder:text-primary-900/25 focus:outline-none dark:placeholder:text-neutral-100/25'
+          className='min-h-[10rem]'
           id='description'
           placeholder='e.g. It’s always good to take a break. This 15 minute break will
 recharge the batteries a little.'
-        ></textarea>
+        ></TextField>
       </div>
 
       <fieldset className='> * + * space-y-4'>
-        <legend className='block text-300 font-bold leading-200 text-primary-400 dark:text-neutral-100'>
-          Subtasks
-        </legend>
+        <FormLabel variant='legend'>Subtasks</FormLabel>
         <SubtaskList />
       </fieldset>
 
       <fieldset className='> * + * space-y-4'>
-        <legend className='block text-300 font-bold leading-200 text-primary-400 dark:text-neutral-100'>
-          Status
-        </legend>
+        <FormLabel variant='legend'>Status</FormLabel>
 
         <div className='relative w-full'>
           <button
