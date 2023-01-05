@@ -7,7 +7,11 @@ type Props = {
 
 const ColumnHeader = ({ column }: Props) => {
   return (
-    <h4 key={column.id} className="flex w-[28rem] items-center gap-2">
+    <h4
+      key={column.id}
+      id={column.id}
+      className='flex w-[28rem] items-center gap-2'
+    >
       <span
         aria-hidden
         className={clsx(
@@ -19,8 +23,8 @@ const ColumnHeader = ({ column }: Props) => {
             : "bg-accent-500"
         )}
       ></span>
-      <span className="uppercase">{column.name}</span>
-      <output className="uppercase">({column.tasks.length})</output>
+      <span className='uppercase'>{column.name}</span>
+      <output className='uppercase'>({column.tasks.length})</output>
     </h4>
   );
 };
