@@ -1,4 +1,5 @@
 import { icons } from "common";
+import { FormInput } from "components/atoms";
 import { data } from "lib/data";
 import { Fragment } from "react";
 import { hasValues, pluck } from "utilities";
@@ -17,18 +18,20 @@ const SubtaskList = (props: Props) => {
       {hasValues(subtasks) &&
         subtasks.map((item) => {
           return (
-            <div key={item.id} className='flex items-center justify-between'>
-              <input
+            <div
+              key={item.id}
+              className='grid grid-cols-[1fr,auto] items-center gap-8'
+            >
+              <FormInput
                 type='text'
-                className='w-[93%] rounded-300 border border-primary-400/25 bg-inherit py-4 px-6 text-400 font-medium leading-400 placeholder:text-primary-900/25 focus:outline-none dark:placeholder:text-neutral-100/25'
                 name={`subtask-${item.id}`}
                 placeholder='e.g. Make coffee'
               />
               <button
                 type='button'
-                className='inline-flex w-[8%] items-center justify-end'
+                className='inline-flex items-center justify-end text-primary-400 hover:text-accent-100 active:text-accent-100'
               >
-                <icons.board.cross />
+                <icons.board.cross className='fill-current ' />
                 <span className='sr-only'>Remove</span>
               </button>
             </div>
