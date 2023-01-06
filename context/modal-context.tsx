@@ -4,12 +4,12 @@ import {
   ReactNode,
   useContext,
   useReducer,
-} from 'react';
+} from "react";
 
-type IAction = 'Add' | 'View' | 'Edit' | 'Delete';
-type ISubject = 'Board' | 'Task';
+type IAction = "Add" | "View" | "Edit" | "Delete";
+type ISubject = "Board" | "Task";
 
-export type IModal = `${IAction}${ISubject}` | null;
+export type IModal = Exclude<`${IAction}${ISubject}` | null, "ViewBoard">;
 
 interface IModalState {
   open: boolean;
@@ -17,16 +17,18 @@ interface IModalState {
 }
 
 type IModalActions =
-  | { type: 'OPEN_MODAL'; payload: IModal }
-  | { type: 'CLOSE_MODAL' };
+  | { type: "OPEN_MODAL"; payload: IModal }
+  | { type: "CLOSE_MODAL" };
 
 const initialState: IModalState = {
   open: false,
   current: null,
 };
 
-const Store = createContext<IModalState | null>(null);
-const StoreDispatch = createContext<Dispatch<IModalActions> | null>(null);
+const ModalContext = createContext<IModalState | null>(null);
+const ModalContextDispatch = createContext<Dispatch<IModalActions> | null>(
+  null
+);
 
 type ProviderProps = {
   children: ReactNode;
@@ -36,37 +38,37 @@ export const ModalProvider = ({ children }: ProviderProps) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   return (
-    <Store.Provider value={state}>
-      <StoreDispatch.Provider value={dispatch}>
+    <ModalContext.Provider value={state}>
+      <ModalContextDispatch.Provider value={dispatch}>
         {children}
-      </StoreDispatch.Provider>
-    </Store.Provider>
+      </ModalContextDispatch.Provider>
+    </ModalContext.Provider>
   );
 };
 
 export const useModalState = () => {
-  const context = useContext(Store);
+  const context = useContext(ModalContext);
   if (context == undefined)
-    throw new Error('useModalState must be used within a ModalProvider');
+    throw new Error("useModalState must be used within a ModalProvider");
   return context;
 };
 
 export const useModalDispatch = () => {
-  const context = useContext(StoreDispatch);
+  const context = useContext(ModalContextDispatch);
   if (context == undefined)
-    throw new Error('useModalDispatch must be used within a ModalProvider');
+    throw new Error("useModalDispatch must be used within a ModalProvider");
   return context;
 };
 
 const reducer = (state: IModalState, action: IModalActions) => {
   switch (action.type) {
-    case 'OPEN_MODAL':
+    case "OPEN_MODAL":
       return {
         ...state,
         open: true,
         current: action.payload,
       };
-    case 'CLOSE_MODAL':
+    case "CLOSE_MODAL":
       return {
         ...state,
         open: false,

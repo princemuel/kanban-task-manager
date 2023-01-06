@@ -14,7 +14,7 @@ const Board: NextPageWithLayout<Props> = () => {
       <Head>
         <title>Kanban Task Manager</title>
       </Head>
-      <MainContent className="text-900 bg-primary-300 py-10 px-8 font-bold text-neutral-100">
+      <MainContent className='text-900 bg-brand-300 py-10 px-8 font-bold text-neutral-100'>
         <h1>MAIN CONTENT</h1>
         {/* <p className='text-600'>{JSON.stringify(dehydratedState?.queries)}</p> */}
         <br />

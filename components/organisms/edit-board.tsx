@@ -2,15 +2,24 @@ import { Dialog } from "@headlessui/react";
 import { icons } from "common";
 import { FormInput, FormLabel } from "components/atoms";
 import { useModalDispatch, useModalState } from "context";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { BaseModal } from "./base-modal";
 
 type Props = {};
 
-export const AddBoard = (props: Props) => {
+export const EditBoard = (props: Props) => {
   const modalState = useModalState();
   const modalDispatch = useModalDispatch();
   let inputRef = useRef<HTMLInputElement>(null);
+
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [optionValue, setOptionValue] = useState("");
+  const [isChecked, setIsChecked] = useState(false);
+
+  function handleStatusChange(e: React.MouseEvent<HTMLLIElement, MouseEvent>) {
+    setOptionValue(e.currentTarget.textContent!);
+    setIsDropdownOpen(false);
+  }
 
   return (
     <BaseModal
@@ -19,7 +28,7 @@ export const AddBoard = (props: Props) => {
       closeModal={() => modalDispatch({ type: "CLOSE_MODAL" })}
     >
       <Dialog.Title as='h2' className={"font-bold"}>
-        Add New Board
+        Edit Board
       </Dialog.Title>
 
       <div className='> * + * space-y-4'>
@@ -55,6 +64,16 @@ export const AddBoard = (props: Props) => {
             <span className='sr-only'>Remove</span>
           </button>
         </div>
+        <div className='grid grid-cols-[1fr,auto] items-center gap-8'>
+          <FormInput type='text' name={`column`} placeholder='Done' />
+          <button
+            type='button'
+            className='inline-flex items-center justify-end text-brand-400 hover:text-accent-100 active:text-accent-100'
+          >
+            <icons.board.cross className='fill-current ' />
+            <span className='sr-only'>Remove</span>
+          </button>
+        </div>
 
         <button
           type='button'
@@ -68,7 +87,7 @@ export const AddBoard = (props: Props) => {
         type='button'
         className='inline-grid w-full place-items-center rounded-pill bg-brand-500 py-4 text-400 font-bold leading-400 text-neutral-100'
       >
-        Create New Board
+        Save Changes
       </button>
     </BaseModal>
   );
