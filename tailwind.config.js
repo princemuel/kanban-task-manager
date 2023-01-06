@@ -23,7 +23,7 @@ module.exports = {
       transparent: "transparent",
       inherit: "inherit",
       neutral: { 100: "#ffffff", 900: "#000000" },
-      primary: {
+      brand: {
         100: "#f4f7fd",
         200: "#e4ebfa",
         300: "#a8a4ff",
