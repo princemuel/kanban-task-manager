@@ -1,97 +1,151 @@
-// import { Dialog } from "@headlessui/react";
-// import { icons } from "common";
-// import { Text } from "components/atoms";
-// import { useModalDispatch, useModalState } from "context";
-// import { useMemo } from "react";
-// import { ITask } from "types";
-// import { clsx, getArrayLength } from "utilities";
-// import { BaseModal } from "./base-modal";
+import { Dialog } from "@headlessui/react";
+import { icons } from "common";
+import { FormLabel, Text } from "components/atoms";
+import { useModalDispatch, useModalState } from "context";
+import { useRef, useState } from "react";
+import { BaseModal } from "./base-modal";
 
-// type Props = {
-//   task: ITask;
-// };
+type Props = {};
 
-// const ViewTask = ({ task }: Props) => {
-//   const modalState = useModalState();
-//   const modalDispatch = useModalDispatch();
+export const ViewTask = (props: Props) => {
+  const modalState = useModalState();
+  const modalDispatch = useModalDispatch();
+  let inputRef = useRef<HTMLInputElement>(null);
 
-//   const numSubtasks = getArrayLength(task.subtasks);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [optionValue, setOptionValue] = useState("");
+  const [isChecked, setIsChecked] = useState(false);
 
-//   const numCompletedSubtasks = useMemo(
-//     () =>
-//       getArrayLength(task.subtasks.filter((subtask) => subtask.isCompleted)),
-//     [task.subtasks]
-//   );
+  function handleStatusChange(e: React.MouseEvent<HTMLLIElement, MouseEvent>) {
+    setOptionValue(e.currentTarget.textContent!);
+    setIsDropdownOpen(false);
+  }
 
-//   return (
-//     <BaseModal
-//       focusRef={}
-//       isOpen={modalState.open}
-//       closeModal={() => modalDispatch({ type: "CLOSE_MODAL" })}
-//     >
-//       <Dialog.Title as='h2' className={""}>
-//         {task.title}
-//       </Dialog.Title>
+  return (
+    <BaseModal
+      focusRef={inputRef}
+      isOpen={modalState.open}
+      closeModal={() => modalDispatch({ type: "CLOSE_MODAL" })}
+    >
+      <Dialog.Title as='h2' className={"font-bold"}>
+        Research pricing points of various competitors and trial different
+        business models
+      </Dialog.Title>
 
-//       {task.description && (
-//         <Dialog.Description className={""}>
-//           {task.description}
-//         </Dialog.Description>
-//       )}
+      <Text className='text-400 font-medium leading-400 text-brand-400'>
+        We know what we&#39;re planning to build for version one. Now we need to
+        finalise the first pricing model we&#39;ll use. Keep iterating the
+        subtasks until we have a coherent proposition.
+      </Text>
 
-//       <Text variant='h4' className='text-300 leading-200 text-brand-400'>
-//         Subtasks ({numCompletedSubtasks} of {numSubtasks})
-//       </Text>
+      <fieldset className='> * + * space-y-4'>
+        <FormLabel
+          variant='legend'
+          className='text-300 leading-200 text-brand-400'
+        >
+          Subtasks (<output>2</output> of <output>3</output>)
+        </FormLabel>
 
-//       <div>
-//         {task.subtasks.map((subtask) => {
-//           const name = subtask.title.toLowerCase();
-//           return (
-//             <div key={subtask.id}>
-//               <label className='flex cursor-pointer items-center gap-6 rounded-xl bg-brand-100 py-6 px-6 text-400 font-bold leading-200 text-brand-900 hover:bg-brand-500/25'>
-//                 <input
-//                   type='checkbox'
-//                   name={name}
-//                   className='aspect-square w-6 cursor-pointer accent-brand-500'
-//                 />
-//                 <Text
-//                   className={clsx("", subtask.isCompleted && "line-through")}
-//                 >
-//                   {subtask.title}
-//                 </Text>
-//               </label>
-//             </div>
-//           );
-//         })}
-//       </div>
+        <div className='grid gap-4'>
+          <div className='grid grid-cols-[auto,1fr] items-center gap-6 rounded-300 bg-brand-100 py-5 px-6 dark:bg-brand-800'>
+            <button
+              type='button'
+              className='group inline-grid aspect-square w-[1.6rem] place-items-center rounded-[0.2rem] border border-brand-400/25 bg-neutral-100 aria-pressed:bg-brand-500 dark:bg-brand-700 dark:aria-pressed:bg-brand-500'
+              onClick={() => {
+                setIsChecked((prev) => !prev);
+              }}
+              aria-pressed={isChecked}
+            >
+              <icons.board.check className='hidden group-aria-pressed:block' />
+            </button>
 
-//       <Text variant='h4' className='text-300 leading-200 text-brand-400'>
-//         Current Status
-//       </Text>
+            <Text className='text-300 font-bold leading-200 text-brand-900/50 line-through dark:text-neutral-100/50'>
+              Research competitor pricing and business models
+            </Text>
+          </div>
 
-//       <div>
-//         <button
-//           type='button'
-//           className='flex items-center justify-between rounded-lg border border-brand-500'
-//         >
-//           <span>Select Task Status</span>
-//           <icons.chevron.down />
-//         </button>
+          <div className='grid grid-cols-[auto,1fr] items-center gap-6 rounded-300 bg-brand-100 py-5 px-6 dark:bg-brand-800'>
+            <button
+              type='button'
+              className='group inline-grid aspect-square w-[1.6rem] place-items-center rounded-[0.2rem] border border-brand-400/25 bg-neutral-100 aria-pressed:bg-brand-500 dark:bg-brand-700 dark:aria-pressed:bg-brand-500'
+              onClick={() => {
+                setIsChecked((prev) => !prev);
+              }}
+              aria-pressed={isChecked}
+            >
+              <icons.board.check className='hidden group-aria-pressed:block' />
+            </button>
 
-//         <ul>
-//           {task.subtasks.map((subtask) => {
-//             return <li key={subtask.id}>{subtask.title}</li>;
-//           })}
-//         </ul>
-//       </div>
+            <Text className='text-300 font-bold leading-200 text-brand-900/50 line-through dark:text-neutral-100/50'>
+              Research competitor pricing and business models
+            </Text>
+          </div>
 
-//       <button onClick={() => modalDispatch({ type: "CLOSE_MODAL" })}>
-//         Cancel
-//       </button>
-//     </BaseModal>
-//   );
-// };
+          <div className='grid grid-cols-[auto,1fr] items-center gap-6 rounded-300 bg-brand-100 py-5 px-6 dark:bg-brand-800'>
+            <button
+              type='button'
+              className='group inline-grid aspect-square w-[1.6rem] place-items-center rounded-[0.2rem] border border-brand-400/25 bg-neutral-100 aria-pressed:bg-brand-500 dark:bg-brand-700 dark:aria-pressed:bg-brand-500'
+              onClick={() => {
+                setIsChecked((prev) => !prev);
+              }}
+              aria-pressed={isChecked}
+            >
+              <icons.board.check className='hidden group-aria-pressed:block' />
+            </button>
 
-// export { ViewTask };
+            <Text className='text-300 font-bold leading-200 text-brand-900 dark:text-neutral-100'>
+              Talk to potential customers about our proposed solution and ask
+              for fair price expectancy
+            </Text>
+          </div>
+        </div>
+      </fieldset>
 
-export {};
+      <fieldset className='> * + * space-y-4'>
+        <FormLabel variant='legend'>Status</FormLabel>
+
+        <div className='relative w-full'>
+          <button
+            type='button'
+            className='flex w-full items-center justify-between rounded-300 border border-brand-400/25 bg-inherit py-4 px-6 text-400 font-medium leading-400'
+            onClick={() => setIsDropdownOpen((prev) => !prev)}
+          >
+            <span>{optionValue || "Current Status"}</span>
+            <icons.chevron.down />
+          </button>
+
+          <ul
+            className='absolute left-0 mt-4 w-full scale-0 rounded-100 bg-neutral-100 p-6 transition-all duration-500 data-[open=true]:scale-100 dark:bg-brand-800'
+            data-open={isDropdownOpen}
+          >
+            <li
+              className='cursor-pointer text-400 font-medium leading-400 text-brand-400'
+              onClick={handleStatusChange}
+            >
+              Todo
+            </li>
+            <li
+              className='cursor-pointer text-400 font-medium leading-400 text-brand-400'
+              onClick={handleStatusChange}
+            >
+              Doing
+            </li>
+            <li
+              className='cursor-pointer text-400  font-medium leading-400 text-brand-400'
+              onClick={handleStatusChange}
+            >
+              Done
+            </li>
+          </ul>
+        </div>
+      </fieldset>
+
+      <button
+        type='button'
+        className='inline-grid w-full place-items-center rounded-pill bg-brand-500 py-4 text-400 font-bold leading-400 text-neutral-100'
+      >
+        Save Changes
+      </button>
+    </BaseModal>
+  );
+};
