@@ -47,7 +47,27 @@ export const ViewTask = (props: Props) => {
         </FormLabel>
 
         <div className='grid gap-4'>
-          <div className='grid grid-cols-[auto,1fr] items-center gap-6 rounded-300 bg-brand-100 py-5 px-6 dark:bg-brand-800'>
+          <div className='grid cursor-pointer grid-cols-[auto,1fr] items-center gap-6 rounded-300  bg-brand-100 py-5 px-6 hover:bg-brand-500/25 dark:bg-brand-800 dark:hover:bg-brand-500/25'>
+            <button
+              type='button'
+              className='group inline-grid aspect-square w-[1.6rem] place-items-center rounded-[0.2rem] border border-brand-400/25 bg-neutral-100 aria-pressed:bg-brand-500 dark:bg-brand-700 dark:aria-pressed:bg-brand-500'
+              onClick={() => {
+                setIsChecked((prev) => !prev);
+              }}
+              aria-pressed={isChecked}
+            >
+              <icons.board.check className='hidden group-aria-pressed:block' />
+            </button>
+
+            <Text
+              variant='span'
+              className='text-300 font-bold leading-200 text-brand-900/50 line-through dark:text-neutral-100/50'
+            >
+              Research competitor pricing and business models
+            </Text>
+          </div>
+
+          <div className='grid cursor-pointer grid-cols-[auto,1fr] items-center gap-6 rounded-300  bg-brand-100 py-5 px-6 hover:bg-brand-500/25 dark:bg-brand-800 dark:hover:bg-brand-500/25'>
             <button
               type='button'
               className='group inline-grid aspect-square w-[1.6rem] place-items-center rounded-[0.2rem] border border-brand-400/25 bg-neutral-100 aria-pressed:bg-brand-500 dark:bg-brand-700 dark:aria-pressed:bg-brand-500'
@@ -64,24 +84,7 @@ export const ViewTask = (props: Props) => {
             </Text>
           </div>
 
-          <div className='grid grid-cols-[auto,1fr] items-center gap-6 rounded-300 bg-brand-100 py-5 px-6 dark:bg-brand-800'>
-            <button
-              type='button'
-              className='group inline-grid aspect-square w-[1.6rem] place-items-center rounded-[0.2rem] border border-brand-400/25 bg-neutral-100 aria-pressed:bg-brand-500 dark:bg-brand-700 dark:aria-pressed:bg-brand-500'
-              onClick={() => {
-                setIsChecked((prev) => !prev);
-              }}
-              aria-pressed={isChecked}
-            >
-              <icons.board.check className='hidden group-aria-pressed:block' />
-            </button>
-
-            <Text className='text-300 font-bold leading-200 text-brand-900/50 line-through dark:text-neutral-100/50'>
-              Research competitor pricing and business models
-            </Text>
-          </div>
-
-          <div className='grid grid-cols-[auto,1fr] items-center gap-6 rounded-300 bg-brand-100 py-5 px-6 dark:bg-brand-800'>
+          <div className='grid cursor-pointer grid-cols-[auto,1fr] items-center gap-6 rounded-300  bg-brand-100 py-5 px-6 hover:bg-brand-500/25 dark:bg-brand-800 dark:hover:bg-brand-500/25'>
             <button
               type='button'
               className='group inline-grid aspect-square w-[1.6rem] place-items-center rounded-[0.2rem] border border-brand-400/25 bg-neutral-100 aria-pressed:bg-brand-500 dark:bg-brand-700 dark:aria-pressed:bg-brand-500'
