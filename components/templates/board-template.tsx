@@ -7,7 +7,7 @@ type Props = {
 
 const BoardTemplate = ({ board }: Props) => {
   return (
-    <main className='overflow-auto border-l border-primary-200 py-10 px-12 text-700 font-bold text-neutral-100 grid-in-main scrollbar scrollbar-track-primary-400 scrollbar-thumb-primary-600 scrollbar-track-rounded-lg scrollbar-thumb-rounded-lg scrollbar-w-4 scrollbar-h-4  dark:border-primary-600 dark:scrollbar-track-primary-700 dark:scrollbar-thumb-primary-400'>
+    <main className='border-brand-200 scrollbar-track-brand-400 scrollbar-thumb-brand-600 dark:border-brand-600 dark:scrollbar-track-brand-700 dark:scrollbar-thumb-brand-400 overflow-auto border-l py-10 px-12 text-700 font-bold text-neutral-100 grid-in-main scrollbar scrollbar-track-rounded-lg  scrollbar-thumb-rounded-lg scrollbar-w-4 scrollbar-h-4'>
       <section
         id='main-content'
         className='h-full min-w-min cursor-move space-y-8'
@@ -42,7 +42,7 @@ const BoardTemplate = ({ board }: Props) => {
 
           <button
             type='button'
-            className='grid h-full w-[28rem] place-content-center rounded-100 bg-gradient-to-b from-[#E9EFFA] to-[#E9EFFA]/50 text-[2.4rem] font-bold leading-500 text-primary-400 hover:text-primary-500 active:text-primary-500  dark:from-primary-700/25 dark:to-primary-700/[0.125]'
+            className='text-brand-400 hover:text-brand-500 active:text-brand-500 dark:from-brand-700/25 dark:to-brand-700/[0.125] grid h-full w-[28rem] place-content-center rounded-100 bg-gradient-to-b from-[#E9EFFA] to-[#E9EFFA]/50 text-[2.4rem]  font-bold leading-500'
           >
             + New Column
           </button>

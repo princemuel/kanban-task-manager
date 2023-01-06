@@ -17,7 +17,7 @@ const TextFieldInner = <E extends React.ElementType = "textarea">(
   return (
     <RenderedElement
       className={clsx(
-        "w-full rounded-300 border border-primary-400/25 bg-inherit py-4 px-6 text-400 font-medium leading-400 placeholder:text-primary-900/25 focus:outline-none dark:placeholder:text-neutral-100/25",
+        "border-brand-400/25 placeholder:text-brand-900/25 w-full rounded-300 border bg-inherit py-4 px-6 text-400 font-medium leading-400 focus:outline-none dark:placeholder:text-neutral-100/25",
         className || null
       )}
       {...rest}

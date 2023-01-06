@@ -21,7 +21,7 @@ const FormLabel = <E extends React.ElementType = "label">({
   return (
     <RenderedElement
       className={clsx(
-        "block text-300 font-bold leading-200 text-primary-400 dark:text-neutral-100",
+        "text-brand-400 block text-300 font-bold leading-200 dark:text-neutral-100",
         className || null
       )}
       {...rest}

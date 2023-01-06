@@ -158,7 +158,7 @@ Version: 01
 
   /* *********** TYPOGRAPHY  ************* */
   :where(body) {
-    @apply bg-primary-100 font-sans text-primary-900 dark:bg-primary-800 dark:text-neutral-100;
+    @apply bg-brand-100 text-brand-900 dark:bg-brand-800 font-sans dark:text-neutral-100;
   }
 
   :is(h1, h2, h3, h4, .body-200) {
@@ -175,7 +175,7 @@ Version: 01
     @apply text-500 leading-300;
   }
   h4 {
-    @apply text-300 leading-200 tracking-100 text-primary-400;
+    @apply text-brand-400 text-300 leading-200 tracking-100;
   }
 
   .body-100 {
@@ -205,21 +205,21 @@ Version: 01
   .btn {
     @apply inline-flex items-center rounded-pill py-4 px-24 text-400 font-bold leading-400 text-neutral-100 transition-colors;
   }
-  .btn-primary--sm {
-    @apply bg-primary-500 hover:bg-primary-300;
+  .btn-brand--sm {
+    @apply bg-brand-500 hover:bg-brand-300;
   }
-  .btn-primary--xl {
-    @apply bg-primary-500 text-500 leading-300 hover:bg-primary-300;
+  .btn-brand--xl {
+    @apply bg-brand-500 hover:bg-brand-300 text-500 leading-300;
   }
   .btn-accent {
-    @apply bg-primary-500/10 text-primary-500 hover:bg-primary-500/25 dark:bg-neutral-100;
+    @apply bg-brand-500/10 text-brand-500 hover:bg-brand-500/25 dark:bg-neutral-100;
   }
   .btn-delete {
     @apply bg-accent-200 hover:bg-accent-100;
   }
 
   /* .logo {
-    @apply fill-primary-500 dark:bg-primary-500;
+    @apply fill-brand-500 dark:bg-brand-500;
   } */
 }
 
@@ -235,7 +235,7 @@ Version: 01
 */
 @layer utilities {
   .skip-to-content {
-    @apply absolute z-[9999] mx-auto translate-y-[-120%]  bg-primary-500 py-[1em] px-[0.5em] text-neutral-100 transition-transform focus:translate-y-0 focus:outline focus:outline-offset-2 focus:outline-primary-300;
+    @apply bg-brand-500 focus:outline-brand-300 absolute z-[9999]  mx-auto translate-y-[-120%] py-[1em] px-[0.5em] text-neutral-100 transition-transform focus:translate-y-0 focus:outline focus:outline-offset-2;
   }
 }
 

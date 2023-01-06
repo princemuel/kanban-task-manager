@@ -29,7 +29,7 @@ const SubtaskList = (props: Props) => {
               />
               <button
                 type='button'
-                className='inline-flex items-center justify-end text-primary-400 hover:text-accent-100 active:text-accent-100'
+                className='inline-flex items-center justify-end text-brand-400 hover:text-accent-100 active:text-accent-100'
               >
                 <icons.board.cross className='fill-current ' />
                 <span className='sr-only'>Remove</span>
@@ -40,7 +40,7 @@ const SubtaskList = (props: Props) => {
 
       <button
         type='button'
-        className='inline-grid w-full place-items-center rounded-pill bg-primary-500/10 py-4 text-400 font-bold leading-400 text-primary-500 dark:bg-neutral-100'
+        className='inline-grid w-full place-items-center rounded-pill bg-brand-500/10 py-4 text-400 font-bold leading-400 text-brand-500 dark:bg-neutral-100'
       >
         + Add New Subtask
       </button>

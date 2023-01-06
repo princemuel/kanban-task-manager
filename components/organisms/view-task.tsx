@@ -39,7 +39,7 @@
 //         </Dialog.Description>
 //       )}
 
-//       <Text variant='h4' className='text-300 leading-200 text-primary-400'>
+//       <Text variant='h4' className='text-300 leading-200 text-brand-400'>
 //         Subtasks ({numCompletedSubtasks} of {numSubtasks})
 //       </Text>
 
@@ -48,11 +48,11 @@
 //           const name = subtask.title.toLowerCase();
 //           return (
 //             <div key={subtask.id}>
-//               <label className='flex cursor-pointer items-center gap-6 rounded-xl bg-primary-100 py-6 px-6 text-400 font-bold leading-200 text-primary-900 hover:bg-primary-500/25'>
+//               <label className='flex cursor-pointer items-center gap-6 rounded-xl bg-brand-100 py-6 px-6 text-400 font-bold leading-200 text-brand-900 hover:bg-brand-500/25'>
 //                 <input
 //                   type='checkbox'
 //                   name={name}
-//                   className='aspect-square w-6 cursor-pointer accent-primary-500'
+//                   className='aspect-square w-6 cursor-pointer accent-brand-500'
 //                 />
 //                 <Text
 //                   className={clsx("", subtask.isCompleted && "line-through")}
@@ -65,14 +65,14 @@
 //         })}
 //       </div>
 
-//       <Text variant='h4' className='text-300 leading-200 text-primary-400'>
+//       <Text variant='h4' className='text-300 leading-200 text-brand-400'>
 //         Current Status
 //       </Text>
 
 //       <div>
 //         <button
 //           type='button'
-//           className='flex items-center justify-between rounded-lg border border-primary-500'
+//           className='flex items-center justify-between rounded-lg border border-brand-500'
 //         >
 //           <span>Select Task Status</span>
 //           <icons.chevron.down />

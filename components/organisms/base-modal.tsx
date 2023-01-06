@@ -44,7 +44,7 @@ const BaseModal = ({ isOpen, closeModal, children, focusRef }: Props) => {
           <div className='fixed inset-0 flex items-center justify-center p-6'>
             <Dialog.Panel
               as='form'
-              className='mx-auto w-full max-w-3xl rounded-200 bg-neutral-100 dark:bg-primary-700'
+              className='mx-auto w-full max-w-3xl rounded-200 bg-neutral-100 dark:bg-brand-700'
             >
               <section className='flex w-full flex-col gap-10 p-[3.2rem]'>
                 {children}
