@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { Children, cloneElement, ReactElement, ReactNode } from "react";
+import { $ElementProps } from "types";
 import { clsx } from "utilities";
 
 interface Props extends $ElementProps<typeof Link> {
