@@ -63,7 +63,7 @@ recharge the batteries a little.'
         <div className='relative w-full'>
           <button
             type='button'
-            className='flex w-full items-center justify-between rounded-300 border border-primary-400/25 bg-inherit py-4 px-6 text-400 font-medium leading-400'
+            className='flex w-full items-center justify-between rounded-300 border border-brand-400/25 bg-inherit py-4 px-6 text-400 font-medium leading-400'
             onClick={() => setIsDropdownOpen((prev) => !prev)}
           >
             <span>{optionValue || "Select a Status"}</span>
@@ -71,23 +71,23 @@ recharge the batteries a little.'
           </button>
 
           <ul
-            className='absolute left-0 mt-4 w-full scale-0 rounded-100 bg-neutral-100 p-6 transition-all duration-500 data-[open=true]:scale-100 dark:bg-primary-800'
+            className='absolute left-0 mt-4 w-full scale-0 rounded-100 bg-neutral-100 p-6 transition-all duration-500 data-[open=true]:scale-100 dark:bg-brand-800'
             data-open={isDropdownOpen}
           >
             <li
-              className='cursor-pointer text-400 font-medium leading-400 text-primary-400'
+              className='cursor-pointer text-400 font-medium leading-400 text-brand-400'
               onClick={handleStatusChange}
             >
               Todo
             </li>
             <li
-              className='cursor-pointer text-400 font-medium leading-400 text-primary-400'
+              className='cursor-pointer text-400 font-medium leading-400 text-brand-400'
               onClick={handleStatusChange}
             >
               Doing
             </li>
             <li
-              className='cursor-pointer text-400  font-medium leading-400 text-primary-400'
+              className='cursor-pointer text-400  font-medium leading-400 text-brand-400'
               onClick={handleStatusChange}
             >
               Done
@@ -98,7 +98,7 @@ recharge the batteries a little.'
 
       <button
         type='button'
-        className='inline-grid w-full place-items-center rounded-pill bg-primary-500 py-4 text-400 font-bold leading-400 text-neutral-100'
+        className='inline-grid w-full place-items-center rounded-pill bg-brand-500 py-4 text-400 font-bold leading-400 text-neutral-100'
       >
         Create Task
       </button>

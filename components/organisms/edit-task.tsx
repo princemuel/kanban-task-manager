@@ -28,7 +28,7 @@ export const EditTask = (props: Props) => {
       closeModal={() => modalDispatch({ type: "CLOSE_MODAL" })}
     >
       <Dialog.Title as='h2' className={"font-bold"}>
-        Edit New Task
+        Edit Task
       </Dialog.Title>
 
       <div className='> * + * space-y-4'>
