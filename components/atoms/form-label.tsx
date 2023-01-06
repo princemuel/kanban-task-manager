@@ -12,7 +12,6 @@ type Props<E extends React.ElementType<any>> = FormLabelProps<E> &
 
 const FormLabel = <E extends React.ElementType = "label">({
   children,
-
   variant,
   className,
   ...rest
@@ -21,7 +20,7 @@ const FormLabel = <E extends React.ElementType = "label">({
   return (
     <RenderedElement
       className={clsx(
-        "text-brand-400 block text-300 font-bold leading-200 dark:text-neutral-100",
+        "block text-300 font-bold leading-200 text-brand-400 dark:text-neutral-100",
         className || null
       )}
       {...rest}
