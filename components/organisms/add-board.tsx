@@ -23,7 +23,7 @@ export const AddBoard = (props: Props) => {
       </Dialog.Title>
 
       <div className='> * + * space-y-4'>
-        <FormLabel htmlFor='name'>Name</FormLabel>
+        <FormLabel htmlFor='name'>Board Name</FormLabel>
         <FormInput
           type='text'
           ref={inputRef}
@@ -33,7 +33,7 @@ export const AddBoard = (props: Props) => {
       </div>
 
       <fieldset className='> * + * space-y-4'>
-        <FormLabel variant='legend'>Columns</FormLabel>
+        <FormLabel variant='legend'>Board Columns</FormLabel>
 
         <div className='grid grid-cols-[1fr,auto] items-center gap-8'>
           <FormInput type='text' name={`column`} placeholder='Todo' />
