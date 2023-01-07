@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from "react";
 import {
   IconAddTask,
   IconBoard,
@@ -14,9 +14,9 @@ import {
   LogoDark,
   LogoLight,
   LogoMobile,
-} from './images';
+} from "./images";
 
-export interface IconProps extends React.ComponentPropsWithoutRef<'svg'> {}
+export interface IconProps extends React.ComponentPropsWithoutRef<"svg"> {}
 
 export const icons = {
   board: {
