@@ -1,3 +1,2 @@
-export * from './api';
-// export * from './generated/graphql';
-export * from './schema';
+export * from "./clients";
+export * from "./schema";
