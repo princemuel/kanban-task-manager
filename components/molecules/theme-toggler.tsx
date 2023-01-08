@@ -10,7 +10,7 @@ const ThemeModeToggler = ({ className }: Props) => {
   return (
     <div
       className={clsx(
-        "bg-brand-100 dark:bg-brand-800 flex cursor-pointer items-center justify-center gap-10 rounded-200 py-4 px-12",
+        "flex cursor-fancy items-center justify-center  gap-10 rounded-200 bg-brand-100 py-4 px-12 dark:bg-brand-800",
         className || ""
       )}
     >

@@ -31,10 +31,14 @@ function App({ Component, pageProps }: AppPropsWithLayout<PageProps>) {
   return (
     <>
       <Head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name='viewport' content='width=device-width, initial-scale=1.0' />
       </Head>
 
-      <ThemeProvider enableSystem={true} attribute="class">
+      <ThemeProvider
+        storageKey='preferred-theme'
+        enableSystem={true}
+        attribute='class'
+      >
         <QueryClientProvider client={queryClient}>
           <Hydrate state={pageProps?.dehydratedState ?? {}}>
             <ModalProvider>
