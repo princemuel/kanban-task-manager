@@ -39,7 +39,7 @@ export const AddBoard = (props: Props) => {
           <FormInput type='text' name={`column`} placeholder='Todo' />
           <button
             type='button'
-            className='inline-flex items-center justify-end text-brand-400 hover:text-accent-100 active:text-accent-100'
+            className='inline-flex cursor-fancy items-center justify-end text-brand-400 hover:text-accent-100 active:text-accent-100'
           >
             <icons.board.cross className='fill-current ' />
             <span className='sr-only'>Remove</span>
@@ -49,7 +49,7 @@ export const AddBoard = (props: Props) => {
           <FormInput type='text' name={`column`} placeholder='Doing' />
           <button
             type='button'
-            className='inline-flex items-center justify-end text-brand-400 hover:text-accent-100 active:text-accent-100'
+            className='inline-flex cursor-fancy items-center justify-end text-brand-400 hover:text-accent-100 active:text-accent-100'
           >
             <icons.board.cross className='fill-current ' />
             <span className='sr-only'>Remove</span>
@@ -58,7 +58,7 @@ export const AddBoard = (props: Props) => {
 
         <button
           type='button'
-          className='inline-grid w-full place-items-center rounded-pill bg-brand-500/10 py-4 text-400 font-bold leading-400 text-brand-500 dark:bg-neutral-100'
+          className='inline-grid w-full cursor-fancy place-items-center rounded-pill bg-brand-500/10 py-4 text-400 font-bold leading-400 text-brand-500 dark:bg-neutral-100'
         >
           + Add New Column
         </button>
@@ -66,7 +66,7 @@ export const AddBoard = (props: Props) => {
 
       <button
         type='button'
-        className='inline-grid w-full place-items-center rounded-pill bg-brand-500 py-4 text-400 font-bold leading-400 text-neutral-100'
+        className='inline-grid w-full cursor-fancy place-items-center rounded-pill bg-brand-500 py-4 text-400 font-bold leading-400 text-neutral-100'
       >
         Create New Board
       </button>

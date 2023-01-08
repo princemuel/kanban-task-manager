@@ -19,7 +19,7 @@ const Card = ({ task, completed, subtasks }: Props) => {
   return (
     <article
       data-id={task.id}
-      className='group flex cursor-pointer select-none flex-col gap-4 rounded-200 bg-neutral-100 px-6 py-9 text-brand-900 shadow-task dark:bg-brand-700 dark:text-neutral-100'
+      className='group flex cursor-fancy select-none flex-col gap-4 rounded-200 bg-neutral-100 px-6 py-9 text-brand-900 shadow-task dark:bg-brand-700 dark:text-neutral-100'
       onClick={(e) => openModal(e)}
     >
       <h3 className='group-hover:text-brand-500'>{task.title}</h3>

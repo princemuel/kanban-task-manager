@@ -30,7 +30,8 @@ const NavLink = ({ href, children, activeClassName, ...props }: Props) => {
 
   const className = clsx(
     child?.props?.className,
-    isCurrentPath && activeClassName
+    isCurrentPath && activeClassName,
+    "cursor-fancy"
   );
 
   return (

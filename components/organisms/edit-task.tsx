@@ -75,19 +75,19 @@ recharge the batteries a little.'
             data-open={isDropdownOpen}
           >
             <li
-              className='cursor-pointer text-400 font-medium leading-400 text-brand-400'
+              className='cursor-fancy text-400 font-medium leading-400 text-brand-400'
               onClick={handleStatusChange}
             >
               Todo
             </li>
             <li
-              className='cursor-pointer text-400 font-medium leading-400 text-brand-400'
+              className='cursor-fancy text-400 font-medium leading-400 text-brand-400'
               onClick={handleStatusChange}
             >
               Doing
             </li>
             <li
-              className='cursor-pointer text-400  font-medium leading-400 text-brand-400'
+              className='cursor-fancy text-400  font-medium leading-400 text-brand-400'
               onClick={handleStatusChange}
             >
               Done

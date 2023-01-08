@@ -47,7 +47,7 @@ export const ViewTask = (props: Props) => {
         </FormLabel>
 
         <div className='grid gap-4'>
-          <div className='grid cursor-pointer grid-cols-[auto,1fr] items-center gap-6 rounded-300  bg-brand-100 py-5 px-6 hover:bg-brand-500/25 dark:bg-brand-800 dark:hover:bg-brand-500/25'>
+          <div className='grid cursor-fancy grid-cols-[auto,1fr] items-center gap-6 rounded-300  bg-brand-100 py-5 px-6 hover:bg-brand-500/25 dark:bg-brand-800 dark:hover:bg-brand-500/25'>
             <button
               type='button'
               className='group inline-grid aspect-square w-[1.6rem] place-items-center rounded-[0.2rem] border border-brand-400/25 bg-neutral-100 aria-pressed:bg-brand-500 dark:bg-brand-700 dark:aria-pressed:bg-brand-500'
@@ -67,7 +67,7 @@ export const ViewTask = (props: Props) => {
             </Text>
           </div>
 
-          <div className='grid cursor-pointer grid-cols-[auto,1fr] items-center gap-6 rounded-300  bg-brand-100 py-5 px-6 hover:bg-brand-500/25 dark:bg-brand-800 dark:hover:bg-brand-500/25'>
+          <div className='grid cursor-fancy  grid-cols-[auto,1fr] items-center gap-6 rounded-300  bg-brand-100 py-5 px-6 hover:bg-brand-500/25 dark:bg-brand-800 dark:hover:bg-brand-500/25'>
             <button
               type='button'
               className='group inline-grid aspect-square w-[1.6rem] place-items-center rounded-[0.2rem] border border-brand-400/25 bg-neutral-100 aria-pressed:bg-brand-500 dark:bg-brand-700 dark:aria-pressed:bg-brand-500'
@@ -84,7 +84,7 @@ export const ViewTask = (props: Props) => {
             </Text>
           </div>
 
-          <div className='grid cursor-pointer grid-cols-[auto,1fr] items-center gap-6 rounded-300  bg-brand-100 py-5 px-6 hover:bg-brand-500/25 dark:bg-brand-800 dark:hover:bg-brand-500/25'>
+          <div className='grid cursor-fancy  grid-cols-[auto,1fr] items-center gap-6 rounded-300  bg-brand-100 py-5 px-6 hover:bg-brand-500/25 dark:bg-brand-800 dark:hover:bg-brand-500/25'>
             <button
               type='button'
               className='group inline-grid aspect-square w-[1.6rem] place-items-center rounded-[0.2rem] border border-brand-400/25 bg-neutral-100 aria-pressed:bg-brand-500 dark:bg-brand-700 dark:aria-pressed:bg-brand-500'
@@ -122,19 +122,19 @@ export const ViewTask = (props: Props) => {
             data-open={isDropdownOpen}
           >
             <li
-              className='cursor-pointer text-400 font-medium leading-400 text-brand-400'
+              className='cursor-fancy  text-400 font-medium leading-400 text-brand-400'
               onClick={handleStatusChange}
             >
               Todo
             </li>
             <li
-              className='cursor-pointer text-400 font-medium leading-400 text-brand-400'
+              className='cursor-fancy  text-400 font-medium leading-400 text-brand-400'
               onClick={handleStatusChange}
             >
               Doing
             </li>
             <li
-              className='cursor-pointer text-400  font-medium leading-400 text-brand-400'
+              className='cursor-fancy  text-400  font-medium leading-400 text-brand-400'
               onClick={handleStatusChange}
             >
               Done
