@@ -111,25 +111,5 @@ module.exports = {
     require("@savvywombat/tailwindcss-grid-areas"),
     require("tailwind-scrollbar")({ nocompatible: true }),
     require("@headlessui/tailwindcss")({ prefix: "ui" }),
-    plugin(function ({ addComponents, addUtilities, theme }) {
-      addComponents({
-        ".btn": {
-          display: "inline-flex",
-          alignItems: "center",
-          gap: "1rem",
-          paddingBlock: "1.5rem",
-          paddingInline: "2.75rem",
-          borderRadius: theme("borderRadius.pill"),
-          fontSize: theme("fontSize.400"),
-          lineHeight: theme("lineHeight.200"),
-          letterSpacing: theme("letterSpacing.200"),
-        },
-      });
-      addUtilities({
-        ".icon--svg": {
-          fill: "currentColor",
-        },
-      });
-    }),
   ],
 };
