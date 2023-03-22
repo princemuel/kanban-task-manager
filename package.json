@@ -6,14 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "generate": "npm -s run generate:prisma && npm -s run generate:nexus",
-    "generate:prisma": "prisma generate",
-    "ts-node": "ts-node --compiler-options \"{\\\"module\\\":\\\"commonjs\\\"}\"",
-    "generate:nexus": "ts-node --transpile-only -P nexus.tsconfig.json pages/api"
-  },
-  "prisma": {
-    "seed": "ts-node prisma/seed.ts"
+    "lint": "next lint"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.2",
@@ -27,9 +20,12 @@
     "bcrypt": "^5.1.0",
     "chalk": "^5.1.2",
     "class-validator": "^0.14.0",
+    "class-variance-authority": "^0.4.0",
+    "clsx": "^1.2.1",
     "cookies-next": "^2.1.1",
     "graphql": "^16.6.0",
     "graphql-request": "^5.0.0",
+    "graphql-scalars": "^1.20.1",
     "immer": "^9.0.17",
     "jsonwebtoken": "^9.0.0",
     "micro": "^10.0.1",
@@ -45,7 +41,8 @@
     "type-graphql": "^1.1.1",
     "use-immer": "^0.8.1",
     "vercel": "^28.4.14",
-    "yaml-loader": "^0.8.0"
+    "yaml-loader": "^0.8.0",
+    "zustand": "^4.3.2"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^2.13.11",
