@@ -1,3 +1,4 @@
+import produce from "immer";
 import { ContextFactory } from "./context-factory";
 import { ContextKeys } from "./context-keys";
 
@@ -7,3 +8,7 @@ const BoardDispatchContext = ContextFactory.createContext(
 );
 
 export {};
+const reducer = produce((draft, action) => {
+  switch (action.type) {
+  }
+});
