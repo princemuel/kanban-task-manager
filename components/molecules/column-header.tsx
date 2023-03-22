@@ -1,5 +1,5 @@
+import clsx from "clsx";
 import { IColumn } from "types";
-import { clsx } from "utilities";
 
 type Props = {
   column: IColumn;
