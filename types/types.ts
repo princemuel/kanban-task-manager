@@ -1,10 +1,10 @@
-import InferNextPropsType from 'infer-next-props-type';
-import type { NextPage } from 'next';
-import { NextApiRequest, NextApiResponse } from 'next';
-import type { AppContext, AppProps } from 'next/app';
-import { ParsedUrlQuery } from 'querystring';
-import type { ReactElement, ReactNode } from 'react';
-import { User } from 'server/models';
+import InferNextPropsType from "infer-next-props-type";
+import type { NextPage } from "next";
+import { NextApiRequest, NextApiResponse } from "next";
+import type { AppContext, AppProps } from "next/app";
+import { ParsedUrlQuery } from "querystring";
+import type { ReactElement, ReactNode } from "react";
+import { User } from "server/models";
 
 /*===============================*
           EVENT TYPES
@@ -24,7 +24,7 @@ export type {
   GetStaticPaths,
   GetStaticProps,
   NextPage,
-} from 'next';
+} from "next";
 export type { InferNextPropsType };
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode;

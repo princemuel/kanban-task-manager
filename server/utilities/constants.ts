@@ -1,5 +1,5 @@
-import type { OptionsType } from 'cookies-next/lib/types';
-import { User, UserModel } from 'server/models';
+import type { OptionsType } from "cookies-next/lib/types";
+import { User, UserModel } from "server/models";
 
 // Cookie Options
 export const accessTokenExpiresIn = 15;
@@ -7,7 +7,7 @@ export const refreshTokenExpiresIn = 60;
 
 export const cookieOptions: OptionsType = {
   httpOnly: true,
-  sameSite: 'lax',
+  sameSite: "lax",
   // domain: '/',
   // secure: true,
 };
@@ -25,5 +25,5 @@ export const refreshTokenCookieOptions = {
 };
 
 export async function findByEmail(email: string): Promise<User | null> {
-  return UserModel.findOne({ email }).select('+password');
+  return UserModel.findOne({ email }).select("+password");
 }
