@@ -36,7 +36,7 @@ const Home: NextPageWithLayout<Props> = (props: Props) => {
       </Head>
 
       <div className='grid grid-cols-[26rem,1fr] grid-rows-[8rem_calc(100vh_-_8rem)] grid-areas-desk'>
-        <header className='grid grid-cols-[26rem,1fr] bg-neutral-100 text-700 font-bold grid-in-header dark:bg-brand-700'>
+        <header className='sticky top-0 z-30 grid grid-cols-[26rem,1fr] bg-neutral-100 text-700 font-bold grid-in-header dark:bg-brand-700'>
           <div className='px-8 py-10'>
             <LogoIcon />
           </div>
