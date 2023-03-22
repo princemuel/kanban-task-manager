@@ -1,9 +1,9 @@
 schema: ${NEXT_PUBLIC_GRAPHQL_ENDPOINT}
-documents: './lib/**/*.{graphql,gql}'
+documents: "./lib/**/*.{graphql,gql}"
 overwrite: true
 watch: true
 generates:
-  ./lib/generated/graphql.ts:
+  ./generated/graphql.ts:
     plugins:
       - typescript
       - typescript-operations
@@ -11,10 +11,10 @@ generates:
     config:
       noNamespaces: true
       pureMagicComment: true
-      typesPrefix: 'I'
+      typesPrefix: "I"
       skipTypename: true
-      interfacePrefix: 'I'
-      declarationKind: 'interface'
+      interfacePrefix: "I"
+      declarationKind: "interface"
       exposeQueryKeys: true
       exposeFetcher: true
       fetcher:
