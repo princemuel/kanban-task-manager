@@ -96,7 +96,7 @@ Version: 01
     color: inherit;
   }
   :where(button, label, select, summary, [role="button"], [role="option"]) {
-    cursor: pointer;
+    @apply cursor-pointer;
   }
   :where(textarea) {
     resize: vertical;
