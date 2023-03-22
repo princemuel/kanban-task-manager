@@ -6,14 +6,15 @@ import { PrismaClient } from "@prisma/client";
 // Learn more:
 // https://pris.ly/d/help/next-js-best-practices
 
+declare global {
+  var prisma: PrismaClient | undefined;
+}
 const isProd = process.env.NODE_ENV === "production";
 
-const globalForPrisma = global as unknown as { prisma: PrismaClient };
-
 export const prisma =
-  globalForPrisma.prisma ||
+  global.prisma ||
   new PrismaClient({
     log: isProd ? ["error"] : ["query", "error", "warn"],
   });
 
-if (!isProd) globalForPrisma.prisma = prisma;
+if (!isProd) global.prisma = prisma;
