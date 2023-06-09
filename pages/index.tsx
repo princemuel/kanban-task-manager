@@ -42,19 +42,26 @@ const Home: NextPageWithLayout<Props> = (props: Props) => {
           </div>
 
           <div className='flex items-center justify-between border-b border-l border-brand-200 bg-neutral-100 px-12 dark:border-brand-600 dark:bg-brand-700'>
+          <div className='flex items-center justify-between border-b border-l border-brand-200 bg-neutral-100 px-12 dark:border-brand-600 dark:bg-brand-700'>
             <h1>{currentBoard.name}</h1>
 
             <div className='flex items-center gap-8'>
               <button
                 type='button'
+                className='flex place-items-center items-center justify-center rounded-pill bg-brand-500 px-0 py-2 text-500 leading-300 text-neutral-100 transition-all hover:bg-brand-300 sm:w-20 md:w-fit md:px-8 md:py-6'
                 className='inline-grid cursor-fancy place-items-center rounded-pill bg-brand-500 px-8 py-6 text-500 leading-300 text-neutral-100 transition-all hover:bg-brand-300'
                 data-id='AddTask'
                 onClick={(e) => openModal(e)}
               >
-                + Add New Task
+                <span className='sm:py-2 sm:px-10 md:py-0 md:px-0'>+</span>
+                <p className='hidden md:block'>Add New Task</p>
               </button>
 
-              <button type='button' className='inline-block cursor-fancy'>
+              {/* <button className='px-10 py-2 rounded-pill bg-brand-500 md:hidden'>
+                +
+              </button> */}
+
+              <button type='button' className='inline-block'>
                 <icons.board.ellipsis />
                 <span className='sr-only'>Open Dropdown</span>
               </button>
@@ -63,10 +70,11 @@ const Home: NextPageWithLayout<Props> = (props: Props) => {
         </header>
 
         <aside className='space-y-4 bg-neutral-100 pt-10 pb-14 text-700 font-bold grid-in-aside dark:bg-brand-700'>
+        <aside className='space-y-4 bg-neutral-100 pt-10 pb-14 text-700 font-bold grid-in-aside dark:bg-brand-700'>
           <h4 className='flex items-center gap-2 px-10'>
             <span className='uppercase'>All Boards</span>
-            <output className='uppercase'>({data.boards.length})</output>
-          </h4>
+            <output className='uppercase'>({data.boards.length})</output>1
+          </h4>1
 
           <div className='flex h-full flex-col justify-between'>
             <nav className='flex flex-col gap-4'>
@@ -77,7 +85,9 @@ const Home: NextPageWithLayout<Props> = (props: Props) => {
               <button
                 type='button'
                 className='group mr-8 flex cursor-fancy items-center gap-6 px-10 py-4 text-500 font-bold leading-300 text-brand-500'
+                className='group mr-8 flex items-center gap-6 px-10 py-4 text-500 font-bold leading-300 text-brand-500'
               >
+                <icons.board.board className='fill-current text-brand-500' />
                 <icons.board.board className='fill-current text-brand-500' />
                 <span>+ Create New Board</span>
               </button>
@@ -90,7 +100,9 @@ const Home: NextPageWithLayout<Props> = (props: Props) => {
                 <button
                   type='button'
                   className='group flex w-full items-center gap-6 px-10 py-4 text-500 font-bold leading-300 text-brand-400 hover:rounded-r-full hover:bg-brand-500/10 active:rounded-r-full dark:hover:bg-neutral-100'
+                  className='group flex w-full items-center gap-6 px-10 py-4 text-500 font-bold leading-300 text-brand-400 hover:rounded-r-full hover:bg-brand-500/10 active:rounded-r-full dark:hover:bg-neutral-100'
                 >
+                  <icons.sidebar.hide className='fill-current text-brand-400' />
                   <icons.sidebar.hide className='fill-current text-brand-400' />
                   <span className='group-hover:text-brand-500 group-active:text-brand-500'>
                     Hide Sidebar
@@ -103,7 +115,7 @@ const Home: NextPageWithLayout<Props> = (props: Props) => {
 
         <BoardTemplate board={currentBoard} />
 
-        <div className='fixed bottom-12 left-0 z-20'>
+        <div className='fixed left-0 bottom-12 z-20'>
           <button
             type='button'
             className='group flex cursor-fancy items-center gap-6 rounded-r-full bg-brand-500 px-8 py-7 text-500 font-bold leading-300 dark:hover:bg-brand-300'
