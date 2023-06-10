@@ -1,2 +1,1 @@
-export * from "./clients";
-export * from "./schema";
+export * from './hooks';
