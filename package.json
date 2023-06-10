@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --turbo",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
@@ -41,6 +41,7 @@
     "zustand": "^4.3.8"
   },
   "devDependencies": {
+    "@svgr/webpack": "^8.0.1",
     "@types/bcrypt": "^5.0.0",
     "prettier": "^2.8.8",
     "prettier-plugin-prisma": "^4.13.0",
