@@ -1,25 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  swcMinify: true,
+  experimental: {
+    typedRoutes: true,
+    webVitalsAttribution: ["CLS", "LCP"],
+  },
   compiler: {
-    removeConsole: process.env.NODE_ENV === 'production',
-  },
-  images: {
-    dangerouslyAllowSVG: true,
-    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
-  },
-  webpack(config) {
-    config.experiments = config.experiments || {};
-    config.experiments.topLevelAwait = true;
-
-    config.module.rules.push({
-      test: /\.svg$/i,
-      issuer: /\.[jt]sx?$/,
-      use: ['@svgr/webpack'],
-    });
-
-    return config;
+    removeConsole: process.env.NODE_ENV === "production",
   },
 };
 
