@@ -17,9 +17,9 @@ Version: 01
  */
 @tailwind base;
 /*============================
-      CUSTOM RESETS
-  ============================
-*/
+       CUSTOM RESETS
+   ============================
+ */
 @layer base {
   :root {
     scroll-padding-top: 2rem;
@@ -186,20 +186,20 @@ Version: 01
   }
 
   /* :where(li a) {
-    @apply text-300 no-underline uppercase;
-  } */
+     @apply text-300 no-underline uppercase;
+   } */
 }
 
 /**
- * This injects Tailwind's component classes and any component classes
- * registered by plugins.
- */
+  * This injects Tailwind's component classes and any component classes
+  * registered by plugins.
+  */
 @tailwind components;
 /*============================
-      CUSTOM COMPONENTS
-      <button class="py-2 px-4 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75">
-  ============================
-*/
+       CUSTOM COMPONENTS
+       <button class="py-2 px-4 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75">
+   ============================
+ */
 @layer components {
   /* ********** BUTTONS ********** */
   .btn {
@@ -219,20 +219,20 @@ Version: 01
   }
 
   /* .logo {
-    @apply fill-brand-500 dark:bg-brand-500;
-  } */
+     @apply fill-brand-500 dark:bg-brand-500;
+   } */
 }
 
 /**
- * This injects Tailwind' s utility classes and
- * any utility classes registered * by plugins.
- */
+  * This injects Tailwind' s utility classes and
+  * any utility classes registered * by plugins.
+  */
 @tailwind utilities;
 
 /*============================
-      CUSTOM UTILITIES
-  ============================
-*/
+       CUSTOM UTILITIES
+   ============================
+ */
 @layer utilities {
   .skip-to-content {
     @apply bg-brand-500 focus:outline-brand-300 absolute z-[9999]  mx-auto translate-y-[-120%] py-[1em] px-[0.5em] text-neutral-100 transition-transform focus:translate-y-0 focus:outline focus:outline-offset-2;
@@ -240,12 +240,12 @@ Version: 01
 }
 
 /**
- * Use this directive to control where Tailwind injects the hover, focus,
- * responsive, dark mode, and other variants of each class.
- *
- * If omitted, Tailwind will append these classes to the very end of
- * your stylesheet by default.
- */
+  * Use this directive to control where Tailwind injects the hover, focus,
+  * responsive, dark mode, and other variants of each class.
+  *
+  * If omitted, Tailwind will append these classes to the very end of
+  * your stylesheet by default.
+  */
 @tailwind variants;
 
 .modal {
