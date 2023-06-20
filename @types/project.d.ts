@@ -1,34 +1,64 @@
-/*===============================*
-          ELEMENT TYPES
- *===============================*
-*/
-type ExtractElementProps<T> = T extends React.ComponentType<infer Props>
-  ? Props extends object
-    ? Props
-    : never
-  : never;
-
-type $ElementProps<E extends React.ElementType<any>> = {
-  children: React.ReactNode;
-  as?: E;
-};
-
-type ElementProps<E extends React.ElementType<any>> = $ElementProps<E> &
-  Omit<React.ComponentPropsWithoutRef<E>, keyof $ElementProps<E>>;
-
-interface IconProps extends React.ComponentPropsWithoutRef<'svg'> {}
-
-type Level = [0, 1, 2, 3, 4, 5, 6][number];
-
-interface CSSStyleProps extends React.CSSProperties {
-  '--min-column-size': string;
+interface ModalState {
+  show: boolean;
+  open: () => void;
+  close: () => void;
 }
 
-/*===============================*
-          EVENT TYPES
- *===============================*
-*/
-type ReactFormEvent = React.FormEvent<HTMLFormElement>;
-type ReactSelectEvent = React.ChangeEvent<HTMLSelectElement>;
-type ReactInputEvent = React.ChangeEvent<HTMLInputElement>;
-type ReactMouseEvent = React.MouseEvent<HTMLButtonElement>;
+interface IProvider {
+  id: 'github' | 'google';
+  name: Capitalize<IProvider['id']>;
+}
+
+interface IParams {
+  [key: string]: string | undefined;
+}
+
+interface IErrorResponse {
+  response: { errors: IError[]; data: IErrorData };
+}
+
+interface IError {
+  message: string;
+  locations: IErrorLocation[];
+  path: string[];
+  extensions: IErrorExtensions;
+}
+interface IErrorLocation {
+  line: number;
+  column: number;
+}
+interface IErrorExtensions {
+  code: string;
+  http: { status: number };
+  stacktrace: string[];
+}
+interface IErrorData {
+  [x: string]: any;
+}
+
+type SuccessResponseCode = 200;
+type ErrorResponseCode = 400 | 500;
+type ResponseCode = SuccessResponseCode | ErrorResponseCode;
+
+type ResponseShape = {
+  [C in ResponseCode]: {
+    code: C;
+    body: C extends SuccessResponseCode
+      ? { success: true }
+      : { success: false; error: string };
+  };
+}[ResponseCode];
+
+type Lookup<T> = {
+  [K in keyof T]: {
+    key: K;
+  };
+}[keyof T];
+
+type PrefixType<E extends { type: string }> = {
+  type: `PREFIX_${E['type']}`;
+} & Omit<E, 'type'>;
+
+type ExampleEvent = {
+  [E in Event as E['type']]: PrefixType<E>;
+}[Event['type']];

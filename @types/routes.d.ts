@@ -15,13 +15,4 @@ interface ISocial {
   url: string;
 }
 
-type IconRFCType = (props: IconProps) => JSX.Element;
-
-interface ISvgIcons {
-  logo: IconRFCType;
-  arrows: {
-    down: IconRFCType;
-    left: IconRFCType;
-    right: IconRFCType;
-  };
-}
+type IconRFCType = (props: IconProps) => React.JSX.Element;

@@ -1,3 +1,11 @@
+/*==============================*
+          DATA MODELS
+    ==============================*/
+type AuthFormData = Pick<
+  Misc.DeepRequired<IUser>,
+  'name' | 'email' | 'password'
+>;
+
 interface IData {
   boards: IBoard[];
 }
