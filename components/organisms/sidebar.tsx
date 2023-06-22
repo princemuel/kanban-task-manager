@@ -3,7 +3,8 @@
 import styles from '@/assets/styles/layout.module.scss';
 import { icons } from '@/common';
 import { cn, useSidebar } from '@/lib';
-import { NavLink, Switch, Text } from '../atoms';
+import { NavLink, Text } from '../atoms';
+import { ThemeSwitch } from '../molecules';
 
 interface Props {}
 
@@ -44,13 +45,13 @@ const Sidebar = ({}: Props) => {
                   // @ts-expect-error
                   href={link.route}
                   className={cn(
-                    'group flex items-center gap-6 px-12 py-5 aria-[current="page"]:bg-brand-500'
+                    'group mr-6 flex items-center gap-6 rounded-r-pill px-12 py-5 aria-[current="page"]:bg-brand-500 hover:bg-brand-500/10 active:bg-brand-500/10 dark:hover:bg-white dark:active:bg-white'
                   )}
                 >
-                  <icons.board.board className='text-brand-400 group-hover:text-brand-500 group-aria-[current="page"]:text-white' />
+                  <icons.board.board className='text-brand-400 group-hover:text-brand-500 group-active:text-brand-500 group-aria-[current="page"]:text-white group-aria-[current="page"]:group-hover:text-brand-500 group-aria-[current="page"]:group-active:text-brand-500' />
                   <span
                     className={cn(
-                      'text-500 font-bold leading-300 text-brand-400 group-aria-[current="page"]:text-white'
+                      'text-500 font-bold leading-300 text-brand-400 group-hover:text-brand-500 group-active:text-brand-500 group-aria-[current="page"]:text-white group-aria-[current="page"]:group-hover:text-brand-500'
                     )}
                   >
                     Platform Launch
@@ -65,7 +66,7 @@ const Sidebar = ({}: Props) => {
               type='button'
               className={cn('group flex items-center gap-6 px-12 py-5')}
             >
-              <icons.board.board className='text-brand-400' />
+              <icons.board.board className='fill-current text-brand-500' />
               <span className='text-500 font-bold leading-300 text-brand-500'>
                 + Create New Board
               </span>
@@ -75,11 +76,7 @@ const Sidebar = ({}: Props) => {
       </nav>
 
       <div className='mb-24 mt-auto'>
-        <div className='mx-12 flex items-center justify-center gap-10 rounded-lg bg-brand-100 px-12 py-4 dark:bg-brand-800'>
-          <icons.mode.sun />
-          <Switch />
-          <icons.mode.moon />
-        </div>
+        <ThemeSwitch className='mx-12' />
       </div>
       {/* <div className='fixed bottom-12 left-0 z-20'>
         <Button
