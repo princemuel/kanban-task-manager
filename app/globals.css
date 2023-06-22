@@ -58,22 +58,13 @@ Version: 01
     box-sizing: inherit;
   }
 
-  :where([hidden]:not([hidden="until-found"])) {
+  :where([hidden]:not([hidden='until-found'])) {
     display: none !important;
   }
 
   /* Set core body defaults */
   :where(body) {
-    /* Changed to min- to prevent cropping */
-    min-height: 100vh;
-    /* min-block-size: 100vh; */
-
-    line-height: 1.5;
-    text-rendering: optimizeSpeed;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-
-    position: relative;
+    min-block-size: 100vh;
   }
 
   :where(h1, h2, h3) {
@@ -95,7 +86,7 @@ Version: 01
     font: inherit;
     color: inherit;
   }
-  :where(button, label, select, summary, [role="button"], [role="option"]) {
+  :where(button, label, select, summary, [role='button'], [role='option']) {
     @apply cursor-pointer;
   }
   :where(textarea) {
@@ -109,22 +100,21 @@ Version: 01
     cursor: not-allowed;
   }
 
-  :where(img, svg, video, canvas, audio, iframe, embed, object) {
-    display: block;
+  /* Remove list styles on ul, ol elements  */
+  :where(ul, ol) {
+    list-style: none;
   }
-  :where(img, picture, svg) {
-    max-inline-size: 100%;
-    block-size: auto;
-  }
+
   @media not all and (min-resolution: 0.001dpcm) {
-    :where(img[loading="lazy"]) {
+    :where(img[loading='lazy']) {
       clip-path: inset(0.5px);
     }
   }
-  :where(svg) {
-    --clr-icon--svg: currentColor;
-  }
 
+  :where(svg[class]) {
+    --clr-icon: currentColor;
+    fill: currentColor;
+  }
   /* Anchor elements that don't have a class get default styles */
   :where(a) {
     text-decoration: none;
@@ -132,6 +122,11 @@ Version: 01
   }
   :where(a:not([class])) {
     text-decoration-skip-ink: auto;
+  }
+
+  :where(:focus-visible) {
+    outline: 2px solid var(--focus-color, Highlight);
+    outline-offset: 2px;
   }
 
   @media (prefers-reduced-motion: no-preference) {
@@ -158,31 +153,7 @@ Version: 01
 
   /* *********** TYPOGRAPHY  ************* */
   :where(body) {
-    @apply bg-brand-100 text-brand-900 dark:bg-brand-800 font-sans dark:text-neutral-100;
-  }
-
-  :is(h1, h2, h3, h4, .body-200) {
-    @apply font-bold;
-  }
-
-  h1 {
-    @apply text-700 leading-500;
-  }
-  h2 {
-    @apply text-600 leading-400;
-  }
-  h3 {
-    @apply text-500 leading-300;
-  }
-  h4 {
-    @apply text-brand-400 text-300 leading-200 tracking-100;
-  }
-
-  .body-100 {
-    @apply text-400 font-medium leading-400;
-  }
-  .body-200 {
-    @apply text-300 leading-200 tracking-100;
+    transition: background-color 300ms ease-in-out 200ms;
   }
 
   /* :where(li a) {
@@ -203,19 +174,16 @@ Version: 01
 @layer components {
   /* ********** BUTTONS ********** */
   .btn {
-    @apply inline-flex items-center rounded-pill py-4 px-24 text-400 font-bold leading-400 text-neutral-100 transition-colors;
+    @apply inline-flex items-center rounded-pill px-24 py-4 text-400 font-bold leading-400 text-white transition-colors;
   }
   .btn-brand--sm {
     @apply bg-brand-500 hover:bg-brand-300;
   }
   .btn-brand--xl {
-    @apply bg-brand-500 hover:bg-brand-300 text-500 leading-300;
+    @apply bg-brand-500 text-500 leading-300 hover:bg-brand-300;
   }
   .btn-accent {
-    @apply bg-brand-500/10 text-brand-500 hover:bg-brand-500/25 dark:bg-neutral-100;
-  }
-  .btn-delete {
-    @apply bg-accent-200 hover:bg-accent-100;
+    @apply bg-brand-500/10 text-brand-500 hover:bg-brand-500/25 dark:bg-white;
   }
 
   /* .logo {
@@ -235,7 +203,7 @@ Version: 01
  */
 @layer utilities {
   .skip-to-content {
-    @apply bg-brand-500 focus:outline-brand-300 absolute z-[9999]  mx-auto translate-y-[-120%] py-[1em] px-[0.5em] text-neutral-100 transition-transform focus:translate-y-0 focus:outline focus:outline-offset-2;
+    @apply absolute z-[9999] mx-auto translate-y-[-120%]  bg-brand-500 px-[0.5em] py-[1em] text-white transition-transform focus:translate-y-0 focus:outline focus:outline-offset-2 focus:outline-brand-300;
   }
 }
 
@@ -247,57 +215,3 @@ Version: 01
   * your stylesheet by default.
   */
 @tailwind variants;
-
-.modal {
-  border: 0;
-  max-width: 50rem;
-  margin: auto;
-  border-radius: 0.5rem;
-  box-shadow: 0 0 1em rgb(0 0 0 / 0.3), 0 0 0 100vw rgb(0 0 0 / 0.3);
-}
-/* .modal */
-.modal > * {
-  margin-block-end: 0.8rem;
-}
-
-.modal-content {
-  padding: 1.5em;
-}
-
-.modal::backdrop {
-  background-color: rgb(0 0 0 / 0.3);
-  /* opacity: 0.2; */
-}
-
-.modal[open] {
-  animation: slide-up 1000ms cubic-bezier(0.4, 0, 0.2, 1) forwards,
-    fade-in 500ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
-}
-
-.modal--closing {
-  animation: fade-out 500ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
-}
-@keyframes slide-up {
-  0% {
-    transform: translateY(100%);
-  }
-  100% {
-    transform: translateY(0%);
-  }
-}
-@keyframes fade-in {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-@keyframes fade-out {
-  100% {
-    opacity: 0;
-  }
-  0% {
-    opacity: 1;
-  }
-}
