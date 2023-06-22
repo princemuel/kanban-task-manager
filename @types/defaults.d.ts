@@ -26,7 +26,16 @@ type ReactSelectEvent = React.MouseEvent<HTMLLIElement>;
 type ReactInputEvent = React.ChangeEvent<HTMLInputElement>;
 type ReactMouseEvent = React.MouseEvent<HTMLButtonElement>;
 
-
+type ClassValue =
+  | ClassArray
+  | ClassDictionary
+  | string
+  | number
+  | null
+  | boolean
+  | undefined;
+type ClassDictionary = Record<string, any>;
+type ClassArray = ClassValue[];
 interface PropsWithChildren {
   children: React.ReactNode;
 }
