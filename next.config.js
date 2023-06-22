@@ -21,15 +21,13 @@ const nextConfig = {
       rule.test?.test?.('.svg')
     );
     config.module.rules.push(
-      // Reapply the existing rule, but only for svg imports not ending in ".inline.svg"
       {
         ...fileLoaderRule,
         test: /(?<!inline)\.svg$/i,
       },
-      // Convert all other *.svg imports to React components
+
       {
         test: /\.inline.svg$/i,
-        issuer: /\.[jt]sx?$/,
         use: [
           {
             loader: '@svgr/webpack',
