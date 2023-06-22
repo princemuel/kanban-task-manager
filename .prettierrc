@@ -11,11 +11,11 @@
   "tabWidth": 2,
   "arrowParens": "always",
   "semi": true,
-  "jsxBracketSameLine": false,
   "jsxSingleQuote": true,
   "useTabs": false,
 
   "tailwindConfig": "./tailwind.config.js",
-  "tailwindFunctions": ["cx"],
-  "tailwindAttributes": ["tw"]
+  "tailwindFunctions": ["cn"],
+  "tailwindAttributes": ["tw"],
+  "plugins": ["prettier-plugin-prisma", "prettier-plugin-tailwindcss"]
 }
