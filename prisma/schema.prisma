@@ -20,9 +20,11 @@ model User {
   password      String?
   emailVerified DateTime? @map("email_verified")
   image         String?
-  accounts      Account[]
-  sessions      Session[]
-  boards        Board[]
+
+  boards Board[]
+
+  accounts Account[]
+  sessions Session[]
 
   @@map("users")
 }
@@ -44,11 +46,12 @@ model Board {
 }
 
 model Column {
-  id        String    @id @default(auto()) @map("_id") @db.ObjectId
-  createdAt DateTime  @default(now())
-  updatedAt DateTime? @updatedAt
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt DateTime @default(now())
 
   name String
+
+  tasks Task[]
 
   board   Board?  @relation(fields: [boardId], references: [id], onDelete: Cascade)
   boardId String? @db.ObjectId
@@ -65,18 +68,30 @@ model Task {
   title       String
   description String
   status      String
-  subtasks    SubTask[]
 
-  board   Board?  @relation(fields: [boardId], references: [id], onDelete: Cascade)
-  boardId String? @db.ObjectId
+  order    Int?
+  subtasks SubTask[]
+
+  board    Board?  @relation(fields: [boardId], references: [id], onDelete: Cascade)
+  boardId  String? @db.ObjectId
+  Column   Column? @relation(fields: [columnId], references: [id], onDelete: Cascade)
+  columnId String? @db.ObjectId
 
   @@unique([title])
+  @@index([order, id])
   @@map("tasks")
 }
 
-type SubTask {
+model SubTask {
+  id    String  @id @default(auto()) @map("_id") @db.ObjectId
   title String
   done  Boolean @default(false)
+
+  Task   Task?   @relation(fields: [taskId], references: [id], onDelete: Cascade)
+  taskId String? @db.ObjectId
+
+  @@unique([title])
+  @@map("subtasks")
 }
 
 model Account {
