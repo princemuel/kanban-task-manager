@@ -3,7 +3,7 @@ const plugin = require('tailwindcss/plugin');
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  darkMode: ['class', '[data-color="dark"]'],
+  darkMode: ['class', '[data-theme="dark"]'],
   content: [
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
     './components/**/*.{js,ts,jsx,tsx,mdx}',
@@ -78,10 +78,46 @@ module.exports = {
         100: '0px 4px 6px rgba(54, 78, 126, 0.101545)',
         200: 'inset 2px 2px 2px rgb(0 0% 0% / 0.5%), inset -2px -2px 2px rgb(0 0 0 / 0.5%)',
       },
+      keyframes: {
+        'slide-in-from-left': {
+          '0%': { transform: 'translateX(-100%)' },
+          '100%': { transform: 'translateX(0)' },
+        },
+        'slide-out-to-left': {
+          '0%': { transform: 'translateX(0)' },
+          '100%': { transform: 'translateX(-100%)' },
+        },
+      },
+      animation: {
+        'slide-in':
+          'slide-in-from-left 300ms cubic-bezier(0.82, 0.085, 0.395, 0.895)',
+        'slide-out':
+          'slide-out-to-left 250ms cubic-bezier(0.82, 0.085, 0.395, 0.895)',
+      },
     },
   },
   plugins: [
     require('tailwind-scrollbar')({ nocompatible: true }),
     require('@headlessui/tailwindcss')({ prefix: 'ui' }),
+
+    plugin(function ({ addUtilities }) {
+      addUtilities({
+        '.fw-shadow': {
+          boxShadow: '0 0 0 100vmax currentColor, 0 0 2rem currentColor',
+          clipPath: 'inset(0 -100vmax)',
+        },
+        '.h-container': {
+          '--mx-width': '111rem',
+          '--padding': '1.6rem',
+          width: 'min(var(--mx-width),100% - (var(--padding) * 2))',
+          marginInline: 'auto',
+        },
+        '.grid-auto-fit': {
+          '--min-col-size': '22rem',
+          gridTemplateColumns:
+            'repeat(auto-fit, minmax(min(var(--min-col-size), 100%), 1fr))',
+        },
+      });
+    }),
   ],
 };
