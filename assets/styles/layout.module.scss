@@ -1,0 +1,27 @@
+.body {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 8rem 1fr;
+
+  grid-template-areas: 'header' 'content';
+}
+
+.header {
+  display: grid;
+  grid-template-columns: 25rem 1fr;
+}
+
+.content {
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: 25rem 1fr;
+  grid-template-areas: 'aside main';
+}
+
+.sidebar {
+  grid-area: aside;
+}
+
+.content > main {
+  grid-area: main;
+}

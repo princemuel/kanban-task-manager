@@ -7,8 +7,8 @@ import Link from 'next/link';
 interface Props {}
 
 const LogoIcon = (props: Props) => {
-  const { isDarkMode } = useThemeMode();
-  // if (!isMounted) return null;
+  const { isMounted, isDarkMode } = useThemeMode();
+  if (!isMounted) return null;
 
   return (
     <Link href={'/'} className='flex items-center' title='Home Logo'>

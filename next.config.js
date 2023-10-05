@@ -7,9 +7,6 @@ const nextConfig = {
   experimental: {
     typedRoutes: true,
     webVitalsAttribution: ['CLS', 'LCP'],
-    // turbo: {
-    //   loaders: { '.svg': ['@svgr/webpack'] },
-    // },
   },
   webpack(config, { isServer }) {
     if (!isServer) {
