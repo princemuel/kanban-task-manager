@@ -7,13 +7,9 @@ const customTwMerge = extendTailwindMerge({
   },
 });
 
-const cn = (...args: ClassValue[]) => {
-  const modified = cx(args);
-  const merged = customTwMerge(modified);
-  return merged;
-};
-
-export { cn };
+export function cn(...args: ClassValue[]) {
+  return customTwMerge(cx(args));
+}
 
 /*---------------------------------*
             STRING UTILS           *
