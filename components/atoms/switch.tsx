@@ -1,9 +1,10 @@
 'use client';
 
+import { Fragment } from 'react';
+
 import { cn, useThemeMode } from '@/lib';
 import { Switch as HeadlessSwitch } from '@headlessui/react';
 import { cx } from 'cva';
-import { Fragment } from 'react';
 
 interface Props {}
 

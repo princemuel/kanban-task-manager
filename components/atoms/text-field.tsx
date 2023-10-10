@@ -1,29 +1,21 @@
-import * as React from "react";
-import { clsx } from "utilities";
+import { cn } from '@/helpers';
+import * as React from 'react';
 
-type TextFieldProps<E extends React.ElementType<any>> = {
-  className?: string;
-  variant?: E;
-};
+interface Props extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {}
 
-type Props<E extends React.ElementType<any>> = TextFieldProps<E> &
-  Omit<React.ComponentPropsWithRef<E>, keyof TextFieldProps<E>>;
+export const TextArea = React.forwardRef<HTMLTextAreaElement, Props>(
+  ({ className, ...rest }, forwardedRef) => {
+    return (
+      <textarea
+        className={cn(
+          'rounded-300 w-full border border-brand-400/25 bg-inherit px-6 py-4 text-400 font-medium leading-400 placeholder:text-brand-900/25 focus:outline-none dark:placeholder:text-white/25',
+          className
+        )}
+        {...rest}
+        ref={forwardedRef}
+      />
+    );
+  }
+);
 
-const TextFieldInner = <E extends React.ElementType = "textarea">(
-  { variant, className, ...rest }: Props<E>,
-  ref: React.ForwardedRef<HTMLTextAreaElement>
-) => {
-  const RenderedElement = variant || "textarea";
-  return (
-    <RenderedElement
-      className={clsx(
-        "border-brand-400/25 placeholder:text-brand-900/25 w-full rounded-300 border bg-inherit py-4 px-6 text-400 font-medium leading-400 focus:outline-none dark:placeholder:text-neutral-100/25",
-        className || null
-      )}
-      {...rest}
-      ref={ref}
-    />
-  );
-};
-
-export const TextField = React.forwardRef(TextFieldInner);
+TextArea.displayName = 'TextArea';
