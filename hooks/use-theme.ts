@@ -1,24 +1,36 @@
 'use client';
 
 import { useTheme } from 'next-themes';
-import { useCallback, useEffect, useState } from 'react';
+import {
+  startTransition,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react';
 
 export const useThemeMode = () => {
   const { setTheme, resolvedTheme } = useTheme();
-  const [isMounted, setIsMounted] = useState(false);
+  const [hasMounted, setHasMounted] = useState(false);
 
-  useEffect(() => {
-    setIsMounted(true);
-    return () => {
-      setIsMounted(false);
-    };
-  }, []);
+  useEffect(() => setHasMounted(true), []);
 
-  const isDarkMode = resolvedTheme === 'dark';
+  const isDark = resolvedTheme === 'dark';
 
   const updateTheme = useCallback(() => {
-    setTheme(isDarkMode ? 'light' : 'dark');
-  }, [isDarkMode, setTheme]);
+    startTransition(() => {
+      setTheme(isDark ? 'light' : 'dark');
+    });
+  }, [isDark, setTheme]);
 
-  return { isMounted, isDarkMode, updateTheme };
+  const { hasMounted: isMounted, isDark: isDarkMode } = useMemo(
+    () => ({ hasMounted, isDark }),
+    [hasMounted, isDark]
+  );
+
+  return {
+    isMounted,
+    isDarkMode,
+    updateTheme,
+  };
 };
