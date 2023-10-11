@@ -7,6 +7,7 @@
   "author": "princemuel <vansomecsam@gmail.com>",
   "license": "MIT",
   "scripts": {
+    "prepare": "panda codegen",
     "dev": "rm -rvf .next && next dev",
     "build": "next build",
     "start": "next start",
@@ -55,6 +56,7 @@
     "zustand": "^4.4.2"
   },
   "devDependencies": {
+    "@pandacss/dev": "^0.15.5",
     "@svgr/webpack": "^8.1.0",
     "prettier": "^3.0.3",
     "prettier-plugin-prisma": "^5.0.0",
