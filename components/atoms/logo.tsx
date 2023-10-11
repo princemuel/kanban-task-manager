@@ -13,7 +13,11 @@ const LogoIcon = (props: Props) => {
   return (
     <Link href={'/'} className='flex items-center' title='Home Logo'>
       <span className='sr-only'>Home Logo</span>
-      {isDarkMode ? <icons.logo.dark /> : <icons.logo.light />}
+      {isDarkMode ? (
+        <icons.logo.dark aria-hidden='true' />
+      ) : (
+        <icons.logo.light aria-hidden='true' />
+      )}
     </Link>
   );
 };

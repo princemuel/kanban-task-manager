@@ -1,4 +1,4 @@
-import { cn } from '@/lib';
+import { cn } from '@/helpers';
 import type { VariantProps } from 'cva';
 import { cva } from 'cva';
 
@@ -41,7 +41,6 @@ const textVariants = cva('', {
 interface TextVariants extends VariantProps<typeof textVariants> {}
 const text = (variants: TextVariants, className = '') =>
   cn(textVariants(variants), className);
-// const text = (variants: TextVariants) => textVariants(variants);
 
 type Props<E extends React.ElementType = 'p'> = ElementProps<E> & TextVariants;
 

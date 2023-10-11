@@ -1,29 +1,21 @@
-import * as React from "react";
-import { clsx } from "utilities";
+import { cn } from '@/helpers';
+import * as React from 'react';
 
-type FormInputProps<E extends React.ElementType<any>> = {
-  className?: string;
-  variant?: E;
-};
+interface Props extends React.InputHTMLAttributes<HTMLInputElement> {}
 
-type Props<E extends React.ElementType<any>> = FormInputProps<E> &
-  Omit<React.ComponentPropsWithRef<E>, keyof FormInputProps<E>>;
+const FormInput = React.forwardRef<HTMLInputElement, Props>(
+  ({ className, ...rest }, forwardedRef) => {
+    return (
+      <input
+        className={cn(
+          'rounded-300 w-full border border-brand-400/25 bg-inherit px-6 py-4 text-400 font-medium leading-400 placeholder:text-brand-900/25 focus:outline-none dark:placeholder:text-white/25',
+          className
+        )}
+        {...rest}
+        ref={forwardedRef}
+      />
+    );
+  }
+);
 
-const FormInputInner = <E extends React.ElementType = "input">(
-  { variant, className, ...rest }: Props<E>,
-  ref: React.ForwardedRef<HTMLInputElement>
-) => {
-  const RenderedElement = variant || "input";
-  return (
-    <RenderedElement
-      className={clsx(
-        "border-brand-400/25 placeholder:text-brand-900/25 w-full rounded-300 border bg-inherit py-4 px-6 text-400 font-medium leading-400 focus:outline-none dark:placeholder:text-neutral-100/25",
-        className || null
-      )}
-      {...rest}
-      ref={ref}
-    />
-  );
-};
-
-export const FormInput = React.forwardRef(FormInputInner);
+FormInput.displayName = 'FormInput';

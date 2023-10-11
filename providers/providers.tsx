@@ -12,7 +12,7 @@ export function Providers({ children }: Props) {
       storageKey='ktm-theme'
       defaultTheme='system'
       enableSystem={true}
-      attribute='data-color'
+      attribute='data-theme'
       // disableTransitionOnChange
     >
       {children}

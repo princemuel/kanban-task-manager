@@ -1,5 +1,5 @@
 import { icons } from '@/common';
-import { cn } from '@/lib';
+import { cn } from '@/helpers';
 import { Switch } from '../atoms';
 
 interface Props {

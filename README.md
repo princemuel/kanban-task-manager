@@ -32,7 +32,7 @@ This project uses the STAR approach. Find out more about the Kanban methodology 
 
 ### Project Links
 
-Press `.` on the keyboard to view this project's code in `github.dev` just like in `Visual Studio Code`
+Press <kbd>.</kbd> on the keyboard to view this project's code in the _`github.dev`_ code editor just like in _`Visual Studio Code`_
 
 - Solution URL: [Repository](https://github.com/princemuel/kanban-task-manager)
 - Live Site URL: [Live Site](https://kanban-tm.vercel.app/)
