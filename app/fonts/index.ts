@@ -1,3 +1,4 @@
+import { cx } from '@/styled-system/css';
 import { Plus_Jakarta_Sans } from 'next/font/google';
 
 const Font_Sans = Plus_Jakarta_Sans({
@@ -7,4 +8,4 @@ const Font_Sans = Plus_Jakarta_Sans({
   subsets: ['latin'],
 });
 
-export const fonts = Font_Sans.variable;
+export const fontVars = cx(Font_Sans.variable);
