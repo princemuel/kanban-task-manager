@@ -56,6 +56,7 @@
     "zustand": "^4.4.2"
   },
   "devDependencies": {
+    "@csstools/postcss-cascade-layers": "^4.0.0",
     "@pandacss/dev": "^0.15.5",
     "@svgr/webpack": "^8.1.0",
     "prettier": "^3.0.3",

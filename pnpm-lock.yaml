@@ -88,6 +88,9 @@ dependencies:
     version: 4.4.2(@types/react@18.2.24)(immer@10.0.3)(react@18.2.0)
 
 devDependencies:
+  '@csstools/postcss-cascade-layers':
+    specifier: ^4.0.0
+    version: 4.0.0(postcss@8.4.31)
   '@pandacss/dev':
     specifier: ^0.15.5
     version: 0.15.5(@internationalized/date@3.5.0)(@types/node@20.8.2)(@types/react-dom@18.2.8)(@types/react@18.2.24)(sass@1.68.0)(typescript@5.2.2)
@@ -1561,6 +1564,26 @@ packages:
     engines: {node: '>=12'}
     dependencies:
       '@jridgewell/trace-mapping': 0.3.9
+    dev: true
+
+  /@csstools/postcss-cascade-layers@4.0.0(postcss@8.4.31):
+    resolution: {integrity: sha512-dVPVVqQG0FixjM9CG/+8eHTsCAxRKqmNh6H69IpruolPlnEF1611f2AoLK8TijTSAsqBSclKd4WHs1KUb/LdJw==}
+    engines: {node: ^14 || ^16 || >=18}
+    peerDependencies:
+      postcss: ^8.4
+    dependencies:
+      '@csstools/selector-specificity': 3.0.0(postcss-selector-parser@6.0.13)
+      postcss: 8.4.31
+      postcss-selector-parser: 6.0.13
+    dev: true
+
+  /@csstools/selector-specificity@3.0.0(postcss-selector-parser@6.0.13):
+    resolution: {integrity: sha512-hBI9tfBtuPIi885ZsZ32IMEU/5nlZH/KOVYJCOh7gyMxaVLGmLedYqFN6Ui1LXkI8JlC8IsuC0rF0btcRZKd5g==}
+    engines: {node: ^14 || ^16 || >=18}
+    peerDependencies:
+      postcss-selector-parser: ^6.0.13
+    dependencies:
+      postcss-selector-parser: 6.0.13
     dev: true
 
   /@edge-runtime/cookies@3.4.1:
