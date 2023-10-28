@@ -1,8 +1,9 @@
 const defaultTheme = require('tailwindcss/defaultTheme');
 const plugin = require('tailwindcss/plugin');
+const { withTV } = require('tailwind-variants/transformer');
 
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+module.exports = withTV({
   darkMode: ['class', '[data-theme="dark"]'],
   content: [
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
@@ -92,4 +93,4 @@ module.exports = {
       });
     }),
   ],
-};
+});
