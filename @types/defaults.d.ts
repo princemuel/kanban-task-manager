@@ -7,8 +7,8 @@ type ReactInputEvent = React.ChangeEvent<HTMLInputElement>;
 type ReactMouseEvent = React.MouseEvent<HTMLButtonElement>;
 
 /*==============================*
-      ELEMENT TYPES
-      ==============================*/
+        ELEMENT TYPES
+  ==============================*/
 type $ElementProps<E extends React.ElementType<any>> = {
   children: React.ReactNode;
   as?: E;
@@ -117,6 +117,10 @@ type NarrowIntrinsic<E> = E extends keyof JSX.IntrinsicElements ? E : never;
 interface IParams {
   [key: string]: string | undefined;
 }
+
+type Callback<T> = (data: T) => void;
+
+type Level = [0, 1, 2, 3, 4, 5, 6][number];
 
 interface CSSCustomProps extends React.CSSProperties {
   '--min-col-size': string;
