@@ -15,7 +15,7 @@
   "useTabs": false,
 
   "tailwindConfig": "./tailwind.config.js",
-  "tailwindFunctions": ["cn"],
+  "tailwindFunctions": ["cn", "tv"],
   "tailwindAttributes": ["tw"],
 
   "plugins": ["prettier-plugin-prisma", "prettier-plugin-tailwindcss"]

@@ -2,8 +2,9 @@
 const nextConfig = {
   compiler: {
     removeConsole: process.env.NODE_ENV === 'production',
+    reactRemoveProperties: process.env.NODE_ENV === 'production',
   },
-  reactStrictMode: true,
+  productionBrowserSourceMaps: true,
   experimental: {
     typedRoutes: true,
     webVitalsAttribution: ['CLS', 'LCP'],
