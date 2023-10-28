@@ -1,4 +1,4 @@
-import { cn } from '@/helpers';
+import { twcn } from '@/helpers';
 import { Plus_Jakarta_Sans } from 'next/font/google';
 
 const Font_Sans = Plus_Jakarta_Sans({
@@ -8,4 +8,4 @@ const Font_Sans = Plus_Jakarta_Sans({
   subsets: ['latin'],
 });
 
-export const fontVars = cn(Font_Sans.variable);
+export const fontVars = twcn(Font_Sans.variable);

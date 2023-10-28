@@ -11,7 +11,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang='en' dir='ltr' suppressHydrationWarning className={fontVars}>
-      <body className=''>
+      <body className='font-sans text-brand-900 dark:text-white'>
         <RootProvider>
           {children}
 
