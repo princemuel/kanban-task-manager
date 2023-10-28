@@ -1,7 +1,6 @@
 'use client';
 
 import { ThemeProvider as NextThemesProvider } from 'next-themes';
-
 import ModalManager from './modal-manager';
 
 export default function RootProvider({
@@ -20,5 +19,3 @@ export default function RootProvider({
     </NextThemesProvider>
   );
 }
-
-// export default RootProviders;
