@@ -24,7 +24,7 @@ pids
 *.pid.lock
 
 # Editor directories and files
-.vscode/*
+# .vscode/*
 !.vscode/extensions.json
 .idea
 *.suo
@@ -172,3 +172,5 @@ local
 
 *.pem
 *.local.*
+
+styled-system

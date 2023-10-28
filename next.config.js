@@ -2,18 +2,14 @@
 const nextConfig = {
   compiler: {
     removeConsole: process.env.NODE_ENV === 'production',
+    reactRemoveProperties: process.env.NODE_ENV === 'production',
   },
-  reactStrictMode: true,
+  productionBrowserSourceMaps: true,
   experimental: {
     typedRoutes: true,
     webVitalsAttribution: ['CLS', 'LCP'],
   },
-  webpack(config, { isServer }) {
-    if (!isServer) {
-      config.resolve.fallback = {
-        fs: false,
-      };
-    }
+  webpack(config) {
     const fileLoaderRule = config.module.rules.find((rule) =>
       rule.test?.test?.('.svg')
     );

@@ -1,14 +1,8 @@
-import styles from '@/assets/styles/layout.module.scss';
-import { BaseLayout } from '@/components';
-import { defineMeta } from '@/config';
-import { cn } from '@/helpers';
-import { Providers } from '@/providers';
+import RootProvider from '@/providers';
 import { Analytics } from '@vercel/analytics/react';
 import * as React from 'react';
-import { fonts } from './fonts';
+import { fontVars } from './fonts';
 import './globals.css';
-
-export const metadata = defineMeta();
 
 export default function RootLayout({
   children,
@@ -16,19 +10,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html
-      lang='en'
-      suppressHydrationWarning
-      className={cn(
-        'scrollbar-thin scrollbar-track-rounded-md scrollbar-thumb-rounded-md',
-        fonts
-      )}
-    >
-      <body className={cn('relative antialiased', styles.body)}>
-        <Providers>
-          <BaseLayout>{children}</BaseLayout>
-        </Providers>
-        <Analytics />
+    <html lang='en' dir='ltr' suppressHydrationWarning className={fontVars}>
+      <body className=''>
+        <RootProvider>
+          {children}
+
+          <Analytics />
+        </RootProvider>
       </body>
     </html>
   );
