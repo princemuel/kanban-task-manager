@@ -1,3 +1,4 @@
+import { BaseLayout } from '@/components';
 import RootProvider from '@/providers';
 import { Analytics } from '@vercel/analytics/react';
 import * as React from 'react';
@@ -13,9 +14,8 @@ export default function RootLayout({
     <html lang='en' dir='ltr' suppressHydrationWarning className={fontVars}>
       <body className='font-sans text-brand-900 dark:text-white'>
         <RootProvider>
-          {children}
-
           <Analytics />
+          <BaseLayout>{children}</BaseLayout>
         </RootProvider>
       </body>
     </html>
