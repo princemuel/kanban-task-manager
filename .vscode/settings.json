@@ -1,0 +1,25 @@
+{
+  "editor.tabSize": 2,
+
+  "editor.inlineSuggest.enabled": true,
+  "editor.wordWrap": "bounded",
+  "editor.wordWrapColumn": 96,
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": "explicit",
+    "source.addMissingImports": true,
+    "source.fixAll": "explicit",
+    "source.fixAll.eslint": false
+  },
+  "eslint.codeAction.showDocumentation": {
+    "enable": true
+  },
+
+  "tailwindCSS.rootFontSize": 16,
+  "tailwindCSS.experimental.classRegex": [
+    ["tv\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"]
+  ],
+  "editor.bracketPairColorization.independentColorPoolPerBracketType": true,
+  "dotenv.enableAutocloaking": false,
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true
+}
