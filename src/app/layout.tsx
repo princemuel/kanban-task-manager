@@ -1,5 +1,5 @@
-import { BaseLayout } from '@/src/components';
-import RootProvider from '@/src/providers';
+import { BaseLayout } from '@/components';
+import GlobalProviders from '@/providers';
 import { Analytics } from '@vercel/analytics/react';
 import * as React from 'react';
 import { fontVars } from './fonts';
@@ -13,7 +13,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang='en' dir='ltr' className={fontVars} suppressHydrationWarning>
-      <body className='font-sans text-brand-900 dark:text-white'>
+      <body className='font-sans text-brand-900 antialiased dark:text-white'>
         <GlobalProviders>
           <Analytics />
           <BaseLayout>{children}</BaseLayout>

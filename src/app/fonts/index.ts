@@ -1,4 +1,4 @@
-import { twcn } from '@/src/helpers';
+import { twcn } from '@/helpers';
 import { Plus_Jakarta_Sans } from 'next/font/google';
 
 const Font_Sans = Plus_Jakarta_Sans({
