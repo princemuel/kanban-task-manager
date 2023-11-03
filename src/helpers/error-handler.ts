@@ -1,5 +1,5 @@
-import { z } from 'zod';
 import { HttpError, isHttpError } from 'http-errors-enhanced';
+import { z } from 'zod';
 
 export function handleServerError(exception: unknown) {
   // Errors with statusCode >= 500 are should not be exposed

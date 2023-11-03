@@ -1,5 +1,6 @@
 'use client';
 
+import { SessionProvider } from 'next-auth/react';
 import { ThemeProvider as NextThemesProvider } from 'next-themes';
 import ModalManager from './modal-manager';
 
@@ -15,7 +16,9 @@ export default function RootProvider({
       enableSystem={true}
       attribute='data-theme'
     >
-      <ModalManager.Provider>{children}</ModalManager.Provider>
+      <SessionProvider>
+        <ModalManager.Provider>{children}</ModalManager.Provider>
+      </SessionProvider>
     </NextThemesProvider>
   );
 }

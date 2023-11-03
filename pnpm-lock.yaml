@@ -93,8 +93,8 @@ dependencies:
     specifier: ^1.69.5
     version: 1.69.5
   tailwind-variants:
-    specifier: ^0.1.17
-    version: 0.1.17(tailwindcss@3.3.5)
+    specifier: ^0.1.18
+    version: 0.1.18(tailwindcss@3.3.5)
   tailwindcss:
     specifier: 3.3.5
     version: 3.3.5
@@ -105,8 +105,8 @@ dependencies:
     specifier: ^3.22.4
     version: 3.22.4
   zustand:
-    specifier: ^4.4.5
-    version: 4.4.5(@types/react@18.2.34)(immer@10.0.3)(react@18.2.0)
+    specifier: ^4.4.6
+    version: 4.4.6(@types/react@18.2.34)(immer@10.0.3)(react@18.2.0)
 
 devDependencies:
   '@svgr/webpack':
@@ -6243,8 +6243,8 @@ packages:
       tailwindcss: 3.3.5
     dev: true
 
-  /tailwind-variants@0.1.17(tailwindcss@3.3.5):
-    resolution: {integrity: sha512-EJsiQPCdFbTEju6mW8xL/QQnSl1LBVWowhCfjvHTK4JLuOzpXD5+47q1nWNhSOa2W42mJGtY9d5TAtmnAfdK4g==}
+  /tailwind-variants@0.1.18(tailwindcss@3.3.5):
+    resolution: {integrity: sha512-yoydMYm3FbZRw7wak+E2sqwYv2Uo3YWRqVZR03DGqDGm0ytzDrEnWO/Q/GMHdhaz8adOvycKw/bwCgQFCfmfhg==}
     engines: {node: '>=16.x', pnpm: '>=7.x'}
     peerDependencies:
       tailwindcss: '*'
@@ -6861,8 +6861,8 @@ packages:
     resolution: {integrity: sha512-iC+8Io04lddc+mVqQ9AZ7OQ2MrUKGN+oIQyq1vemgt46jwCwLfhq7/pwnBnNXXXZb8VTVLKwp9EDkx+ryxIWmg==}
     dev: false
 
-  /zustand@4.4.5(@types/react@18.2.34)(immer@10.0.3)(react@18.2.0):
-    resolution: {integrity: sha512-jgIrBBLKncQW74PA2Lclct3gwD4aPughwGE4FqlXrv3rDqQox7JCn8rwUiFK6ygJcbBAvfTf8fF+ICg7HLD2FQ==}
+  /zustand@4.4.6(@types/react@18.2.34)(immer@10.0.3)(react@18.2.0):
+    resolution: {integrity: sha512-Rb16eW55gqL4W2XZpJh0fnrATxYEG3Apl2gfHTyDSE965x/zxslTikpNch0JgNjJA9zK6gEFW8Fl6d1rTZaqgg==}
     engines: {node: '>=12.7.0'}
     peerDependencies:
       '@types/react': '>=16.8'
