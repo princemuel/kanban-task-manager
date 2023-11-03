@@ -1,3 +1,69 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  :root {
+    isolation: isolate;
+    scroll-padding-top: 2em;
+  }
+
+  html {
+    box-sizing: border-box;
+    text-rendering: optimizeSpeed;
+    text-size-adjust: none;
+    touch-action: manipulation;
+  }
+
+  *::before,
+  *::after {
+    margin: 0;
+    padding: 0;
+    font: inherit;
+    box-sizing: inherit;
+  }
+
+  :where(body) {
+    min-block-size: 100vh;
+    min-block-size: 100dvh;
+  }
+
+  :is(
+      a,
+      button,
+      label,
+      select,
+      summary,
+      [role='button'],
+      [role='option'],
+      [role='menuitem']
+    ) {
+    @apply cursor-pointer;
+  }
+
+  @media not all and (min-resolution: 0.001dpcm) {
+    :where(img[loading='lazy']) {
+      clip-path: inset(0.5px);
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    :where(html:focus-within) {
+      scroll-behavior: smooth;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html:focus-within {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
