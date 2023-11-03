@@ -1,8 +1,8 @@
 import { z } from 'zod';
 
 /**
- * Specify your server-side environment variables schema here. This way you can ensure the app isn't
- * built with invalid env vars.
+ * Specify your server-side environment variables schema here.
+ * This way you can ensure the app isn't built with invalid env vars.
  */
 const server = z.object({
   DATABASE_URL: z.string().url(),
@@ -23,6 +23,10 @@ const server = z.object({
   GITHUB_SECRET: z.string().min(1),
   GOOGLE_ID: z.string().min(1),
   GOOGLE_SECRET: z.string().min(1),
+
+  RESEND_API_KEY: z.string().min(1),
+
+  PORT: z.number().optional(),
 });
 
 /**
@@ -31,6 +35,7 @@ const server = z.object({
  */
 const client = z.object({
   // NEXT_PUBLIC_CLIENTVAR: z.string().min(1),
+  NEXT_PUBLIC_VERCEL_URL: z.string().min(1).optional(),
 });
 
 /**
@@ -48,6 +53,7 @@ const processEnv = {
   GITHUB_SECRET: process.env.GITHUB_SECRET,
   GOOGLE_ID: process.env.GOOGLE_ID,
   GOOGLE_SECRET: process.env.GOOGLE_SECRET,
+  RESEND_API_KEY: process.env.RESEND_API_KEY,
   // NEXT_PUBLIC_CLIENTVAR: process.env.NEXT_PUBLIC_CLIENTVAR,
 };
 
