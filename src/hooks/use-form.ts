@@ -1,32 +1,40 @@
-// 'use client';
+'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { UseFormProps, useForm } from 'react-hook-form';
-import type { ZodType } from 'zod';
+import { SubmitHandler, UseFormProps, useForm } from 'react-hook-form';
+import * as z from 'zod';
 
-export function useZodForm<T extends ZodType<any, any, any>>({
-  schema,
-  ...restProps
-}: Omit<UseFormProps<T['_input']>, 'resolver'> & {
-  schema: T;
-}) {
+// React Hook Form Types
+export interface RHFormSubmitHandler<T extends z.ZodType<any, any, any>>
+  extends SubmitHandler<z.infer<T>> {}
+
+export function useZodForm<T extends z.ZodType<any, any, any>>(
+  props: Omit<UseFormProps<T['_input']>, 'resolver'> & {
+    schema: T;
+  }
+) {
+  const { schema, ...rest } = props;
+
   return useForm<T['_input']>({
-    ...restProps,
+    ...rest,
     resolver: async (data, context, options) => {
       // you can debug your validation schema here
       if (process.env.NODE_ENV !== 'production') {
-        console.log('FormData', data);
+        console.log('formData', data);
         console.log(
           'validation result',
-          await zodResolver(schema, undefined, {
-            raw: true,
-          })(data, context, options)
+          await zodResolver(schema, undefined, { mode: 'async' })(
+            data,
+            context,
+            options
+          )
         );
       }
-
-      return zodResolver(schema, undefined, {
-        raw: true,
-      })(data, context, options);
+      return zodResolver(schema, undefined, { mode: 'async' })(
+        data,
+        context,
+        options
+      );
     },
   });
 }
