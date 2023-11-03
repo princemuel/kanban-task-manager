@@ -1,4 +1,4 @@
-import { Button, FormInput } from '@/components';
+import { Button, FormInput } from '@/src/components';
 
 type Props = {};
 
