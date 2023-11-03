@@ -2,12 +2,12 @@ import { Slot } from '@radix-ui/react-slot';
 import * as React from 'react';
 import { tv, type VariantProps } from 'tailwind-variants';
 
-export type ButtonVariants = Omit<VariantProps<typeof button>, '_content'>;
-type ButtonProps = Partial<ButtonVariants> &
-  Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'disabled'> & {
-    asChild?: boolean;
-    disabled?: boolean;
-  };
+type ButtonVariants = Omit<VariantProps<typeof button>, '_content'>;
+type ButtonProps = Partial<ButtonVariants> & {
+  asChild?: boolean;
+  disabled?: boolean;
+  children?: React.ReactNode;
+};
 
 export const Button = React.forwardRef(
   (
@@ -28,6 +28,7 @@ export const Button = React.forwardRef(
     return (
       <As
         {...restProps}
+        ref={forwardedRef}
         className={button({
           intent,
           size,
@@ -36,7 +37,6 @@ export const Button = React.forwardRef(
           rounded,
           className,
         })}
-        ref={forwardedRef}
       />
     );
   }
@@ -152,3 +152,19 @@ const button = tv(
     responsiveVariants: true,
   }
 );
+
+// type RequiredVariantProps<
+//   T extends (...args: any) => any,
+//   // By default, all variants will be required
+//   Keys extends keyof VariantProps<T> = keyof VariantProps<T>,
+// > = Simplify<
+//   // Create an intersection of all variants with those being marked as required
+//   VariantProps<T> & {
+//     // For each variant being marked as required, remove null and undefined
+//     [Variant in Keys]: Exclude<VariantProps<T>[Variant], null | undefined>;
+//   }
+// >;
+
+// type Simplify<ObjectType> = {
+//   [KeyType in keyof ObjectType]: ObjectType[KeyType];
+// } & {};
