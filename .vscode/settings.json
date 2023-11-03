@@ -16,7 +16,7 @@
 
   "tailwindCSS.rootFontSize": 16,
   "tailwindCSS.experimental.classRegex": [
-    ["tv\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"]
+    ["tv\\((([^()]*|\\([^()]*\\))*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"]
   ],
   "editor.bracketPairColorization.independentColorPoolPerBracketType": true,
   "dotenv.enableAutocloaking": false,
