@@ -1,8 +1,11 @@
 import db from '@/app/db.server';
 import { env } from '@/env.mjs';
+import { sendVerificationRequest } from '@/lib';
 import { PrismaAdapter } from '@next-auth/prisma-adapter';
 import { HttpError } from 'http-errors-enhanced';
-import { AuthOptions, Session, TokenSet, getServerSession } from 'next-auth';
+import type { AuthOptions, Session, TokenSet } from 'next-auth';
+import { getServerSession } from 'next-auth';
+import DiscordProvider from 'next-auth/providers/discord';
 import GithubProvider from 'next-auth/providers/github';
 import GoogleProvider from 'next-auth/providers/google';
 
@@ -11,12 +14,14 @@ const {
   GITHUB_SECRET,
   GOOGLE_ID,
   GOOGLE_SECRET,
+  DISCORD_ID,
+  DISCORD_SECRET,
   NEXTAUTH_SECRET,
   NODE_ENV,
 } = env;
 
 /**
- * Options for NextAuth.js used to configure adapters, providers, callbacks, etc.
+ * Options for NextAuth.js used to configure adaptrs, providers, callbacks, etc.
  *
  * @see https://next-auth.js.org/configuration/options
  */
@@ -26,6 +31,10 @@ export const options: AuthOptions = {
     GithubProvider({
       clientId: GITHUB_ID,
       clientSecret: GITHUB_SECRET,
+    }),
+    DiscordProvider({
+      clientId: DISCORD_ID,
+      clientSecret: DISCORD_SECRET,
     }),
     GoogleProvider({
       clientId: GOOGLE_ID,
@@ -38,6 +47,14 @@ export const options: AuthOptions = {
         },
       },
     }),
+    {
+      id: 'resend',
+      name: 'Resend',
+      type: 'oauth',
+      // @ts-expect-error
+      sendVerificationRequest,
+    },
+
     /**
      * ...add more providers here.
      *

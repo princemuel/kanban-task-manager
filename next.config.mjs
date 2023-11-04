@@ -5,7 +5,7 @@
 !process.env.SKIP_ENV_VALIDATION && (await import('./src/env.mjs'));
 
 /** @type {import('next').NextConfig} */
-const nextConfig = {
+const config = {
   compiler: {
     removeConsole: process.env.NODE_ENV === 'production',
     reactRemoveProperties: process.env.NODE_ENV === 'production',
@@ -38,7 +38,6 @@ const nextConfig = {
       },
     ],
   },
-
   webpack(config) {
     const fileLoaderRule = config.module.rules.find((rule) =>
       rule.test?.test?.('.svg')
@@ -79,4 +78,4 @@ const nextConfig = {
   },
 };
 
-module.exports = nextConfig;
+export default config;
