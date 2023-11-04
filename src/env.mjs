@@ -5,7 +5,7 @@ import { z } from 'zod';
  * This way you can ensure the app isn't built with invalid env vars.
  */
 const server = z.object({
-  PORT: z.number().optional(),
+  PORT: z.coerce.number().optional(),
   NODE_ENV: z.enum(['development', 'test', 'production']),
 
   DATABASE_URL: z.string().url(),
