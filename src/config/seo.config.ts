@@ -6,7 +6,7 @@ type MetaFunction = (input?: Metadata) => Metadata;
 export const defineMeta: MetaFunction = (metadata) => {
   const defaultTitle: Metadata['title'] = 'Kanban TM';
   const defaultDescription: Metadata['description'] =
-    'The Kanban board is an easy-to-use agile project management tool using the Kanban methodology that is designed to bring clarity to your work process, and enhance productivity by minimizing work in progress and help you visualize and manage workflows.';
+    'Kanban TM is an easy-to-use agile project management tool using the Kanban methodology that is designed to bring clarity to your work process, and enhance productivity by minimizing work in progress and help you visualize and manage workflows.';
 
   return {
     title: {
