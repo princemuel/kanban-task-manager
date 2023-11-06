@@ -3,6 +3,7 @@
 import { SessionProvider } from 'next-auth/react';
 import { ThemeProvider as NextThemesProvider } from 'next-themes';
 import ModalManager from './modal-manager';
+import ToastManager from './toast-manager';
 
 export default function RootProvider({
   children,
@@ -18,6 +19,7 @@ export default function RootProvider({
     >
       <SessionProvider>
         <ModalManager.Provider>{children}</ModalManager.Provider>
+        <ToastManager />
       </SessionProvider>
     </NextThemesProvider>
   );
