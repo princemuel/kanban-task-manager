@@ -5,11 +5,7 @@ import { ThemeProvider as NextThemesProvider } from 'next-themes';
 import ModalManager from './modal-manager';
 import ToastManager from './toast-manager';
 
-export default function RootProvider({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+function RootProvider({ children }: { children: React.ReactNode }) {
   return (
     <NextThemesProvider
       storageKey='THEME_MODE'
@@ -24,3 +20,5 @@ export default function RootProvider({
     </NextThemesProvider>
   );
 }
+
+export default RootProvider;
