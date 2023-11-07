@@ -42,6 +42,7 @@ module.exports = withTV({
       },
       fontFamily: {
         sans: ['var(--font-sans)', ...defaultTheme.fontFamily.sans],
+        accent: ['var(--font-accent)', ...defaultTheme.fontFamily.sans],
       },
       fontSize: {
         100: '0.5rem',
