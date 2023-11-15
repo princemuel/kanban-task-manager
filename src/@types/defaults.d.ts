@@ -23,10 +23,10 @@ type SVGComponent = React.ComponentType<React.SVGAttributes<SVGSVGElement>>;
 type PropsFrom<O> = O extends React.FC<infer Props>
   ? Props
   : O extends React.Component<infer Props>
-  ? Props
-  : O extends object
-  ? { [Prop in keyof O]: O[Prop] }
-  : never;
+    ? Props
+    : O extends object
+      ? { [Prop in keyof O]: O[Prop] }
+      : never;
 
 /* -------------------------------------------------------------------------------------------------
  * ForwardRefComponent
@@ -57,10 +57,10 @@ interface ForwardRefComponent<
     props: As extends ''
       ? { as: keyof JSX.IntrinsicElements }
       : As extends React.ComponentType<infer P>
-      ? Merge<P, OwnProps & { as: As }>
-      : As extends keyof JSX.IntrinsicElements
-      ? Merge<JSX.IntrinsicElements[As], OwnProps & { as: As }>
-      : never
+        ? Merge<P, OwnProps & { as: As }>
+        : As extends keyof JSX.IntrinsicElements
+          ? Merge<JSX.IntrinsicElements[As], OwnProps & { as: As }>
+          : never
   ): React.ReactElement | null;
 }
 
@@ -76,10 +76,10 @@ interface MemoComponent<IntrinsicElementString, OwnProps = {}>
     props: As extends ''
       ? { as: keyof JSX.IntrinsicElements }
       : As extends React.ComponentType<infer P>
-      ? Merge<P, OwnProps & { as: As }>
-      : As extends keyof JSX.IntrinsicElements
-      ? Merge<JSX.IntrinsicElements[As], OwnProps & { as: As }>
-      : never
+        ? Merge<P, OwnProps & { as: As }>
+        : As extends keyof JSX.IntrinsicElements
+          ? Merge<JSX.IntrinsicElements[As], OwnProps & { as: As }>
+          : never
   ): React.ReactElement | null;
 }
 

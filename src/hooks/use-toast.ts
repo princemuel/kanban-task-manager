@@ -1,12 +1,12 @@
 'use client';
+
+import type { ToastActionElement, ToastProps } from '@/components';
 import * as React from 'react';
 
-import type { ToastActionElement, ToastProps } from '@/components/ui/toast';
+const TOAST_LIMIT = 10;
+const TOAST_EXPIRE_DISMISS_DELAY = 1000;
 
-const TOAST_LIMIT = 1;
-const TOAST_REMOVE_DELAY = 1000000;
-
-type ToasterToast = ToastProps & {
+type ToastType = ToastProps & {
   id: string;
   title?: React.ReactNode;
   description?: React.ReactNode;
@@ -14,35 +14,15 @@ type ToasterToast = ToastProps & {
 };
 
 let count = 0;
+let state: State = { toasts: [] };
+
+const subscribers = new Set<(state: State) => void>();
+const toastTimeouts = new Map<ToastType['id'], ReturnType<typeof setTimeout>>();
 
 function genId() {
   count = (count + 1) % Number.MAX_VALUE;
   return count.toString();
 }
-
-interface ToastState {
-  toasts: ToasterToast[];
-}
-
-type Action =
-  | {
-      type: 'toast/add';
-      payload: ToasterToast;
-    }
-  | {
-      type: 'toast/update';
-      payload: Partial<ToasterToast>;
-    }
-  | {
-      type: 'toast/dismiss';
-      payload?: ToasterToast['id'];
-    }
-  | {
-      type: 'toast/remove';
-      payload?: ToasterToast['id'];
-    };
-
-const toastTimeouts = new Map<string, ReturnType<typeof setTimeout>>();
 
 const addToRemoveQueue = (toastId: string) => {
   if (toastTimeouts.has(toastId)) return;
@@ -53,83 +33,22 @@ const addToRemoveQueue = (toastId: string) => {
       type: 'toast/remove',
       payload: toastId,
     });
-  }, TOAST_REMOVE_DELAY);
+  }, TOAST_EXPIRE_DISMISS_DELAY);
 
   toastTimeouts.set(toastId, timeout);
 };
 
-export const reducer = (state: ToastState, action: Action): ToastState => {
-  switch (action.type) {
-    case 'toast/add': {
-      return {
-        ...state,
-        toasts: [action.payload, ...state.toasts].slice(0, TOAST_LIMIT),
-      };
-    }
-
-    case 'toast/update': {
-      return {
-        ...state,
-        toasts: state.toasts.map((toast) =>
-          toast.id === action.payload.id
-            ? { ...toast, ...action.payload }
-            : toast
-        ),
-      };
-    }
-
-    case 'toast/dismiss': {
-      const { payload } = action;
-
-      // ! Side effects ! - This could be extracted into a dismissToast() action,
-      // but I'll keep it here for simplicity
-      !payload
-        ? state.toasts.forEach((toast) => {
-            addToRemoveQueue(toast.id);
-          })
-        : addToRemoveQueue(payload);
-
-      return {
-        ...state,
-        toasts: state.toasts.map((toast) =>
-          payload === undefined || toast.id === payload
-            ? {
-                ...toast,
-                open: false,
-              }
-            : toast
-        ),
-      };
-    }
-
-    case 'toast/remove': {
-      return Boolean(action.payload)
-        ? {
-            ...state,
-            toasts: [],
-          }
-        : {
-            ...state,
-            toasts: state.toasts.filter((t) => t.id !== action.payload),
-          };
-    }
-  }
+const clearFromRemoveQueue = (toastId: string) => {
+  const timeout = toastTimeouts.get(toastId);
+  if (timeout) clearTimeout(timeout);
 };
 
-let state: ToastState = { toasts: [] };
-const subscribers = new Set<(state: ToastState) => void>();
-
-function dispatch(action: Action) {
-  state = reducer(state, action);
-  subscribers.forEach((subscriber) => subscriber(state));
-}
-
-type Toast = Omit<ToasterToast, 'id'>;
+type Toast = Omit<ToastType, 'id'>;
 
 function toast({ duration = 3000, ...props }: Toast) {
   const id = genId();
 
-  const update = (props: ToasterToast) =>
+  const update = (props: ToastType) =>
     dispatch({
       type: 'toast/update',
       payload: { ...props, duration, id },
@@ -174,4 +93,113 @@ function useToast() {
   };
 }
 
+////////////////////////////
+////////////////////////////
 export { toast, useToast };
+////////////////////////////
+////////////////////////////
+
+function dispatch(action: Action) {
+  state = reducer(state, action);
+  subscribers.forEach((listener) => listener(state));
+}
+
+function reducer(state: State, action: Action): State {
+  switch (action.type) {
+    case 'toast/add': {
+      return {
+        ...state,
+        toasts: [action.payload, ...state.toasts].slice(0, TOAST_LIMIT),
+      };
+    }
+
+    case 'toast/update': {
+      //  ! Side effects !
+      if (action.payload.id) clearFromRemoveQueue(action.payload.id);
+
+      return {
+        ...state,
+        toasts: state.toasts.map((toast) =>
+          toast.id === action.payload.id
+            ? { ...toast, ...action.payload }
+            : toast
+        ),
+      };
+    }
+
+    case 'toast/upsert': {
+      const { payload } = action;
+
+      return state.toasts.find((t) => t.id === payload.id)
+        ? reducer(state, { type: 'toast/update', payload })
+        : reducer(state, { type: 'toast/add', payload });
+    }
+
+    case 'toast/dismiss': {
+      const { payload } = action;
+
+      // ! Side effects ! - This could be extracted into a dismissToast() action,
+      // but I'll keep it here for simplicity
+      if (payload) {
+        addToRemoveQueue(payload);
+      } else {
+        state.toasts.forEach((toast) => {
+          addToRemoveQueue(toast.id);
+        });
+      }
+
+      return {
+        ...state,
+        toasts: state.toasts.map((toast) =>
+          toast.id === payload || payload == undefined
+            ? {
+                ...toast,
+                open: false,
+              }
+            : toast
+        ),
+      };
+    }
+
+    case 'toast/remove':
+      return action.payload == undefined
+        ? {
+            ...state,
+            toasts: [],
+          }
+        : {
+            ...state,
+            toasts: state.toasts.filter((t) => t.id !== action.payload),
+          };
+
+    default:
+      // @ts-expect-error
+      throw new Error(`Unhandled action type ${action.type}`);
+  }
+}
+
+interface State {
+  toasts: ToastType[];
+}
+
+type Action =
+  | {
+      type: 'toast/add';
+      payload: ToastType;
+    }
+  | {
+      type: 'toast/upsert';
+      payload: ToastType;
+    }
+  | {
+      type: 'toast/update';
+      payload: Partial<ToastType>;
+    }
+  | {
+      type: 'toast/dismiss';
+      payload?: ToastType['id'];
+    }
+  | {
+      type: 'toast/remove';
+      payload?: ToastType['id'];
+    };

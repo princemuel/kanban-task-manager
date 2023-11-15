@@ -1,5 +1,5 @@
 import db from '@/app/db.server';
-import { env } from '@/env.mjs';
+import { envVars } from '@/env.dto.mjs';
 import { sendVerificationRequest } from '@/lib';
 import { PrismaAdapter } from '@next-auth/prisma-adapter';
 import { HttpError } from 'http-errors-enhanced';
@@ -18,7 +18,7 @@ const {
   DISCORD_SECRET,
   NEXTAUTH_SECRET,
   NODE_ENV,
-} = env;
+} = envVars;
 
 /**
  * Options for NextAuth.js used to configure adaptrs, providers, callbacks, etc.
@@ -76,6 +76,7 @@ export const options: AuthOptions = {
         // If the access token has expired, try to refresh it
         try {
           const response = await fetch('https://oauth2.googleapis.com/token', {
+            method: 'POST',
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             body: new URLSearchParams({
               client_id: GOOGLE_ID,
@@ -83,19 +84,18 @@ export const options: AuthOptions = {
               grant_type: 'refresh_token',
               refresh_token: google.refresh_token || '',
             }),
-            method: 'POST',
           });
 
-          const tokens: TokenSet = await response.json();
-          if (!response.ok) throw tokens;
+          const result: TokenSet = await response.json();
+          if (!response.ok) throw result;
 
           await db.account.update({
             data: {
-              access_token: tokens.access_token,
+              access_token: result.access_token,
               expires_at: Math.floor(
-                Date.now() / 1000 + Number(tokens.expires_in)
+                Date.now() / 1000 + Number(result.expires_in)
               ),
-              refresh_token: tokens.refresh_token ?? google.refresh_token,
+              refresh_token: result.refresh_token ?? google.refresh_token,
             },
             where: {
               provider_providerAccountId: {

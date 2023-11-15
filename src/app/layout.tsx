@@ -1,4 +1,3 @@
-import { BaseLayout } from '@/components';
 import { defineMeta } from '@/config';
 import GlobalProviders from '@/providers';
 import { Analytics } from '@vercel/analytics/react';
@@ -18,16 +17,19 @@ export const metadata = defineMeta();
 
 //className='relative flex min-h-screen flex-col text-brand-900 antialiased dark:bg-////brand-800 dark:text-white md:flex-row'
 export default function RootLayout({
+  auth,
   children,
 }: {
+  auth: React.ReactNode;
   children: React.ReactNode;
 }) {
   return (
     <html lang='en' dir='ltr' className={fontVars} suppressHydrationWarning>
-      <body className='font-sans text-brand-900 antialiased dark:text-white'>
+      <body className='text-brand-900 antialiased dark:text-white'>
         <GlobalProviders>
+          <React.Fragment>{children}</React.Fragment>
           <Analytics />
-          <BaseLayout>{children}</BaseLayout>
+          <React.Fragment>{auth}</React.Fragment>
         </GlobalProviders>
       </body>
     </html>

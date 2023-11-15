@@ -2,7 +2,14 @@
  * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation.
  * This is especially useful for Docker builds.
  */
-!process.env.SKIP_ENV_VALIDATION && (await import('./src/env.mjs'));
+
+(async () => {
+  if (!process.env.SKIP_ENV_VALIDATION) {
+    console.log('loading env');
+    await import('./src/env.dto.mjs');
+    console.log('env validation successful');
+  }
+})();
 
 /** @type {import('next').NextConfig} */
 const config = {
@@ -11,12 +18,17 @@ const config = {
     reactRemoveProperties: process.env.NODE_ENV === 'production',
   },
   typescript: {
+    // !! WARN !!
+    // Dangerously allow production builds to successfully complete even if
+    // your project has type errors.
+    // !! WARN !!
     ignoreBuildErrors: true,
   },
   productionBrowserSourceMaps: true,
   experimental: {
     typedRoutes: true,
     webVitalsAttribution: ['CLS', 'LCP'],
+    optimizeCss: true,
   },
   images: {
     formats: ['image/avif', 'image/webp'],

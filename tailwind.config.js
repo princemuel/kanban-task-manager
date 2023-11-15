@@ -4,12 +4,15 @@ const { withTV } = require('tailwind-variants/transformer');
 
 /** @type {import('tailwindcss').Config} */
 module.exports = withTV({
-  darkMode: ['class', '[data-theme="dark"]'],
+  darkMode: 'class',
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
+  future: {
+    hoverOnlyWhenSupported: true,
+  },
   theme: {
     screens: {
       '3xs': '24em', // @media (min-width: 384px) { ... }
@@ -42,6 +45,7 @@ module.exports = withTV({
       },
       fontFamily: {
         sans: ['var(--font-sans)', ...defaultTheme.fontFamily.sans],
+        accent: ['var(--font-accent)', ...defaultTheme.fontFamily.sans],
       },
       fontSize: {
         100: '0.5rem',

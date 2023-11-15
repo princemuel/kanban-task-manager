@@ -3,11 +3,6 @@
 @tailwind utilities;
 
 @layer base {
-  :root {
-    isolation: isolate;
-    scroll-padding-top: 2em;
-  }
-
   html {
     box-sizing: border-box;
     text-rendering: optimizeSpeed;
@@ -15,6 +10,7 @@
     touch-action: manipulation;
   }
 
+  *,
   *::before,
   *::after {
     margin: 0;
@@ -26,6 +22,15 @@
   :where(body) {
     min-block-size: 100vh;
     min-block-size: 100dvh;
+  }
+  img {
+    /* max-width: 100%; */
+    /* height: auto; */
+    /* vertical-align: middle; */
+    font-style: italic;
+    background-repeat: no-repeat;
+    background-size: cover;
+    shape-margin: 0.75rem;
   }
 
   :is(
