@@ -6,7 +6,9 @@ import { z } from 'zod';
  */
 const server = z.object({
   PORT: z.coerce.number().optional(),
-  NODE_ENV: z.enum(['development', 'test', 'production']),
+  NODE_ENV: z
+    .enum(['development', 'test', 'production'])
+    .default('development'),
 
   DATABASE_URL: z.string().url(),
   NEXTAUTH_SECRET:
@@ -83,9 +85,9 @@ const merged = server.merge(client);
 /** @typedef {z.infer<typeof merged>} MergedOutput */
 /** @typedef {z.SafeParseReturnType<MergedInput, MergedOutput>} MergedSafeParseReturn */
 
-let env = /** @type {MergedOutput} */ (process.env);
+let envVars = /** @type {MergedOutput} */ (Object.assign({}, process.env));
 
-if (!!process.env.SKIP_ENV_VALIDATION == false) {
+if (Boolean(process.env.SKIP_ENV_VALIDATION) == false) {
   const isServer = typeof window === 'undefined';
 
   const parsed = /** @type {MergedSafeParseReturn} */ (
@@ -102,7 +104,7 @@ if (!!process.env.SKIP_ENV_VALIDATION == false) {
     throw new Error('Invalid environment variables');
   }
 
-  env = new Proxy(parsed.data, {
+  envVars = new Proxy(parsed.data, {
     get(target, prop) {
       if (typeof prop !== 'string') return undefined;
       // Throw a descriptive error if a server-side env var is accessed on the client
@@ -118,4 +120,4 @@ if (!!process.env.SKIP_ENV_VALIDATION == false) {
   });
 }
 
-export { env };
+export { envVars };
