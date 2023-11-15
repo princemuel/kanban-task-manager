@@ -3,14 +3,14 @@
 import { Text } from '@/components';
 import {
   DialogContent,
-  DialogTitle,
   DialogDescription,
   DialogHeader,
+  DialogTitle,
 } from '@/components/ui/radix-dialog';
 
 type Props = {};
 
-const PageRoute = (props: Props) => {
+const PageRoute = () => {
   return (
     <>
       <DialogContent className=''>

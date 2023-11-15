@@ -4,7 +4,7 @@ import { Text } from '@/components';
 
 type Props = {};
 
-const PageRoute = (props: Props) => {
+const PageRoute = () => {
   return (
     <>
       <div className=''>

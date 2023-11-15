@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 type Props = {};
 
-const PageRoute = (props: Props) => {
+const PageRoute = () => {
   return (
     <div>
       <h1 className='text-3xl'>PageRoute</h1>

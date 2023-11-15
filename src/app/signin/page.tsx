@@ -3,7 +3,7 @@ import NextLink from 'next/link';
 
 type Props = {};
 
-const PageRoute = (props: Props) => {
+const PageRoute = () => {
   return (
     <div className='flex min-h-full bg-white font-sans'>
       {/* <h1 className='font-sans text-3xl font-bold text-black'>Sign In Page</h1> */}

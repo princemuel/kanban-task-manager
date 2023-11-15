@@ -1,6 +1,6 @@
 type Props = {};
 
-const PageRoute = (props: Props) => {
+const PageRoute = () => {
   return <div>Register Page</div>;
 };
 
