@@ -25,7 +25,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang='en' dir='ltr' className={fontVars} suppressHydrationWarning>
-      <body className='relative text-brand-900 antialiased dark:text-white'>
+      <body className='text-brand-900 antialiased dark:text-white'>
         <GlobalProviders>
           <React.Fragment>{children}</React.Fragment>
           <Analytics />

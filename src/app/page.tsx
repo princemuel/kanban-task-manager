@@ -2,12 +2,12 @@ import { icons } from '@/common';
 import NextLink from 'next/link';
 
 type Props = {};
-// supercharge your workflow
+//
 
-async function PageRoute(props: Props) {
+export default async function PageRoute(props: Props) {
   return (
     <>
-      <main className='h-screen w-full  font-accent'>
+      <main className='h-screen w-full bg-white font-accent text-brand-700'>
         <div className='relative flex h-full'>
           <section className='mx-auto flex-1 ps-40'>
             <div className='flex flex-col gap-28 pt-16'>
@@ -27,7 +27,7 @@ async function PageRoute(props: Props) {
                   </div>
 
                   <header className='flex w-full max-w-md flex-col gap-6'>
-                    <h1 className='break-words text-6xl font-bold uppercase text-brand-700'>
+                    <h1 className='break-words text-6xl font-bold uppercase'>
                       Powerful Insights Into Your Team
                     </h1>
 
@@ -35,7 +35,8 @@ async function PageRoute(props: Props) {
                       aria-label='lead'
                       className='font-sans text-lg font-normal text-brand-700/75 '
                     >
-                      Project planning and time tracking for agile teams
+                      Supercharge your workflow with project planning and time
+                      tracking for agile teams
                     </p>
                   </header>
                 </div>
@@ -85,6 +86,11 @@ async function PageRoute(props: Props) {
                     login
                   </NextLink>
                 </li>
+
+                <li className='cursor-pointer bg-blue-600 px-4 py-2 text-base font-bold uppercase text-white'>
+                  {/* <TestButton className=''>Show Modal</TestButton> */}
+                  <NextLink href='/boards/addboard'>create board</NextLink>
+                </li>
               </ul>
             </div>
             <div className='flex-1' />
@@ -94,5 +100,3 @@ async function PageRoute(props: Props) {
     </>
   );
 }
-
-export default PageRoute;

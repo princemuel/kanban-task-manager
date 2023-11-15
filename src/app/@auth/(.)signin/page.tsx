@@ -1,11 +1,10 @@
 import { Dialog } from '@/components/ui/dialog';
-import Link from 'next/link';
 
 type Props = {};
 
 const PageRoute = (props: Props) => {
   return (
-    <Dialog aria-labelledby='dialog-heading' appear={true}>
+    <Dialog aria-labelledby='dialog-heading' appear={false}>
       <div className='mx-auto flex w-[700px] max-w-full flex-col overflow-hidden rounded-lg bg-white'>
         <div className='mb-4 flex flex-row justify-between bg-yellow-400 px-5 pt-2'>
           <h1
