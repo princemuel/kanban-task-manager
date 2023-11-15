@@ -5,7 +5,16 @@ interface TextProps extends VariantProps<typeof text> {}
 
 export const Text = forwardRef(
   (
-    { as, variant, modifier, weight, size, className, children, ...restProps },
+    {
+      as,
+      variant,
+      modifier,
+      disabled,
+      size,
+      className,
+      children,
+      ...restProps
+    },
     forwardedRef
   ) => {
     const As = as || 'p';
@@ -18,7 +27,7 @@ export const Text = forwardRef(
           variant,
           modifier,
           size,
-          weight,
+          disabled,
           className,
         })}
       >
@@ -51,30 +60,24 @@ const text = tv(
         'dark/50': 'text-black/50',
       },
       size: {
-        xl: 'text-900 leading-800 -tracking-500',
-        lg: '-tracking-300 text-700 leading-500',
-        md: 'leading-600 -tracking-400 text-600',
-        sm: '-tracking-600 text-500 leading-400',
-        base: '-tracking-200 text-400 leading-200',
-        xs: '-tracking-300 text-300 leading-300',
-      },
-      //////////// leaving this in case I need it later
-      weight: {
-        bold: 'font-bold',
-        medium: 'font-medium',
-        regular: 'font-normal',
-        light: 'font-light',
+        xl: 'text-700 leading-500',
+        lg: 'text-600 leading-400',
+        md: 'text-500 leading-300',
+        base: 'text-400 leading-400',
+        sm: 'text-300 leading-200',
+        xs: '',
       },
       ////////////
       uppercase: {
         true: 'uppercase',
       },
       disabled: {
-        true: '',
+        true: 'line-through',
       },
     },
     compoundVariants: [
-      { size: ['sm', 'md', 'lg', 'xl'], className: 'font-bold' },
+      { size: ['base', 'md', 'lg', 'xl'], className: 'font-bold' },
+      { size: ['sm'], className: 'font-medium' },
       {
         variant: ['primary', 'secondary', 'accent'],
         className: 'dark:text-brand-100',
@@ -87,8 +90,7 @@ const text = tv(
     ],
     defaultVariants: {
       variant: 'default',
-      size: 'base',
-      weight: 'medium',
+      size: 'sm',
     },
   },
   {
