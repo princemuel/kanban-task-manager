@@ -28,7 +28,6 @@ const config = {
   experimental: {
     typedRoutes: true,
     webVitalsAttribution: ['CLS', 'LCP'],
-    optimizeCss: true,
   },
   images: {
     formats: ['image/avif', 'image/webp'],

@@ -4,7 +4,7 @@ import NextLink from 'next/link';
 type Props = {};
 //
 
-export default async function PageRoute() {
+export default  function PageRoute() {
   return (
     <>
       <main className='h-screen w-full bg-white font-accent text-brand-700'>

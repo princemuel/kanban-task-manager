@@ -17,13 +17,6 @@
     "format:check": "prettier ./src --check \"**/*.{js,mjs,jsx,ts,tsx}\" --cache",
     "postinstall": "npx prisma generate"
   },
-  "engines": {
-    "node": ">=18",
-    "npm": ">=8",
-    "yarn": "please-use-npm",
-    "bun": "please-use-npm",
-    "pnpm": "please-use-npm"
-  },
   "dependencies": {
     "@ebay/nice-modal-react": "^1.2.13",
     "@headlessui/react": "^1.7.17",
