@@ -13,8 +13,8 @@
     "lint:fix": "next lint --fix",
     "preview": "next build && next start",
     "type-check": "tsc --noEmit",
-    "format:write": "prettier --write \"{src}/**/*.{ts,tsx,js,mjs}\" --cache",
-    "format:check": "prettier --check \"{src}**/*.{ts,tsx,js,mjs}\" --cache",
+    "format:write": "prettier ./src --write \"**/*.{js,mjs,jsx,ts,tsx}\" --cache",
+    "format:check": "prettier ./src --check \"**/*.{js,mjs,jsx,ts,tsx}\" --cache",
     "postinstall": "npx prisma generate"
   },
   "engines": {
