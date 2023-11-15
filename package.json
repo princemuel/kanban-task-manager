@@ -13,17 +13,16 @@
     "lint:fix": "next lint --fix",
     "preview": "next build && next start",
     "type-check": "tsc --noEmit",
-    "gen:prisma": "pnpm exec prisma generate",
-    "format:write": "prettier --write \"{app,lib,components}/**/*.{ts,tsx,mdx}\" --cache",
-    "format:check": "prettier --check \"{app,lib,components}**/*.{ts,tsx,mdx}\" --cache",
-    "postinstall": "pnpm -s run gen:prisma"
+    "format:write": "prettier --write \"{src}/**/*.{ts,tsx,js,mjs}\" --cache",
+    "format:check": "prettier --check \"{src}**/*.{ts,tsx,js,mjs}\" --cache",
+    "postinstall": "npx prisma generate"
   },
   "engines": {
     "node": ">=18",
-    "npm": "please-use-pnpm",
-    "yarn": "please-use-pnpm",
-    "bun": "please-use-pnpm",
-    "pnpm": ">=8"
+    "npm": ">=8",
+    "yarn": "please-use-npm",
+    "bun": "please-use-npm",
+    "pnpm": "please-use-npm"
   },
   "dependencies": {
     "@ebay/nice-modal-react": "^1.2.13",
