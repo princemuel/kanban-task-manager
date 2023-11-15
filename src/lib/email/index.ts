@@ -1,9 +1,9 @@
 import { EmailTemplate } from '@/components';
-import { env } from '@/env.mjs';
+import { envVars } from '@/env.dto.mjs';
 import type { SendVerificationRequestParams } from 'next-auth/providers/email';
 import { Resend } from 'resend';
 
-export const resend = new Resend(env.RESEND_API_KEY);
+export const resend = new Resend(envVars.RESEND_API_KEY);
 
 export async function sendVerificationRequest(
   params: SendVerificationRequestParams
