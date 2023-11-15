@@ -3,11 +3,6 @@
 @tailwind utilities;
 
 @layer base {
-  :root {
-    isolation: isolate;
-    scroll-padding-top: 2em;
-  }
-
   html {
     box-sizing: border-box;
     text-rendering: optimizeSpeed;
@@ -15,6 +10,7 @@
     touch-action: manipulation;
   }
 
+  *,
   *::before,
   *::after {
     margin: 0;
