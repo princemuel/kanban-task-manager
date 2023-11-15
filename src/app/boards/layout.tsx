@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { Fragment } from 'react';
 
 export default function Layout({
   modal,
@@ -9,10 +9,8 @@ export default function Layout({
 }) {
   return (
     <main className='relative flex min-h-screen flex-col bg-white text-brand-900 antialiased dark:bg-brand-800 dark:text-white'>
-      <React.Fragment>
-        {children}
-        {modal}
-      </React.Fragment>
+      <Fragment>{children}</Fragment>
+      <Fragment>{modal}</Fragment>
     </main>
   );
 }
