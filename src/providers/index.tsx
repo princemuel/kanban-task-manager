@@ -1,20 +1,24 @@
 'use client';
 
+import { Dialog } from '@/components/ui/radix-dialog';
 import { SessionProvider } from 'next-auth/react';
 import { ThemeProvider as NextThemesProvider } from 'next-themes';
-import ModalManager from './modal-manager';
+import { ModalProvider } from './modal-manager';
 import ToastManager from './toast-manager';
 
 function RootProvider({ children }: { children: React.ReactNode }) {
   return (
     <NextThemesProvider
-      storageKey='THEME_MODE'
+      storageKey='ktm-theme'
       defaultTheme='system'
       enableSystem={true}
-      attribute='data-theme'
+      attribute='class'
+      disableTransitionOnChange
     >
       <SessionProvider>
-        <ModalManager.Provider>{children}</ModalManager.Provider>
+        <ModalProvider>
+          <Dialog>{children}</Dialog>
+        </ModalProvider>
         <ToastManager />
       </SessionProvider>
     </NextThemesProvider>
