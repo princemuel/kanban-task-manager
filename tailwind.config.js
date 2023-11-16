@@ -67,7 +67,7 @@ module.exports = withTV({
         100: '2.4px',
       },
       screens: {
-        sx: '36em', // @media (min-width: 576px) { ... },
+        xs: '36em', // @media (min-width: 576px) { ... },
         sm: '40em', // @media (min-width: 640px) { ... }
         md: '48em', // @media (min-width: 768px) { ... }
         lg: '64em', // @media (min-width: 1024px) { ... }

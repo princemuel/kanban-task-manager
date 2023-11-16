@@ -1,7 +1,9 @@
+import { BreakpointIndicator } from '@/components';
 import { defineMeta } from '@/config';
 import GlobalProviders from '@/providers';
 import { Analytics } from '@vercel/analytics/react';
 import * as React from 'react';
+import { Fragment } from 'react';
 import { fontVars } from './fonts';
 import './globals.css';
 
@@ -27,9 +29,10 @@ export default function RootLayout({
     <html lang='en' dir='ltr' className={fontVars} suppressHydrationWarning>
       <body className='text-brand-900 antialiased dark:text-white'>
         <GlobalProviders>
-          <React.Fragment>{children}</React.Fragment>
+          <Fragment>{children}</Fragment>
+          <Fragment>{auth}</Fragment>
           <Analytics />
-          <React.Fragment>{auth}</React.Fragment>
+          <BreakpointIndicator />
         </GlobalProviders>
       </body>
     </html>
