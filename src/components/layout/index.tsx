@@ -7,7 +7,7 @@ export function BaseLayout({ children }: { children: React.ReactNode }) {
     <React.Fragment>
       <LayoutHeader />
 
-      <div className=''>
+      <div className='pl-9'>
         <LayoutSidebar />
         {children}
       </div>
