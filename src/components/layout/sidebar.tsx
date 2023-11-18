@@ -3,5 +3,5 @@ interface Props {
 }
 
 export function LayoutSidebar(props: Props) {
-  return <aside> </aside>;
+  return <aside>sidebar </aside>;
 }
