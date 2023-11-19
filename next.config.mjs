@@ -1,3 +1,4 @@
+// @ts-check
 /**
  * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation.
  * This is especially useful for Docker builds.
@@ -24,6 +25,7 @@ const config = {
     // !! WARN !!
     ignoreBuildErrors: true,
   },
+  // !! DISABLE THIS LATER
   productionBrowserSourceMaps: true,
   experimental: {
     typedRoutes: true,
@@ -49,9 +51,11 @@ const config = {
       },
     ],
   },
+
   webpack(config) {
-    const fileLoaderRule = config.module.rules.find((rule) =>
-      rule.test?.test?.('.svg')
+    const fileLoaderRule = config.module.rules.find(
+      (/** @type {{ test: { test: (value: string) => any; }; }} */ rule) =>
+        rule.test?.test?.('.svg')
     );
     config.module.rules.push(
       {
