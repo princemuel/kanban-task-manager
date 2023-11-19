@@ -17,7 +17,7 @@ export const Text = forwardRef(
     },
     forwardedRef
   ) => {
-    const As = as || 'p';
+    const As = disabled ? 's' : as || 'p';
 
     return (
       <As
