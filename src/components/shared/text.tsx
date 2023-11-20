@@ -5,19 +5,10 @@ interface TextProps extends VariantProps<typeof text> {}
 
 export const Text = forwardRef(
   (
-    {
-      as,
-      variant,
-      modifier,
-      disabled,
-      size,
-      className,
-      children,
-      ...restProps
-    },
+    { as, variant, modifier, size, className, children, ...restProps },
     forwardedRef
   ) => {
-    const As = disabled ? 's' : as || 'p';
+    const As = as || 'p';
 
     return (
       <As
@@ -27,7 +18,6 @@ export const Text = forwardRef(
           variant,
           modifier,
           size,
-          disabled,
           className,
         })}
       >
@@ -46,7 +36,7 @@ Text.displayName = 'Text';
 
 export const text = tv(
   {
-    base: '',
+    base: 'aria-disabled:text-brand-900/50 aria-disabled:line-through aria-disabled:decoration-current aria-disabled:dark:text-white/50',
     variants: {
       variant: {
         default: 'text-brand-900 dark:text-white',
@@ -71,9 +61,6 @@ export const text = tv(
       ////////////
       uppercase: {
         true: 'uppercase',
-      },
-      disabled: {
-        true: 'line-through',
       },
     },
     compoundVariants: [
