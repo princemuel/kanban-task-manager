@@ -79,7 +79,7 @@ const FormItem = React.forwardRef(
     return (
       <FormItemContext.Provider value={{ id }}>
         <As
-          className={twcn('group flex flex-col gap-3', className)}
+          className={twcn('group', className)}
           {...restProps}
           ref={forwardedRef}
         />
@@ -137,16 +137,18 @@ const FormMessage = React.forwardRef<
   const { error, formMessageId } = useFormField();
   const body = error ? String(error?.message) : children;
 
-  if (!body) return null;
+  // if (!body) return null;
 
   return (
     <p
       role='alert'
+      aria-live='polite'
       id={formMessageId}
-      className={twcn(
-        '-tracking-200 text-400 font-medium leading-200 text-accent-200',
-        className
-      )}
+      className={text({
+        variant: 'destructive',
+        size: 'base',
+        className,
+      })}
       {...restProps}
       ref={forwardedRef}
     >
