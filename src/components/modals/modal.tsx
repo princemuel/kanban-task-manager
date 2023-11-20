@@ -15,33 +15,15 @@ type Props = {
 const dialog = tv({
   slots: {
     base: ['fixed inset-0 flex items-center justify-center p-4 md:p-8'],
-    panel: ['mx-auto w-full max-w-md rounded-md bg-white dark:bg-brand-700'],
+    panel: [
+      'mx-auto max-h-[stretch] w-full max-w-md overflow-y-auto',
+      'rounded-md bg-white dark:bg-brand-700',
+    ],
     overlay: ['fixed inset-0 bg-black/50 backdrop-blur-sm'],
     container: ['w-full p-6 md:p-8'],
     header: ['flex w-full items-start gap-5'],
     footer: ['flex w-full flex-col items-center gap-4 md:flex-row'],
   },
-  // variants: {
-  //   direction: {
-  //     col: {},
-  //     row: {},
-  //   },
-  // },
-  // defaultVariants: {
-  //   direction: 'col',
-  // }, compoundSlots: [
-
-  //   {
-  //     slots: ["footer", ],
-  //     direction: "col",
-  //     className: "flex flex-col",
-  //   },
-  //   {
-  //     slots: ["footer", ],
-  //     direction: "row",
-  //     className: "flex flex-row",
-  //   },
-  // ],
 });
 
 const { base, overlay, panel, container, header, footer } = dialog();
@@ -50,7 +32,7 @@ const BaseModal = NiceModal.create<Props>(({ children, focusRef }) => {
   const modal = useModal();
 
   return (
-    <Transition show={true || modal.visible} as={Fragment}>
+    <Transition show={modal.visible} as={Fragment}>
       <HeadlessDialog
         as='div'
         initialFocus={focusRef}

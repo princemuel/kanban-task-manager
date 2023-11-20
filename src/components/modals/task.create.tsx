@@ -4,7 +4,7 @@ import { useApiState, useZodForm } from '@/hooks';
 import { StringContraint } from '@/lib/schema/fields';
 import { Listbox, Transition } from '@headlessui/react';
 import { ChevronDown, X } from 'lucide-react';
-import { useCallback, Fragment } from 'react';
+import { Fragment, useCallback } from 'react';
 import { useFieldArray } from 'react-hook-form';
 import { v4 as uuid } from 'uuid';
 import { z } from 'zod';
@@ -17,7 +17,7 @@ import {
   TextField,
 } from '../form';
 import { SrOnly } from '../helpers';
-import { Button, Text } from '../shared';
+import { Button, Text, text } from '../shared';
 import { BaseModal, ModalFooter, ModalHeader, ModalTitle } from './modal';
 
 type Props = {};
@@ -25,7 +25,7 @@ type Props = {};
 const schema = z.object({
   title: StringContraint,
   description: StringContraint,
-  status: StringContraint,
+  status: StringContraint.toLowerCase(),
   subtasks: z
     .array(
       z.object({
@@ -40,6 +40,7 @@ const schema = z.object({
 export default function CreateTaskModal() {
   const form = useZodForm({
     schema: schema,
+    defaultValues: { title: '', description: '', status: '', subtasks: [] },
   });
 
   const { fields, append, remove } = useFieldArray({
@@ -211,11 +212,18 @@ export default function CreateTaskModal() {
                     <div className='relative z-[1] mt-1'>
                       <Listbox.Button
                         title='select a payment term'
-                        className='group relative inline-flex w-full items-center justify-between rounded border border-white bg-transparent px-4 py-3 text-brand-900 outline-none transition-colors duration-300 ease-in hover:border-brand-500 focus:border-brand-500 focus-visible:outline-none dark:border-brand-600 dark:bg-brand-700 dark:text-white dark:hover:border-brand-500 dark:focus:border-brand-500'
+                        className='group relative inline-flex w-full items-center justify-between rounded border border-white bg-transparent px-4 py-3 outline-none transition-colors duration-300 ease-in hover:border-brand-500 focus:border-brand-500 focus-visible:outline-none dark:border-brand-600 dark:bg-brand-700 dark:hover:border-brand-500 dark:focus:border-brand-500'
                       >
                         {({ value }) => (
                           <>
-                            <span className='block truncate'>{value}</span>
+                            <span
+                              className={text({
+                                size: 'base',
+                                className: 'block truncate',
+                              })}
+                            >
+                              {value}
+                            </span>
 
                             <span className='pointer-events-none'>
                               <ChevronDown
@@ -244,7 +252,11 @@ export default function CreateTaskModal() {
                             <Listbox.Option
                               key={option.toString()}
                               value={option}
-                              className='px-4 py-2 font-medium text-brand-900 outline-none hui-selected:text-brand-500 hui-active:text-brand-500 dark:text-white dark:hui-selected:text-brand-500 dark:hui-active:text-brand-500'
+                              className={text({
+                                size: 'base',
+                                className:
+                                  'block truncate px-4 py-2 font-medium text-brand-900 outline-none hui-selected:text-brand-500 hui-active:text-brand-500 dark:text-white dark:hui-selected:text-brand-500 dark:hui-active:text-brand-500',
+                              })}
                             >
                               {option}
                             </Listbox.Option>

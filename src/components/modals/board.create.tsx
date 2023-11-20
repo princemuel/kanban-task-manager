@@ -17,13 +17,11 @@ type Props = {};
 const schema = z.object({
   name: StringContraint,
   columns: z
-    .array(z.object({ id: z.string(), name: StringContraint }))
+    .array(z.object({ id: z.string(), name: StringContraint.toLowerCase() }))
     .nonempty(),
 });
 
 export default function CreateBoardModal() {
-  // let inputRef = useRef<HTMLInputElement>(null);
-
   const form = useZodForm({
     schema: schema,
   });
