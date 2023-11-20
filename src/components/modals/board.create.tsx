@@ -7,7 +7,15 @@ import { useCallback } from 'react';
 import { useFieldArray } from 'react-hook-form';
 import { v4 as uuid } from 'uuid';
 import { z } from 'zod';
-import { Form, FormLabel, TextField } from '../form';
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+  TextField,
+} from '../form';
 import { SrOnly } from '../helpers';
 import { Button, Text } from '../shared';
 import { BaseModal, ModalFooter, ModalHeader, ModalTitle } from './modal';
@@ -37,13 +45,7 @@ export default function CreateBoardModal() {
   const { router, isMutating, controllerRef, startTransition, setFetchStatus } =
     useApiState();
 
-  const {
-    handleSubmit,
-    register,
-    reset,
-    setValue,
-    formState: { errors, isDirty, isValid },
-  } = form;
+  const { handleSubmit, reset } = form;
 
   const addItem = useCallback(() => {
     append({
@@ -108,8 +110,6 @@ export default function CreateBoardModal() {
     // }
   });
 
-  const isSubmittable = Boolean(isDirty) && Boolean(isValid);
-
   return (
     <BaseModal id='board/create'>
       <Form {...form}>
@@ -118,16 +118,25 @@ export default function CreateBoardModal() {
             <ModalTitle>Add New Board</ModalTitle>
           </ModalHeader>
 
-          <div className='space-y-2'>
-            <FormLabel htmlFor='name'>Board Name</FormLabel>
-            <TextField
-              type='text'
-              id='name'
-              placeholder='e.g. Web Design'
-              {...register('name')}
-              aria-invalid={Boolean(errors?.name)}
-            />
-          </div>
+          <FormField
+            name='name'
+            render={({ field }) => (
+              <FormItem className='space-y-2'>
+                <FormLabel>Board Name</FormLabel>
+
+                <div className='relative w-full'>
+                  <FormControl>
+                    <TextField
+                      type='text'
+                      placeholder='e.g. Web Design'
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage className='absolute right-4 top-2' />
+                </div>
+              </FormItem>
+            )}
+          />
 
           <fieldset className='space-y-3'>
             <Text as='legend' variant='accent'>
@@ -136,18 +145,31 @@ export default function CreateBoardModal() {
 
             <ul className='flex flex-col gap-3'>
               {fields.map((field, index) => {
-                const fieldErrors = errors?.columns?.[index];
                 return (
                   <li
                     key={field.id}
                     className='grid grid-cols-[1fr,auto] items-center'
                   >
-                    <TextField
-                      type='text'
-                      id={`columns.${index}.name`}
-                      placeholder='Todo'
-                      {...register(`columns.${index}.name`)}
-                      aria-invalid={Boolean(fieldErrors?.name)}
+                    <FormField
+                      name={`columns.${index}.name`}
+                      render={({ field }) => (
+                        <FormItem>
+                          <SrOnly>
+                            <FormLabel>Column Name</FormLabel>
+                          </SrOnly>
+
+                          <div className='relative w-full'>
+                            <FormControl>
+                              <TextField
+                                type='text'
+                                placeholder='Todo'
+                                {...field}
+                              />
+                            </FormControl>
+                            <FormMessage className='absolute right-4 top-2' />
+                          </div>
+                        </FormItem>
+                      )}
                     />
                     <Button
                       type='button'
@@ -173,12 +195,7 @@ export default function CreateBoardModal() {
           </fieldset>
 
           <ModalFooter>
-            <Button
-              type='submit'
-              intent='primary'
-              disabled={!isSubmittable}
-              fullWidth
-            >
+            <Button type='submit' intent='primary' fullWidth>
               Create New Board
             </Button>
           </ModalFooter>
@@ -187,8 +204,3 @@ export default function CreateBoardModal() {
     </BaseModal>
   );
 }
-
-/* <Button className='text-brand-400'>
-              <MoreVertical />
-              <SrOnly>Show Actions Menu</SrOnly>
-            </Button>*/

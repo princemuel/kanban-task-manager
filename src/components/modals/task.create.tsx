@@ -10,9 +10,11 @@ import { v4 as uuid } from 'uuid';
 import { z } from 'zod';
 import {
   Form,
+  FormControl,
   FormField,
   FormItem,
   FormLabel,
+  FormMessage,
   TextArea,
   TextField,
 } from '../form';
@@ -37,10 +39,17 @@ const schema = z.object({
     .nonempty(),
 });
 
+const options = ['Todo', 'Doing', 'Done'];
+
 export default function CreateTaskModal() {
   const form = useZodForm({
     schema: schema,
-    defaultValues: { title: '', description: '', status: '', subtasks: [] },
+    defaultValues: {
+      title: '',
+      description: '',
+      status: options[0],
+      subtasks: [],
+    },
   });
 
   const { fields, append, remove } = useFieldArray({
@@ -54,13 +63,7 @@ export default function CreateTaskModal() {
   const { router, isMutating, controllerRef, startTransition, setFetchStatus } =
     useApiState();
 
-  const {
-    handleSubmit,
-    register,
-    reset,
-    setValue,
-    formState: { errors, isDirty, isValid },
-  } = form;
+  const { handleSubmit, reset } = form;
 
   const addItem = useCallback(() => {
     append({
@@ -126,8 +129,6 @@ export default function CreateTaskModal() {
     // }
   });
 
-  const isSubmittable = Boolean(isDirty) && Boolean(isValid);
-
   return (
     <BaseModal id='task/create'>
       <Form {...form}>
@@ -136,27 +137,44 @@ export default function CreateTaskModal() {
             <ModalTitle>Add New Task</ModalTitle>
           </ModalHeader>
 
-          <div className='space-y-2'>
-            <FormLabel htmlFor='title'>Title</FormLabel>
-            <TextField
-              type='text'
-              id='title'
-              placeholder='e.g. Take coffee break'
-              {...register('title')}
-              aria-invalid={Boolean(errors?.title)}
-            />
-          </div>
+          <FormField
+            name='title'
+            render={({ field }) => (
+              <FormItem className='space-y-2'>
+                <FormLabel>Title</FormLabel>
 
-          <div className='space-y-2'>
-            <FormLabel htmlFor='description'>Description</FormLabel>
-            <TextArea
-              id='description'
-              placeholder='e.g. It’s always good to take a break. This 15 minute break will
-              recharge the batteries a little.'
-              {...register('description')}
-              aria-invalid={Boolean(errors?.description)}
-            />
-          </div>
+                <div className='relative w-full'>
+                  <FormControl>
+                    <TextField
+                      type='text'
+                      placeholder='e.g. Take coffee break'
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage className='absolute right-4 top-2' />
+                </div>
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            name='description'
+            render={({ field }) => (
+              <FormItem className='space-y-2'>
+                <FormLabel>Description</FormLabel>
+
+                <div className='relative w-full'>
+                  <FormControl>
+                    <TextArea
+                      placeholder="e.g. It's always good to take a break. This 15 minute break will recharge the batteries a little."
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage className='absolute right-4 top-2' />
+                </div>
+              </FormItem>
+            )}
+          />
 
           <fieldset className='space-y-3'>
             <Text as='legend' variant='accent'>
@@ -165,19 +183,33 @@ export default function CreateTaskModal() {
 
             <ul className='flex flex-col gap-3'>
               {fields.map((field, index) => {
-                const fieldErrors = errors?.subtasks?.[index];
                 return (
                   <li
                     key={field.id}
                     className='grid grid-cols-[1fr,auto] items-center'
                   >
-                    <TextField
-                      type='text'
-                      id={`subtasks.${index}.title`}
-                      placeholder='e.g. Make coffee'
-                      {...register(`subtasks.${index}.title`)}
-                      aria-invalid={Boolean(fieldErrors?.title)}
+                    <FormField
+                      name={`subtasks.${index}.title`}
+                      render={({ field }) => (
+                        <FormItem>
+                          <SrOnly>
+                            <FormLabel>Subtask Title</FormLabel>
+                          </SrOnly>
+
+                          <div className='relative w-full'>
+                            <FormControl>
+                              <TextField
+                                type='text'
+                                placeholder='e.g. Make coffee'
+                                {...field}
+                              />
+                            </FormControl>
+                            <FormMessage className='absolute right-4 top-2' />
+                          </div>
+                        </FormItem>
+                      )}
                     />
+
                     <Button
                       type='button'
                       className='justify-end text-brand-400 hover:text-accent-200 focus:text-accent-200'
@@ -212,7 +244,7 @@ export default function CreateTaskModal() {
                     <div className='relative z-[1] mt-1'>
                       <Listbox.Button
                         title='select a payment term'
-                        className='group relative inline-flex w-full items-center justify-between rounded border border-white bg-transparent px-4 py-3 outline-none transition-colors duration-300 ease-in hover:border-brand-500 focus:border-brand-500 focus-visible:outline-none dark:border-brand-600 dark:bg-brand-700 dark:hover:border-brand-500 dark:focus:border-brand-500'
+                        className='group relative inline-flex w-full items-center justify-between rounded border border-brand-400/25 bg-transparent px-4 py-2 outline-none transition-colors duration-300 ease-in hover:border-brand-500 focus:border-brand-500 focus-visible:outline-none'
                       >
                         {({ value }) => (
                           <>
@@ -225,12 +257,11 @@ export default function CreateTaskModal() {
                               {value}
                             </span>
 
-                            <span className='pointer-events-none'>
+                            <span className='pointer-events-none transform-gpu text-brand-500 transition-transform hui-open:-rotate-180'>
                               <ChevronDown
                                 size={16}
-                                strokeWidth={1}
+                                strokeWidth={2}
                                 aria-hidden
-                                className='transform-gpu transition-transform hui-open:-rotate-180'
                               />
                               <SrOnly>Toggle Menu</SrOnly>
                             </span>
@@ -247,15 +278,16 @@ export default function CreateTaskModal() {
                         leaveFrom='opacity-100'
                         leaveTo='opacity-0'
                       >
-                        <Listbox.Options className='shadow-200 dark:shadow-300 absolute z-20 mt-2 w-full rounded-lg bg-white transition-all duration-500 dark:bg-brand-700'>
-                          {['Todo', 'Doing', 'Done'].map((option) => (
+                        <Listbox.Options className='absolute z-20 mt-3 w-full rounded-lg bg-white shadow-[0_10px_20px_0_rgba(54,78,126,0.25)] transition-all duration-500 dark:bg-brand-800'>
+                          {options.map((option) => (
                             <Listbox.Option
                               key={option.toString()}
                               value={option}
                               className={text({
+                                variant: 'accent',
                                 size: 'base',
                                 className:
-                                  'block truncate px-4 py-2 font-medium text-brand-900 outline-none hui-selected:text-brand-500 hui-active:text-brand-500 dark:text-white dark:hui-selected:text-brand-500 dark:hui-active:text-brand-500',
+                                  'block truncate px-4 py-2 outline-none hui-selected:text-brand-500 hui-active:text-brand-500 dark:hui-selected:text-brand-500 dark:hui-active:text-brand-500',
                               })}
                             >
                               {option}
@@ -271,12 +303,7 @@ export default function CreateTaskModal() {
           </fieldset>
 
           <ModalFooter>
-            <Button
-              type='submit'
-              intent='primary'
-              disabled={!isSubmittable}
-              fullWidth
-            >
+            <Button type='submit' intent='primary' fullWidth>
               Create Task
             </Button>
           </ModalFooter>
