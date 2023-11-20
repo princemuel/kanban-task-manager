@@ -41,7 +41,7 @@ export function buildItemCountMsg(message: string) {
   };
 }
 
-export function singleton<T>(name: string, callback: () => T): T {
+export function singleton<T>(name: string, callback: () => T): NonNullable<T> {
   const g = globalThis as any;
   g.__singletons ??= new Map();
 

@@ -3,7 +3,7 @@ import { z } from 'zod';
 // Zod Constraints
 export const StringContraint = z
   .string()
-  .min(3, { message: 'Must 3 or more char(s)' })
+  .min(2, { message: 'Must 2 or more char(s)' })
   .trim();
 
 export const EmailContraint = z

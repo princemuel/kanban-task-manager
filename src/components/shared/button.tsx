@@ -92,10 +92,12 @@ const button = tv(
         className: 'text-brand-500',
       },
       {
+        // intent: ['primary', 'secondary', 'destructive'],
         size: ['large'],
         className: 'h-12 px-5',
       },
       {
+        // intent: ['primary', 'secondary', 'destructive'],
         size: ['small', 'medium'],
         className: 'h-10 px-4',
       },

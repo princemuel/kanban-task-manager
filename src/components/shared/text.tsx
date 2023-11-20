@@ -44,7 +44,7 @@ Text.displayName = 'Text';
 //////////////////////////////////////////
 //////////////////////////////////////////
 
-const text = tv(
+export const text = tv(
   {
     base: '',
     variants: {
@@ -52,8 +52,9 @@ const text = tv(
         default: 'text-brand-900 dark:text-white',
         primary: 'text-brand-400',
         secondary: 'text-brand-300',
-        accent: 'text-[#858BB2]',
+        accent: 'text-brand-400 dark:text-white',
         brand: 'text-brand-500',
+        destructive: 'text-accent-200',
       },
       modifier: {
         inverted: 'text-white',
@@ -76,17 +77,8 @@ const text = tv(
       },
     },
     compoundVariants: [
-      { size: ['base', 'md', 'lg', 'xl'], className: 'font-bold' },
-      { size: ['sm'], className: 'font-medium' },
-      {
-        variant: ['primary', 'secondary', 'accent'],
-        className: 'dark:text-brand-100',
-      },
-      {
-        variant: ['default', 'primary', 'secondary', 'accent'],
-        disabled: true,
-        className: '!text-brand-500/20',
-      },
+      { size: ['sm', 'md', 'lg', 'xl'], className: 'font-bold' },
+      { size: ['base'], className: 'font-medium' },
     ],
     defaultVariants: {
       variant: 'default',
@@ -113,7 +105,5 @@ const text = tv(
         ],
       },
     },
-
-    responsiveVariants: true,
   }
 );

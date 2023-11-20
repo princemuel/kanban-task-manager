@@ -12,6 +12,7 @@ import {
   FormProvider,
   useFormContext,
 } from 'react-hook-form';
+import { text } from '../shared';
 import { Label } from './label';
 
 type FormFieldContextValue<
@@ -116,14 +117,11 @@ const FormLabel = React.forwardRef<
   React.ElementRef<typeof LabelPrimitive.Root>,
   React.ComponentPropsWithoutRef<typeof LabelPrimitive.Root>
 >(({ className, ...restProps }, forwardedRef) => {
-  const { error, formItemId } = useFormField();
+  const { formItemId } = useFormField();
 
   return (
     <Label
-      className={twcn(
-        error && 'text-accent-200 dark:text-accent-200',
-        className
-      )}
+      className={twcn(text({ size: 'sm', variant: 'accent' }), className)}
       htmlFor={formItemId}
       {...restProps}
       ref={forwardedRef}
