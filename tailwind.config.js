@@ -10,6 +10,9 @@ module.exports = withTV({
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
+  corePlugins: {
+    float: false,
+  },
   future: {
     hoverOnlyWhenSupported: true,
   },
