@@ -33,6 +33,13 @@ namespace Misc {
     executor: Function,
   ];
 
+  type PropEventSource<T> = {
+    on<K extends string & keyof T>(
+      eventName: `${K}Change`,
+      callback: (newValue: T[K]) => void
+    ): void;
+  };
+
   type LooseAutocomplete<T extends string> = T | Omit<string, T>;
 
   type Simplify<ObjectType> = {
@@ -190,3 +197,7 @@ namespace Misc {
   type AtomicObject = Function | RegExp | Promise<any> | Date;
   type BrowserNativeObject = Date | FileList | File;
 }
+
+/// Create a "watched object" with an 'on' method
+/// so that you can watch for changes to properties.
+declare function makeWatchedObject<T>(obj: T): T & Misc.PropEventSource<T>;

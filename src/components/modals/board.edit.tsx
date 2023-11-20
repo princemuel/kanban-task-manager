@@ -21,11 +21,19 @@ const schema = z.object({
     .nonempty(),
 });
 
-export default function CreateBoardModal() {
+export default function EditBoardModal() {
   // let inputRef = useRef<HTMLInputElement>(null);
 
   const form = useZodForm({
     schema: schema,
+    defaultValues: {
+      name: 'Platform Launch',
+      columns: [
+        { id: uuid(), name: 'Todo' },
+        { id: uuid(), name: 'Doing' },
+        // { id: uuid(), name: 'Done' },
+      ],
+    },
   });
 
   const { fields, append, remove } = useFieldArray({
@@ -113,11 +121,11 @@ export default function CreateBoardModal() {
   const isSubmittable = Boolean(isDirty) && Boolean(isValid);
 
   return (
-    <BaseModal id='board/create'>
+    <BaseModal id='board/edit'>
       <Form {...form}>
         <form onSubmit={onSubmit} className='flex flex-col gap-6'>
           <ModalHeader>
-            <ModalTitle>Add New Board</ModalTitle>
+            <ModalTitle>Edit Board</ModalTitle>
           </ModalHeader>
 
           <div className='space-y-2'>
@@ -181,7 +189,7 @@ export default function CreateBoardModal() {
               disabled={!isSubmittable}
               fullWidth
             >
-              Create New Board
+              Save Changes
             </Button>
           </ModalFooter>
         </form>
@@ -189,8 +197,3 @@ export default function CreateBoardModal() {
     </BaseModal>
   );
 }
-
-/* <Button className='text-brand-400'>
-              <MoreVertical />
-              <SrOnly>Show Actions Menu</SrOnly>
-            </Button>*/

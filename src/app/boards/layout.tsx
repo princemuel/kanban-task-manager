@@ -1,10 +1,4 @@
-export default function Layout({
-  modal,
-  children,
-}: {
-  children: React.ReactNode;
-  modal: React.ReactNode;
-}) {
+export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     // <main className='relative flex min-h-screen flex-col bg-white text-brand-900 antialiased dark:bg-brand-800 dark:text-white'>
     //   <BaseLayout>{children}</BaseLayout>
