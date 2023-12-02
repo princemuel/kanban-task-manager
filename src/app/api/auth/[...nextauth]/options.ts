@@ -1,6 +1,6 @@
-import db from "@/app/db.server";
+import { db } from "@/app/db.server";
 import { envVars } from "@/env.dto.mjs";
-import { sendVerificationRequest } from "@/lib";
+import { sendVerificationRequest } from "@/lib/email";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { HttpError } from "http-errors-enhanced";
 import type { AuthOptions, Session, TokenSet } from "next-auth";
@@ -115,7 +115,7 @@ export const options: AuthOptions = {
 
   pages: {
     // signIn: '/',
-    // signIn: '/auth/signin',
+    signIn: "/auth/signin",
     // signOut: '/auth/signout',
     // error: '/auth/error', // Error code passed in query string as ?error=
     // verifyRequest: '/auth/verify-request', // (used for check email message)
