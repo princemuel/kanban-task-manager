@@ -1,4 +1,4 @@
-import { EmailTemplate } from "@/components";
+import { EmailTemplate } from "@/components/email-tenplate";
 import { envVars } from "@/env.dto.mjs";
 import type { SendVerificationRequestParams } from "next-auth/providers/email";
 import { Resend } from "resend";
