@@ -5,6 +5,7 @@ import { useState } from "react";
 type FetchStatus =
   | "idle"
   | "pending"
+  | "invalid"
   | "delayed"
   | "canceled"
   | "failed"

@@ -3,7 +3,7 @@
 import { useRef, useState } from "react";
 
 export function useReactState<T>(initialState: T) {
-  const [_index, setIndex] = useState(0);
+  const [_, setIndex] = useState(0);
 
   const proxy = useRef<T>(
     // @ts-expect-error
