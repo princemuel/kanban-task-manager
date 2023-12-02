@@ -1,19 +1,19 @@
-'use client';
+"use client";
 
-import * as CheckboxPrimitive from '@radix-ui/react-checkbox';
-import * as React from 'react';
-import { tv, type VariantProps } from 'tailwind-variants';
-import { Check } from 'lucide-react';
+import * as CheckboxPrimitive from "@radix-ui/react-checkbox";
+import * as React from "react";
+import { LuCheck } from "react-icons/lu";
+import { tv } from "tailwind-variants";
 
 const checkbox = tv({
   slots: {
     base: [
-      'border-1 peer h-4 w-4 shrink-0 rounded-sm border-brand-400',
-      'bg-white dark:bg-brand-700',
-      'data-[state=checked]:!bg-brand-500 data-[state=checked]:!text-white',
+      "border-1 peer h-4 w-4 shrink-0 rounded-sm border-brand-400",
+      "bg-white dark:bg-brand-700",
+      "data-[state=checked]:!bg-brand-500 data-[state=checked]:!text-white",
     ],
-    indicator: ['flex items-center justify-center text-current'],
-    icon: ['h-3 w-3'],
+    indicator: ["flex items-center justify-center text-current"],
+    icon: ["h-3 w-3"],
   },
 });
 
@@ -29,7 +29,7 @@ export const Checkbox = React.forwardRef<
     {...restProps}
   >
     <CheckboxPrimitive.Indicator className={indicator()}>
-      <Check size={16} strokeWidth={3} className={icon()} />
+      <LuCheck size={16} strokeWidth={3} className={icon()} />
     </CheckboxPrimitive.Indicator>
   </CheckboxPrimitive.Root>
 ));

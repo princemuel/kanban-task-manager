@@ -1,13 +1,13 @@
-'use client';
+"use client";
 
-import { useApiState, useZodForm } from '@/hooks';
-import { StringContraint } from '@/lib/schema/fields';
-import { Listbox, Transition } from '@headlessui/react';
-import { ChevronDown, X } from 'lucide-react';
-import { Fragment, useCallback } from 'react';
-import { useFieldArray } from 'react-hook-form';
-import { v4 as uuid } from 'uuid';
-import { z } from 'zod';
+import { useApiState, useZodForm } from "@/hooks";
+import { StringContraint } from "@/lib/schema/fields";
+import { Listbox, Transition } from "@headlessui/react";
+import { Fragment, useCallback } from "react";
+import { useFieldArray } from "react-hook-form";
+import { LuChevronDown, LuX } from "react-icons/lu";
+import { v4 as uuid } from "uuid";
+import { z } from "zod";
 import {
   Form,
   FormControl,
@@ -17,10 +17,10 @@ import {
   FormMessage,
   TextArea,
   TextField,
-} from '../form';
-import { SrOnly } from '../helpers';
-import { Button, Text, text } from '../shared';
-import { BaseModal, ModalFooter, ModalHeader, ModalTitle } from './modal';
+} from "../form";
+import { SrOnly } from "../helpers";
+import { Button, Text, text } from "../shared";
+import { BaseModal, ModalFooter, ModalHeader, ModalTitle } from "./modal";
 
 type Props = {};
 
@@ -34,29 +34,29 @@ const schema = z.object({
         id: z.string(),
         title: StringContraint,
         done: z.boolean().default(false),
-      })
+      }),
     )
     .nonempty(),
 });
 
-const options = ['Todo', 'Doing', 'Done'];
+const options = ["Todo", "Doing", "Done"];
 
 export default function CreateTaskModal() {
   const form = useZodForm({
     schema: schema,
     defaultValues: {
-      title: '',
-      description: '',
+      title: "",
+      description: "",
       status: options[0],
       subtasks: [],
     },
   });
 
   const { fields, append, remove } = useFieldArray({
-    name: 'subtasks',
+    name: "subtasks",
     control: form.control,
     rules: {
-      required: 'Please add at least one column',
+      required: "Please add at least one column",
     },
   });
 
@@ -68,13 +68,13 @@ export default function CreateTaskModal() {
   const addItem = useCallback(() => {
     append({
       id: uuid(),
-      title: '',
+      title: "",
       done: false,
     });
   }, [append]);
 
   const onSubmit = handleSubmit(async (values) => {
-    console.log('SUBMITTED', JSON.stringify(values, null, 2));
+    console.log("SUBMITTED", JSON.stringify(values, null, 2));
 
     // try {
     //   const draft = produce(values, (draft) => {
@@ -130,63 +130,63 @@ export default function CreateTaskModal() {
   });
 
   return (
-    <BaseModal id='task/create'>
+    <BaseModal id="task/create">
       <Form {...form}>
-        <form onSubmit={onSubmit} className='flex flex-col gap-6'>
+        <form onSubmit={onSubmit} className="flex flex-col gap-6">
           <ModalHeader>
             <ModalTitle>Add New Task</ModalTitle>
           </ModalHeader>
 
           <FormField
-            name='title'
+            name="title"
             render={({ field }) => (
-              <FormItem className='space-y-2'>
+              <FormItem className="space-y-2">
                 <FormLabel>Title</FormLabel>
 
-                <div className='relative w-full'>
+                <div className="relative w-full">
                   <FormControl>
                     <TextField
-                      type='text'
-                      placeholder='e.g. Take coffee break'
+                      type="text"
+                      placeholder="e.g. Take coffee break"
                       {...field}
                     />
                   </FormControl>
-                  <FormMessage className='absolute right-4 top-2' />
+                  <FormMessage className="absolute right-4 top-2" />
                 </div>
               </FormItem>
             )}
           />
 
           <FormField
-            name='description'
+            name="description"
             render={({ field }) => (
-              <FormItem className='space-y-2'>
+              <FormItem className="space-y-2">
                 <FormLabel>Description</FormLabel>
 
-                <div className='relative w-full'>
+                <div className="relative w-full">
                   <FormControl>
                     <TextArea
                       placeholder="e.g. It's always good to take a break. This 15 minute break will recharge the batteries a little."
                       {...field}
                     />
                   </FormControl>
-                  <FormMessage className='absolute right-4 top-2' />
+                  <FormMessage className="absolute right-4 top-2" />
                 </div>
               </FormItem>
             )}
           />
 
-          <fieldset className='space-y-3'>
-            <Text as='legend' variant='accent'>
+          <fieldset className="space-y-3">
+            <Text as="legend" variant="accent">
               Subtasks
             </Text>
 
-            <ul className='flex flex-col gap-3'>
+            <ul className="flex flex-col gap-3">
               {fields.map((field, index) => {
                 return (
                   <li
                     key={field.id}
-                    className='grid grid-cols-[1fr,auto] items-center'
+                    className="grid grid-cols-[1fr,auto] items-center"
                   >
                     <FormField
                       name={`subtasks.${index}.title`}
@@ -196,26 +196,26 @@ export default function CreateTaskModal() {
                             <FormLabel>Subtask Title</FormLabel>
                           </SrOnly>
 
-                          <div className='relative w-full'>
+                          <div className="relative w-full">
                             <FormControl>
                               <TextField
-                                type='text'
-                                placeholder='e.g. Make coffee'
+                                type="text"
+                                placeholder="e.g. Make coffee"
                                 {...field}
                               />
                             </FormControl>
-                            <FormMessage className='absolute right-4 top-2' />
+                            <FormMessage className="absolute right-4 top-2" />
                           </div>
                         </FormItem>
                       )}
                     />
 
                     <Button
-                      type='button'
-                      className='justify-end text-brand-400 hover:text-accent-200 focus:text-accent-200'
+                      type="button"
+                      className="justify-end text-brand-400 hover:text-accent-200 focus:text-accent-200"
                       onClick={() => void remove(index)}
                     >
-                      <X />
+                      <LuX />
                       <SrOnly>Remove</SrOnly>
                     </Button>
                   </li>
@@ -224,8 +224,8 @@ export default function CreateTaskModal() {
             </ul>
 
             <Button
-              type='button'
-              intent='secondary'
+              type="button"
+              intent="secondary"
               onClick={addItem}
               fullWidth
             >
@@ -233,32 +233,32 @@ export default function CreateTaskModal() {
             </Button>
           </fieldset>
 
-          <fieldset className='space-y-2'>
+          <fieldset className="space-y-2">
             <FormField
-              name='status'
+              name="status"
               render={({ field }) => (
                 <Listbox {...field}>
-                  <FormItem className='relative col-span-6 flex-col sm:col-span-3'>
+                  <FormItem className="relative col-span-6 flex-col sm:col-span-3">
                     <Listbox.Label as={FormLabel}>Status</Listbox.Label>
 
-                    <div className='relative z-[1] mt-1'>
+                    <div className="relative z-[1] mt-1">
                       <Listbox.Button
-                        title='select a payment term'
-                        className='group relative inline-flex w-full items-center justify-between rounded border border-brand-400/25 bg-transparent px-4 py-2 outline-none transition-colors duration-300 ease-in hover:border-brand-500 focus:border-brand-500 focus-visible:outline-none'
+                        title="select a payment term"
+                        className="group relative inline-flex w-full items-center justify-between rounded border border-brand-400/25 bg-transparent px-4 py-2 outline-none transition-colors duration-300 ease-in hover:border-brand-500 focus:border-brand-500 focus-visible:outline-none"
                       >
                         {({ value }) => (
                           <>
                             <span
                               className={text({
-                                size: 'base',
-                                className: 'block truncate',
+                                size: "base",
+                                className: "block truncate",
                               })}
                             >
                               {value}
                             </span>
 
-                            <span className='pointer-events-none transform-gpu text-brand-500 transition-transform hui-open:-rotate-180'>
-                              <ChevronDown
+                            <span className="pointer-events-none transform-gpu text-brand-500 transition-transform hui-open:-rotate-180">
+                              <LuChevronDown
                                 size={16}
                                 strokeWidth={2}
                                 aria-hidden
@@ -271,23 +271,23 @@ export default function CreateTaskModal() {
 
                       <Transition
                         as={Fragment}
-                        enter='transition-opacity ease-in-out duration-300'
-                        enterFrom='opacity-0'
-                        enterTo='opacity-100'
-                        leave='transition-opacity ease-in-out duration-300'
-                        leaveFrom='opacity-100'
-                        leaveTo='opacity-0'
+                        enter="transition-opacity ease-in-out duration-300"
+                        enterFrom="opacity-0"
+                        enterTo="opacity-100"
+                        leave="transition-opacity ease-in-out duration-300"
+                        leaveFrom="opacity-100"
+                        leaveTo="opacity-0"
                       >
-                        <Listbox.Options className='absolute z-20 mt-3 w-full rounded-lg bg-white shadow-[0_10px_20px_0_rgba(54,78,126,0.25)] transition-all duration-500 dark:bg-brand-800'>
+                        <Listbox.Options className="absolute z-20 mt-3 w-full rounded-lg bg-white shadow-[0_10px_20px_0_rgba(54,78,126,0.25)] transition-all duration-500 dark:bg-brand-800">
                           {options.map((option) => (
                             <Listbox.Option
                               key={option.toString()}
                               value={option}
                               className={text({
-                                variant: 'accent',
-                                size: 'base',
+                                variant: "accent",
+                                size: "base",
                                 className:
-                                  'block truncate px-4 py-2 outline-none hui-selected:text-brand-500 hui-active:text-brand-500 dark:hui-selected:text-brand-500 dark:hui-active:text-brand-500',
+                                  "block truncate px-4 py-2 outline-none hui-selected:text-brand-500 hui-active:text-brand-500 dark:hui-selected:text-brand-500 dark:hui-active:text-brand-500",
                               })}
                             >
                               {option}
@@ -303,7 +303,7 @@ export default function CreateTaskModal() {
           </fieldset>
 
           <ModalFooter>
-            <Button type='submit' intent='primary' fullWidth>
+            <Button type="submit" intent="primary" fullWidth>
               Create Task
             </Button>
           </ModalFooter>

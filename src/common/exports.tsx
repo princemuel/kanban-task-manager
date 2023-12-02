@@ -13,9 +13,9 @@ import {
   LogoDark,
   LogoLight,
   LogoMobile,
-} from './assets';
+} from "./assets";
 
-type IconObject = 'board' | 'logo' | 'mode' | 'sidebar' | 'chevron';
+type IconObject = "board" | "logo" | "mode" | "sidebar" | "chevron";
 
 export const icons: Record<
   IconObject,

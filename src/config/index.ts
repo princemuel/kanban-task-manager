@@ -1,2 +1,2 @@
-export * from './baseurl';
-export * from './seo.config';
+export * from "./baseurl";
+export * from "./seo.config";

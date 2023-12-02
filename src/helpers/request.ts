@@ -10,7 +10,7 @@ export async function request<JSON extends unknown>(
 
     if (!response.ok) {
       const json = await response.json();
-      const message = json?.error || 'An unexpected error occurred.';
+      const message = json?.error || "An unexpected error occurred.";
 
       const error: FetchError = new Error(message);
       error.status = response.status;
@@ -28,7 +28,7 @@ export async function request<JSON extends unknown>(
  * Used to uniquely identify a timeout
  * @private
  */
-const TIMEOUT = Symbol('TIMEOUT');
+const TIMEOUT = Symbol("TIMEOUT");
 
 const createTimeoutPromise = (ms: number | undefined) => {
   return (timer: NodeJS.Timeout | null) => {
@@ -73,7 +73,7 @@ const createTimeoutPromise = (ms: number | undefined) => {
  */
 export function timeout<Value>(
   promise: Promise<Value>,
-  options: { controller?: AbortController; ms: number }
+  options: { controller?: AbortController; ms: number },
 ): Promise<Value> {
   const timeoutPromise = createTimeoutPromise(options.ms);
 
@@ -91,7 +91,7 @@ export function timeout<Value>(
         }
 
         return reject(
-          new TimeoutError(`Operation timed out after ${options.ms}ms`)
+          new TimeoutError(`Operation timed out after ${options.ms}ms`),
         );
       }
 
@@ -117,7 +117,7 @@ export function timeout<Value>(
 export class TimeoutError extends Error {
   constructor(message: string) {
     super(message);
-    this.name = 'TimeoutError';
+    this.name = "TimeoutError";
   }
 }
 
@@ -159,11 +159,11 @@ export type AwaitedPromiseHash<Hash extends PromiseHash> = {
  * }
  */
 export async function promiseHash<Hash extends PromiseHash>(
-  hash: Hash
+  hash: Hash,
 ): Promise<AwaitedPromiseHash<Hash>> {
   return Object.fromEntries(
     await Promise.all(
-      Object.entries(hash).map(async ([key, promise]) => [key, await promise])
-    )
+      Object.entries(hash).map(async ([key, promise]) => [key, await promise]),
+    ),
   );
 }

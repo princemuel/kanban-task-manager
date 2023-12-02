@@ -7,7 +7,7 @@ import {
   Link,
   Preview,
   Text,
-} from '@react-email/components';
+} from "@react-email/components";
 
 type Props = {
   url: string;
@@ -25,11 +25,11 @@ export function EmailTemplate({ url, host }: Props) {
 
           <Link
             href={url}
-            target='_blank'
+            target="_blank"
             style={{
               ...link,
-              display: 'block',
-              marginBottom: '16px',
+              display: "block",
+              marginBottom: "16px",
             }}
           >
             Click here to log in with this magic link
@@ -38,9 +38,9 @@ export function EmailTemplate({ url, host }: Props) {
           <Text
             style={{
               ...text,
-              color: '#ababab',
-              marginTop: '14px',
-              marginBottom: '16px',
+              color: "#ababab",
+              marginTop: "14px",
+              marginBottom: "16px",
             }}
           >
             If you didn&apos;t try to login, you can safely ignore this email.
@@ -48,9 +48,9 @@ export function EmailTemplate({ url, host }: Props) {
 
           <Text style={footer}>
             <Link
-              href='https://hamedbahram.io'
-              target='_blank'
-              style={{ ...link, color: '#898989' }}
+              href="https://hamedbahram.io"
+              target="_blank"
+              style={{ ...link, color: "#898989" }}
             >
               hamedbahram.io
             </Link>
@@ -62,57 +62,57 @@ export function EmailTemplate({ url, host }: Props) {
 }
 
 const main = {
-  backgroundColor: '#ffffff',
+  backgroundColor: "#ffffff",
 };
 
 const container = {
-  paddingLeft: '12px',
-  paddingRight: '12px',
-  margin: '0 auto',
+  paddingLeft: "12px",
+  paddingRight: "12px",
+  margin: "0 auto",
 };
 
 const h1 = {
-  color: '#333',
+  color: "#333",
   fontFamily:
     "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif",
-  fontSize: '24px',
-  fontWeight: 'bold',
-  margin: '40px 0',
-  padding: '0',
+  fontSize: "24px",
+  fontWeight: "bold",
+  margin: "40px 0",
+  padding: "0",
 };
 
 const link = {
-  color: '#2754C5',
+  color: "#2754C5",
   fontFamily:
     "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif",
-  fontSize: '14px',
-  textDecoration: 'underline',
+  fontSize: "14px",
+  textDecoration: "underline",
 };
 
 const text = {
-  color: '#333',
+  color: "#333",
   fontFamily:
     "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif",
-  fontSize: '14px',
-  margin: '24px 0',
+  fontSize: "14px",
+  margin: "24px 0",
 };
 
 const footer = {
-  color: '#898989',
+  color: "#898989",
   fontFamily:
     "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif",
-  fontSize: '12px',
-  lineHeight: '22px',
-  marginTop: '12px',
-  marginBottom: '24px',
+  fontSize: "12px",
+  lineHeight: "22px",
+  marginTop: "12px",
+  marginBottom: "24px",
 };
 
 const code = {
-  display: 'inline-block',
-  padding: '16px 4.5%',
-  width: '90.5%',
-  backgroundColor: '#f4f4f4',
-  borderRadius: '5px',
-  border: '1px solid #eee',
-  color: '#333',
+  display: "inline-block",
+  padding: "16px 4.5%",
+  width: "90.5%",
+  backgroundColor: "#f4f4f4",
+  borderRadius: "5px",
+  border: "1px solid #eee",
+  color: "#333",
 };

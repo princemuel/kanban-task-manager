@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { useRef, useState } from 'react';
+import { useRef, useState } from "react";
 
 export function useReactState<T>(initialState: T) {
   const [_index, setIndex] = useState(0);
@@ -13,7 +13,7 @@ export function useReactState<T>(initialState: T) {
         setIndex((idx) => idx + 1);
         return true;
       },
-    })
+    }),
   );
 
   return proxy.current;

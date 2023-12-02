@@ -1,7 +1,7 @@
-'use client';
-import NiceModal from '@ebay/nice-modal-react';
+"use client";
+import NiceModal from "@ebay/nice-modal-react";
 // import { icons } from '@/common';
-import NextLink from 'next/link';
+import NextLink from "next/link";
 
 type Props = {};
 //
@@ -9,12 +9,12 @@ type Props = {};
 export default function PageRoute() {
   return (
     <>
-      <main className='h-screen w-full bg-white font-accent text-brand-700'>
-        <NextLink href={'/signin'} className='text-blue-500 underline'>
+      <main className="h-screen w-full bg-white font-accent text-brand-700">
+        <NextLink href={"/signin"} className="text-blue-500 underline">
           Sign in
         </NextLink>
 
-        <button onClick={() => NiceModal.show('task/view')}>Show Modal</button>
+        <button onClick={() => NiceModal.show("task/view")}>Show Modal</button>
       </main>
       {/* <main className='h-screen w-full bg-white font-accent text-brand-700'>
         <div className='relative flex h-full'>

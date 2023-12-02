@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 interface Props extends PropsFrom<typeof Link> {}
 
@@ -15,21 +15,23 @@ const NavLink = ({ href, children, className, ...props }: Props) => {
   const pathname = usePathname();
 
   href =
-    href &&
-    href !== '/' &&
-    (href as __next_route_internal_types__.RouteImpl<unknown>).endsWith('/')
-      ? ((href as __next_route_internal_types__.RouteImpl<unknown>).slice(
-          0,
-          -1
-        ) as __next_route_internal_types__.RouteImpl<unknown>)
-      : (href as __next_route_internal_types__.RouteImpl<unknown>);
+    (
+      href &&
+      href !== "/" &&
+      (href as __next_route_internal_types__.RouteImpl<unknown>).endsWith("/")
+    ) ?
+      ((href as __next_route_internal_types__.RouteImpl<unknown>).slice(
+        0,
+        -1,
+      ) as __next_route_internal_types__.RouteImpl<unknown>)
+    : (href as __next_route_internal_types__.RouteImpl<unknown>);
 
-  const isCurrentPath = href === pathname || pathname?.startsWith(href + '/');
+  const isCurrentPath = href === pathname || pathname?.startsWith(href + "/");
 
   return (
     <Link
       href={href}
-      aria-current={isCurrentPath ? 'page' : 'false'}
+      aria-current={isCurrentPath ? "page" : "false"}
       className={className}
       {...props}
     >

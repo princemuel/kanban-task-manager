@@ -6,17 +6,17 @@
 
 (async () => {
   if (!process.env.SKIP_ENV_VALIDATION) {
-    console.log('loading env');
-    await import('./src/env.dto.mjs');
-    console.log('env validation successful');
+    console.log("loading env");
+    await import("./src/env.dto.mjs");
+    console.log("env validation successful");
   }
 })();
 
 /** @type {import('next').NextConfig} */
 const config = {
   compiler: {
-    removeConsole: process.env.NODE_ENV === 'production',
-    reactRemoveProperties: process.env.NODE_ENV === 'production',
+    removeConsole: process.env.NODE_ENV === "production",
+    reactRemoveProperties: process.env.NODE_ENV === "production",
   },
   typescript: {
     // !! WARN !!
@@ -29,25 +29,25 @@ const config = {
   productionBrowserSourceMaps: true,
   experimental: {
     typedRoutes: true,
-    webVitalsAttribution: ['CLS', 'LCP'],
+    webVitalsAttribution: ["CLS", "LCP"],
   },
   images: {
-    formats: ['image/avif', 'image/webp'],
+    formats: ["image/avif", "image/webp"],
     dangerouslyAllowSVG: true,
-    contentDispositionType: 'attachment',
+    contentDispositionType: "attachment",
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
     remotePatterns: [
       {
-        protocol: 'https',
-        hostname: 'lh3.googleusercontent.com',
-        port: '',
-        pathname: '/a/**',
+        protocol: "https",
+        hostname: "lh3.googleusercontent.com",
+        port: "",
+        pathname: "/a/**",
       },
       {
-        protocol: 'https',
-        hostname: 'avatars.githubusercontent.com',
-        port: '',
-        pathname: '/u/**',
+        protocol: "https",
+        hostname: "avatars.githubusercontent.com",
+        port: "",
+        pathname: "/u/**",
       },
     ],
   },
@@ -55,7 +55,7 @@ const config = {
   webpack(config) {
     const fileLoaderRule = config.module.rules.find(
       (/** @type {{ test: { test: (value: string) => any; }; }} */ rule) =>
-        rule.test?.test?.('.svg')
+        rule.test?.test?.(".svg"),
     );
     config.module.rules.push(
       {
@@ -67,26 +67,26 @@ const config = {
         test: /\.inline.svg$/i,
         use: [
           {
-            loader: '@svgr/webpack',
+            loader: "@svgr/webpack",
             options: {
               svgo: true,
               svgoConfig: {
                 plugins: [
                   {
-                    name: 'preset-default',
+                    name: "preset-default",
                     params: {
                       overrides: {
                         removeViewBox: false,
                       },
                     },
                   },
-                  'prefixIds',
+                  "prefixIds",
                 ],
               },
             },
           },
         ],
-      }
+      },
     );
     fileLoaderRule.exclude = /\.svg$/i;
     return config;

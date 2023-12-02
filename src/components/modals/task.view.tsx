@@ -1,19 +1,24 @@
-'use client';
+"use client";
 
-import { StringContraint } from '@/lib/schema/fields';
-import { Listbox, Transition } from '@headlessui/react';
-import { ChevronDown, MoreVertical } from 'lucide-react';
-import { Fragment, useCallback } from 'react';
-import { useFieldArray } from 'react-hook-form';
-import { v4 as uuid } from 'uuid';
-import { z } from 'zod';
-import { Form, FormField, FormItem, FormLabel, Checkbox } from '../form';
-import { SrOnly } from '../helpers';
-import { Button, text, Text } from '../shared';
-import { BaseModal, ModalDescription, ModalHeader, ModalTitle } from './modal';
-import { useApiState, useZodForm } from '@/hooks';
-import { X } from 'lucide-react';
-import { FormControl, FormMessage, TextArea, TextField } from '../form';
+import { useApiState, useZodForm } from "@/hooks";
+import { StringContraint } from "@/lib/schema/fields";
+import { Listbox, Transition } from "@headlessui/react";
+import { Fragment, useCallback } from "react";
+import { useFieldArray } from "react-hook-form";
+import { LuChevronDown, LuMoreVertical } from "react-icons/lu";
+import { v4 as uuid } from "uuid";
+import { z } from "zod";
+import {
+  Checkbox,
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+} from "../form";
+import { SrOnly } from "../helpers";
+import { Button, Text, text } from "../shared";
+import { BaseModal, ModalDescription, ModalHeader, ModalTitle } from "./modal";
 
 type Props = {};
 
@@ -27,27 +32,27 @@ const schema = z.object({
         id: z.string(),
         title: StringContraint,
         done: z.boolean().default(false),
-      })
+      }),
     )
     .nonempty(),
 });
 
-const options = ['Todo', 'Doing', 'Done'];
+const options = ["Todo", "Doing", "Done"];
 const subtasks = [
   {
     id: uuid(),
-    title: 'Research competitor pricing and business models',
+    title: "Research competitor pricing and business models",
     done: true,
   },
   {
     id: uuid(),
-    title: 'Outline a business model that works for our solution',
+    title: "Outline a business model that works for our solution",
     done: true,
   },
   {
     id: uuid(),
     title:
-      'Talk to potential customers about our proposed solution and ask for fair price expectancy',
+      "Talk to potential customers about our proposed solution and ask for fair price expectancy",
     done: false,
   },
 ];
@@ -56,18 +61,18 @@ const ViewTaskModal = (props: Props) => {
   const form = useZodForm({
     schema: schema,
     defaultValues: {
-      title: '',
-      description: '',
+      title: "",
+      description: "",
       status: options[0],
       subtasks: subtasks,
     },
   });
 
   const { fields, append } = useFieldArray({
-    name: 'subtasks',
+    name: "subtasks",
     control: form.control,
     rules: {
-      required: 'Please add at least one column',
+      required: "Please add at least one column",
     },
   });
   const { router, isMutating, controllerRef, startTransition, setFetchStatus } =
@@ -78,13 +83,13 @@ const ViewTaskModal = (props: Props) => {
   const addItem = useCallback(() => {
     append({
       id: uuid(),
-      title: '',
+      title: "",
       done: false,
     });
   }, [append]);
 
   const onSubmit = handleSubmit(async (values) => {
-    console.log('SUBMITTED', JSON.stringify(values, null, 2));
+    console.log("SUBMITTED", JSON.stringify(values, null, 2));
 
     // try {
     //   const draft = produce(values, (draft) => {
@@ -140,17 +145,17 @@ const ViewTaskModal = (props: Props) => {
   });
 
   return (
-    <BaseModal id='task/view'>
+    <BaseModal id="task/view">
       <Form {...form}>
-        <form onSubmit={onSubmit} className='flex flex-col gap-6'>
+        <form onSubmit={onSubmit} className="flex flex-col gap-6">
           <ModalHeader>
             <ModalTitle>
               Research pricing points of various competitors and trial different
               business models
             </ModalTitle>
 
-            <Button className='pe-0 ps-4 text-brand-400'>
-              <MoreVertical />
+            <Button className="pe-0 ps-4 text-brand-400">
+              <LuMoreVertical />
               <SrOnly>Show Actions Menu</SrOnly>
             </Button>
           </ModalHeader>
@@ -161,15 +166,15 @@ const ViewTaskModal = (props: Props) => {
             iterating the subtasks until we have a coherent proposition.
           </ModalDescription>
 
-          <fieldset className='space-y-3'>
-            <Text as='legend' variant='accent'>
+          <fieldset className="space-y-3">
+            <Text as="legend" variant="accent">
               Subtasks (
               <output>{fields.filter((field) => field.done).length}</output>
               &nbsp;of&nbsp;
               <output>{fields.length}</output>)
             </Text>
 
-            <ul className='flex flex-col gap-3'>
+            <ul className="flex flex-col gap-3">
               {fields.map((subtask, index) => {
                 return (
                   <FormField
@@ -177,8 +182,8 @@ const ViewTaskModal = (props: Props) => {
                     name={`subtasks.${index}.done`}
                     render={({ field }) => (
                       <FormItem
-                        as='li'
-                        className='grid cursor-pointer grid-cols-[auto,1fr] items-center gap-4 rounded bg-brand-100 px-4 py-3 hover:bg-brand-500/25 dark:bg-brand-800 dark:hover:bg-brand-500/25'
+                        as="li"
+                        className="grid cursor-pointer grid-cols-[auto,1fr] items-center gap-4 rounded bg-brand-100 px-4 py-3 hover:bg-brand-500/25 dark:bg-brand-800 dark:hover:bg-brand-500/25"
                       >
                         <FormControl>
                           <Checkbox
@@ -198,32 +203,32 @@ const ViewTaskModal = (props: Props) => {
             </ul>
           </fieldset>
 
-          <fieldset className='space-y-2'>
+          <fieldset className="space-y-2">
             <FormField
-              name='status'
+              name="status"
               render={({ field }) => (
                 <Listbox {...field}>
-                  <FormItem className='relative col-span-6 flex-col sm:col-span-3'>
+                  <FormItem className="relative col-span-6 flex-col sm:col-span-3">
                     <Listbox.Label as={FormLabel}>Current Status</Listbox.Label>
 
-                    <div className='relative z-[1] mt-1'>
+                    <div className="relative z-[1] mt-1">
                       <Listbox.Button
-                        title='select a payment term'
-                        className='group relative inline-flex w-full items-center justify-between rounded border border-brand-400/25 bg-transparent px-4 py-2 outline-none transition-colors duration-300 ease-in hover:border-brand-500 focus:border-brand-500 focus-visible:outline-none'
+                        title="select a payment term"
+                        className="group relative inline-flex w-full items-center justify-between rounded border border-brand-400/25 bg-transparent px-4 py-2 outline-none transition-colors duration-300 ease-in hover:border-brand-500 focus:border-brand-500 focus-visible:outline-none"
                       >
                         {({ value }) => (
                           <>
                             <span
                               className={text({
-                                size: 'base',
-                                className: 'block truncate',
+                                size: "base",
+                                className: "block truncate",
                               })}
                             >
                               {value}
                             </span>
 
-                            <span className='pointer-events-none transform-gpu text-brand-500 transition-transform hui-open:-rotate-180'>
-                              <ChevronDown
+                            <span className="pointer-events-none transform-gpu text-brand-500 transition-transform hui-open:-rotate-180">
+                              <LuChevronDown
                                 size={16}
                                 strokeWidth={2}
                                 aria-hidden
@@ -236,23 +241,23 @@ const ViewTaskModal = (props: Props) => {
 
                       <Transition
                         as={Fragment}
-                        enter='transition-opacity ease-in-out duration-300'
-                        enterFrom='opacity-0'
-                        enterTo='opacity-100'
-                        leave='transition-opacity ease-in-out duration-300'
-                        leaveFrom='opacity-100'
-                        leaveTo='opacity-0'
+                        enter="transition-opacity ease-in-out duration-300"
+                        enterFrom="opacity-0"
+                        enterTo="opacity-100"
+                        leave="transition-opacity ease-in-out duration-300"
+                        leaveFrom="opacity-100"
+                        leaveTo="opacity-0"
                       >
-                        <Listbox.Options className='absolute z-20 mt-3 w-full rounded-lg bg-white shadow-[0_10px_20px_0_rgba(54,78,126,0.25)] transition-all duration-500 dark:bg-brand-800'>
+                        <Listbox.Options className="absolute z-20 mt-3 w-full rounded-lg bg-white shadow-[0_10px_20px_0_rgba(54,78,126,0.25)] transition-all duration-500 dark:bg-brand-800">
                           {options.map((option) => (
                             <Listbox.Option
                               key={option.toString()}
                               value={option}
                               className={text({
-                                variant: 'accent',
-                                size: 'base',
+                                variant: "accent",
+                                size: "base",
                                 className:
-                                  'block truncate px-4 py-2 outline-none hui-selected:text-brand-500 hui-active:text-brand-500 dark:hui-selected:text-brand-500 dark:hui-active:text-brand-500',
+                                  "block truncate px-4 py-2 outline-none hui-selected:text-brand-500 hui-active:text-brand-500 dark:hui-selected:text-brand-500 dark:hui-active:text-brand-500",
                               })}
                             >
                               {option}

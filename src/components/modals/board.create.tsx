@@ -1,12 +1,11 @@
-'use client';
+"use client";
 
-import { useApiState, useZodForm } from '@/hooks';
-import { StringContraint } from '@/lib/schema/fields';
-import { X } from 'lucide-react';
-import { useCallback } from 'react';
-import { useFieldArray } from 'react-hook-form';
-import { v4 as uuid } from 'uuid';
-import { z } from 'zod';
+import { useApiState, useZodForm } from "@/hooks";
+import { StringContraint } from "@/lib/schema/fields";
+import { useCallback } from "react";
+import { useFieldArray } from "react-hook-form";
+import { v4 as uuid } from "uuid";
+import { z } from "zod";
 import {
   Form,
   FormControl,
@@ -15,10 +14,10 @@ import {
   FormLabel,
   FormMessage,
   TextField,
-} from '../form';
-import { SrOnly } from '../helpers';
-import { Button, Text } from '../shared';
-import { BaseModal, ModalFooter, ModalHeader, ModalTitle } from './modal';
+} from "../form";
+import { SrOnly } from "../helpers";
+import { Button, Text } from "../shared";
+import { BaseModal, ModalFooter, ModalHeader, ModalTitle } from "./modal";
 
 type Props = {};
 
@@ -35,10 +34,10 @@ export default function CreateBoardModal() {
   });
 
   const { fields, append, remove } = useFieldArray({
-    name: 'columns',
+    name: "columns",
     control: form.control,
     rules: {
-      required: 'Please add at least one column',
+      required: "Please add at least one column",
     },
   });
 
@@ -50,12 +49,12 @@ export default function CreateBoardModal() {
   const addItem = useCallback(() => {
     append({
       id: uuid(),
-      name: '',
+      name: "",
     });
   }, [append]);
 
   const onSubmit = handleSubmit(async (values) => {
-    console.log('SUBMITTED', JSON.stringify(values, null, 2));
+    console.log("SUBMITTED", JSON.stringify(values, null, 2));
 
     // try {
     //   const draft = produce(values, (draft) => {
@@ -111,44 +110,44 @@ export default function CreateBoardModal() {
   });
 
   return (
-    <BaseModal id='board/create'>
+    <BaseModal id="board/create">
       <Form {...form}>
-        <form onSubmit={onSubmit} className='flex flex-col gap-6'>
+        <form onSubmit={onSubmit} className="flex flex-col gap-6">
           <ModalHeader>
             <ModalTitle>Add New Board</ModalTitle>
           </ModalHeader>
 
           <FormField
-            name='name'
+            name="name"
             render={({ field }) => (
-              <FormItem className='space-y-2'>
+              <FormItem className="space-y-2">
                 <FormLabel>Board Name</FormLabel>
 
-                <div className='relative w-full'>
+                <div className="relative w-full">
                   <FormControl>
                     <TextField
-                      type='text'
-                      placeholder='e.g. Web Design'
+                      type="text"
+                      placeholder="e.g. Web Design"
                       {...field}
                     />
                   </FormControl>
-                  <FormMessage className='absolute right-4 top-2' />
+                  <FormMessage className="absolute right-4 top-2" />
                 </div>
               </FormItem>
             )}
           />
 
-          <fieldset className='space-y-3'>
-            <Text as='legend' variant='accent'>
+          <fieldset className="space-y-3">
+            <Text as="legend" variant="accent">
               Board Columns
             </Text>
 
-            <ul className='flex flex-col gap-3'>
+            <ul className="flex flex-col gap-3">
               {fields.map((field, index) => {
                 return (
                   <li
                     key={field.id}
-                    className='grid grid-cols-[1fr,auto] items-center'
+                    className="grid grid-cols-[1fr,auto] items-center"
                   >
                     <FormField
                       name={`columns.${index}.name`}
@@ -158,22 +157,22 @@ export default function CreateBoardModal() {
                             <FormLabel>Column Name</FormLabel>
                           </SrOnly>
 
-                          <div className='relative w-full'>
+                          <div className="relative w-full">
                             <FormControl>
                               <TextField
-                                type='text'
-                                placeholder='Todo'
+                                type="text"
+                                placeholder="Todo"
                                 {...field}
                               />
                             </FormControl>
-                            <FormMessage className='absolute right-4 top-2' />
+                            <FormMessage className="absolute right-4 top-2" />
                           </div>
                         </FormItem>
                       )}
                     />
                     <Button
-                      type='button'
-                      className='justify-end text-brand-400 hover:text-accent-200 focus:text-accent-200'
+                      type="button"
+                      className="justify-end text-brand-400 hover:text-accent-200 focus:text-accent-200"
                       onClick={() => void remove(index)}
                     >
                       <X />
@@ -185,8 +184,8 @@ export default function CreateBoardModal() {
             </ul>
 
             <Button
-              type='button'
-              intent='secondary'
+              type="button"
+              intent="secondary"
               onClick={addItem}
               fullWidth
             >
@@ -195,7 +194,7 @@ export default function CreateBoardModal() {
           </fieldset>
 
           <ModalFooter>
-            <Button type='submit' intent='primary' fullWidth>
+            <Button type="submit" intent="primary" fullWidth>
               Create New Board
             </Button>
           </ModalFooter>

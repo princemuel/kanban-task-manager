@@ -39,15 +39,15 @@
       label,
       select,
       summary,
-      [role='button'],
-      [role='option'],
-      [role='menuitem']
+      [role="button"],
+      [role="option"],
+      [role="menuitem"]
     ) {
     @apply cursor-pointer;
   }
 
   @media not all and (min-resolution: 0.001dpcm) {
-    :where(img[loading='lazy']) {
+    :where(img[loading="lazy"]) {
       clip-path: inset(0.5px);
     }
   }

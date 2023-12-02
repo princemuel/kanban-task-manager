@@ -1,20 +1,20 @@
-import { Button } from '../shared';
+import { Button } from "../shared";
 import {
   BaseModal,
   ModalDescription,
   ModalFooter,
   ModalHeader,
   ModalTitle,
-} from './modal';
+} from "./modal";
 
 type Props = {};
 
 export default function DeleteTaskModal() {
   return (
-    <BaseModal id='task/delete'>
-      <form className='flex flex-col gap-6'>
+    <BaseModal id="task/delete">
+      <form className="flex flex-col gap-6">
         <ModalHeader>
-          <ModalTitle variant='destructive'>Delete this task?</ModalTitle>
+          <ModalTitle variant="destructive">Delete this task?</ModalTitle>
         </ModalHeader>
 
         <ModalDescription>
@@ -23,11 +23,11 @@ export default function DeleteTaskModal() {
         </ModalDescription>
 
         <ModalFooter>
-          <Button type='submit' intent='destructive' fullWidth>
+          <Button type="submit" intent="destructive" fullWidth>
             Delete
           </Button>
 
-          <Button type='button' intent='secondary' fullWidth>
+          <Button type="button" intent="secondary" fullWidth>
             Cancel
           </Button>
         </ModalFooter>

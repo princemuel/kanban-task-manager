@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import { twcn } from '@/helpers';
-import * as LabelPrimitive from '@radix-ui/react-label';
-import { Slot } from '@radix-ui/react-slot';
-import * as React from 'react';
+import { twcn } from "@/helpers";
+import * as LabelPrimitive from "@radix-ui/react-label";
+import { Slot } from "@radix-ui/react-slot";
+import * as React from "react";
 import {
   Controller,
   ControllerProps,
@@ -11,9 +11,9 @@ import {
   FieldValues,
   FormProvider,
   useFormContext,
-} from 'react-hook-form';
-import { text } from '../shared';
-import { Label } from './label';
+} from "react-hook-form";
+import { text } from "../shared";
+import { Label } from "./label";
 
 type FormFieldContextValue<
   TFieldValues extends FieldValues = FieldValues,
@@ -26,11 +26,11 @@ type FormItemContextValue = {
 };
 
 const FormFieldContext = React.createContext<FormFieldContextValue>(
-  {} as FormFieldContextValue
+  {} as FormFieldContextValue,
 );
 
 const FormItemContext = React.createContext<FormItemContextValue>(
-  {} as FormItemContextValue
+  {} as FormItemContextValue,
 );
 
 const useFormField = () => {
@@ -41,7 +41,7 @@ const useFormField = () => {
   const fieldState = getFieldState(fieldContext.name, formState);
 
   if (!fieldContext) {
-    throw new Error('useFormField should be used within <FormField>');
+    throw new Error("useFormField should be used within <FormField>");
   }
 
   const { id } = itemContext;
@@ -74,20 +74,20 @@ const FormField = <
 const FormItem = React.forwardRef(
   ({ as, className, ...restProps }, forwardedRef) => {
     const id = React.useId();
-    const As = as || 'div';
+    const As = as || "div";
 
     return (
       <FormItemContext.Provider value={{ id }}>
         <As
-          className={twcn('group', className)}
+          className={twcn("group", className)}
           {...restProps}
           ref={forwardedRef}
         />
       </FormItemContext.Provider>
     );
-  }
-) as ForwardRefComponent<'div', {}>;
-FormItem.displayName = 'FormItem';
+  },
+) as ForwardRefComponent<"div", {}>;
+FormItem.displayName = "FormItem";
 
 const FormControl = React.forwardRef<
   React.ElementRef<typeof Slot>,
@@ -100,9 +100,9 @@ const FormControl = React.forwardRef<
     <Slot
       id={formItemId}
       aria-describedby={
-        !error
-          ? `${formDescriptionId}`
-          : `${formDescriptionId} ${formMessageId}`
+        !error ?
+          `${formDescriptionId}`
+        : `${formDescriptionId} ${formMessageId}`
       }
       aria-errormessage={formMessageId}
       aria-invalid={Boolean(error)}
@@ -111,7 +111,7 @@ const FormControl = React.forwardRef<
     />
   );
 });
-FormControl.displayName = 'FormControl';
+FormControl.displayName = "FormControl";
 
 const FormLabel = React.forwardRef<
   React.ElementRef<typeof LabelPrimitive.Root>,
@@ -121,14 +121,14 @@ const FormLabel = React.forwardRef<
 
   return (
     <Label
-      className={twcn(text({ size: 'sm', variant: 'accent' }), className)}
+      className={twcn(text({ size: "sm", variant: "accent" }), className)}
       htmlFor={formItemId}
       {...restProps}
       ref={forwardedRef}
     />
   );
 });
-FormLabel.displayName = 'FormLabel';
+FormLabel.displayName = "FormLabel";
 
 const FormMessage = React.forwardRef<
   HTMLParagraphElement,
@@ -141,12 +141,12 @@ const FormMessage = React.forwardRef<
 
   return (
     <p
-      role='alert'
-      aria-live='polite'
+      role="alert"
+      aria-live="polite"
       id={formMessageId}
       className={text({
-        variant: 'destructive',
-        size: 'base',
+        variant: "destructive",
+        size: "base",
         className,
       })}
       {...restProps}
@@ -156,7 +156,7 @@ const FormMessage = React.forwardRef<
     </p>
   );
 });
-FormMessage.displayName = 'FormMessage';
+FormMessage.displayName = "FormMessage";
 
 const FormDescription = React.forwardRef<
   HTMLParagraphElement,
@@ -167,13 +167,13 @@ const FormDescription = React.forwardRef<
   return (
     <p
       id={formDescriptionId}
-      className={twcn('text-xs', className)}
+      className={twcn("text-xs", className)}
       {...restProps}
       ref={forwardedRef}
     />
   );
 });
-FormDescription.displayName = 'FormDescription';
+FormDescription.displayName = "FormDescription";
 
 export {
   Form,

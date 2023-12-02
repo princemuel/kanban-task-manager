@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import { z } from "zod";
 
 // Zod Constraints
 export const StringContraint = z
@@ -8,8 +8,8 @@ export const StringContraint = z
 
 export const EmailContraint = z
   .string()
-  .email({ message: 'Invalid email address' })
-  .min(6, { message: 'Must 6 or more char(s)' })
+  .email({ message: "Invalid email address" })
+  .min(6, { message: "Must 6 or more char(s)" })
   .toLowerCase()
   .trim();
 

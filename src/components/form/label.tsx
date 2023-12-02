@@ -1,9 +1,9 @@
-import * as LabelPrimitive from '@radix-ui/react-label';
-import * as React from 'react';
-import { tv, type VariantProps } from 'tailwind-variants';
+import * as LabelPrimitive from "@radix-ui/react-label";
+import * as React from "react";
+import { tv, type VariantProps } from "tailwind-variants";
 
 const label = tv({
-  base: 'peer-disabled:cursor-not-allowed peer-disabled:opacity-70',
+  base: "peer-disabled:cursor-not-allowed peer-disabled:opacity-70",
 });
 
 export const Label = React.forwardRef<
