@@ -10,7 +10,7 @@ export default function PageRoute() {
   return (
     <>
       <main className="h-screen w-full bg-white font-accent text-brand-700">
-        <NextLink href={"/signin"} className="text-blue-500 underline">
+        <NextLink href="/auth/signin" className="text-blue-500 underline">
           Sign in
         </NextLink>
 

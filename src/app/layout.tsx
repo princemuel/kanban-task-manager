@@ -1,6 +1,6 @@
-import { BreakpointIndicator } from "@/components";
-import { defineMeta } from "@/config";
-import { RootProvider } from "@/context";
+import { BreakpointIndicator } from "@/components/breakpoint-indicator";
+import { defineMeta } from "@/config/seo.config";
+import { RootProvider } from "@/context/providers";
 import { Analytics } from "@vercel/analytics/react";
 import type { Viewport } from "next";
 import * as React from "react";

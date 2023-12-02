@@ -1,4 +1,4 @@
-import { Button } from "@/components";
+import { Button } from "@/components/button";
 
 type Props = {};
 
@@ -68,6 +68,7 @@ const PageRoute = () => {
           <p className="text-300 font-bold uppercase tracking-100 text-brand-400">
             all boards <span>(3)</span>
           </p>
+
           <ul className="mt-8 flex flex-col items-start">
             <li className="-ml-9 flex items-baseline justify-center rounded-r-3xl py-[14px] pl-9 pr-28 text-[15px] font-bold text-brand-400 hover:bg-brand-800 hover:text-white">
               <span className="h-4 w-4 ">@</span>Platform Launch
