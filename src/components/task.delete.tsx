@@ -1,4 +1,4 @@
-import { Button } from "../shared";
+import { Button } from "./button";
 import {
   BaseModal,
   ModalDescription,
@@ -18,7 +18,7 @@ export default function DeleteTaskModal() {
         </ModalHeader>
 
         <ModalDescription>
-          Are you sure you want to delete the &apos;Build settings UI&apos; task
+          Are you sure you want to delete the &#39;Build settings UI&#39; task
           and its subtasks? This action cannot be reversed.
         </ModalDescription>
 

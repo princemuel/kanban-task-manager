@@ -1,4 +1,4 @@
-import { twcn } from "@/helpers";
+import { twcn } from "@/helpers/utils";
 import { Slot } from "@radix-ui/react-slot";
 
 type Props = { asChild?: boolean } & React.HTMLAttributes<HTMLDivElement>;

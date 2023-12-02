@@ -1,4 +1,6 @@
-import { Button } from "../shared";
+"use client";
+
+import { Button } from "./button";
 import {
   BaseModal,
   ModalDescription,
@@ -18,7 +20,7 @@ export default function DeleteBoardModal() {
         </ModalHeader>
 
         <ModalDescription>
-          Are you sure you want to delete the &apos;Platform Launch&apos; board?
+          Are you sure you want to delete the &#39;Platform Launch&#39; board?
           This action will remove all columns and tasks and cannot be reversed.
         </ModalDescription>
 

@@ -1,26 +1,20 @@
 "use client";
 
-import { useApiState, useZodForm } from "@/hooks";
-import { StringContraint } from "@/lib/schema/fields";
+import { useApiState } from "@/hooks/use-api-state";
+import { useZodForm } from "@/hooks/use-form";
+import { StringContraint } from "@/lib/schema.fields";
 import { Listbox, Transition } from "@headlessui/react";
+import { Checkbox } from "@radix-ui/react-checkbox";
 import { Fragment, useCallback } from "react";
-import { useFieldArray } from "react-hook-form";
-import { LuChevronDown, LuX } from "react-icons/lu";
+import { Form, useFieldArray } from "react-hook-form";
+import { LuChevronDown, LuMoreVertical } from "react-icons/lu";
 import { v4 as uuid } from "uuid";
 import { z } from "zod";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-  TextArea,
-  TextField,
-} from "../form";
-import { SrOnly } from "../helpers";
-import { Button, Text, text } from "../shared";
-import { BaseModal, ModalFooter, ModalHeader, ModalTitle } from "./modal";
+import { FormControl, FormField, FormItem, FormLabel } from "./__form__";
+import { Button } from "./button";
+import { BaseModal, ModalDescription, ModalHeader, ModalTitle } from "./modal";
+import { SrOnly } from "./sr-only";
+import { Text, text } from "./text";
 
 type Props = {};
 
@@ -40,33 +34,47 @@ const schema = z.object({
 });
 
 const options = ["Todo", "Doing", "Done"];
+const subtasks = [
+  {
+    id: uuid(),
+    title: "Research competitor pricing and business models",
+    done: true,
+  },
+  {
+    id: uuid(),
+    title: "Outline a business model that works for our solution",
+    done: true,
+  },
+  {
+    id: uuid(),
+    title:
+      "Talk to potential customers about our proposed solution and ask for fair price expectancy",
+    done: false,
+  },
+];
 
-export default function CreateTaskModal() {
+const ViewTaskModal = (props: Props) => {
   const form = useZodForm({
     schema: schema,
     defaultValues: {
-      title: "Add authentication endpoints",
+      title: "",
       description: "",
-      status: options[1],
-      subtasks: [
-        { id: uuid(), title: "Define user model", done: false },
-        { id: uuid(), title: "Add auth endpoints", done: false },
-      ],
+      status: options[0],
+      subtasks: subtasks,
     },
   });
 
-  const { fields, append, remove } = useFieldArray({
+  const { fields, append } = useFieldArray({
     name: "subtasks",
     control: form.control,
     rules: {
       required: "Please add at least one column",
     },
   });
-
   const { router, isMutating, controllerRef, startTransition, setFetchStatus } =
     useApiState();
 
-  const { handleSubmit, reset } = form;
+  const { handleSubmit, reset, register } = form;
 
   const addItem = useCallback(() => {
     append({
@@ -133,107 +141,62 @@ export default function CreateTaskModal() {
   });
 
   return (
-    <BaseModal id="task/edit">
+    <BaseModal id="task/view">
       <Form {...form}>
         <form onSubmit={onSubmit} className="flex flex-col gap-6">
           <ModalHeader>
-            <ModalTitle>Add New Task</ModalTitle>
+            <ModalTitle>
+              Research pricing points of various competitors and trial different
+              business models
+            </ModalTitle>
+
+            <Button className="pe-0 ps-4 text-brand-400">
+              <LuMoreVertical />
+              <SrOnly>Show Actions Menu</SrOnly>
+            </Button>
           </ModalHeader>
 
-          <FormField
-            name="title"
-            render={({ field }) => (
-              <FormItem className="space-y-2">
-                <FormLabel>Title</FormLabel>
-
-                <div className="relative w-full">
-                  <FormControl>
-                    <TextField
-                      type="text"
-                      placeholder="e.g. Take coffee break"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage className="absolute right-4 top-2" />
-                </div>
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            name="description"
-            render={({ field }) => (
-              <FormItem className="space-y-2">
-                <FormLabel>Description</FormLabel>
-
-                <div className="relative w-full">
-                  <FormControl>
-                    <TextArea
-                      placeholder="e.g. It's always good to take a break. This 15 minute break will recharge the batteries a little."
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage className="absolute right-4 top-2" />
-                </div>
-              </FormItem>
-            )}
-          />
+          <ModalDescription>
+            We know what we&#39;re planning to build for version one. Now we
+            need to finalise the first pricing model we&#39;ll use. Keep
+            iterating the subtasks until we have a coherent proposition.
+          </ModalDescription>
 
           <fieldset className="space-y-3">
             <Text as="legend" variant="accent">
-              Subtasks
+              Subtasks (
+              <output>{fields.filter((field) => field.done).length}</output>
+              &nbsp;of&nbsp;
+              <output>{fields.length}</output>)
             </Text>
 
             <ul className="flex flex-col gap-3">
-              {fields.map((field, index) => {
+              {fields.map((subtask, index) => {
                 return (
-                  <li
-                    key={field.id}
-                    className="grid grid-cols-[1fr,auto] items-center"
-                  >
-                    <FormField
-                      name={`subtasks.${index}.title`}
-                      render={({ field }) => (
-                        <FormItem>
-                          <SrOnly>
-                            <FormLabel>Subtask Title</FormLabel>
-                          </SrOnly>
+                  <FormField
+                    key={subtask.id}
+                    name={`subtasks.${index}.done`}
+                    render={({ field }) => (
+                      <FormItem
+                        as="li"
+                        className="grid cursor-pointer grid-cols-[auto,1fr] items-center gap-4 rounded bg-brand-100 px-4 py-3 hover:bg-brand-500/25 dark:bg-brand-800 dark:hover:bg-brand-500/25"
+                      >
+                        <FormControl>
+                          <Checkbox
+                            checked={field.value}
+                            onCheckedChange={field.onChange}
+                          />
+                        </FormControl>
 
-                          <div className="relative w-full">
-                            <FormControl>
-                              <TextField
-                                type="text"
-                                placeholder="e.g. Make coffee"
-                                {...field}
-                              />
-                            </FormControl>
-                            <FormMessage className="absolute right-4 top-2" />
-                          </div>
-                        </FormItem>
-                      )}
-                    />
-
-                    <Button
-                      type="button"
-                      className="justify-end text-brand-400 hover:text-accent-200 focus:text-accent-200"
-                      onClick={() => void remove(index)}
-                    >
-                      <LuX />
-                      <SrOnly>Remove</SrOnly>
-                    </Button>
-                  </li>
+                        <FormLabel aria-disabled={field.value}>
+                          {subtask.title}
+                        </FormLabel>
+                      </FormItem>
+                    )}
+                  />
                 );
               })}
             </ul>
-
-            <Button
-              type="button"
-              intent="secondary"
-              onClick={addItem}
-              fullWidth
-            >
-              + Add New Subtask
-            </Button>
           </fieldset>
 
           <fieldset className="space-y-2">
@@ -241,8 +204,8 @@ export default function CreateTaskModal() {
               name="status"
               render={({ field }) => (
                 <Listbox {...field}>
-                  <FormItem className="relative flex-col">
-                    <Listbox.Label as={FormLabel}>Status</Listbox.Label>
+                  <FormItem className="relative col-span-6 flex-col sm:col-span-3">
+                    <Listbox.Label as={FormLabel}>Current Status</Listbox.Label>
 
                     <div className="relative z-[1] mt-1">
                       <Listbox.Button
@@ -304,14 +267,10 @@ export default function CreateTaskModal() {
               )}
             ></FormField>
           </fieldset>
-
-          <ModalFooter>
-            <Button type="submit" intent="primary" fullWidth>
-              Save Changes
-            </Button>
-          </ModalFooter>
         </form>
       </Form>
     </BaseModal>
   );
-}
+};
+
+export default ViewTaskModal;

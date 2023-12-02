@@ -1,23 +1,25 @@
 "use client";
 
-import { useApiState, useZodForm } from "@/hooks";
-import { StringContraint } from "@/lib/schema/fields";
+import { useApiState } from "@/hooks/use-api-state";
+import { useZodForm } from "@/hooks/use-form";
+import { StringContraint } from "@/lib/schema.fields";
 import { useCallback } from "react";
-import { useFieldArray } from "react-hook-form";
+import { Form, useFieldArray } from "react-hook-form";
+import { LuX } from "react-icons/lu";
 import { v4 as uuid } from "uuid";
 import { z } from "zod";
 import {
-  Form,
   FormControl,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
-  TextField,
-} from "../form";
-import { SrOnly } from "../helpers";
-import { Button, Text } from "../shared";
+} from "./__form__";
+import { Button } from "./button";
+import { TextField } from "./input";
 import { BaseModal, ModalFooter, ModalHeader, ModalTitle } from "./modal";
+import { SrOnly } from "./sr-only";
+import { Text } from "./text";
 
 type Props = {};
 
@@ -187,7 +189,7 @@ export default function EditBoardModal() {
                       className="justify-end text-brand-400 hover:text-accent-200 focus:text-accent-200"
                       onClick={() => void remove(index)}
                     >
-                      <X />
+                      <LuX />
                       <SrOnly>Remove</SrOnly>
                     </Button>
                   </li>

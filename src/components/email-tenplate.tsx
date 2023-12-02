@@ -43,7 +43,7 @@ export function EmailTemplate({ url, host }: Props) {
               marginBottom: "16px",
             }}
           >
-            If you didn&apos;t try to login, you can safely ignore this email.
+            If you didn&#39;t try to login, you can safely ignore this email.
           </Text>
 
           <Text style={footer}>

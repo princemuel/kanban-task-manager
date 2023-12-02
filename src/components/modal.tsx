@@ -5,7 +5,7 @@ import { Dialog as HeadlessDialog, Transition } from "@headlessui/react";
 import { Fragment, forwardRef } from "react";
 import type { VariantProps } from "tailwind-variants";
 import { tv } from "tailwind-variants";
-import { text } from "../shared";
+import { text } from "./text";
 
 type Props = {
   children: React.ReactNode;

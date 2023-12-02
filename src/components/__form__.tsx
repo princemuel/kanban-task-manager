@@ -1,6 +1,6 @@
 "use client";
 
-import { twcn } from "@/helpers";
+import { twcn } from "@/helpers/utils";
 import * as LabelPrimitive from "@radix-ui/react-label";
 import { Slot } from "@radix-ui/react-slot";
 import * as React from "react";
@@ -12,8 +12,8 @@ import {
   FormProvider,
   useFormContext,
 } from "react-hook-form";
-import { text } from "../shared";
 import { Label } from "./label";
+import { text } from "./text";
 
 type FormFieldContextValue<
   TFieldValues extends FieldValues = FieldValues,
