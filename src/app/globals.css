@@ -1,7 +1,6 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
 @layer base {
   html {
     box-sizing: border-box;
@@ -24,9 +23,6 @@
     min-block-size: 100svh;
   }
   img {
-    /* max-width: 100%; */
-    /* height: auto; */
-    /* vertical-align: middle; */
     font-style: italic;
     background-repeat: no-repeat;
     background-size: cover;
@@ -57,8 +53,10 @@
       scroll-behavior: smooth;
     }
   }
+
+  /* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
   @media (prefers-reduced-motion: reduce) {
-    html:focus-within {
+    :where(html:focus-within) {
       scroll-behavior: auto;
     }
 
