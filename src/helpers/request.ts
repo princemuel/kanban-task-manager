@@ -1,16 +1,16 @@
-export async function request<JSON extends unknown>(
+export async function request<Value extends unknown>(
   ...args: Parameters<typeof fetch>
-): Promise<JSON> {
-  interface FetchError extends Error {
-    status?: number;
-  }
+): Promise<Value> {
+  type FetchError = Error & { status?: number };
 
   try {
     const response = await fetch(...args);
 
     if (!response.ok) {
-      const json = await response.json();
-      const message = json?.error || 'An unexpected error occurred.';
+      const json = (await response.json()) as Value & { error: string };
+
+      const message =
+        json?.error || "NetworkError when attempting to fetch resource";
 
       const error: FetchError = new Error(message);
       error.status = response.status;
@@ -18,7 +18,7 @@ export async function request<JSON extends unknown>(
       return Promise.reject(error);
     }
 
-    return response.json();
+    return response.json() as Value;
   } catch (error) {
     return Promise.reject(error);
   }
@@ -28,15 +28,7 @@ export async function request<JSON extends unknown>(
  * Used to uniquely identify a timeout
  * @private
  */
-const TIMEOUT = Symbol('TIMEOUT');
-
-const createTimeoutPromise = (ms: number | undefined) => {
-  return (timer: NodeJS.Timeout | null) => {
-    return new Promise((resolve) => {
-      timer = setTimeout(() => resolve(TIMEOUT), ms);
-    });
-  };
-};
+const TIMEOUT = Symbol("TIMEOUT");
 
 /**
  * Attach a timeout to any promise, if the timeout resolves first ignore the
@@ -73,36 +65,44 @@ const createTimeoutPromise = (ms: number | undefined) => {
  */
 export function timeout<Value>(
   promise: Promise<Value>,
-  options: { controller?: AbortController; ms: number }
+  options: { controller?: AbortController; ms: number },
 ): Promise<Value> {
-  const timeoutPromise = createTimeoutPromise(options.ms);
-
   return new Promise(async (resolve, reject) => {
     let timer: NodeJS.Timeout | null = null;
 
     try {
-      const result = await Promise.race([promise, timeoutPromise(timer)]);
+      const result = await Promise.race([
+        promise,
+        new Promise((resolve) => {
+          timer = setTimeout(() => resolve(TIMEOUT), options.ms);
+        }),
+      ]);
 
       if (timer) clearTimeout(timer);
 
-      if (result === TIMEOUT) {
-        if (options.controller && !options.controller.signal.aborted) {
-          options.controller.abort();
-        }
+      // if (result === TIMEOUT) {
+      //   if (options.controller && !options.controller.signal.aborted) {
+      //     options.controller.abort();
+      //   }
 
-        return reject(
-          new TimeoutError(`Operation timed out after ${options.ms}ms`)
-        );
+      //   return reject(
+      //     new TimeoutError(`Operation timed out after ${options.ms}ms`),
+      //   );
+      // }
+
+      if (result === TIMEOUT) {
+        if (options.controller) options.controller.abort();
+
+        reject(new TimeoutError(`Request timed out after ${options.ms}ms`));
       }
 
-      return resolve(result as Awaited<Value>);
+      resolve(result as Awaited<Value>);
     } catch (error) {
       if (timer) clearTimeout(timer);
       reject(error);
     }
   });
 }
-
 /**
  * An error thrown when a timeout occurs
  * @example
@@ -117,7 +117,7 @@ export function timeout<Value>(
 export class TimeoutError extends Error {
   constructor(message: string) {
     super(message);
-    this.name = 'TimeoutError';
+    this.name = "TimeoutError";
   }
 }
 
@@ -159,11 +159,11 @@ export type AwaitedPromiseHash<Hash extends PromiseHash> = {
  * }
  */
 export async function promiseHash<Hash extends PromiseHash>(
-  hash: Hash
+  hash: Hash,
 ): Promise<AwaitedPromiseHash<Hash>> {
   return Object.fromEntries(
     await Promise.all(
-      Object.entries(hash).map(async ([key, promise]) => [key, await promise])
-    )
+      Object.entries(hash).map(async ([key, promise]) => [key, await promise]),
+    ),
   );
 }

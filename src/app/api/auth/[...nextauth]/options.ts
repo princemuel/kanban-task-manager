@@ -1,13 +1,13 @@
-import db from '@/app/db.server';
-import { envVars } from '@/env.dto.mjs';
-import { sendVerificationRequest } from '@/lib';
-import { PrismaAdapter } from '@next-auth/prisma-adapter';
-import { HttpError } from 'http-errors-enhanced';
-import type { AuthOptions, Session, TokenSet } from 'next-auth';
-import { getServerSession } from 'next-auth';
-import DiscordProvider from 'next-auth/providers/discord';
-import GithubProvider from 'next-auth/providers/github';
-import GoogleProvider from 'next-auth/providers/google';
+import { db } from "@/app/db.server";
+import { envVars } from "@/env.dto.mjs";
+import { sendVerificationRequest } from "@/lib/email";
+import { PrismaAdapter } from "@next-auth/prisma-adapter";
+import { HttpError } from "http-errors-enhanced";
+import type { AuthOptions, Session, TokenSet } from "next-auth";
+import { getServerSession } from "next-auth";
+import DiscordProvider from "next-auth/providers/discord";
+import GithubProvider from "next-auth/providers/github";
+import GoogleProvider from "next-auth/providers/google";
 
 const {
   GITHUB_ID,
@@ -41,16 +41,16 @@ export const options: AuthOptions = {
       clientSecret: GOOGLE_SECRET,
       authorization: {
         params: {
-          access_type: 'offline',
-          prompt: 'consent',
-          response_type: 'code',
+          access_type: "offline",
+          prompt: "consent",
+          response_type: "code",
         },
       },
     }),
     {
-      id: 'resend',
-      name: 'Resend',
-      type: 'oauth',
+      id: "resend",
+      name: "Resend",
+      type: "oauth",
       // @ts-expect-error
       sendVerificationRequest,
     },
@@ -69,20 +69,20 @@ export const options: AuthOptions = {
   callbacks: {
     async session({ session, user }) {
       const [google] = await db.account.findMany({
-        where: { userId: user.id, provider: 'google' },
+        where: { userId: user.id, provider: "google" },
       });
 
       if (google?.expires_at && google?.expires_at * 1000 < Date.now()) {
         // If the access token has expired, try to refresh it
         try {
-          const response = await fetch('https://oauth2.googleapis.com/token', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          const response = await fetch("https://oauth2.googleapis.com/token", {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
             body: new URLSearchParams({
               client_id: GOOGLE_ID,
               client_secret: GOOGLE_SECRET,
-              grant_type: 'refresh_token',
-              refresh_token: google.refresh_token || '',
+              grant_type: "refresh_token",
+              refresh_token: google.refresh_token || "",
             }),
           });
 
@@ -93,20 +93,20 @@ export const options: AuthOptions = {
             data: {
               access_token: result.access_token,
               expires_at: Math.floor(
-                Date.now() / 1000 + Number(result.expires_in)
+                Date.now() / 1000 + Number(result.expires_in),
               ),
               refresh_token: result.refresh_token ?? google.refresh_token,
             },
             where: {
               provider_providerAccountId: {
-                provider: 'google',
+                provider: "google",
                 providerAccountId: google.providerAccountId,
               },
             },
           });
         } catch (error) {
-          console.error('Error refreshing access token', error);
-          session.error = 'RefreshAccessTokenError';
+          console.error("Error refreshing access token", error);
+          session.error = "RefreshAccessTokenError";
         }
       }
       return session;
@@ -115,7 +115,7 @@ export const options: AuthOptions = {
 
   pages: {
     // signIn: '/',
-    // signIn: '/auth/signin',
+    signIn: "/auth/signin",
     // signOut: '/auth/signout',
     // error: '/auth/error', // Error code passed in query string as ?error=
     // verifyRequest: '/auth/verify-request', // (used for check email message)
@@ -123,13 +123,13 @@ export const options: AuthOptions = {
   },
 
   session: {
-    strategy: 'database',
+    strategy: "database",
     maxAge: 30 * 24 * 60 * 60, // 30 days
     updateAge: 1 * 24 * 60 * 60, // 1 hours
   },
 
   secret: NEXTAUTH_SECRET,
-  debug: NODE_ENV === 'development',
+  debug: NODE_ENV === "development",
 };
 
 /**
@@ -144,12 +144,12 @@ export const options: AuthOptions = {
  */
 
 export async function getAuthSession(
-  param?: 'SkipValidation'
+  param?: "SkipValidation",
 ): Promise<Session | null> {
   const session = await getServerSession(options);
-  if (param === 'SkipValidation') return session;
+  if (param === "SkipValidation") return session;
   if (!session) {
-    throw new HttpError(401, 'Invalid user session. Please login again');
+    throw new HttpError(401, "Invalid user session. Please login again");
   }
   return session;
 }

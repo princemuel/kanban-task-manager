@@ -4,27 +4,21 @@
 */
 
 namespace Misc {
-  type Immutable<T> = T extends PrimitiveType
-    ? T
-    : T extends AtomicObject
-      ? T
-      : T extends Array<infer A>
-        ? ReadonlyArray<Immutable<A>>
-        : T extends IfAvailable<ReadonlyMap<infer K, infer V>>
-          ? ReadonlyMap<Immutable<K>, Immutable<V>>
-          : T extends IfAvailable<ReadonlySet<infer S>>
-            ? ReadonlySet<Immutable<S>>
-            : T extends WeakReferences
-              ? T
-              : T extends object
-                ? {
-                    // !NOTE: removes methods on object
-                    readonly [P in NonFunctionPropertyNames<T>]: Immutable<
-                      T[P]
-                    >;
-                    // !NOTE: use { readonly [P in keyof T]: Immutable<T[P]> } to add methods
-                  }
-                : unknown;
+  type Immutable<T> =
+    T extends PrimitiveType ? T
+    : T extends AtomicObject ? T
+    : T extends Array<infer A> ? ReadonlyArray<Immutable<A>>
+    : T extends IfAvailable<ReadonlyMap<infer K, infer V>> ?
+      ReadonlyMap<Immutable<K>, Immutable<V>>
+    : T extends IfAvailable<ReadonlySet<infer S>> ? ReadonlySet<Immutable<S>>
+    : T extends WeakReferences ? T
+    : T extends object ?
+      {
+        // !NOTE: removes methods on object
+        readonly [P in NonFunctionPropertyNames<T>]: Immutable<T[P]>;
+        // !NOTE: use { readonly [P in keyof T]: Immutable<T[P]> } to add methods
+      }
+    : unknown;
 
   type GuardQualifier<Function extends VariadicFunction> = [
     validator: <Result extends boolean>(
@@ -32,6 +26,13 @@ namespace Misc {
     ) => Result,
     executor: Function,
   ];
+
+  type PropEventSource<T> = {
+    on<K extends string & keyof T>(
+      eventName: `${K}Change`,
+      callback: (newValue: T[K]) => void,
+    ): void;
+  };
 
   type LooseAutocomplete<T extends string> = T | Omit<string, T>;
 
@@ -45,10 +46,11 @@ namespace Misc {
     };
   }[keyof T];
 
-  type ObjectEntry<T extends {}> = T extends object
-    ? { [K in keyof T]: [K, Required<T>[K]] }[keyof T] extends infer E
-      ? E extends [infer K extends string | number, infer V]
-        ? [`${K}`, V]
+  type ObjectEntry<T extends {}> =
+    T extends object ?
+      { [K in keyof T]: [K, Required<T>[K]] }[keyof T] extends infer E ?
+        E extends [infer K extends string | number, infer V] ?
+          [`${K}`, V]
         : never
       : never
     : never;
@@ -57,41 +59,38 @@ namespace Misc {
     T extends readonly unknown[],
     I extends unknown[] = [],
     R = never,
-  > = T extends readonly [infer Head, ...infer Tail]
-    ? TupleEntry<Tail, [...I, unknown], R | [`${I['length']}`, Head]>
-    : R;
+  > = T extends readonly [infer Head, ...infer Tail] ?
+    TupleEntry<Tail, [...I, unknown], R | [`${I["length"]}`, Head]>
+  : R;
 
-  type Entry<T extends {}> = T extends readonly [unknown, ...unknown[]]
-    ? TupleEntry<T>
-    : T extends ReadonlyArray<infer U>
-      ? [`${number}`, U]
-      : ObjectEntry<T>;
+  type Entry<T extends {}> =
+    T extends readonly [unknown, ...unknown[]] ? TupleEntry<T>
+    : T extends ReadonlyArray<infer U> ? [`${number}`, U]
+    : ObjectEntry<T>;
 
-  type Expand<T> = T extends (...args: infer A) => infer R
-    ? (...args: Expand<A>) => Expand<R>
-    : T extends object
-      ? T extends infer O
-        ? { [K in keyof O]: Expand<O[K]> }
-        : never
-      : T;
+  type Expand<T> =
+    T extends (...args: infer A) => infer R ? (...args: Expand<A>) => Expand<R>
+    : T extends object ?
+      T extends infer O ?
+        { [K in keyof O]: Expand<O[K]> }
+      : never
+    : T;
 
   type RequiredKeys<T> = {
     [K in keyof T]-?: {} extends { [P in K]: T[K] } ? never : K;
   }[keyof T];
 
-  type DeepRequired<T> = T extends BrowserNativeObject | Blob
-    ? T
+  type DeepRequired<T> =
+    T extends BrowserNativeObject | Blob ? T
     : {
         [K in keyof T]-?: NonNullable<DeepRequired<T[K]>>;
       };
 
-  type DeepPartial<T> = T extends Function
-    ? T
-    : T extends Array<infer A>
-      ? DeepPartialArray<A>
-      : T extends object
-        ? DeepPartialObject<T>
-        : T | undefined;
+  type DeepPartial<T> =
+    T extends Function ? T
+    : T extends Array<infer A> ? DeepPartialArray<A>
+    : T extends object ? DeepPartialObject<T>
+    : T | undefined;
 
   type DeepPartialArray<T> = Array<DeepPartial<T>>;
   type DeepPartialObject<T> = {
@@ -113,12 +112,13 @@ namespace Misc {
     | IfAvailable<WeakSet<any>>;
 
   type IfAvailable<T, Fallback = void> = true | false extends (
-    T extends never ? true : false
-  )
-    ? Fallback
-    : keyof T extends never
-      ? Fallback
-      : T;
+    T extends never ?
+      true
+    : false
+  ) ?
+    Fallback
+  : keyof T extends never ? Fallback
+  : T;
 
   /**
    * Makes a composition of functions from received arguments.
@@ -126,13 +126,11 @@ namespace Misc {
   type Compose<
     Arguments extends any[],
     Functions extends any[] = [],
-  > = Arguments['length'] extends 0
-    ? Functions
-    : Arguments extends [infer A, infer B]
-      ? [...Functions, (arg: A) => B]
-      : Arguments extends [infer A, ...infer Rest, infer P, infer L]
-        ? Compose<[A, ...Rest, P], [...Functions, (arg: P) => L]>
-        : [];
+  > = Arguments["length"] extends 0 ? Functions
+  : Arguments extends [infer A, infer B] ? [...Functions, (arg: A) => B]
+  : Arguments extends [infer A, ...infer Rest, infer P, infer L] ?
+    Compose<[A, ...Rest, P], [...Functions, (arg: P) => L]>
+  : [];
 
   /**
    * Destructures a composition of functions into arguments.
@@ -140,14 +138,13 @@ namespace Misc {
   type Decompose<
     Functions extends UnaryFunction[],
     Arguments extends any[] = [],
-  > = Functions extends [(arg: infer Arg) => infer Return]
-    ? [...Arguments, Arg, Return]
-    : Functions extends [
-          ...infer Rest extends UnaryFunction[],
-          (arg: infer Arg) => any,
-        ]
-      ? Decompose<Rest, [...Arguments, Arg]>
-      : [];
+  > = Functions extends [(arg: infer Arg) => infer Return] ?
+    [...Arguments, Arg, Return]
+  : Functions extends (
+    [...infer Rest extends UnaryFunction[], (arg: infer Arg) => any]
+  ) ?
+    Decompose<Rest, [...Arguments, Arg]>
+  : [];
 
   // get method names in an object
   type FunctionPropertyNames<T> = {
@@ -190,3 +187,7 @@ namespace Misc {
   type AtomicObject = Function | RegExp | Promise<any> | Date;
   type BrowserNativeObject = Date | FileList | File;
 }
+
+/// Create a "watched object" with an 'on' method
+/// so that you can watch for changes to properties.
+declare function makeWatchedObject<T>(obj: T): T & Misc.PropEventSource<T>;

@@ -1,7 +1,6 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
 @layer base {
   html {
     box-sizing: border-box;
@@ -21,12 +20,9 @@
 
   :where(body) {
     min-block-size: 100vh;
-    min-block-size: 100dvh;
+    min-block-size: 100svh;
   }
   img {
-    /* max-width: 100%; */
-    /* height: auto; */
-    /* vertical-align: middle; */
     font-style: italic;
     background-repeat: no-repeat;
     background-size: cover;
@@ -39,15 +35,15 @@
       label,
       select,
       summary,
-      [role='button'],
-      [role='option'],
-      [role='menuitem']
+      [role="button"],
+      [role="option"],
+      [role="menuitem"]
     ) {
     @apply cursor-pointer;
   }
 
   @media not all and (min-resolution: 0.001dpcm) {
-    :where(img[loading='lazy']) {
+    :where(img[loading="lazy"]) {
       clip-path: inset(0.5px);
     }
   }
@@ -57,8 +53,10 @@
       scroll-behavior: smooth;
     }
   }
+
+  /* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
   @media (prefers-reduced-motion: reduce) {
-    html:focus-within {
+    :where(html:focus-within) {
       scroll-behavior: auto;
     }
 

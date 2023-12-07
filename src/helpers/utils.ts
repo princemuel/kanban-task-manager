@@ -1,12 +1,12 @@
-import { clsx, type ClassValue } from 'clsx';
-import { extendTailwindMerge } from 'tailwind-merge';
+import { clsx, type ClassValue } from "clsx";
+import { extendTailwindMerge } from "tailwind-merge";
 
 const customTwMerge = extendTailwindMerge({
   extend: {
     classGroups: {
-      'font-size': [
+      "font-size": [
         {
-          text: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
+          text: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
         },
       ],
     },
@@ -19,13 +19,13 @@ export function twcn(...inputs: ClassValue[]) {
 
 export function safeNum(value: any, defaultValue = 0): number {
   const num = Number(value);
-  return (Number.isNaN(num) || isNaN(num)) && !Object.is(num, 0)
-    ? defaultValue
+  return (Number.isNaN(num) || isNaN(num)) && !Object.is(num, 0) ?
+      defaultValue
     : num;
 }
 
 export function hasValues<T>(
-  value: T[] | null | undefined
+  value: T[] | null | undefined,
 ): value is NonNullable<T[]> {
   return Array.isArray(value) && value.length > 0;
 }
@@ -33,15 +33,15 @@ export function hasValues<T>(
 export function buildItemCountMsg(message: string) {
   return function (data: any[]) {
     const itemCount = data?.length || 0;
-    const verb = itemCount === 1 ? 'is' : 'are';
+    const verb = itemCount === 1 ? "is" : "are";
 
     return message
-      .replace('{{ verb }}', verb)
-      .replace('{{ count }}', `${itemCount}`);
+      .replace("{{ verb }}", verb)
+      .replace("{{ count }}", `${itemCount}`);
   };
 }
 
-export function singleton<T>(name: string, callback: () => T): T {
+export function singleton<T>(name: string, callback: () => T): NonNullable<T> {
   const g = globalThis as any;
   g.__singletons ??= new Map();
 

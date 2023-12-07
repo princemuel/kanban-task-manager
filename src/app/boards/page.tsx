@@ -1,4 +1,4 @@
-import { Button } from '@/components';
+import { Button } from "@/components/button";
 
 type Props = {};
 
@@ -49,55 +49,56 @@ const PageRoute = () => {
     // </div>
 
     // GRID SOLUTION
-    <div className='grid h-screen grid-cols-[4rem_1fr] grid-rows-[4rem_1fr] bg-brand-800 md:grid-cols-[16.25rem_1fr] md:grid-rows-[5rem_1fr] lg:grid-cols-[18.75rem_1fr] lg:grid-rows-[6rem_1fr]'>
-      <div className='border-brand-600 bg-brand-700 pl-9 pt-8 md:border-r '>
-        <h1 className='hidden text-4xl font-semibold md:block'>kanban</h1>
+    <div className="grid h-screen grid-cols-[4rem_1fr] grid-rows-[4rem_1fr] bg-brand-800 md:grid-cols-[16.25rem_1fr] md:grid-rows-[5rem_1fr] lg:grid-cols-[18.75rem_1fr] lg:grid-rows-[6rem_1fr]">
+      <div className="border-brand-600 bg-brand-700 pl-9 pt-8 md:border-r ">
+        <h1 className="hidden text-4xl font-semibold md:block">kanban</h1>
       </div>
-      <nav className='flex items-center justify-between border-b border-brand-600 bg-brand-700 p-6'>
-        <h1 className='text-600 font-bold md:text-[20px] lg:text-700'>
+      <nav className="flex items-center justify-between border-b border-brand-600 bg-brand-700 p-6">
+        <h1 className="text-600 font-bold md:text-[20px] lg:text-700">
           Platform Launch
         </h1>
         <div>
-          <Button intent='primary' rounded='normal' className='capitalize'>
-            + <span className='hidden md:inline'> Add new task</span>
+          <Button intent="primary" rounded="normal" className="capitalize">
+            + <span className="hidden md:inline"> Add new task</span>
           </Button>
         </div>
       </nav>
-      <aside className='hidden flex-col justify-between border-r border-brand-600 bg-brand-700 pb-4 pl-9 md:flex'>
+      <aside className="hidden flex-col justify-between border-r border-brand-600 bg-brand-700 pb-4 pl-9 md:flex">
         <div>
-          <p className='text-300 font-bold uppercase tracking-100 text-brand-400'>
+          <p className="text-300 font-bold uppercase tracking-100 text-brand-400">
             all boards <span>(3)</span>
           </p>
-          <ul className='mt-8 flex flex-col items-start'>
-            <li className='-ml-9 flex items-baseline justify-center rounded-r-3xl py-[14px] pl-9 pr-28 text-[15px] font-bold text-brand-400 hover:bg-brand-800 hover:text-white'>
-              <span className='h-4 w-4 '>@</span>Platform Launch
+
+          <ul className="mt-8 flex flex-col items-start">
+            <li className="-ml-9 flex items-baseline justify-center rounded-r-3xl py-[14px] pl-9 pr-28 text-[15px] font-bold text-brand-400 hover:bg-brand-800 hover:text-white">
+              <span className="h-4 w-4 ">@</span>Platform Launch
             </li>
-            <li className='-ml-9 flex items-baseline justify-center rounded-r-3xl py-[14px] pl-9 pr-28 text-[15px] font-bold text-brand-400 hover:bg-brand-800 hover:text-white'>
-              <span className='h-4 w-4 '>@</span>Marketing Plan
+            <li className="-ml-9 flex items-baseline justify-center rounded-r-3xl py-[14px] pl-9 pr-28 text-[15px] font-bold text-brand-400 hover:bg-brand-800 hover:text-white">
+              <span className="h-4 w-4 ">@</span>Marketing Plan
             </li>
-            <li className='-ml-9 flex items-baseline justify-center rounded-r-3xl py-[14px] pl-9 pr-28 text-[15px] font-bold text-brand-400 hover:bg-brand-800 hover:text-white'>
-              <span className='h-4 w-4'>@</span>Roadmap
+            <li className="-ml-9 flex items-baseline justify-center rounded-r-3xl py-[14px] pl-9 pr-28 text-[15px] font-bold text-brand-400 hover:bg-brand-800 hover:text-white">
+              <span className="h-4 w-4">@</span>Roadmap
             </li>
           </ul>
         </div>
 
         <div>
-          <div className='flex items-center justify-center gap-3 rounded-md bg-brand-800 py-[14px] md:w-[210px] lg:w-[250px]'>
+          <div className="flex items-center justify-center gap-3 rounded-md bg-brand-800 py-[14px] md:w-[210px] lg:w-[250px]">
             <div>eyes</div>
             <div>switch</div>
             <div>moon</div>
           </div>
-          <div className='mt-[22px] text-500 font-bold text-brand-400'>
+          <div className="mt-[22px] text-500 font-bold text-brand-400">
             <span>@</span>
-            <span className='ml-[15px] '>Hide Sidebar</span>
+            <span className="ml-[15px] ">Hide Sidebar</span>
           </div>
         </div>
       </aside>
-      <main className='col-span-2 col-start-1 flex w-full flex-col items-center justify-center gap-6 p-6 md:col-span-1 md:col-start-2'>
-        <p className='text-center text-600 font-bold text-brand-400 md:px-8'>
+      <main className="col-span-2 col-start-1 flex w-full flex-col items-center justify-center gap-6 p-6 md:col-span-1 md:col-start-2">
+        <p className="text-center text-600 font-bold text-brand-400 md:px-8">
           This board is empty. Create a new column to get started.
         </p>
-        <Button intent='primary' className='capitalize'>
+        <Button intent="primary" className="capitalize">
           + add new column
         </Button>
       </main>

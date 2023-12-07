@@ -1,13 +1,22 @@
-import { icons } from '@/common';
-import NextLink from 'next/link';
+"use client";
+import NiceModal from "@ebay/nice-modal-react";
+// import { icons } from '@/common';
+import NextLink from "next/link";
 
 type Props = {};
 //
 
-export default  function PageRoute() {
+export default function PageRoute() {
   return (
     <>
-      <main className='h-screen w-full bg-white font-accent text-brand-700'>
+      <main className="h-screen w-full bg-white font-accent text-brand-700">
+        <NextLink href="/auth/signin" className="text-blue-500 underline">
+          Sign in
+        </NextLink>
+
+        <button onClick={() => NiceModal.show("task/view")}>Show Modal</button>
+      </main>
+      {/* <main className='h-screen w-full bg-white font-accent text-brand-700'>
         <div className='relative flex h-full'>
           <section className='mx-auto flex-1 ps-40'>
             <div className='flex flex-col gap-28 pt-16'>
@@ -89,14 +98,14 @@ export default  function PageRoute() {
 
                 <li className='cursor-pointer bg-blue-600 px-4 py-2 text-base font-bold uppercase text-white'>
                   {/* <TestButton className=''>Show Modal</TestButton> */}
-                  <NextLink href='/boards/addboard'>create board</NextLink>
+      {/* <NextLink href='/boards/addboard'>create board</NextLink>
                 </li>
               </ul>
             </div>
             <div className='flex-1' />
           </section>
         </div>
-      </main>
+      </main> */}
     </>
   );
 }
