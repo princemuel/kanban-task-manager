@@ -4,13 +4,12 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, type UseFormProps } from "react-hook-form";
 import * as z from "zod";
 
-export function useZodForm<T extends z.ZodType<any, any, any>>(
-  props: Omit<UseFormProps<T["_input"]>, "resolver"> & {
-    schema: T;
-  },
-) {
-  const { schema, ...rest } = props;
-
+export function useZodForm<T extends z.ZodType<any, any, any>>({
+  schema,
+  ...rest
+}: Omit<UseFormProps<T["_input"]>, "resolver"> & {
+  schema: T;
+}) {
   return useForm<T["_input"]>({
     ...rest,
     resolver: async (data, context, options) => {

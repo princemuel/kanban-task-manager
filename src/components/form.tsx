@@ -4,16 +4,12 @@ import { twcn } from "@/helpers/utils";
 import * as LabelPrimitive from "@radix-ui/react-label";
 import { Slot } from "@radix-ui/react-slot";
 import * as React from "react";
-import {
-  Controller,
-  ControllerProps,
-  FieldPath,
-  FieldValues,
-  FormProvider,
-  useFormContext,
-} from "react-hook-form";
+import type { ControllerProps, FieldPath, FieldValues } from "react-hook-form";
+import { Controller, FormProvider, useFormContext } from "react-hook-form";
 import { Label } from "./label";
 import { text } from "./text";
+
+const Form = FormProvider;
 
 type FormFieldContextValue<
   TFieldValues extends FieldValues = FieldValues,
@@ -55,8 +51,6 @@ const useFormField = () => {
     ...fieldState,
   };
 };
-
-const Form = FormProvider;
 
 const FormField = <
   TFieldValues extends FieldValues = FieldValues,
@@ -137,7 +131,7 @@ const FormMessage = React.forwardRef<
   const { error, formMessageId } = useFormField();
   const body = error ? String(error?.message) : children;
 
-  // if (!body) return null;
+  if (!body) return null;
 
   return (
     <p
