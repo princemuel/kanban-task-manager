@@ -1,5 +1,5 @@
-import type { DefaultSession, DefaultUser } from 'next-auth';
-import type { DefaultJWT } from 'next-auth/jwt';
+import type { DefaultSession, DefaultUser } from "next-auth";
+import type { DefaultJWT } from "next-auth/jwt";
 
 /**
  * Module augmentation for `next-auth` types. Allows us to add custom properties to the `session`
@@ -7,9 +7,9 @@ import type { DefaultJWT } from 'next-auth/jwt';
  *
  * @see https://next-auth.js.org/getting-started/typescript#module-augmentation
  */
-declare module 'next-auth' {
+declare module "next-auth" {
   interface Session {
-    error?: 'RefreshAccessTokenError';
+    error?: "RefreshAccessTokenError";
     user: {
       /** The user's id. */
       id: string;
@@ -17,17 +17,17 @@ declare module 'next-auth' {
       updatedAt: string;
       emailVerified: string | null;
       password: string | null;
-    } & DefaultSession['user'];
+    } & DefaultSession["user"];
   }
 
   interface User extends DefaultUser {}
 }
 
-declare module 'next-auth/jwt' {
+declare module "next-auth/jwt" {
   interface JWT extends DefaultJWT {
     access_token: string;
     expires_at: number;
     refresh_token: string;
-    error?: 'RefreshAccessTokenError';
+    error?: "RefreshAccessTokenError";
   }
 }

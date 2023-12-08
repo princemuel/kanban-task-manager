@@ -6,9 +6,9 @@
   "editor.wordWrapColumn": 96,
   "editor.codeActionsOnSave": {
     "source.organizeImports": "explicit",
-    "source.addMissingImports": true,
+    "source.addMissingImports": "explicit",
     "source.fixAll": "explicit",
-    "source.fixAll.eslint": false
+    "source.fixAll.eslint": "never"
   },
   "eslint.codeAction.showDocumentation": {
     "enable": true
@@ -16,7 +16,8 @@
 
   "tailwindCSS.rootFontSize": 16,
   "tailwindCSS.experimental.classRegex": [
-    ["tv\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"]
+    ["tv\\((([^()]*|\\([^()]*\\))*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"],
+    ["twcn\\((([^()]*|\\([^()]*\\))*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"]
   ],
   "editor.bracketPairColorization.independentColorPoolPerBracketType": true,
   "dotenv.enableAutocloaking": false,
