@@ -1,6 +1,8 @@
-# Kanban Task Manager
+# Roadmap
 
-- [Kanban Task Manager](#kanban-task-manager)
+This file provides an overview of the direction this project is heading. The roadmap is organized in steps that focus on a specific theme,for instance, UX.
+
+- [Roadmap](#roadmap)
   - [Sprint 1: Foundation and Core Functionality](#sprint-1-foundation-and-core-functionality)
     - [Expected Behaviour (Tasks)](#expected-behaviour-tasks)
   - [Sprint 2: Foundation and Core Functionality](#sprint-2-foundation-and-core-functionality)
