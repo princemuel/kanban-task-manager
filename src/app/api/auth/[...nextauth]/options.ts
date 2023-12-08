@@ -135,17 +135,18 @@ export const options: AuthOptions = {
 /**
  * An function wrapper for `getServerSession`
  * so that you don't need to import the `options` in every file.
- * The getAuthSession function retrieves the authentication session
+ * The auth function retrieves the authentication session
  * and by default, enforces session validation.
  * However, if you provide the 'SkipValidation' parameter,
  * it skips the validation step and returns the session as is,
  * to enable handling the validation yourself
+ * @example const session = auth() // Promise<Session>
+ * @example const session =  auth("SkipValidation") // Promise<Session | null>
  * @see https://next-auth.js.org/configuration/nextjs
  */
-
-export async function getAuthSession(
-  param?: "SkipValidation",
-): Promise<Session | null> {
+export async function auth(): Promise<Session>;
+export async function auth(param: "SkipValidation"): Promise<Session | null>;
+export async function auth(param?: "SkipValidation") {
   const session = await getServerSession(options);
   if (param === "SkipValidation") return session;
   if (!session) {
