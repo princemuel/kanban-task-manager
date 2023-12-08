@@ -4,18 +4,19 @@ import { useApiState } from "@/hooks/use-api-state";
 import { useZodForm } from "@/hooks/use-form";
 import { StringContraint } from "@/lib/schema.fields";
 import { useCallback } from "react";
-import { Form, useFieldArray } from "react-hook-form";
+import { useFieldArray } from "react-hook-form";
 import { LuX } from "react-icons/lu";
 import { v4 as uuid } from "uuid";
 import { z } from "zod";
+import { Button } from "./button";
 import {
+  Form,
   FormControl,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
-} from "./__form__";
-import { Button } from "./button";
+} from "./form";
 import { TextField } from "./input";
 import { BaseModal, ModalFooter, ModalHeader, ModalTitle } from "./modal";
 import { SrOnly } from "./sr-only";
@@ -33,6 +34,10 @@ const schema = z.object({
 export default function CreateBoardModal() {
   const form = useZodForm({
     schema: schema,
+    defaultValues: {
+      name: "",
+      columns: [],
+    },
   });
 
   const { fields, append, remove } = useFieldArray({
@@ -46,8 +51,6 @@ export default function CreateBoardModal() {
   const { router, isMutating, controllerRef, startTransition, setFetchStatus } =
     useApiState();
 
-  const { handleSubmit, reset } = form;
-
   const addItem = useCallback(() => {
     append({
       id: uuid(),
@@ -55,7 +58,7 @@ export default function CreateBoardModal() {
     });
   }, [append]);
 
-  const onSubmit = handleSubmit(async (values) => {
+  const onSubmit = form.handleSubmit(async (values) => {
     console.log("SUBMITTED", JSON.stringify(values, null, 2));
 
     // try {

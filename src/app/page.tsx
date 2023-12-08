@@ -14,7 +14,9 @@ export default function PageRoute() {
           Sign in
         </NextLink>
 
-        <button onClick={() => NiceModal.show("task/view")}>Show Modal</button>
+        <button onClick={() => NiceModal.show("board/create")}>
+          Show Modal
+        </button>
       </main>
       {/* <main className='h-screen w-full bg-white font-accent text-brand-700'>
         <div className='relative flex h-full'>
