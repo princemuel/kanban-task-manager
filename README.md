@@ -13,8 +13,6 @@ The Kanban board is an easy-to-use agile project management tool using the Kanba
     - [Project Links](#project-links)
   - [My process](#my-process)
     - [Building with](#building-with)
-    - [The challenge (Situation)](#the-challenge-situation)
-    - [Expected Behaviour (Tasks)](#expected-behaviour-tasks)
   - [Author](#author)
 
 ## Overview
@@ -49,25 +47,6 @@ Press <kbd>.</kbd> on the keyboard to view this project's code in the _`github.d
 - [React](https://reactjs.org/) - JS library
 - [Next.js](https://nextjs.org/) - React framework
 - [Tailwind CSS](https://tailwindcss.com/docs) - For composing component styles using utility classes
-
-### The challenge (Situation)
-
-View the User Stories at the [User Stories Markdown File](./user-stories.md)
-
-### Expected Behaviour (Tasks)
-
-- Boards
-  - Clicking different boards in the sidebar will change to the selected board.
-  - Clicking "Create New Board" in the sidebar opens the "Add New Board" modal.
-  - Clicking in the dropdown menu "Edit Board" opens up the "Edit Board" modal where details can be changed.
-  - Columns are added and removed for the Add/Edit Board modals.
-  - Deleting a board deletes all columns and tasks and requires confirmation.
-- Columns
-  - A board needs at least one column before tasks can be added. If no columns exist, the "Add New Task" button in the header is disabled.
-  - Clicking "Add New Column" opens the "Edit Board" modal where columns are added.
-- Tasks
-  - Adding a new task adds it to the bottom of the relevant column.
-  - Updating a task's status will move the task to the relevant column. If taking on the drag and drop bonus, dragging a task to a different column will also update the status.
 
 ## Author
 
