@@ -1,4 +1,7 @@
+import tvHeadlessUI from "@headlessui/tailwindcss";
+import twScrollbar from "tailwind-scrollbar";
 import { Config } from "tailwindcss";
+import twAnimate from "tailwindcss-animate";
 import defaultTheme from "tailwindcss/defaultTheme";
 import plugin from "tailwindcss/plugin";
 
@@ -21,6 +24,49 @@ export default {
     extend: {
       borderRadius: {
         pill: "100vmax",
+      },
+      colors: {
+        brand: {
+          100: "#f4f7fd",
+          200: "#e4ebfa", //lines-light
+          300: "#a8a4ff",
+          400: "#828fa3",
+          500: "#635fc7",
+          600: "#3e3f4e", //lines-dark
+          700: "#2b2c37",
+          800: "#20212c",
+          900: "#000112",
+        },
+        accent: {
+          100: "#ff9898",
+          200: "#ea5555",
+          300: "#49C4E5",
+          400: "#8471F2",
+          500: "#67E2AE",
+        },
+      },
+      fontFamily: {
+        sans: ["var(--font-sans)", ...defaultTheme.fontFamily.sans],
+        accent: ["var(--font-accent)", ...defaultTheme.fontFamily.sans],
+      },
+      fontSize: {
+        100: "0.5rem",
+        200: "0.625rem",
+        300: "0.75rem",
+        400: "0.8125rem",
+        500: "0.9375rem",
+        600: "1.125rem",
+        700: "1.5rem", //
+      },
+      lineHeight: {
+        100: "0.5rem",
+        200: "0.9375rem",
+        300: "1.1875rem",
+        400: "1.4375rem",
+        500: "1.875rem",
+      },
+      letterSpacing: {
+        100: "2.4px",
       },
       screens: {
         xs: "36em", // @media (min-width: 576px) { ... },
@@ -47,6 +93,9 @@ export default {
     },
   },
   plugins: [
+    twAnimate,
+    twScrollbar({ nocompatible: true }),
+    tvHeadlessUI({ prefix: "hui" }),
     plugin(function ({ addVariant }) {
       addVariant("optional", "&:optional");
       addVariant("hocus", ["&:hover", "&:focus"]);
