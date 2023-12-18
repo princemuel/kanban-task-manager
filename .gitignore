@@ -16,7 +16,6 @@ report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 /node_modules
 /.pnp
 .pnp.js
-.yarn/install-state.gz
 
 # Runtime data
 pids
@@ -25,7 +24,7 @@ pids
 *.pid.lock
 
 # Editor directories and files
-# .vscode/*
+.vscode/*
 !.vscode/extensions.json
 .idea
 *.suo
@@ -140,7 +139,7 @@ dist
 .tern-port
 
 # production
-/build
+build
 
 # Local Netlify folder
 .netlify
@@ -173,5 +172,3 @@ local
 
 *.pem
 *.local.*
-
-styled-system

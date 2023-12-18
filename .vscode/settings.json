@@ -5,20 +5,16 @@
   "editor.wordWrap": "bounded",
   "editor.wordWrapColumn": 96,
   "editor.codeActionsOnSave": {
-    "source.organizeImports": "explicit",
     "source.addMissingImports": "explicit",
-    "source.fixAll": "explicit",
-    "source.fixAll.eslint": "never"
+    "source.organizeImports": "explicit",
+    "source.fixAll": "explicit"
   },
+
   "eslint.codeAction.showDocumentation": {
     "enable": true
   },
 
   "tailwindCSS.rootFontSize": 16,
-  "tailwindCSS.experimental.classRegex": [
-    ["tv\\((([^()]*|\\([^()]*\\))*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"],
-    ["twcn\\((([^()]*|\\([^()]*\\))*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"]
-  ],
   "editor.bracketPairColorization.independentColorPoolPerBracketType": true,
   "dotenv.enableAutocloaking": false,
   "typescript.tsdk": "node_modules/typescript/lib",
