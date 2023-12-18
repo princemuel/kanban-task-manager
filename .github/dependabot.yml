@@ -3,35 +3,36 @@
 version: 2
 updates:
   # Maintain dependencies for GitHub Actions
-  - package-ecosystem: 'github-actions'
-    directory: '/'
+  - package-ecosystem: "github-actions"
+    directory: "/"
     schedule:
-      interval: 'weekly'
+      interval: "weekly"
 
   # Maintain dependencies for npm
-  - package-ecosystem: 'npm'
-    directory: '/' # Location of package manifests
+  - package-ecosystem: "npm"
+    directory: "/" # Location of package manifests
     schedule:
-      interval: 'weekly'
+      interval: "weekly"
     commit-message:
       # Prefix all commit messages with "chore: "
-      prefix: 'chore'
+      prefix: "chore(deps)"
     # Specify labels for npm pull requests
     labels:
-      - 'npm'
-      - 'dependencies'
+      - "npm"
+      - "dependencies"
     # Allow up to 10 open pull requests for pip dependencies
-    open-pull-requests-limit: 6
+    open-pull-requests-limit: 2
     # Raise pull requests for version updates
-    # to pip against the `dev` branch
-    target-branch: 'dev'
+    # to pip against the `development` branch
+    target-branch: "development"
     pull-request-branch-name:
       # Separate sections of the branch name with a hyphen
       # for example, `dependabot/npm_and_yarn-next_js-acorn-6.4.1`
-      separator: '/'
+      separator: "/"
     # Update the npm manifest file to relax
     # the version requirements
     versioning-strategy: increase-if-necessary
     # Add assignees
     assignees:
-      - 'princemuel'
+      - "princemuel"
+      - "giddyware"
