@@ -17,11 +17,15 @@
   "embeddedLanguageFormatting": "auto",
   "singleAttributePerLine": false,
 
-  "tailwindConfig": "./tailwind.config.js",
-  "tailwindFunctions": ["twcn", "cn", "tv", "cva"],
+  "tailwindConfig": "./tailwind.config.ts",
+  "tailwindFunctions": ["tw", "cn", "tv", "cva"],
   "tailwindAttributes": ["tw"],
 
-  "plugins": ["prettier-plugin-prisma", "prettier-plugin-tailwindcss"],
+  "plugins": [
+    "prettier-plugin-prisma",
+    "prettier-plugin-tailwindcss",
+    "@svgr/plugin-prettier"
+  ],
 
   "experimentalTernaries": true
 }

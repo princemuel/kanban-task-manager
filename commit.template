@@ -1,0 +1,41 @@
+# Type: (feat, fix, ci, docs, perf, build, style, refactor, test, chore)
+# Scope: (module name, component, area affected, etc.)
+# Short description (50 characters or less)
+#
+# Body of the commit message (more detailed explanation if necessary)
+#
+# Breaking Changes: (description of any breaking changes)
+#
+# Closes: #123, #456
+
+
+## Example:
+
+# No more than 50 chars. #### 50 chars is here:  #
+## fix(release): need to depend on latest rxjs & zone.js
+
+## The version in our package.json gets copied to the one we publish, and users need the latest of these.
+## Closes: #123, #456
+
+## Co-authored-by: name <username@users.noreply.github.com>
+
+
+# Type Description
+
+# build: Changes that affect the build system or external dependencies (example scopes: nodejs, gulp, broccoli, npm, yarn)
+# ci: Changes to configuration files and scripts
+# docs: Documentation only changes
+# feat: A new feature
+# fix: A bug fix
+# perf: A code change that improves performance
+# refactor: A code change that neither fixes a bug nor adds a feature
+# style: Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)
+# test: Adding missing tests or correcting existing tests
+# chore: maintainance
+
+
+# How to Write a Git Commit Message:
+
+# https://chris.beams.io/posts/git-commit/
+# https://www.conventionalcommits.org/en/v1.0.0/
+# https://github.com/angular/angular/blob/22b96b9/CONTRIBUTING.md#commit
