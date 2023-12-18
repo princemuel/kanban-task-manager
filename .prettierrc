@@ -1,0 +1,31 @@
+{
+  "printWidth": 80,
+  "tabWidth": 2,
+  "useTabs": false,
+  "semi": true,
+  "singleQuote": false,
+  "quoteProps": "as-needed",
+  "jsxSingleQuote": false,
+  "trailingComma": "all",
+  "bracketSpacing": true,
+  "bracketSameLine": false,
+  "arrowParens": "always",
+
+  "requirePragma": false,
+  "endOfLine": "lf",
+  "htmlWhitespaceSensitivity": "css",
+  "embeddedLanguageFormatting": "auto",
+  "singleAttributePerLine": false,
+
+  "tailwindConfig": "./tailwind.config.ts",
+  "tailwindFunctions": ["tw", "cn", "tv", "cva"],
+  "tailwindAttributes": ["tw"],
+
+  "plugins": [
+    "prettier-plugin-prisma",
+    "prettier-plugin-tailwindcss",
+    "@svgr/plugin-prettier"
+  ],
+
+  "experimentalTernaries": true
+}
