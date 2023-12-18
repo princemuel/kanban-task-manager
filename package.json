@@ -25,10 +25,12 @@
     "@remix-run/react": "^2.4.0",
     "@remix-run/serve": "^2.4.0",
     "@vercel/analytics": "^1.1.1",
+    "clsx": "^2.0.0",
     "isbot": "^3.7.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "remix-themes": "^1.2.2",
+    "tailwind-variants": "^0.1.19",
     "zod": "^3.22.4"
   },
   "devDependencies": {

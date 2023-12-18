@@ -1,3 +1,9 @@
+import clsx, { ClassValue } from "clsx";
+
+export function tw(...inputs: ClassValue[]) {
+  return clsx(inputs);
+}
+
 /*---------------------------------*
             NUMBER UTILS           *
   ---------------------------------*
