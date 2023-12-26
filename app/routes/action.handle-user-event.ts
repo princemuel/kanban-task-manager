@@ -16,7 +16,6 @@ export async function action({ request }: ActionFunctionArgs) {
     const svix_timestamp = headers.get("svix-timestamp");
     const svix_signature = headers.get("svix-signature");
 
-    // If there are no headers, error out
     if (!svix_id || !svix_timestamp || !svix_signature) {
       return new Response("Error: No Webhook Headers", {
         status: 400,
@@ -27,12 +26,9 @@ export async function action({ request }: ActionFunctionArgs) {
     const payload = await request.json();
     const body = JSON.stringify(payload);
 
-    // Create a new Svix instance
     const webhook = new Webhook(WEBHOOK_SECRET);
-
     let event: WebhookEvent;
 
-    // Verify the payload with the headers
     try {
       event = webhook.verify(body, {
         "svix-id": svix_id,
@@ -47,13 +43,7 @@ export async function action({ request }: ActionFunctionArgs) {
       });
     }
 
-    console.log(`WebhookId: ${event.data.id}`);
-    console.log(`WebhookType: ${event.type}`);
-    console.log("WebhookBody:", body);
-
     if (event.type === "user.created" || event.type === "user.updated") {
-      console.log(event.data.id);
-
       const client = await db.user.findUnique({
         where: {
           userAuthId: event.data.id,
