@@ -1,7 +1,7 @@
-export { default as IconBoard } from "./IconBoard";
-export { default as IconDarkTheme } from "./IconDarkTheme";
-export { default as IconLightTheme } from "./IconLightTheme";
-export { default as Icon404 } from "./Icon404";
-export { default as LogoDark } from "./LogoDark";
-export { default as LogoLight } from "./LogoLight";
-export { default as LogoMobile } from "./LogoMobile";
+export { default as IconBoard } from "./icon-board";
+export { default as IconDarkTheme } from "./icon-dark-theme";
+export { default as IconLightTheme } from "./icon-light-theme";
+export { default as Icon404 } from "./icon-404";
+export { default as LogoDark } from "./logo-dark";
+export { default as LogoLight } from "./logo-light";
+export { default as LogoMobile } from "./logo-mobile";
