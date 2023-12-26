@@ -1,5 +1,9 @@
 function PageRoute() {
-  return <h1>PageRoute</h1>;
+  return (
+    <main className="">
+      <h1>MAIN CONTENT</h1>
+    </main>
+  );
 }
 
 export default PageRoute;
