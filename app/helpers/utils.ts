@@ -1,4 +1,5 @@
-import clsx, { ClassValue } from "clsx";
+import type { ClassValue } from "clsx";
+import clsx from "clsx";
 
 export function tw(...inputs: ClassValue[]) {
   return clsx(inputs);
@@ -36,8 +37,8 @@ export function hasValues<T>(
   ---------------------------------*
  */
 
-export function serialize<T>(data: T): NonNullable<T> {
-  return JSON.parse(JSON.stringify(data));
+export function serialize<T>(data: T) {
+  return JSON.parse(JSON.stringify(data)) as NonNullable<T>;
 }
 
 export function singleton<T>(name: string, callback: () => T): NonNullable<T> {

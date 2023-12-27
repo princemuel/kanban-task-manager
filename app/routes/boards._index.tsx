@@ -1,5 +1,9 @@
-const PageRoute = () => {
-  return <h1>PageRoute</h1>;
-};
+function PageRoute() {
+  return (
+    <main className="">
+      <h1>MAIN CONTENT</h1>
+    </main>
+  );
+}
 
 export default PageRoute;
