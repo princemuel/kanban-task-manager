@@ -51,6 +51,14 @@ function App() {
   const [theme] = useTheme();
 
   useEffect(() => {
+    (async function () {
+      //@ts-expect-error
+      const cssHasPseudo = (await import("css-has-pseudo/browser")).default;
+      cssHasPseudo(document);
+    })();
+  }, []);
+
+  useEffect(() => {
     const type = data.toast?.type || "";
     const message = data.toast?.message;
 
