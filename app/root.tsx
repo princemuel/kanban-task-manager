@@ -88,7 +88,13 @@ function App() {
         <Meta />
         <PreventFlashOnWrongTheme ssrTheme={Boolean(data.theme)} />
         <Links />
-        <style></style>
+        <style
+          type="text/css"
+          dangerouslySetInnerHTML={{
+            __html:
+              "@font-face{font-family: __FontSans_Fallback;src:system-ui;}@font-face{font-family: '__FontSans';src:url('/fonts/PlusJakartaSans.ttf') format('truetype');font-style:normal;font-display:swap;}.__sans__{--font-sans: '__FontSans', '__FontSans_Fallback';}",
+          }}
+        />
       </head>
 
       <body className="relative min-h-screen antialiased">
