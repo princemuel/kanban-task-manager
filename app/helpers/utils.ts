@@ -5,6 +5,13 @@ export function tw(...inputs: ClassValue[]) {
   return clsx(inputs);
 }
 
+export function capitalize(sentence = "") {
+  return sentence
+    .trim()
+    .replace(/\W+/g, " ")
+    .replace(/\b\w/g, (match) => match.toUpperCase());
+}
+
 /*---------------------------------*
             NUMBER UTILS           *
   ---------------------------------*
