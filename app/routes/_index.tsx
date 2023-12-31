@@ -1,9 +1,16 @@
 import type { MetaFunction } from "@remix-run/node";
+import { NavLink } from "@remix-run/react";
 
 export const meta: MetaFunction = () => {
   return [{ title: "Kanban TM" }, { name: "description", content: "" }];
 };
 
-export default function Index() {
-  return <h1>Kanban Task Manager</h1>;
+function PageRoute() {
+  return (
+    <div>
+      <NavLink to="/boards">Boards</NavLink>
+    </div>
+  );
 }
+
+export default PageRoute;
